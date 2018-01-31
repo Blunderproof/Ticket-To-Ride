@@ -1,0 +1,70 @@
+body {
+  margin: 40px;
+}
+
+    .game-container {
+      display: grid;
+      grid-gap: 10px;
+      grid-template-columns: [col1-start] 20%  [col2-start] 60%  [col3-start] 15% [col3-end];
+      grid-template-rows: [row1-start] 50% [row2-start] 20% [row2-end];
+      background-color: #fff;
+      color: #444;
+    }
+
+    .opponent-sidebar {
+      grid-column: col1-start / col2-start;
+      grid-row: row1-start / row2-end;
+      /*NEW INTERNAL GRID*/
+      display: grid;
+      grid-gap: 10px;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+    }
+
+    .opponent {
+      grid-column: 1fr;
+      grid-row: 1fr;
+    }
+
+    .box {
+        background-color: #444;
+        color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        font-size: 150%;
+
+    }
+
+    .box .box {
+        background-color: #FFF;
+        color: #444;
+    }
+    .game-board{
+      grid-column: col2-start / col3-start;
+      grid-row: row1-start / row1-start;
+    }
+
+
+    .map-container{
+      margin: auto;
+      width: 80%;
+      position:relative;
+    }
+
+    .gameMap{
+      max-height:100%; max-width:100%;
+    }
+
+    .player-sidebar {
+      grid-column: col3-start / col3-end;
+      grid-row: row1-start / row2-end;
+    }
+
+    .player-inventory {
+      grid-column: col3-start / col3-end;
+      grid-row: row1-start / row2-start;
+    }
+
+    .chat{
+      grid-column: col3-start / col3-end;
+      grid-row: row2-start / row2-end;
+    }
