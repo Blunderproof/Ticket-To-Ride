@@ -11,6 +11,7 @@ body {
       color: #444;
     }
 
+
     .lobby-game-tiles-sidebar {
       display: grid;
       grid-gap: 10px;
@@ -24,7 +25,7 @@ body {
     }
 
     .join-game-btn{
-      grid-row: game-row3-start / game-row3-end; 
+      grid-row: game-row3-start / game-row3-end;
       float:right;
     }
 
