@@ -17,7 +17,14 @@ body {
       grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     }
 
+    .joined-game{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-rows: [game-row1-start] 1fr [game-row2-start] 6fr [game-row3-start] 1fr [game-row3-end];
+    }
+
     .join-game-btn{
+      grid-row: game-row3-start / game-row3-end; 
       float:right;
     }
 
