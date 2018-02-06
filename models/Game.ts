@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 import { User, IUserModel } from "./User";
 import { Schema } from "mongoose";
 
-enum GameState {
+export enum GameState {
   Open = 1,
   InProgress,
   Ended,
@@ -15,8 +15,8 @@ export interface IGameModel extends mongoose.Document {
 }
 
 export var GameSchema: Schema = new Schema({
-  host: { type: Schema.Types.ObjectId, ref: "User" },
-  playerList: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  host: { type: Schema.Types.ObjectId, required: true, ref: "User" },
+  playerList: [{ type: Schema.Types.ObjectId, required: true, ref: "User" }],
   gameState: Number,
 });
 
