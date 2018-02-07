@@ -3,6 +3,7 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import * as morgan from "morgan";
 import * as session from "express-session";
+import * as socket from "socket.io";
 
 import * as path from "path";
 import * as http from "http";
@@ -17,6 +18,7 @@ export class Server {
   server: any;
   router: any;
   db: any;
+  io:any;
   db_name: string;
   communicator: ServerCommunicator;
 
@@ -28,6 +30,7 @@ export class Server {
     this.communicator = new ServerCommunicator();
     this.config();
     this.routes();
+    this.sockets();
     this.init_db();
   }
 
@@ -63,6 +66,7 @@ export class Server {
 
     this.app.set("port", this.port);
     this.server = http.createServer(this.app);
+    this.io = socket(this.server);
     // this.server.listen(this.port);
     this.server.listen(this.port, "10.37.71.246");
     this.server.on("listening", () => {
@@ -80,6 +84,14 @@ export class Server {
     this.db.once("open", () => {
       this.msg("MongoDB Connected");
     });
+  }
+
+  sockets() {
+    this.io.on("connection",socket => {
+      socket.on("command",data => {
+        //TODO: connect this to the communicator
+      })
+    })
   }
 
   routes(root = "/") {
