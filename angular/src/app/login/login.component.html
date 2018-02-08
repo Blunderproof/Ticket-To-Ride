@@ -4,13 +4,13 @@
 
       <!--Register/Log In-->
 
-      <form class="login-form register-validate-form">
+      <form class="login-form register-validate-form" [formGroup]="form">
         <span class="login-form-title p-b-34">
           Ticket to Ride {{registering ? "Registration" : "Login"}}
         </span>
 
         <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Type user name">
-          <input id="username" class="input" type="text" name="username" placeholder="User name">
+          <input id="username" class="input" type="text" name="username" placeholder="User name" [formControl]="controls.username">
           <span class="focus-input"></span>
         </div>
         <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Type password">
