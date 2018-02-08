@@ -2,6 +2,9 @@ import { Game, GameState } from "../../models/Game";
 import CommandResults from "../../modules/commands/CommandResults";
 
 export default class GameLobbyFacade {
+  // TODOs
+  // validate all pre and post conditions
+
   private constructor() {}
 
   private static instance = new GameLobbyFacade();
@@ -33,6 +36,7 @@ export default class GameLobbyFacade {
       return loginCheck;
     }
 
+    // TODO cannot create game if user is already in game
     const { reqUserID } = data;
     return Game.findOne({
       $or: [
@@ -45,7 +49,7 @@ export default class GameLobbyFacade {
           gameState: GameState.InProgress,
         },
       ],
-    }).then(game => {
+    }).then(async game => {
       if (game) {
         // doc may be null if no document matched
         return {
@@ -61,13 +65,16 @@ export default class GameLobbyFacade {
         });
 
         // Save the new model instance, passing a callback
-        newGame.save();
-        return {
-          success: true,
-          data: {
-            gameID: newGame._id,
-          },
-        };
+
+        return await newGame.save().then(game => {
+          return {
+            success: true,
+            data: {
+              gameID: game._id,
+            },
+            emitCommand: "gameList",
+          };
+        });
       }
     });
   }
@@ -79,19 +86,22 @@ export default class GameLobbyFacade {
     }
 
     const { reqUserID } = data;
+
     return Game.findOne({
       host: reqUserID,
       gameState: GameState.Open,
-    }).then(game => {
+    }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        game.remove();
-        return {
-          success: true,
-          data: {
-            message: "Game deleted.",
-          },
-        };
+        return await game.remove().then(() => {
+          return {
+            success: true,
+            data: {
+              message: "Game deleted.",
+            },
+            emitCommand: "gameList",
+          };
+        });
       } else {
         // Save the new model instance, passing a callback
         return {
@@ -128,12 +138,20 @@ export default class GameLobbyFacade {
     }).then(game => {
       if (game) {
         // doc may be null if no document matched
-        return {
-          success: false,
-          data: {},
-          errorInfo:
-            "You can't join this game because you are already in a game!",
-        };
+        if (game._id == gameID) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "You have already joined this game!",
+          };
+        } else {
+          return {
+            success: false,
+            data: {},
+            errorInfo:
+              "You can't join this game because you are already in a game!",
+          };
+        }
       } else {
         // Save the new model instance, passing a callback
         return null;
@@ -146,7 +164,7 @@ export default class GameLobbyFacade {
 
     return Game.findOne({
       _id: gameID,
-    }).then(game => {
+    }).then(async game => {
       if (game) {
         // doc may be null if no document matched
         if (game.playerList.length >= 5) {
@@ -156,12 +174,14 @@ export default class GameLobbyFacade {
             errorInfo: "The specified game already has 5 players.",
           };
         } else {
-          game.playerList.concat(reqUserID);
-          game.save();
-          return {
-            success: true,
-            data: { message: "Game joined." },
-          };
+          game.playerList.push(reqUserID);
+          return await game.save().then(game => {
+            return {
+              success: true,
+              data: { message: "Game joined." },
+              emitCommand: "gameList",
+            };
+          });
         }
       } else {
         // Save the new model instance, passing a callback
@@ -183,23 +203,28 @@ export default class GameLobbyFacade {
     const { reqUserID } = data;
     return Game.findOne({
       playerList: reqUserID,
-    }).then(game => {
+    }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-
+        if (game.host == reqUserID) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "You can't leave your own game!",
+          };
+        }
         const index = game.playerList.indexOf(reqUserID);
         game.playerList.splice(index, 1);
-        game.save();
 
-        return {
-          success: true,
-          data: {
-            message: "Game left.",
-          },
-        };
+        return await game.save().then(game => {
+          return {
+            success: true,
+            data: { message: "Game left." },
+            emitCommand: "gameList",
+          };
+        });
       } else {
         // Save the new model instance, passing a callback
-
         return {
           success: false,
           data: {},
