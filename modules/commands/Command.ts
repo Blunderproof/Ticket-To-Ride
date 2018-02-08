@@ -12,9 +12,7 @@ export default class Command implements ICommand {
   }
 
   public async execute(): Promise<any> {
-    const responseData = await this.commandFunction(this.data).catch(err => {
-      console.log("do something with our error");
-    });
+    const responseData = this.commandFunction(this.data);
     return responseData;
   }
 
