@@ -10,6 +10,8 @@ import { GamelistComponent } from './gamelist/gamelist.component';
 import { PlayerlistComponent } from './playerlist/playerlist.component';
 import { GamelobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
+import { GameTileComponent } from './game-tile/game-tile.component';
+import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { LoginComponent } from './login/login.component';
     GamelistComponent,
     PlayerlistComponent,
     GamelobbyComponent,
-    LoginComponent
+    LoginComponent,
+    GameTileComponent,
+    ChatMsgComponent
   ],
   imports: [
     BrowserModule,
