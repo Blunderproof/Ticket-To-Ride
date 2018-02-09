@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomValidatorsService } from './core/custom-validators.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { GameTileComponent } from './game-tile/game-tile.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 import { ServerProxy } from './services/server_proxy.service';
+import { ClientCommunicator } from './services/client_communicator.service';
 
 
 @NgModule({
@@ -34,11 +35,12 @@ import { ServerProxy } from './services/server_proxy.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [
     ServerProxy,
-    CustomValidatorsService
+    CustomValidatorsService,
+    ClientCommunicator
   ],
   bootstrap: [AppComponent]
 })
