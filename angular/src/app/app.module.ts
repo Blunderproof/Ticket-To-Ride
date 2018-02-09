@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomValidatorsService } from './core/custom-validators.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
@@ -36,7 +37,8 @@ import { ServerProxy } from './services/server_proxy.service';
     HttpModule
   ],
   providers: [
-    ServerProxy
+    ServerProxy,
+    CustomValidatorsService
   ],
   bootstrap: [AppComponent]
 })
