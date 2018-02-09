@@ -1,7 +1,15 @@
-<div class="box lobby-game-tiles-sidebar">Available games:
-  <app-gametile>
+<div class="box lobby-sidebar">
+  <!-- TODO: ng-repeat over the games available to join -->
+  <div class="game-tile-list">
+    <app-game-tile></app-game-tile>
+    <!-- <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile>
+    <app-game-tile></app-game-tile> -->
 
-  </app-gametile>
-
-  <button type="button" class="btn btn-success" (click)="AddGame()">Add Game</button>
+  </div>
+  <button type="button" class="btn btn-success create-game-btn" (click)="AddGame()">Add Game</button>
 </div>

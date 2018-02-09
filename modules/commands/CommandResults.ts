@@ -3,12 +3,14 @@ export default class CommandResults {
   private data: any;
   private errorInfo: string;
   private userCookie: string;
+  private emitCommand: string;
 
   constructor(responseData: any) {
     this.success = responseData.success;
     this.data = responseData.data;
     this.errorInfo = responseData.errorInfo;
     this.userCookie = responseData.userCookie;
+    this.emitCommand = responseData.emitCommand;
   }
 
   public getData(): any {
@@ -22,5 +24,8 @@ export default class CommandResults {
   }
   public shouldSetSession(): string {
     return this.userCookie;
+  }
+  public shouldEmit(): string {
+    return this.emitCommand;
   }
 }

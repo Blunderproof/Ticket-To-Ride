@@ -1,3 +1,18 @@
-<p>
-  playerlist works!
-</p>
+<div class="box player-list"> Player List
+  <!-- TODO: ng-repeat over the players in the given game,
+  if the player is the admin then make the player cards the kickable variety -->
+  <div class="player-card">
+    <div class="player-card-username">
+      Player 1
+    </div>
+  </div>
+  <div class="player-card kickable">
+    <span>
+      <span class="player-card-username">
+        Player 2
+      </span>
+      <!-- TODO: If the player is the admin, make the kickable button remove the given player-->
+      <button class="btn btn-secondary kick-player-button" type="button">X</button>
+    </span>
+  </div>
+</div>

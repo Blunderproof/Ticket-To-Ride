@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomValidatorsService } from './core/custom-validators.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
@@ -10,7 +13,9 @@ import { GamelistComponent } from './gamelist/gamelist.component';
 import { PlayerlistComponent } from './playerlist/playerlist.component';
 import { GamelobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
-import { ServerProxy } from '../app/services/server_proxy.service';
+import { GameTileComponent } from './game-tile/game-tile.component';
+import { ChatMsgComponent } from './chat-msg/chat-msg.component';
+import { ServerProxy } from './services/server_proxy.service';
 
 
 @NgModule({
@@ -21,13 +26,20 @@ import { ServerProxy } from '../app/services/server_proxy.service';
     GamelistComponent,
     PlayerlistComponent,
     GamelobbyComponent,
-    LoginComponent
+    LoginComponent,
+    GameTileComponent,
+    ChatMsgComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [ServerProxy],
+  providers: [
+    ServerProxy,
+    CustomValidatorsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
