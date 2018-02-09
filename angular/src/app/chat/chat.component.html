@@ -1,3 +1,21 @@
-<p>
-  chat works!
-</p>
+<div class="chat-window">
+  <div class="chat-header">Lobby Chat</div>
+  <div class="chat-history">
+    <!-- TODO: ng-repeat over the game's chat messages, if the message is from the user,
+    then set the class to "chat-msg-user" so that the text aligns properly -->
+    <ul>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+
+   </ul>
+  </div>
+  <div class="chat-input">
+    <div class="input-group mb-3 input-user-msg">
+      <input type="text" class="form-control" placeholder="User Message" aria-label="User Message" aria-describedby="basic-addon2"/>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

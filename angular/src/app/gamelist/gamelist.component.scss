@@ -1,0 +1,33 @@
+.lobby-sidebar{
+  grid-area: lobby-sidebar;
+  position: relative;
+}
+
+.game-tile-list{
+  border-radius: 5px;
+  min-height: 500px;
+  grid-column: 1/2;
+  overflow-y: auto;
+  max-height: 500px;
+  color: #333;
+  background-color: #dae4f2;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 100%;
+}
+
+.box .box {
+    background-color: #FFF;
+    color: #444;
+}
+
+.create-game-btn{
+  grid-column: 2/3;
+  width:95%;
+  margin: 10px;
+}

@@ -1,0 +1,51 @@
+body {
+  margin: 40px;
+  font-size: 14pt;
+}
+
+.lobby-container{
+  display: grid;
+   grid-gap: 10px;
+   grid-template-columns: 60% 40%;
+   grid-template-areas:
+          "joined-game lobby-sidebar";
+   background-color: #fff;
+   color: #444;
+}
+
+
+.joined-game{
+    grid-area: joined-game;
+    display: grid;
+      grid-gap: 10px;
+      grid-template-columns: 40% 60%;
+      grid-template-rows: 20% 60% 20%;
+      grid-template-areas:
+            "game-header ...."
+            "player-list chat"
+            "......... start-leave-button";
+}
+
+app-playerlist{
+  grid-area: player-list;
+}
+
+app-chat{
+  grid-area: chat;
+}
+
+.game-header{
+  grid-area: game-header;
+}
+
+
+.start-leave-button{
+  grid-area: start-leave-button;
+}
+
+.lobby-sidebar{
+  grid-area: lobby-sidebar;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 80% 20%;
+}

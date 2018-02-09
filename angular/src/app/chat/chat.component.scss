@@ -1,0 +1,40 @@
+.chat-window{
+  grid-area: chat;
+  min-height: 500px;
+  max-height: 500px;
+  position: relative;
+  background-color: #FFF;
+  color: #444;
+  border-radius: 5px;
+  font-size: 100%;
+}
+
+.chat-header{
+  padding: 5px;
+  background-color: grey;
+}
+
+.chat-history{
+  overflow-y: auto;
+  min-height: 300px;
+  max-height: 350px;
+}
+
+.chat-input{
+  grid-column: chat-row3-start / chat-row3-end;
+  bottom: 0px;
+}
+
+.input-user-msg{
+  position: absolute;
+  bottom: 10px;
+  height: 40px;
+    width: 90%;
+  margin: 25px;
+}
+
+.input-group-btn{
+  position: absolute;
+  bottom: 10px;
+
+}

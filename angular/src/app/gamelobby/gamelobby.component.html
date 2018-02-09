@@ -1,6 +1,37 @@
-<div class="lobby-container">
-  <div class="box joined-game">
-    <span> GAME NAME </span>
+<body>
+
+  <div class="lobby-container">
+
+
+    <div class="box joined-game">
+
+      <div class="game-header">
+        <span> Current Game </span>
+        <div>Game Name</div>
+      </div>
+      <app-playerlist></app-playerlist>
+      <app-chat></app-chat>
+
+      <div class="start-leave-button">
+        <span>
+          <!-- TODO: ng-if the player is the game host, display start game and delete game buttons,
+          ELSE if !notGameHost, display the Leave Button -->
+          <button type="button" class="btn btn-primary start-game" style="float:right; margin: 5px;"> Start Game</button>
+          <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Leave Game</button>
+          <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Delete Game</button>
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="box lobby-sidebar">
+      <app-gamelist></app-gamelist>
+
+    </div>
+
+
+
   </div>
-  <app-gamelist></app-gamelist>
-</div>
+
+</body>

@@ -18,7 +18,7 @@ export class Server {
   server: any;
   router: any;
   db: any;
-  io:any;
+  io: any;
   db_name: string;
   communicator: ServerCommunicator;
 
@@ -27,8 +27,8 @@ export class Server {
   private constructor() {
     this.port = "3000";
     this.db_name = "tickettoride";
-    this.communicator = new ServerCommunicator();
     this.config();
+    this.communicator = new ServerCommunicator(this.io);
     this.routes();
     this.sockets();
     this.init_db();
@@ -67,8 +67,11 @@ export class Server {
     this.app.set("port", this.port);
     this.server = http.createServer(this.app);
     this.io = socket(this.server);
-    // this.server.listen(this.port);
-    this.server.listen(this.port, "10.37.71.246");
+
+    this.server.listen(this.port);
+    // debug hosts
+    // this.server.listen(this.port, "10.37.71.246");
+
     this.server.on("listening", () => {
       var addr = this.server.address();
       var bind =
@@ -87,11 +90,14 @@ export class Server {
   }
 
   sockets() {
-    this.io.on("connection",socket => {
-      socket.on("command",data => {
-        //TODO: connect this to the communicator
-      })
-    })
+    // this.communicator.setupSockets(this.io);
+    this.io.on("connection", (socket: any) => {
+      console.log("herro");
+      socket.emit("news", { hello: "world" });
+      socket.on("command", (data: any) => {
+        this.communicator.handleSocketCommand(data, socket);
+      });
+    });
   }
 
   routes(root = "/") {
