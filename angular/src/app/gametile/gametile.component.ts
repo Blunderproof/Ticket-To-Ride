@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Game } from '../classes/game';
+import { ServerProxy } from '../services/server_proxy.service';
 
 @Component({
   selector: 'app-gametile',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gametile.component.scss']
 })
 export class GametileComponent implements OnInit {
+  game: Game;
 
-  constructor() { }
+  constructor(private communicator: ServerProxy) { }
 
   ngOnInit() {
+  }
+
+  joinGame() {
+    this.communicator.joinGame(this.game.id);
   }
 
 }

@@ -14,7 +14,9 @@ export class ServerProxy {
         this.communicator.send('createGame', {});
     }
 
-    joinGame() {
-        this.communicator.send('joinGame', {});
+    joinGame(gameID: string) {
+        this.communicator.send('joinGame', {
+            gameID: gameID
+        });
     }
 }

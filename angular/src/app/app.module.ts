@@ -10,6 +10,7 @@ import { GamelistComponent } from './gamelist/gamelist.component';
 import { PlayerlistComponent } from './playerlist/playerlist.component';
 import { GamelobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
+import { ServerProxy } from '../app/services/server_proxy.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ServerProxy],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
