@@ -6,7 +6,7 @@ import { ServerProxy } from '../services/server_proxy.service';
   templateUrl: './gamelist.component.html',
   styleUrls: ['./gamelist.component.scss']
 })
-export class GamelistComponent implements OnInit {
+export class GameListComponent implements OnInit {
 
   constructor(private communicator: ServerProxy) { }
 

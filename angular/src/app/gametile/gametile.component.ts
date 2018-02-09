@@ -7,7 +7,7 @@ import { ServerProxy } from '../services/server_proxy.service';
   templateUrl: './gametile.component.html',
   styleUrls: ['./gametile.component.scss']
 })
-export class GametileComponent implements OnInit {
+export class GameTileComponent implements OnInit {
   game: Game;
 
   constructor(private communicator: ServerProxy) { }
