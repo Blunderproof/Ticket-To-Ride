@@ -8,7 +8,7 @@ import { Game } from '../classes/game';
   templateUrl: './gamelist.component.html',
   styleUrls: ['./gamelist.component.scss']
 })
-export class GamelistComponent implements OnInit {
+export class GameListComponent implements OnInit {
   gameList: Game[];
 
   constructor(private communicator: ServerProxy, private socket: SocketCommunicator) {

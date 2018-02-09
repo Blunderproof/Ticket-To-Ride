@@ -4,29 +4,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomValidatorsService } from './core/custom-validators.service';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
-import { GametileComponent } from './gametile/gametile.component';
-import { GamelistComponent } from './gamelist/gamelist.component';
-import { PlayerlistComponent } from './playerlist/playerlist.component';
-import { GamelobbyComponent } from './gamelobby/gamelobby.component';
+import { GameTileComponent } from './gametile/gametile.component';
+import { GameListComponent } from './gamelist/gamelist.component';
+import { PlayerListComponent } from './playerlist/playerlist.component';
+import { GameLobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
-import { GameTileComponent } from './game-tile/game-tile.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 import { ServerProxy } from './services/server_proxy.service';
 import { SocketCommunicator } from './services/socket_communicator.service';
+import { ClientCommunicator } from './services/client_communicator.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
-    GametileComponent,
-    GamelistComponent,
-    PlayerlistComponent,
-    GamelobbyComponent,
+    GameTileComponent,
+    GameListComponent,
+    PlayerListComponent,
+    GameLobbyComponent,
     LoginComponent,
     GameTileComponent,
     ChatMsgComponent
@@ -35,12 +35,13 @@ import { SocketCommunicator } from './services/socket_communicator.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpClientModule
   ],
   providers: [
     ServerProxy,
     CustomValidatorsService,
-    SocketCommunicator
+    SocketCommunicator,
+    ClientCommunicator
   ],
   bootstrap: [AppComponent]
 })

@@ -1,17 +1,14 @@
-import {Http} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
+@Injectable()
 export class ClientCommunicator {
 
-    private http: Http;
+    constructor(private _http: HttpClient) { }
 
-    constructor(in_http: Http) {
-        this.http = in_http;
-    }
-
-    send(method: string, data: object) {
-        this.http.post('/command', {
-            method: method,
-            data: data
-        });
+    send(data: object) {
+        this._http.post('http://localhost:3000/execute', data).subscribe(
+            (x: any) => { }
+        );
     }
 }
