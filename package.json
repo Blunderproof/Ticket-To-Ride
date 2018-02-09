@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && tsc && node dist/app.js",
-    "build": "cd angular/ && ng build --prod",
+    "build": "cd angular/ && ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "delashum",
