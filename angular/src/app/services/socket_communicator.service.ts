@@ -8,10 +8,15 @@ export class SocketCommunicator {
 
     constructor() {
         this.socket = io();
+        console.log('IOOOO');
     }
 
     receiveMessage(callback: any) {
         return this.socket.on('message', callback);
+    }
+
+    receiveGameList(callback: any) {
+        return this.socket.on('gameList', callback);
     }
 
 }

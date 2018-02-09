@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { GameTileComponent } from './game-tile/game-tile.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 import { ServerProxy } from './services/server_proxy.service';
+import { SocketCommunicator } from './services/socket_communicator.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ServerProxy } from './services/server_proxy.service';
   ],
   providers: [
     ServerProxy,
-    CustomValidatorsService
+    CustomValidatorsService,
+    SocketCommunicator
   ],
   bootstrap: [AppComponent]
 })
