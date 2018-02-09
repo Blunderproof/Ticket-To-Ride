@@ -9,8 +9,8 @@ export class ServerProxy {
         this.communicator.send({'methodName': 'createGame'});
     }
 
-    joinGame() {
-        this.communicator.send({'methodName': 'joinGame'});
+    joinGame(gameID: string) {
+        this.communicator.send({'methodName': 'joinGame', 'gameID': gameID});
     }
 
     login(username: string, password: string) {

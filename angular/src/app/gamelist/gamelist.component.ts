@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerProxy } from '../services/server_proxy.service';
 
 @Component({
   selector: 'app-gamelist',
@@ -7,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GamelistComponent implements OnInit {
 
-  constructor() { }
+  constructor(private communicator: ServerProxy) { }
 
   ngOnInit() {
   }
 
-  AddGame() {
-    // TODO implement this
+  createGame() {
+    this.communicator.createGame();
   }
 
 }
