@@ -36,14 +36,14 @@
           <span class="txt1">
             Don't have an account?
           </span>
-          <a (click)="setRegistering(true)">Sign Up</a>
+          <a (click)="setRegistering(true)" class="link">Sign Up</a>
         </div>
 
         <div class="w-full text-center p-t-27 p-b-239" *ngIf="registering">
           <span class="txt1">
             Already have an account?
           </span>
-          <a (click)="setRegistering(false)">Log In</a>
+          <a (click)="setRegistering(false)" class="link">Log In</a>
         </div>
       </form>
       <div class="login-more" style="background-image: url('../../assets/images/train.jpg');"></div>
