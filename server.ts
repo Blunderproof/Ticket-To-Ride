@@ -102,6 +102,9 @@ export class Server {
 
   routes(root = "/") {
     this.router = express.Router();
+    this.router.get('/*', function(req:any, res:any) {
+      res.sendFile(path.join(__dirname + '/public/index.html'));
+  });
     this.router.post("/execute", this.communicator.handleCommand);
     this.app.use(root, this.router);
   }

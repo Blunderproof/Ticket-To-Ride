@@ -15,6 +15,7 @@ import { GameLobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 import { ServerProxy } from './services/server_proxy.service';
+import { SocketCommunicator } from './services/socket_communicator.service';
 import { ClientCommunicator } from './services/client_communicator.service';
 
 
@@ -39,6 +40,7 @@ import { ClientCommunicator } from './services/client_communicator.service';
   providers: [
     ServerProxy,
     CustomValidatorsService,
+    SocketCommunicator,
     ClientCommunicator
   ],
   bootstrap: [AppComponent]
