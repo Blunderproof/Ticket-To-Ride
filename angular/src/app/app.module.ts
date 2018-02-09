@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
@@ -13,6 +14,7 @@ import { GamelobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
 import { GameTileComponent } from './game-tile/game-tile.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
+import { ServerProxy } from './services/server_proxy.service';
 
 
 @NgModule({
@@ -30,9 +32,12 @@ import { ChatMsgComponent } from './chat-msg/chat-msg.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    ServerProxy
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

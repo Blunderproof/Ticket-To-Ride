@@ -18,11 +18,11 @@ export class ServerProxy {
         this.communicator.send('joinGame', {});
     }
 
-    login(username: String, password: String) {
+    login(username: string, password: string) {
         this.communicator.send('login', {'username': username, 'password': password }); // needs to include username and password
     }
 
-    register(username: String, password: String, confirmPassword: String) {
+    register(username: string, password: string, confirmPassword: string) {
         // tslint:disable-next-line:max-line-length
         this.communicator.send('register', {'username': username, 'password': password, 'confirmPassword': confirmPassword}); // needs to include username password and confirmPassword
     }
