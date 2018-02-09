@@ -113,7 +113,7 @@ export default class ServerCommunicator {
 
     // since we've already checked if facadeCommand is not null,
     // we can force unwrap the optional type using varName!
-    let command: Command = new Command(req.body, facadeCommand!);
+    let command: Command = new Command(req.body.data, facadeCommand!);
 
     this.commandHandler
       .execute(command)

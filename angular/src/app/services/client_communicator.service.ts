@@ -6,9 +6,15 @@ export class ClientCommunicator {
 
     constructor(private _http: HttpClient) { }
 
-    send(data: object) {
-        this._http.post('\execute', data).subscribe(
-            (x: any) => { }
-        );
+    send(method: string, data: object) {
+        return new Promise((accept, reject) => {
+            this._http.post('/execute', {
+                methodName: method,
+                data: data
+            }).subscribe(
+                (x: any) =>  { accept(x); },
+                (x: any) => { reject(x); }
+            );
+        });
     }
 }
