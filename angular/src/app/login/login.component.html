@@ -19,7 +19,7 @@
           <span class="focus-input"></span>
         </div>
         <app-validation-messages [control]="form.controls.password" class="m-b-20"></app-validation-messages>
-        <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Retype password" *ngIf="registering">
+        <div class="wrap-input rs3-wrap-input validate-input" data-validate="Retype password" *ngIf="registering">
           <input id="passwordConfirm" class="input" type="password" name="passwordConfirm" placeholder="Confirm Password" [formControl]="form.controls.confirmPassword">
           <span class="focus-input"></span>
         </div>
