@@ -6,11 +6,11 @@ export class ServerProxy {
     constructor(private communicator: ClientCommunicator) { }
 
     createGame() {
-        this.communicator.send('createGame', {});
+        return this.communicator.send('createGame', {});
     }
 
     joinGame(gameID: string) {
-        this.communicator.send('joinGame', {
+        return this.communicator.send('joinGame', {
             gameID: gameID
         });
     }
@@ -22,20 +22,16 @@ export class ServerProxy {
 
     login(username: string, password: string) {
         // needs to include username and password
-        this.communicator.send('login', {
+        return this.communicator.send('login', {
             username: username,
             password: password
-        }).then(x => {
-            console.log(x);
-        }).catch(err => {
-            console.error(err);
         });
     }
 
     register(username: string, password: string, confirmPassword: string) {
         // needs to include username password and confirmPassword
         // tslint:disable-next-line:max-line-length
-        this.communicator.send('register', {
+        return this.communicator.send('register', {
             username: username,
             password: password,
             confirmPassword: confirmPassword

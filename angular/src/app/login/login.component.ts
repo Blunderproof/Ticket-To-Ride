@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { createFormGroup } from '../core/utils/forms';
 import { ServerProxy } from '../services/server_proxy.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   };
   form = createFormGroup(this.login_controls);
 
-  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy) { }
+  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router) { }
 
   ngOnInit() {  }
 
@@ -41,7 +42,10 @@ export class LoginComponent implements OnInit {
     if (!this.registering) {
       // alert(`Username: ${this.login_controls.username.value}, Password: ${this.login_controls.password.value}`);
       console.log('Logging in');
-      this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value);
+      this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
+        .then(x => {
+          this._router.navigate(['/lobby']);
+        });
     } else {
       /* alert(`Username: ${this.register_controls.username.value}, Password: ${this.register_controls.password.value},
       Confirm: ${this.register_controls.confirmPassword.value}`);*/
