@@ -17,6 +17,7 @@ import { ChatMsgComponent } from './chat-msg/chat-msg.component';
 import { ServerProxy } from './services/server_proxy.service';
 import { SocketCommunicator } from './services/socket_communicator.service';
 import { ClientCommunicator } from './services/client_communicator.service';
+import { ValidationMessagesComponent } from './core/validation-messages/validation-messages.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { ClientCommunicator } from './services/client_communicator.service';
     GameLobbyComponent,
     LoginComponent,
     GameTileComponent,
-    ChatMsgComponent
+    ChatMsgComponent,
+    ValidationMessagesComponent
   ],
   imports: [
     BrowserModule,

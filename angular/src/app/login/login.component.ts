@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { createFormGroup } from '../core/utils/forms';
 import { ServerProxy } from '../services/server_proxy.service';
 import { Router } from '@angular/router';
+import { CustomValidatorsService } from '../core/custom-validators.service';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +19,16 @@ export class LoginComponent implements OnInit {
     password: this._fb.control('', Validators.required)
   };
 
+  password = this._fb.control('', Validators.required);
   register_controls = {
     username: this._fb.control('', Validators.required),
-    password: this._fb.control('', Validators.required),
-    confirmPassword: this._fb.control('', Validators.required)
+    password: this.password,
+    confirmPassword: this._fb.control('', [Validators.required, this._customValidators.passwordsEqualValidator(this.password)])
   };
   form = createFormGroup(this.login_controls);
 
-  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService) { }
 
   ngOnInit() {  }
 

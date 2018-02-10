@@ -126,6 +126,20 @@ export class CustomValidatorsService {
     };
   }
 
+  passwordsEqualValidator(password): ValidatorFn {
+    return (control: FormControl): PasswordsEqualValidationResult => {
+      if (Validators.required(control) != null) {
+        return null;
+      }
+
+      if (!(control.value === password.value)) {
+        return { passwordsequal: false };
+      } else {
+        return null;
+      }
+    };
+  }
+
   // wrap built in pattern validator with validator that can take a custom message
   patternValidator(pattern: string | RegExp, customMessage?: string): ValidatorFn {
     const builtInPatternValidator = Validators.pattern(pattern);
@@ -138,19 +152,5 @@ export class CustomValidatorsService {
         return result;
       }
     };
-  }
-
-  passwordsEqualValidator = (controlGroup: FormGroup): PasswordsEqualValidationResult => {
-    if (this.groupEqualValidator(controlGroup)) {
-      return { passwordsequal: true };
-    }
-  }
-
-  groupEqualValidator = (controlGroup: FormGroup): GroupEqualValidationResult => {
-    const controls = Object.keys(controlGroup.controls).map(x => controlGroup.controls[x])
-      .filter(x => x.touched || x.dirty || !!x.value); // or value is truthy
-    if (!controls.every(x => x.value.toString().trim() === controls[0].value.toString().trim())) {
-      return { groupequal: true };
-    }
   }
 }

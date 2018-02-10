@@ -9,18 +9,21 @@
           Ticket to Ride {{registering ? "Registration" : "Login"}}
         </span>
 
-        <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Type username">
+        <div class="wrap-input rs3-wrap-input validate-input" data-validate="Type username">
           <input id="username" class="input" type="text" name="username" placeholder="Username" [formControl]="form.controls.username">
           <span class="focus-input"></span>
         </div>
+        <app-validation-messages [control]="form.controls.username" class="m-b-20"></app-validation-messages>
         <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Type password">
           <input id="password" class="input" type="password" name="password" placeholder="Password" [formControl]="form.controls.password">
           <span class="focus-input"></span>
         </div>
+        <app-validation-messages [control]="form.controls.password" class="m-b-20"></app-validation-messages>
         <div class="wrap-input rs3-wrap-input validate-input m-b-20" data-validate="Retype password" *ngIf="registering">
           <input id="passwordConfirm" class="input" type="password" name="passwordConfirm" placeholder="Confirm Password" [formControl]="form.controls.confirmPassword">
           <span class="focus-input"></span>
         </div>
+        <app-validation-messages [control]="form.controls.confirmPassword" class="m-b-20" *ngIf="registering"></app-validation-messages>
 
         <div class="container-login-form-btn">
           <button class="login-form-btn" *ngIf="registering" (click)="onSubmit()" [disabled]="!form.valid">
