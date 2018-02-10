@@ -16,6 +16,7 @@ export default class GameLobbyFacade {
   }
 
   validateUserAuth(data: any) {
+    console.log(data);
     if (!data.reqUserID) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({

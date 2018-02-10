@@ -105,7 +105,8 @@ export default class ServerCommunicator {
 
     // set the body's cookie basically
     var reqUserID = req.session.lgid || null;
-    req.body.reqUserID = reqUserID;
+    var body = req.body.data || {};
+    body.reqUserID = reqUserID;
 
     // debug
     // console.log("userCookie");
@@ -113,7 +114,7 @@ export default class ServerCommunicator {
 
     // since we've already checked if facadeCommand is not null,
     // we can force unwrap the optional type using varName!
-    let command: Command = new Command(req.body.data, facadeCommand!);
+    let command: Command = new Command(body, facadeCommand!);
 
     this.commandHandler
       .execute(command)

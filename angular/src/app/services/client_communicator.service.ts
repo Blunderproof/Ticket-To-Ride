@@ -12,8 +12,14 @@ export class ClientCommunicator {
                 methodName: method,
                 data: data
             }).subscribe(
-                (x: any) =>  { accept(x); },
-                (x: any) => { reject(x); }
+                (x: any) =>  {
+                    console.log(x);
+                    accept(x);
+                },
+                (x: any) => {
+                    console.error(x);
+                    reject(x);
+                }
             );
         });
     }
