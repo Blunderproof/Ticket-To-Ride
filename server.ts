@@ -92,7 +92,6 @@ export class Server {
   sockets() {
     // this.communicator.setupSockets(this.io);
     this.io.on("connection", (socket: any) => {
-      console.log("herro");
       socket.emit("news", { hello: "world" });
       socket.on("command", (data: any) => {
         this.communicator.handleSocketCommand(data, socket);

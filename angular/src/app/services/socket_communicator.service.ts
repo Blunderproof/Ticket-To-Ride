@@ -19,4 +19,8 @@ export class SocketCommunicator {
         return this.socket.on('gameList', callback);
     }
 
+    receivePlayerList(callback: any) {
+        return this.socket.on('playerList', callback);
+    }
+
 }
