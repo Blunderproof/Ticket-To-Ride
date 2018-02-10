@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService) { }
 
-  ngOnInit() {  }
+  ngOnInit() { }
 
   setRegistering(value: boolean) {
     this.registering = value;
@@ -38,6 +38,12 @@ export class LoginComponent implements OnInit {
       this.form = createFormGroup(this.register_controls);
     } else {
       this.form = createFormGroup(this.login_controls);
+    }
+  }
+
+  revalidate() {
+    if (this.registering) {
+      this.form.controls.confirmPassword.updateValueAndValidity();
     }
   }
 
