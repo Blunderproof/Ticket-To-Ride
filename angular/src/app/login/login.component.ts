@@ -12,6 +12,7 @@ import { CustomValidatorsService } from '../core/custom-validators.service';
 })
 export class LoginComponent implements OnInit {
 
+  errorMessages = [];
   registering = false;
 
   login_controls = {
@@ -49,16 +50,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (!this.registering) {
-      // alert(`Username: ${this.login_controls.username.value}, Password: ${this.login_controls.password.value}`);
-      console.log('Logging in');
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
-        .then(x => {
-          this._router.navigate(['/lobby']);
+        .then((x: any) => {
+          if (x.success) {
+            this._router.navigate(['/lobby']);
+          } else {
+            this.errorMessages = new Array<string>();
+            this.errorMessages.push(x.message);
+          }
         });
     } else {
-      /* alert(`Username: ${this.register_controls.username.value}, Password: ${this.register_controls.password.value},
-      Confirm: ${this.register_controls.confirmPassword.value}`);*/
-      console.log('Registering');
       // tslint:disable-next-line:max-line-length
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value);
     }

@@ -14,10 +14,13 @@ import { PlayerListComponent } from './playerlist/playerlist.component';
 import { GameLobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
+import { ValidationMessagesComponent } from './core/validation-messages/validation-messages.component';
+
 import { ServerProxy } from './services/server_proxy.service';
 import { SocketCommunicator } from './services/socket_communicator.service';
 import { ClientCommunicator } from './services/client_communicator.service';
-import { ValidationMessagesComponent } from './core/validation-messages/validation-messages.component';
+import { AuthGuardService } from './core/auth-guard.service';
+import { ErrorsComponent } from './core/errors/errors.component';
 
 
 @NgModule({
@@ -31,7 +34,8 @@ import { ValidationMessagesComponent } from './core/validation-messages/validati
     LoginComponent,
     GameTileComponent,
     ChatMsgComponent,
-    ValidationMessagesComponent
+    ValidationMessagesComponent,
+    ErrorsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,8 @@ import { ValidationMessagesComponent } from './core/validation-messages/validati
     ServerProxy,
     CustomValidatorsService,
     SocketCommunicator,
-    ClientCommunicator
+    ClientCommunicator,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
