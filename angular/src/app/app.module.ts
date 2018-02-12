@@ -18,6 +18,7 @@ import { ServerProxy } from './services/server_proxy.service';
 import { SocketCommunicator } from './services/socket_communicator.service';
 import { ClientCommunicator } from './services/client_communicator.service';
 import { ValidationMessagesComponent } from './core/validation-messages/validation-messages.component';
+import { PlayerInfo } from './services/player_info.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ValidationMessagesComponent } from './core/validation-messages/validati
     ServerProxy,
     CustomValidatorsService,
     SocketCommunicator,
-    ClientCommunicator
+    ClientCommunicator,
+    PlayerInfo
   ],
   bootstrap: [AppComponent]
 })

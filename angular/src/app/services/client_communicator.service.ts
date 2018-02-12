@@ -13,7 +13,6 @@ export class ClientCommunicator {
                 data: data
             }).subscribe(
                 (x: any) =>  {
-                    console.log(x);
                     accept(x);
                 },
                 (x: any) => {

@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
       // alert(`Username: ${this.login_controls.username.value}, Password: ${this.login_controls.password.value}`);
       console.log('Logging in');
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
-        .then(x => {
+        .then((x: any) => {
+          this.playerinfo.id = x.result.userID;
           this._router.navigate(['/lobby']);
         });
     } else {
@@ -61,7 +62,10 @@ export class LoginComponent implements OnInit {
       Confirm: ${this.register_controls.confirmPassword.value}`);*/
       console.log('Registering');
       // tslint:disable-next-line:max-line-length
-      this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value);
+      this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value).then((x: any) => {
+        this.playerinfo.id = x.result.userID;
+        this._router.navigate(['/lobby']);
+      });
     }
   }
 }
