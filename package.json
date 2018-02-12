@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && tsc && node dist/app.js",
+    "server": "tsc && node dist/app.js",
+    "angular": "npm run build",
     "build": "cd angular/ && ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

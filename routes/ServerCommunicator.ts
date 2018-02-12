@@ -127,7 +127,10 @@ export default class ServerCommunicator {
           // set and update cookie stuff
           const userCookie = commandResults.shouldSetSession();
           if (userCookie == "") {
-            req.session.destroy();
+            var sessData = req.session;
+            sessData.lgid = userCookie;
+            sessData.cookie.expires = new Date(Date.now() - 50000);
+            sessData.cookie.maxAge = 1;
           } else if (userCookie) {
             // set sessions
             var sessData = req.session;
