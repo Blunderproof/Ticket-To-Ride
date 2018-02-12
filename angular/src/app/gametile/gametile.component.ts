@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Game } from '../classes/game';
 import { ServerProxy } from '../services/server_proxy.service';
 
@@ -8,11 +8,12 @@ import { ServerProxy } from '../services/server_proxy.service';
   styleUrls: ['./gametile.component.scss']
 })
 export class GameTileComponent implements OnInit {
-  game: Game;
+  @Input() game: Game;
 
   constructor(private communicator: ServerProxy) { }
 
   ngOnInit() {
+    console.log(this.game);
   }
 
   joinGame() {

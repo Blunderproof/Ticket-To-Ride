@@ -4,6 +4,7 @@ import { createFormGroup } from '../core/utils/forms';
 import { ServerProxy } from '../services/server_proxy.service';
 import { Router } from '@angular/router';
 import { CustomValidatorsService } from '../core/custom-validators.service';
+import { PlayerInfo } from '../services/player_info.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   form = createFormGroup(this.login_controls);
 
   // tslint:disable-next-line:max-line-length
-  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService) { }
+  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService, private playerinfo: PlayerInfo) { }
 
   ngOnInit() { }
 

@@ -244,4 +244,14 @@ export default class GameLobbyFacade {
       });
     });
   }
+
+  getGameList(data: any): Promise<any> {
+    return new Promise((resolve: any, reject: any) => {
+      resolve({
+        success: true,
+        data: {},
+        emitCommand: "gameList",
+      });
+    });
+  }
 }

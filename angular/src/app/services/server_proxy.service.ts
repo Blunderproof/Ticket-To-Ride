@@ -37,4 +37,8 @@ export class ServerProxy {
             confirmPassword: confirmPassword
         });
     }
+
+    requestGameList() {
+        return this.communicator.send('getGameList', {});
+    }
 }

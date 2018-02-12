@@ -30,6 +30,7 @@ export default class ServerCommunicator {
     this.commandMap.set("joinGame", facade.joinGame);
     this.commandMap.set("deleteGame", facade.deleteGame);
     this.commandMap.set("leaveGame", facade.leaveGame);
+    this.commandMap.set("getGameList", facade.getGameList);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {

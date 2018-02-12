@@ -16,7 +16,7 @@ export class GameListComponent implements OnInit {
    }
 
   ngOnInit() {
-    // TODO: Get list of games
+    this.communicator.requestGameList();
 
   }
 
@@ -26,6 +26,7 @@ export class GameListComponent implements OnInit {
 
   sockets() {
     this.socket.receiveGameList(data => {
+      console.log('gamelist', data);
       this.gameList = data;
     });
 

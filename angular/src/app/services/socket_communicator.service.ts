@@ -8,7 +8,6 @@ export class SocketCommunicator {
 
     constructor() {
         this.socket = io();
-        console.log('IOOOO');
     }
 
     receiveMessage(callback: any) {

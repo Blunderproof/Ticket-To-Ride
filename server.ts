@@ -21,6 +21,7 @@ export class Server {
   io: any;
   db_name: string;
   communicator: ServerCommunicator;
+  session: any;
 
   private static instance = new Server();
 
@@ -59,9 +60,10 @@ export class Server {
       );
       next();
     });
+    this.session = session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, httpOnly: false } });
 
     this.app.use(
-      session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, httpOnly: false } })
+      this.session
     );
 
     this.app.set("port", this.port);
