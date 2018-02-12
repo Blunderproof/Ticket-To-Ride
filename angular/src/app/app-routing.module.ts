@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { GameLobbyComponent } from './gamelobby/gamelobby.component';
+import { AuthGuardService } from './core/auth-guard.service';
 
 const routes: Routes = [{
   path: '',
@@ -12,7 +13,8 @@ const routes: Routes = [{
   component: LoginComponent
 }, {
   path: 'lobby',
-  component: GameLobbyComponent
+  component: GameLobbyComponent,
+  canActivate: [AuthGuardService]
 }];
 
 @NgModule({
