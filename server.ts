@@ -61,7 +61,7 @@ export class Server {
     });
 
     this.app.use(
-      session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE } })
+      session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, httpOnly: false } })
     );
 
     this.app.set("port", this.port);
