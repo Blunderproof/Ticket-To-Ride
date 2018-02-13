@@ -1,5 +1,7 @@
 <div class="box lobby-sidebar">
+  <app-errors [messages]="errorMessages"></app-errors>
   <div class="game-tile-list">
+    <div style="text-align: center;">Games</div>
     <app-gametile *ngFor='let game of gameList' [game]="game"></app-gametile>
 
   </div>
