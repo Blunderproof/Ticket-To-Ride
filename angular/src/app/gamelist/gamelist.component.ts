@@ -11,6 +11,7 @@ import { PlayerInfo } from '../services/player_info.service';
 })
 export class GameListComponent implements OnInit {
   gameList: Game[];
+  errorMessages = [];
 
   constructor(private communicator: ServerProxy, private socket: SocketCommunicator, public _playerInfo: PlayerInfo) {
     this.sockets();
@@ -22,7 +23,13 @@ export class GameListComponent implements OnInit {
   }
 
   createGame() {
-    this.communicator.createGame();
+    this.errorMessages = [];
+    this.communicator.createGame()
+      .then((x: any) => {
+        if (!x.success) {
+          this.errorMessages.push(x.message);
+        }
+      });
   }
 
   sockets() {

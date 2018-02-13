@@ -10,6 +10,7 @@ import { PlayerInfo } from '../services/player_info.service';
 })
 export class GameTileComponent implements OnInit {
   @Input() game: Game;
+  errorMessages = [];
 
   constructor(private communicator: ServerProxy, public playerinfo: PlayerInfo) { }
 
@@ -18,7 +19,13 @@ export class GameTileComponent implements OnInit {
   }
 
   joinGame() {
-    this.communicator.joinGame(this.game._id);
+    this.errorMessages = [];
+    this.communicator.joinGame(this.game._id)
+      .then((x: any) => {
+        if (!x.success) {
+          this.errorMessages.push(x.message);
+        }
+      });
   }
 
 }

@@ -1,11 +1,12 @@
 <!-- TODO: if full, disable join-game button-->
 <div class="game-tile">
+  <app-errors [messages]="errorMessages"></app-errors>
   <div class="game-tile-header">
     {{game.playerList.length}} / 5 Players
   </div>
   <div class="game-tile-name">
     {{game.host.username}}'s Game
   </div>
-  <button *ngIf="playerinfo.id != game.host._id" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()">Join Game</button>
+  <button *ngIf="playerinfo.player.id != game.host._id && playerinfo.game == null" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()" [disabled]="game.playerList.length >= 5">Join Game</button>
   <!-- TODO: Make the join game button actually join the given game unless game is full-->
 </div>

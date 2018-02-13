@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errorMessages = [];
     if (!this.registering) {
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
         .then((x: any) => {
@@ -58,7 +59,6 @@ export class LoginComponent implements OnInit {
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
-            this.errorMessages = new Array<string>();
             this.errorMessages.push(x.message);
           }
         });
@@ -66,9 +66,13 @@ export class LoginComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
         .then((x: any) => {
-          this.playerinfo.player.id = x.result.userID;
-          this.playerinfo.player.username = x.result.username;
-          this._router.navigate(['/lobby']);
+          if (x.success) {
+            this.playerinfo.player.id = x.result.userID;
+            this.playerinfo.player.username = x.result.username;
+            this._router.navigate(['/lobby']);
+          } else {
+            this.errorMessages.push(x.message);
+          }
         });
     }
   }
