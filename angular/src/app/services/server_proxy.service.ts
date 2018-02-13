@@ -19,6 +19,14 @@ export class ServerProxy {
       return this.communicator.send('startGame', {});
   }
 
+  leaveGame() {
+    return this.communicator.send('leaveGame', {});
+  }
+
+  deleteGame() {
+    return this.communicator.send('deleteGame', {});
+  }
+
   login(username: string, password: string) {
     // needs to include username and password
     return this.communicator.send('login', {

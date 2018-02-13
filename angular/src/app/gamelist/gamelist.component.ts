@@ -12,7 +12,7 @@ import { PlayerInfo } from '../services/player_info.service';
 export class GameListComponent implements OnInit {
   gameList: Game[];
 
-  constructor(private communicator: ServerProxy, private socket: SocketCommunicator, private _playerInfo: PlayerInfo) {
+  constructor(private communicator: ServerProxy, private socket: SocketCommunicator, public _playerInfo: PlayerInfo) {
     this.sockets();
    }
 

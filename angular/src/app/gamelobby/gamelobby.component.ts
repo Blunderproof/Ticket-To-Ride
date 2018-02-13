@@ -24,4 +24,24 @@ export class GameLobbyComponent implements OnInit {
         }
       });
   }
+
+  leaveGame() {
+    this.communicator.leaveGame()
+      .then((x: any) => {
+        // TODO: Don't navigate until socket emits to start game
+        if (x.success) {
+          this._router.navigate(['/lobby']);
+        }
+      });
+  }
+
+  deleteGame() {
+    this.communicator.deleteGame()
+      .then((x: any) => {
+        // TODO: Don't navigate until socket emits to start game
+        if (x.success) {
+          this._router.navigate(['/lobby']);
+        }
+      });
+  }
 }
