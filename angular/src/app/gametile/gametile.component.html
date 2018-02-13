@@ -1,5 +1,6 @@
 <!-- TODO: if full, disable join-game button-->
 <div class="game-tile">
+  <app-errors [messages]="errorMessages"></app-errors>
   <div class="game-tile-header">
     {{game.playerList.length}} / 5 Players
   </div>
