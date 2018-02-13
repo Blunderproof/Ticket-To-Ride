@@ -6,7 +6,7 @@ export class Game {
     playerList: Player[];
     host: Player;
     status: string;
-    id: string;
+    _id: string;
 
     constructor() {
 
