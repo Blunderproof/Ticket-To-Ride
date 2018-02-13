@@ -6,6 +6,6 @@
   <div class="game-tile-name">
     {{game._id}}
   </div>
-  <button *ngIf="playerinfo.id == game.host" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()">Join Game</button>
+  <button *ngIf="playerinfo.id != game.host" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()">Join Game</button>
   <!-- TODO: Make the join game button actually join the given game unless game is full-->
 </div>
