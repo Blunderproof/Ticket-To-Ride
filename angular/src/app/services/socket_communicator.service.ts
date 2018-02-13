@@ -18,7 +18,7 @@ export class SocketCommunicator {
         return this.socket.on('startGame', callback);
     }
 
-    joinGame(gameID: string) {
+    joinRoom(gameID: string) {
         return this.socket.emit('join', {
             room: gameID
         });
