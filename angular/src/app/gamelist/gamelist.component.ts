@@ -27,7 +27,6 @@ export class GameListComponent implements OnInit {
 
   sockets() {
     this.socket.receiveGameList(data => {
-      console.log(data);
       this.gameList = data;
       // tslint:disable-next-line:max-line-length
       this._playerInfo.game = this.gameList.filter(x => x.playerList
