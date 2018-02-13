@@ -7,7 +7,7 @@
 
       <div class="game-header" *ngIf="_playerInfo.game != null">
         <span> Current Game </span>
-        <div>{{_playerInfo.game.host.username}}</div>
+        <div>{{_playerInfo.game.host.username}}'s Game</div>
       </div>
       <app-playerlist *ngIf="_playerInfo.game != null" [playerList]="_playerInfo.game.playerList"></app-playerlist>
       
