@@ -73,7 +73,7 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       }
@@ -100,7 +100,7 @@ export default class GameLobbyFacade {
             data: {
               message: "Game deleted.",
             },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       } else {
@@ -180,7 +180,7 @@ export default class GameLobbyFacade {
             return {
               success: true,
               data: { message: "Game joined." },
-              emitCommand: "gameList",
+              emit: [{command:"gameList"}],
             };
           });
         }
@@ -221,7 +221,7 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: { message: "Game left." },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       } else {
@@ -257,11 +257,11 @@ export default class GameLobbyFacade {
           };
         } else {
           game.gameState = GameState.InProgress;
-          return await game.save().then(game => {
+          return await game.save().then(data => {
             return {
               success: true,
               data: { message: "Game started!" },
-              emitCommand: "gameList",
+              emit: [{command:"gameList"},{command:"startGame",to:game._id}],
             };
           });
         }
@@ -286,7 +286,7 @@ export default class GameLobbyFacade {
       resolve({
         success: true,
         data: {},
-        emitCommand: "gameList",
+        emit: [{command:"gameList"}],
       });
     });
   }

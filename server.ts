@@ -98,6 +98,9 @@ export class Server {
       socket.on("command", (data: any) => {
         this.communicator.handleSocketCommand(data, socket);
       });
+      socket.on("join", (data: any) => {
+        if (data.room) socket.join(data.room);
+      })
     });
   }
 

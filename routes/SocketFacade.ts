@@ -12,6 +12,7 @@ export default class SocketFacade {
   private configureSocketCommandMap = () => {
     // user commands
     this.socketCommandMap.set("gameList", this.getOpenGameList);
+    this.socketCommandMap.set("startGame", this.startGame);
   };
 
   private static instance = new SocketFacade();
@@ -23,21 +24,26 @@ export default class SocketFacade {
     return this.instance;
   }
 
-  execute(emitCommand: string, socketConnection: any) {
+  execute(emitRequest: any, socketConnection: any) {
+
+    console.log(emitRequest);
     const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(
-      emitCommand
+      emitRequest.command
     );
 
     if (!socketCommand) {
-      console.log(`Yikes, '${emitCommand}' is not a valid socket command.`);
+      console.log(`Yikes, '${emitRequest.command}' is not a valid socket command.`);
       return;
     }
 
     let sureSocketCommand: SocketCommand = socketCommand!;
     sureSocketCommand().then(emitData => {
-      // console.log(emitData);
-      // TODO verify this works with real sockets on the front end
-      socketConnection.emit(emitCommand, emitData);
+      console.log(emitData);
+      if (emitRequest.to) {
+        socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
+      } else {
+        socketConnection.emit(emitRequest.command, emitData);
+      }
     });
   }
 
@@ -49,4 +55,10 @@ export default class SocketFacade {
         return games;
       });
   };
+
+  private startGame = (): Promise<any> => {
+    return new Promise((accept, reject) => {
+      accept({msg: "start game!"})
+    })
+  }
 }

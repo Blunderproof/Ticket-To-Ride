@@ -32,6 +32,9 @@ export class GameListComponent implements OnInit {
       this._playerInfo.game = this.gameList.filter(x => x.playerList
                                             .indexOf(x.playerList
                                               .find(y => y.username === this._playerInfo.player.username)) !== -1)[0] || null;
+      if (this._playerInfo.game) {
+        this.socket.joinGame(this._playerInfo.game._id);
+      }
     });
   }
 

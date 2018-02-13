@@ -10,16 +10,18 @@ export class SocketCommunicator {
         this.socket = io();
     }
 
-    receiveMessage(callback: any) {
-        return this.socket.on('message', callback);
-    }
-
     receiveGameList(callback: any) {
         return this.socket.on('gameList', callback);
     }
 
-    receivePlayerList(callback: any) {
-        return this.socket.on('playerList', callback);
+    startGame(callback: any) {
+        return this.socket.on('startGame', callback);
+    }
+
+    joinGame(gameID: string) {
+        return this.socket.emit('join', {
+            room: gameID
+        });
     }
 
 }

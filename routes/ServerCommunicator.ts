@@ -138,12 +138,16 @@ export default class ServerCommunicator {
           }
 
           // emit stuff
-          const emitCommand = commandResults.shouldEmit();
-          if (emitCommand) {
-            SocketFacade.instanceOf().execute(
-              emitCommand,
-              this.socketConnection
-            );
+          const emitRequests = commandResults.shouldEmit();
+          if (emitRequests && emitRequests.length > 0) {
+            emitRequests.map((emitRequest: any) => {
+              if (emitRequest && emitRequest.command) {
+                SocketFacade.instanceOf().execute(
+                  emitRequest,
+                  this.socketConnection
+                );
+              }
+            })
           }
 
           res.json({
