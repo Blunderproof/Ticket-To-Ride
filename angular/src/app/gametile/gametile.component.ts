@@ -13,7 +13,9 @@ export class GameTileComponent implements OnInit {
 
   constructor(private communicator: ServerProxy, public playerinfo: PlayerInfo) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.playerinfo, this.game);
+  }
 
   joinGame() {
     this.communicator.joinGame(this.game._id);

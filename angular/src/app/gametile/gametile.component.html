@@ -4,7 +4,7 @@
     {{game.playerList.length}} / 5 Players
   </div>
   <div class="game-tile-name">
-    {{game._id}}
+    {{game.host.username}}'s Game
   </div>
   <button *ngIf="playerinfo.id != game.host._id" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()">Join Game</button>
   <!-- TODO: Make the join game button actually join the given game unless game is full-->
