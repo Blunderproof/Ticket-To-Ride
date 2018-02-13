@@ -236,16 +236,52 @@ export default class GameLobbyFacade {
   }
 
   startGame(data: any): Promise<any> {
-    return new Promise((resolve: any, reject: any) => {
-      resolve({
-        success: false,
-        data: {},
-        errorInfo: "GameLobbyFacade startGame: not implemented.",
-      });
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
+    const { reqUserID } = data;
+
+    return Game.findOne({
+      host: reqUserID,
+      gameState: GameState.Open,
+    }).then(async game => {
+      if (game) {
+        // doc may be null if no document matched
+        if (game.playerList.length <= 1 || game.playerList.length > 5) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "Your game doesn't have enough players to start!",
+          };
+        } else {
+          game.gameState = GameState.InProgress;
+          return await game.save().then(game => {
+            return {
+              success: true,
+              data: { message: "Game started!" },
+              emitCommand: "gameList",
+            };
+          });
+        }
+      } else {
+        // Save the new model instance, passing a callback
+        return {
+          success: false,
+          data: {},
+          errorInfo: "User does not have an open game!",
+        };
+      }
     });
   }
 
-  getGameList(data: any): Promise<any> {
+  getOpenGameList(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
     return new Promise((resolve: any, reject: any) => {
       resolve({
         success: true,

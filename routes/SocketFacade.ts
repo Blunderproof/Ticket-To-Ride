@@ -11,7 +11,7 @@ export default class SocketFacade {
 
   private configureSocketCommandMap = () => {
     // user commands
-    this.socketCommandMap.set("gameList", this.getGameList);
+    this.socketCommandMap.set("gameList", this.getOpenGameList);
   };
 
   private static instance = new SocketFacade();
@@ -41,7 +41,7 @@ export default class SocketFacade {
     });
   }
 
-  private getGameList = (): Promise<any> => {
+  private getOpenGameList = (): Promise<any> => {
     return Game.find({ gameState: GameState.Open })
       .populate("host")
       .populate("playerList")
