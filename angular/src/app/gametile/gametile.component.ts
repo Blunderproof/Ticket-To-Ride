@@ -16,7 +16,7 @@ export class GameTileComponent implements OnInit {
   ngOnInit() {}
 
   joinGame() {
-    this.communicator.joinGame(this.game.id);
+    this.communicator.joinGame(this.game._id);
   }
 
 }
