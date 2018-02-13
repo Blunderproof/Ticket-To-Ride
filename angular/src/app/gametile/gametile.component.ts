@@ -13,8 +13,7 @@ export class GameTileComponent implements OnInit {
 
   constructor(private communicator: ServerProxy, public playerinfo: PlayerInfo) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   joinGame() {
     this.communicator.joinGame(this.game.id);

@@ -26,7 +26,6 @@ export class GameListComponent implements OnInit {
 
   sockets() {
     this.socket.receiveGameList(data => {
-      console.log('gamelist', data);
       this.gameList = data;
     });
 

@@ -5,6 +5,7 @@ import { Game } from '../classes/game';
 export class PlayerInfo {
     id: string;
     game: Game;
+    username: string;
 
     constructor() { }
 

@@ -43,7 +43,7 @@ export default class UserFacade {
           success: true,
           data: {
             userID: user._id,
-            username,
+            username: username,
           },
           userCookie: user._id,
         };
@@ -117,7 +117,7 @@ export default class UserFacade {
           success: true,
           data: {
             userID: newUser._id,
-            username,
+            username: username,
           },
           userCookie: newUser._id,
         };
