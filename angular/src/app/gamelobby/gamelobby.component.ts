@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerInfo } from '../services/player_info.service';
 
 @Component({
   selector: 'app-gamelobby',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameLobbyComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _playerInfo: PlayerInfo) { }
 
   ngOnInit() {
   }

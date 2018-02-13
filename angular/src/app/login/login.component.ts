@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit {
     if (!this.registering) {
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
         .then((x: any) => {
-          this.playerinfo.id = x.result.userID;
+          this.playerinfo.player.id = x.result.userID;
+          this.playerinfo.player.username = x.result.username;
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
@@ -63,10 +64,12 @@ export class LoginComponent implements OnInit {
         });
     } else {
       // tslint:disable-next-line:max-line-length
-      this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value).then((x: any) => {
-        this.playerinfo.id = x.result.userID;
-        this._router.navigate(['/lobby']);
-      });
+      this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
+        .then((x: any) => {
+          this.playerinfo.player.id = x.result.userID;
+          this.playerinfo.player.username = x.result.username;
+          this._router.navigate(['/lobby']);
+        });
     }
   }
 }

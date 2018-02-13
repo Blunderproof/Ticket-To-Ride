@@ -5,12 +5,13 @@
 
     <div class="box joined-game">
 
-      <div class="game-header">
+      <div class="game-header" *ngIf="_playerInfo.game != null">
         <span> Current Game </span>
         <div>Game Name</div>
       </div>
-      <app-playerlist></app-playerlist>
-      <app-chat></app-chat>
+      <app-playerlist *ngIf="_playerInfo.game != null"></app-playerlist>
+      
+      <!--<app-chat></app-chat>-->
 
       <div class="start-leave-button">
         <span>
