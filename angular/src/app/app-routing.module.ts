@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { GameLobbyComponent } from './gamelobby/gamelobby.component';
 import { AuthGuardService } from './core/auth-guard.service';
+import { GameComponent } from './game/game.component';
 
 const routes: Routes = [{
   path: '',
@@ -14,6 +15,10 @@ const routes: Routes = [{
 }, {
   path: 'lobby',
   component: GameLobbyComponent,
+  canActivate: [AuthGuardService]
+}, {
+  path: 'game',
+  component: GameComponent,
   canActivate: [AuthGuardService]
 }];
 

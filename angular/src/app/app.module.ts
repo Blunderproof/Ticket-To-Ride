@@ -23,6 +23,7 @@ import { ClientCommunicator } from './services/client_communicator.service';
 import { PlayerInfo } from './services/player_info.service';
 import { AuthGuardService } from './core/auth-guard.service';
 import { ErrorsComponent } from './core/errors/errors.component';
+import { GameComponent } from './game/game.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ErrorsComponent } from './core/errors/errors.component';
     GameTileComponent,
     ChatMsgComponent,
     ValidationMessagesComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

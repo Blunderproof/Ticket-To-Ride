@@ -15,10 +15,9 @@ export class ServerProxy {
     });
   }
 
-  // login(username: string, password: string) {
-  //     // needs to include username and password
-  //     this.communicator.send({'methodName': 'login', 'username': username, 'password': password});
-  // }
+  startGame() {
+      return this.communicator.send('startGame', {});
+  }
 
   login(username: string, password: string) {
     // needs to include username and password

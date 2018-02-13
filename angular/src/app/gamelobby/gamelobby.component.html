@@ -7,7 +7,7 @@
 
       <div class="game-header" *ngIf="_playerInfo.game != null">
         <span> Current Game </span>
-        <div>Game Name</div>
+        <div>{{_playerInfo.game._id}}</div>
       </div>
       <app-playerlist *ngIf="_playerInfo.game != null"></app-playerlist>
       
@@ -17,7 +17,7 @@
         <span>
           <!-- TODO: ng-if the player is the game host, display start game and delete game buttons,
           ELSE if !notGameHost, display the Leave Button -->
-          <button type="button" class="btn btn-primary start-game" style="float:right; margin: 5px;"> Start Game</button>
+          <button type="button" class="btn btn-primary start-game" style="float:right; margin: 5px;" (click)="startGame()"> Start Game</button>
           <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Leave Game</button>
           <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Delete Game</button>
         </span>
