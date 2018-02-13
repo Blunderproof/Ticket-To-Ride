@@ -1,4 +1,4 @@
-import { Game } from "../models/Game";
+import { Game, GameState } from "../models/Game";
 import { SocketCommand } from "../constants";
 
 export default class SocketFacade {
@@ -42,8 +42,11 @@ export default class SocketFacade {
   }
 
   private getGameList = (): Promise<any> => {
-    return Game.find().then(games => {
-      return games;
-    });
+    return Game.find({ gameState: GameState.Open })
+      .populate("host")
+      .populate("playerList")
+      .then(games => {
+        return games;
+      });
   };
 }
