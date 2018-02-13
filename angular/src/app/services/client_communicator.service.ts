@@ -8,11 +8,12 @@ export class ClientCommunicator {
 
     send(method: string, data: object) {
         return new Promise((accept, reject) => {
-            this._http.post('\execute', {
+            this._http.post('execute', {
                 methodName: method,
                 data: data
             }).subscribe(
                 (x: any) =>  {
+                    console.log(x);
                     accept(x);
                 },
                 (x: any) => {

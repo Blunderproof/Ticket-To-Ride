@@ -27,14 +27,12 @@ export class GameListComponent implements OnInit {
 
   sockets() {
     this.socket.receiveGameList(data => {
-      console.log('gamelist', data);
       this.gameList = data;
       // tslint:disable-next-line:max-line-length
       this._playerInfo.game = this.gameList.filter(x => x.playerList
                                             .indexOf(x.playerList
                                               .find(y => y.username === this._playerInfo.player.username)) !== -1)[0] || null;
     });
-
   }
 
 }
