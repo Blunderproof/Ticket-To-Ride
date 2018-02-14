@@ -1,0 +1,74 @@
+.borders{
+  margin: 60px;
+  font-size: 14pt;
+  overflow: visible;
+}
+
+.game-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: [col1-start] 25%  [col2-start] 45%  [col3-start] 30% [col3-end];
+  grid-template-rows: [row1-start] 70% [row2-start] 20% [row2-end];
+  background-color: #fff;
+  color: #444;
+}
+
+.active-player{
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 80px #FFF;
+  border-radius: 3px;
+}
+
+.opponent-sidebar {
+  grid-column: col1-start / col2-start;
+  grid-row: row1-start / row2-end;
+  /*NEW INTERNAL GRID*/
+  display: grid;
+  grid-gap: 3px;
+  grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
+}
+
+.opponent {
+  grid-column: 1fr;
+  grid-row: 1fr;
+}
+
+.opponent-card{
+  height: 180px;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+
+}
+
+.box .box {
+    background-color: #FFF;
+    color: #444;
+}
+.game-board{
+  grid-column: col2-start / col3-start;
+  grid-row: row1-start / row1-start;
+}
+
+
+.player-sidebar {
+  grid-column: col3-start / col3-end;
+  grid-row: row1-start / row2-end;
+}
+
+.player-inventory {
+  grid-column: col3-start / col3-end;
+  grid-row: row1-start / row2-start;
+  font-size: 14px;
+}
+
+.chat{
+  grid-column: col3-start / col3-end;
+  grid-row: row2-start / row2-end;
+}

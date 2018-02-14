@@ -13,6 +13,13 @@ import { GamelobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
 import { GameTileComponent } from './game-tile/game-tile.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
+import { PlayerInventoryComponent } from './player-inventory/player-inventory.component';
+import { GameComponent } from './game/game.component';
+import { TrainCardListComponent } from './train-card-list/train-card-list.component';
+import { BankComponent } from './bank/bank.component';
+import { OpponentCardComponent } from './opponent-card/opponent-card.component';
+import { MapComponent } from './map/map.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -25,7 +32,14 @@ import { ChatMsgComponent } from './chat-msg/chat-msg.component';
     GamelobbyComponent,
     LoginComponent,
     GameTileComponent,
-    ChatMsgComponent
+    ChatMsgComponent,
+    PlayerInventoryComponent,
+    GameComponent,
+    TrainCardListComponent,
+    BankComponent,
+    OpponentCardComponent,
+    MapComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

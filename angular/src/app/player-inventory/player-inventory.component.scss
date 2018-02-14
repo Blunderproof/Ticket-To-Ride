@@ -1,0 +1,27 @@
+.player-inventory{
+  grid-area: player-inventory;
+
+  display: grid;
+  grid-template-columns: 8fr 2fr;
+  grid-template-rows: .25fr 8fr;
+  grid-template-areas:
+        "inventory-header train-token-pile"
+        "train-card-list  dest-card-list";
+}
+
+.inventory-header{
+  grid-area: inventory-header;
+}
+
+.train-card-list{
+  grid-area: train-card-list;
+
+}
+
+.dest-card-list{
+  grid-area: dest-card-list;
+}
+
+.train-token-pile{
+  grid-area: train-token-pile;
+}

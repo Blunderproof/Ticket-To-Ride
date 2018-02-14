@@ -1,0 +1,121 @@
+.card:hover{
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 80px #FFF;
+  border-radius: 3px;
+  transition: transform 1s;
+  transform: translate(20px, -80px);
+}
+
+.bank-navbar{
+  overflow: hidden;
+  width:100%;
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  bottom: 0;
+  position:fixed;
+}
+
+.bottom-bar{
+  overflow: hidden;
+  object-fit: cover;
+  height: 100px;
+  z-index: 20;
+  bottom: 0px;
+  background-color: rgba(80, 80, 80, 1);
+  text-align: center;
+  position:fixed;
+}
+
+.bottom-bar-tracks{
+  position: relative;
+}
+
+.bank-items{
+  top: 150px;
+  position: relative;
+  display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 deck";
+    justify-items: center;
+    width: 100%;
+    height: inherit;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.card-slot{
+  background-color: rgba(150, 150, 150, 1);
+  width: 100px;
+  height: inherit;
+}
+
+.card{
+  width: 100px;
+  height: 150px;
+  margin: 0;
+  display: block;
+  position: absolute;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+}
+
+// .card:active {
+//   transform: rotateY(180deg);
+// }
+
+.side {
+  backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  animation-iteration-count: 2;
+}
+.back {
+  background: #eaeaed;
+  color: #0087cc;
+  line-height: 150px;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.card:active{
+  transform: translate(20px, -80px) rotateY( 540deg );
+
+}
+
+.card-back{
+  background: blue;
+  transform: rotateY( 180deg );
+}
+
+.traincard-1{
+  grid-area: traincard-1;
+}
+
+.traincard-2{
+  grid-area: traincard-2;
+}
+
+.traincard-3{
+  grid-area: traincard-3;
+}
+
+.traincard-4{
+  grid-area: traincard-4;
+}
+
+.traincard-5{
+  grid-area: traincard-5;
+}
+
+.deck{
+  grid-area: deck;
+  width: 100px;
+  height: auto;
+}

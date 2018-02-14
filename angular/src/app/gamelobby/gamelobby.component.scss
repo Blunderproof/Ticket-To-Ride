@@ -1,9 +1,11 @@
-body {
-  margin: 40px;
+.borders{
+  margin: 60px;
   font-size: 14pt;
+  overflow: visible;
 }
 
 .lobby-container{
+  overflow-x: hidden;
   display: grid;
    grid-gap: 10px;
    grid-template-columns: 60% 40%;

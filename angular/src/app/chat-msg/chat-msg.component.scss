@@ -14,17 +14,17 @@
 }
 
 .chat-msg-text{
-  grid-area:  2 / 1 / span 1 / span 2;
+  grid-area:  chat-msg-text;
   font-size: 80%;
 }
 
 .chat-msg-sender{
-  grid-area:"chat-msg-sender";
+  grid-area: chat-msg-sender;
   font-size: 60%
 }
 
 .chat-msg-timestamp{
-  grid-area: "chat-msg-timestamp";
+  grid-area: chat-msg-timestamp;
   font-size: 60%;
   float:right;
 

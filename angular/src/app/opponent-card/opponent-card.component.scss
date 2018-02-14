@@ -1,0 +1,38 @@
+.opponent-card{
+  height: 180px;
+  border-radius: 3px;
+  background-color: gray;
+  padding: 3px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3px;
+  grid-template-areas:
+        "opponent-icon ....... opponent-name"
+        "opponent-train-tokens opponent-dest-cards opponent-train-cards";
+}
+
+.card{
+  max-width: 100px;
+  max-height: 60px;
+}
+
+.opponent-icon{
+  grid-area: opponent-icon;
+}
+
+.opponent-name{
+  grid-area: opponent-name;
+}
+
+.opponent-train-tokens{
+  grid-area: opponent-train-tokens;
+}
+
+.opponent-dest-cards{
+  grid-area: opponent-dest-cards;
+}
+
+.opponent-train-cards{
+  grid-area: opponent-train-cards;
+}
