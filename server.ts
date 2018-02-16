@@ -21,6 +21,7 @@ export class Server {
   io: any;
   db_name: string;
   communicator: ServerCommunicator;
+  session: any;
 
   private static instance = new Server();
 
@@ -59,9 +60,10 @@ export class Server {
       );
       next();
     });
+    this.session = session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, httpOnly: false } });
 
     this.app.use(
-      session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE } })
+      this.session
     );
 
     this.app.set("port", this.port);
@@ -92,16 +94,21 @@ export class Server {
   sockets() {
     // this.communicator.setupSockets(this.io);
     this.io.on("connection", (socket: any) => {
-      console.log("herro");
       socket.emit("news", { hello: "world" });
       socket.on("command", (data: any) => {
         this.communicator.handleSocketCommand(data, socket);
       });
+      socket.on("join", (data: any) => {
+        if (data.room) socket.join(data.room);
+      })
     });
   }
 
   routes(root = "/") {
     this.router = express.Router();
+    this.router.get('/*', function(req:any, res:any) {
+      res.sendFile(path.join(__dirname + '/public/index.html'));
+  });
     this.router.post("/execute", this.communicator.handleCommand);
     this.app.use(root, this.router);
   }

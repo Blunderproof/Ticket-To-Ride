@@ -1,20 +1,51 @@
 import { Injectable } from '@angular/core';
 import { ClientCommunicator } from './client_communicator.service';
-import { Http } from '@angular/http';
 
 @Injectable()
 export class ServerProxy {
-    communicator: ClientCommunicator;
+  constructor(private communicator: ClientCommunicator) {}
 
-    constructor(private http: Http) {
-        this.communicator = new ClientCommunicator(http);
-    }
+  createGame() {
+    return this.communicator.send('createGame', {});
+  }
 
-    createGame() {
-        this.communicator.send('createGame', {});
-    }
+  joinGame(gameID: string) {
+    return this.communicator.send('joinGame', {
+      gameID: gameID,
+    });
+  }
 
-    joinGame() {
-        this.communicator.send('joinGame', {});
-    }
+  startGame() {
+      return this.communicator.send('startGame', {});
+  }
+
+  leaveGame() {
+    return this.communicator.send('leaveGame', {});
+  }
+
+  deleteGame() {
+    return this.communicator.send('deleteGame', {});
+  }
+
+  login(username: string, password: string) {
+    // needs to include username and password
+    return this.communicator.send('login', {
+      username: username,
+      password: password,
+    });
+  }
+
+  register(username: string, password: string, confirmPassword: string) {
+    // needs to include username password and confirmPassword
+    // tslint:disable-next-line:max-line-length
+    return this.communicator.send('register', {
+      username: username,
+      password: password,
+      confirmPassword: confirmPassword,
+    });
+  }
+
+  requestGameList() {
+    return this.communicator.send('getOpenGameList', {});
+  }
 }

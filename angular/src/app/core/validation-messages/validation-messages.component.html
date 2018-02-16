@@ -1,0 +1,6 @@
+<div style="color: red;" class="validation" *ngIf="errorMessage() != null">
+  <small>{{errorMessage()}}</small>
+</div>
+<div *ngIf="errorMessage() == null">
+  <small>&nbsp;</small>
+</div>

@@ -45,4 +45,8 @@ export default class ServerFacade implements IServer {
   startGame(data: any): Promise<any> {
     return GameLobbyFacade.instanceOf().startGame(data);
   }
+
+  getOpenGameList(data: any): Promise<any> {
+    return GameLobbyFacade.instanceOf().getOpenGameList(data);
+  }
 }

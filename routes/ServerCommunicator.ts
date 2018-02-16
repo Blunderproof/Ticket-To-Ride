@@ -30,6 +30,7 @@ export default class ServerCommunicator {
     this.commandMap.set("joinGame", facade.joinGame);
     this.commandMap.set("deleteGame", facade.deleteGame);
     this.commandMap.set("leaveGame", facade.leaveGame);
+    this.commandMap.set("getOpenGameList", facade.getOpenGameList);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -105,7 +106,8 @@ export default class ServerCommunicator {
 
     // set the body's cookie basically
     var reqUserID = req.session.lgid || null;
-    req.body.reqUserID = reqUserID;
+    var body = req.body.data || {};
+    body.reqUserID = reqUserID;
 
     // debug
     // console.log("userCookie");
@@ -113,7 +115,7 @@ export default class ServerCommunicator {
 
     // since we've already checked if facadeCommand is not null,
     // we can force unwrap the optional type using varName!
-    let command: Command = new Command(req.body, facadeCommand!);
+    let command: Command = new Command(body, facadeCommand!);
 
     this.commandHandler
       .execute(command)
@@ -125,7 +127,10 @@ export default class ServerCommunicator {
           // set and update cookie stuff
           const userCookie = commandResults.shouldSetSession();
           if (userCookie == "") {
-            req.session.destroy();
+            var sessData = req.session;
+            sessData.lgid = userCookie;
+            sessData.cookie.expires = new Date(Date.now() - 50000);
+            sessData.cookie.maxAge = 1;
           } else if (userCookie) {
             // set sessions
             var sessData = req.session;
@@ -133,12 +138,16 @@ export default class ServerCommunicator {
           }
 
           // emit stuff
-          const emitCommand = commandResults.shouldEmit();
-          if (emitCommand) {
-            SocketFacade.instanceOf().execute(
-              emitCommand,
-              this.socketConnection
-            );
+          const emitRequests = commandResults.shouldEmit();
+          if (emitRequests && emitRequests.length > 0) {
+            emitRequests.map((emitRequest: any) => {
+              if (emitRequest && emitRequest.command) {
+                SocketFacade.instanceOf().execute(
+                  emitRequest,
+                  this.socketConnection
+                );
+              }
+            })
           }
 
           res.json({

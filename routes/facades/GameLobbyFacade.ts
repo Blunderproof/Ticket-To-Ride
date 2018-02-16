@@ -16,6 +16,7 @@ export default class GameLobbyFacade {
   }
 
   validateUserAuth(data: any) {
+    console.log(data);
     if (!data.reqUserID) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({
@@ -72,7 +73,7 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       }
@@ -99,7 +100,7 @@ export default class GameLobbyFacade {
             data: {
               message: "Game deleted.",
             },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       } else {
@@ -179,7 +180,7 @@ export default class GameLobbyFacade {
             return {
               success: true,
               data: { message: "Game joined." },
-              emitCommand: "gameList",
+              emit: [{command:"gameList"}],
             };
           });
         }
@@ -220,7 +221,7 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: { message: "Game left." },
-            emitCommand: "gameList",
+            emit: [{command:"gameList"}],
           };
         });
       } else {
@@ -235,11 +236,57 @@ export default class GameLobbyFacade {
   }
 
   startGame(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
+    const { reqUserID } = data;
+
+    return Game.findOne({
+      host: reqUserID,
+      gameState: GameState.Open,
+    }).then(async game => {
+      if (game) {
+        // doc may be null if no document matched
+        if (game.playerList.length <= 1 || game.playerList.length > 5) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "Your game doesn't have enough players to start!",
+          };
+        } else {
+          game.gameState = GameState.InProgress;
+          return await game.save().then(data => {
+            return {
+              success: true,
+              data: { message: "Game started!" },
+              emit: [{command:"gameList"},{command:"startGame",to:game._id}],
+            };
+          });
+        }
+      } else {
+        // Save the new model instance, passing a callback
+        return {
+          success: false,
+          data: {},
+          errorInfo: "User does not have an open game!",
+        };
+      }
+    });
+  }
+
+  getOpenGameList(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
     return new Promise((resolve: any, reject: any) => {
       resolve({
-        success: false,
+        success: true,
         data: {},
-        errorInfo: "GameLobbyFacade startGame: not implemented.",
+        emit: [{command:"gameList"}],
       });
     });
   }

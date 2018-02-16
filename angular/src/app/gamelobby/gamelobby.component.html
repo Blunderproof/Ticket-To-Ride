@@ -1,21 +1,24 @@
 <div class="borders">
   <div class="lobby-container">
+      <app-errors [messages]="errorMessages"></app-errors>
 
     <div class="box joined-game">
-      <div class="game-header">
+
+      <div class="game-header" *ngIf="_playerInfo.game != null">
         <span> Current Game </span>
-        <!-- <div>Game Name</div> -->
+        <div>{{_playerInfo.game.host.username}}'s Game</div>
       </div>
-      <app-playerlist></app-playerlist>
-      <app-chat></app-chat>
+      <app-playerlist *ngIf="_playerInfo.game != null" [playerList]="_playerInfo.game.playerList"></app-playerlist>
+
+      <!--<app-chat></app-chat>-->
 
       <div class="start-leave-button">
-        <span>
+        <span *ngIf="_playerInfo.game != null">
           <!-- TODO: ng-if the player is the game host, display start game and delete game buttons,
           ELSE if !notGameHost, display the Leave Button -->
-          <button type="button" class="btn btn-primary start-game" style="float:right; margin: 5px;"> Start Game</button>
-          <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Leave Game</button>
-          <button type="button" class="btn btn-warning leave-game" style="float:right; margin: 5px;"> Delete Game</button>
+          <button type="button" *ngIf="_playerInfo.game.host._id == _playerInfo.player.id" class="btn btn-primary start-game" style="float:right; margin: 5px;" (click)="startGame()" [disabled]="_playerInfo.game.playerList.length < 2 || _playerInfo.game.playerList.length > 5"> Start Game</button>
+          <button type="button" *ngIf="_playerInfo.game.host._id != _playerInfo.player.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="leaveGame()"> Leave Game</button>
+          <button type="button" *ngIf="_playerInfo.game.host._id == _playerInfo.player.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="deleteGame()"> Delete Game</button>
         </span>
       </div>
     </div>
