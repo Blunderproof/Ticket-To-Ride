@@ -1,0 +1,61 @@
+<div class="limiter">
+  <div class="container-login">
+    <div class="wrap-login">
+
+      <!--Register/Log In-->
+
+      <form class="login-form register-validate-form" [formGroup]="form">
+        <span class="login-form-title p-b-34">
+          Ticket to Ride {{registering ? "Registration" : "Login"}}
+        </span>
+
+        <app-errors [messages]="errorMessages"></app-errors>
+
+        <div class="wrap-input rs3-wrap-input validate-input" data-validate="Type username">
+          <input id="username" class="input" type="text" name="username" placeholder="Username" [formControl]="form.controls.username">
+          <span class="focus-input"></span>
+        </div>
+        <app-validation-messages [control]="form.controls.username" class="m-b-20"></app-validation-messages>
+        <div class="wrap-input rs3-wrap-input validate-input" data-validate="Type password">
+          <input id="password" class="input" type="password" name="password" placeholder="Password" [formControl]="form.controls.password" (change)="revalidate()">
+          <span class="focus-input"></span>
+        </div>
+        <app-validation-messages [control]="form.controls.password" class="m-b-20"></app-validation-messages>
+        <div class="wrap-input rs3-wrap-input validate-input" data-validate="Retype password" *ngIf="registering">
+          <input id="passwordConfirm" class="input" type="password" name="passwordConfirm" placeholder="Confirm Password" [formControl]="form.controls.confirmPassword">
+          <span class="focus-input"></span>
+        </div>
+        <app-validation-messages [control]="form.controls.confirmPassword" class="m-b-20" *ngIf="registering"></app-validation-messages>
+
+        <div class="container-login-form-btn">
+          <button class="login-form-btn" *ngIf="registering" (click)="onSubmit()" [disabled]="!form.valid">
+            Register
+          </button>
+
+          <button class="login-form-btn" *ngIf="!registering" (click)="onSubmit()" [disabled]="!form.valid">
+            Log In
+          </button>
+        </div>
+
+        <div class="w-full text-center p-t-27 p-b-239" *ngIf="!registering">
+          <span class="txt1">
+            Don't have an account?
+          </span>
+          <a (click)="setRegistering(true)" class="link">Sign Up</a>
+        </div>
+
+        <div class="w-full text-center p-t-27 p-b-239" *ngIf="registering">
+          <span class="txt1">
+            Already have an account?
+          </span>
+          <a (click)="setRegistering(false)" class="link">Log In</a>
+        </div>
+      </form>
+      <div class="login-more" style="background-image: url('../../assets/images/train.jpg');"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="dropDownSelect1"></div>

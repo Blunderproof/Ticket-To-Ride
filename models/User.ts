@@ -9,8 +9,8 @@ export interface IUser {
 export interface IUserModel extends IUser, mongoose.Document {}
 
 export var UserSchema: mongoose.Schema = new mongoose.Schema({
-  username: String,
-  hashedPassword: String,
+  username: { type: String, required: true, index: { unique: true } },
+  hashedPassword: { type: String, required: true },
 });
 
 export const User: mongoose.Model<IUserModel> = mongoose.model<IUserModel>(

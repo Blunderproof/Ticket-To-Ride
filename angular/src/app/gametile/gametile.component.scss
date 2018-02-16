@@ -1,0 +1,32 @@
+.game-tile{
+  border-radius: 5px;
+  margin: 10px;
+  background-color: #FFF;
+  color: #444;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-rows: [tile-row1-start] .5fr [tile-row2-start] 1fr [tile-row2-end];
+  grid-template-columns: [tile-col1-start] 3fr [tile-col2-start] 1fr [tile-col2-end];
+}
+
+.game-tile-header{
+  grid-column: tile-col1-start / tile-col2-end;
+  grid-row: tile-row1-start / tile-row2-start;
+  font-size: .75em;
+  padding-left: 20px;
+  background-color: #bbb;
+}
+
+.game-tile-name{
+  grid-column: tile-col1-start / tile-col2-start;
+  grid-row: tile-row2-start / tile-row3-start;
+  padding-left: 10px;
+}
+
+.join-game-btn{
+  float:right;
+  grid-row: tile-row2-start / tile-row3-start;
+  grid-column: tile-col2-start / tile-col2-end;
+  height: 3em;
+  margin-right: 10px;
+}
