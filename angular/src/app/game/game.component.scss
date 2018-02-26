@@ -12,7 +12,7 @@
   color: #444;
 }
 
-.active-player{
+.active-user{
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 80px #FFF;
@@ -56,12 +56,12 @@
 }
 
 
-.player-sidebar {
+.user-sidebar {
   grid-column: col3-start / col3-end;
   grid-row: row1-start / row2-end;
 }
 
-.player-inventory {
+.user-inventory {
   grid-column: col3-start / col3-end;
   grid-row: row1-start / row2-start;
   font-size: 14px;

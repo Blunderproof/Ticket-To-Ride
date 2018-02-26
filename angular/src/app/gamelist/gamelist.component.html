@@ -5,5 +5,5 @@
     <app-gametile *ngFor='let game of gameList' [game]="game"></app-gametile>
 
   </div>
-  <button type="button" *ngIf="_playerInfo.game == null" class="btn btn-success create-game-btn" (click)="createGame()">Add Game</button>
+  <button type="button" *ngIf="_userInfo.game == null" class="btn btn-success create-game-btn" (click)="createGame()">Add Game</button>
 </div>

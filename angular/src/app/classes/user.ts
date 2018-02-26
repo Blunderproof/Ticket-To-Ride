@@ -1,5 +1,5 @@
 
-export class Player {
+export class User {
     username: string;
     id: string;
 

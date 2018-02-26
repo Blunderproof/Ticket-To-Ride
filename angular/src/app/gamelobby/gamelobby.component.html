@@ -4,21 +4,21 @@
 
     <div class="box joined-game">
 
-      <div class="game-header" *ngIf="_playerInfo.game != null">
+      <div class="game-header" *ngIf="_userInfo.game != null">
         <span> Current Game </span>
-        <div>{{_playerInfo.game.host.username}}'s Game</div>
+        <div>{{_userInfo.game.host.username}}'s Game</div>
       </div>
-      <app-playerlist *ngIf="_playerInfo.game != null" [playerList]="_playerInfo.game.playerList"></app-playerlist>
+      <app-userlist *ngIf="_userInfo.game != null" [userList]="_userInfo.game.userList"></app-userlist>
 
       <!--<app-chat></app-chat>-->
 
       <div class="start-leave-button">
-        <span *ngIf="_playerInfo.game != null">
-          <!-- TODO: ng-if the player is the game host, display start game and delete game buttons,
+        <span *ngIf="_userInfo.game != null">
+          <!-- TODO: ng-if the user is the game host, display start game and delete game buttons,
           ELSE if !notGameHost, display the Leave Button -->
-          <button type="button" *ngIf="_playerInfo.game.host._id == _playerInfo.player.id" class="btn btn-primary start-game" style="float:right; margin: 5px;" (click)="startGame()" [disabled]="_playerInfo.game.playerList.length < 2 || _playerInfo.game.playerList.length > 5"> Start Game</button>
-          <button type="button" *ngIf="_playerInfo.game.host._id != _playerInfo.player.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="leaveGame()"> Leave Game</button>
-          <button type="button" *ngIf="_playerInfo.game.host._id == _playerInfo.player.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="deleteGame()"> Delete Game</button>
+          <button type="button" *ngIf="_userInfo.game.host._id == _userInfo.user.id" class="btn btn-primary start-game" style="float:right; margin: 5px;" (click)="startGame()" [disabled]="_userInfo.game.userList.length < 2 || _userInfo.game.userList.length > 5"> Start Game</button>
+          <button type="button" *ngIf="_userInfo.game.host._id != _userInfo.user.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="leaveGame()"> Leave Game</button>
+          <button type="button" *ngIf="_userInfo.game.host._id == _userInfo.user.id" class="btn btn-warning leave-game" style="float:right; margin: 5px;" (click)="deleteGame()"> Delete Game</button>
         </span>
       </div>
     </div>
