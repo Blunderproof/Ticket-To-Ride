@@ -30,7 +30,10 @@ import { PlayerInfo } from './services/player_info.service';
 import { AuthGuardService } from './core/auth-guard.service';
 import { ErrorsComponent } from './core/errors/errors.component';
 import { GameComponent } from './game/game.component';
-
+import { DestCardSelectorComponent } from './dest-card-selector/dest-card-selector.component';
+import { GameHistoryComponent } from './game-history/game-history.component';
+import { HistoryMessageComponent } from './history-message/history-message.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @NgModule({
   declarations: [
@@ -52,8 +55,12 @@ import { GameComponent } from './game/game.component';
     NavbarComponent,
     ValidationMessagesComponent,
     ErrorsComponent,
+    DestCardSelectorComponent,
+    GameHistoryComponent,
+    HistoryMessageComponent,
   ],
   imports: [
+    AngularSvgIconModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

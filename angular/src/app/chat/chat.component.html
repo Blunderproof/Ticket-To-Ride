@@ -4,6 +4,15 @@
     <!-- TODO: ng-repeat over the game's chat messages, if the message is from the user,
     then set the class to "chat-msg-user" so that the text aligns properly -->
     <ul>
+      <!-- <li *ngFor="let message of messageList">
+        <app-history-message [ngClass]="fromUser? 'user-msg' : 'other-msg'"></app-history-message>
+      </li> -->
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
+      <app-chat-msg></app-chat-msg>
       <app-chat-msg></app-chat-msg>
       <app-chat-msg></app-chat-msg>
       <app-chat-msg></app-chat-msg>

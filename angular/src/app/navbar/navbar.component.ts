@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  // toggleGameHistory(){
+  //   // this.display='none';
+  // }
+
   constructor() { }
 
   ngOnInit() {

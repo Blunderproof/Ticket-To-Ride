@@ -1,0 +1,31 @@
+.history-msg{
+  background-color: gray;
+  border-radius: 2px;
+  overflow: hidden;
+  padding: 5px;
+  width:95%;
+  font-size:20px;
+  margin: 5px;
+  display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 80%;
+    grid-template-areas:
+          "history-msg-sender history-msg-timestamp"
+          "history-msg-text   history-msg-text";
+}
+
+.history-msg-text{
+  grid-area:  history-msg-text;
+  font-size: 80%;
+}
+
+.history-msg-sender{
+  grid-area: history-msg-sender;
+  font-size: 60%
+}
+
+.history-msg-timestamp{
+  grid-area: history-msg-timestamp;
+  font-size: 60%;
+  float:right;
+}

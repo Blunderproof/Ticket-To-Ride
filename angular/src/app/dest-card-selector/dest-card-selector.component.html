@@ -1,0 +1,60 @@
+<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
+<!-- Modal section -->
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" >
+  <div class="modal-dialog" style="height:80%;" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <h4 class="modal-title">Select 2-3 Dest Cards</h4>
+      </div>
+      <div class="modal-body">
+
+
+
+        <div class="row">
+            <div class="col">
+              <img (click)="selectDestCard($event)" id="1"
+              class="destcard overlay" src="../../assets/images/destcards/Duluth-Houston.png"
+              [ngClass]="selectedCard1 ? 'card-selected' : ''"
+              />
+              <!-- <div class="overlay">
+                <a href="#" class="icon" title="User Profile">
+                  <i class="fa fa-user"></i>
+                </a>
+              </div> -->
+            </div>
+            <div class="col">
+              <img (click)="selectDestCard($event)" id="2"
+              class="destcard" src="../../assets/images/destcards/Duluth-Houston.png"
+              [ngClass]="selectedCard2 ? 'card-selected' : ''"
+              />
+              <!-- <div class="overlay">
+                <a href="#" class="icon" title="User Profile">
+                  <i class="fa fa-user"></i>
+                </a>
+              </div> -->
+            </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <img (click)="selectDestCard($event)" id="3"
+            class="destcard" src="../../assets/images/destcards/Duluth-Houston.png"
+            [ngClass]="selectedCard3 ? 'card-selected' : ''"
+            />
+            <!-- <div class="overlay">
+              <a href="#" class="icon" title="User Profile">
+                <i class="fa fa-user"></i>
+              </a>
+            </div> -->
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <!--TODO: Disable select button if less than 3 cards are selected -->
+        <button type="button" class="btn btn-success" (click)="onCloseHandled()">Choose</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->

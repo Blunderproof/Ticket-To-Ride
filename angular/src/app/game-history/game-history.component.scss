@@ -1,0 +1,74 @@
+.history-window{
+  padding: 10px;
+  z-index: 2000;
+  grid-area: history;
+  min-height: 250px;
+  max-height: 250px;
+  position: relative;
+  background-color: #555;
+  color: #444;
+  border-radius: 5px;
+  font-size: 100%;
+  position: fixed;
+  right: 10px;
+  top: 70px;
+  border-radius: 5px;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 80px #FFF;
+}
+
+.backdrop{
+  background-color:rgba(0,0,0,0.3);
+  transition: background-color 2s ease-in-out;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 1049;
+}
+
+
+.arrow{
+  z-index: 2001;
+  position: fixed;
+  right: 150px;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 15px 20px 15px;
+  border-color: transparent transparent #555 transparent;
+}
+
+.history-header{
+  padding: 5px;
+  background-color: grey;
+}
+
+.history-textbox{
+  background-color: #FFF;
+  overflow-y: auto;
+  min-height: 230px;
+  max-height: 230px;
+}
+
+.history-input{
+  grid-column: history-row3-start / history-row3-end;
+  bottom: 0px;
+}
+
+.input-user-msg{
+  position: absolute;
+  bottom: 10px;
+  height: 40px;
+    width: 90%;
+  margin: 25px;
+}
+
+.input-group-btn{
+  position: absolute;
+  bottom: 10px;
+
+}

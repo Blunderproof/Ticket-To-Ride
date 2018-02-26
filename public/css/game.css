@@ -43,13 +43,6 @@ body {
       grid-row: row1-start / row1-start;
     }
 
-
-    .map-container{
-      margin: auto;
-      width: 80%;
-      position:relative;
-    }
-
     .gameMap{
       max-height:100%; max-width:100%;
     }

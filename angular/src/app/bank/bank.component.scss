@@ -7,7 +7,8 @@
   transform: translate(20px, -80px);
 }
 
-.bank-navbar{
+.bank-navbar{ //Used to allow the cards to float upward
+  pointer-events: none;
   overflow: hidden;
   width:100%;
   height: 350px;
@@ -63,10 +64,6 @@
   transition: all 1s ease-in-out;
 }
 
-// .card:active {
-//   transform: rotateY(180deg);
-// }
-
 .side {
   backface-visibility: hidden;
   border-radius: 6px;
@@ -86,7 +83,6 @@
 
 .card:active{
   transform: translate(20px, -80px) rotateY( 540deg );
-
 }
 
 .card-back{

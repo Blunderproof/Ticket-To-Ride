@@ -3,11 +3,10 @@
   font-size: 14pt;
   overflow: visible;
 }
-
 .game-container {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: [col1-start] 25%  [col2-start] 45%  [col3-start] 30% [col3-end];
+  grid-template-columns: [col1-start] 20%  [col2-start] 50%  [col3-start] 30% [col3-end];
   grid-template-rows: [row1-start] 70% [row2-start] 20% [row2-end];
   background-color: #fff;
   color: #444;
@@ -25,8 +24,8 @@
   grid-row: row1-start / row2-end;
   /*NEW INTERNAL GRID*/
   display: grid;
-  grid-gap: 3px;
-  grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
+    grid-gap: 3px;
+    grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
 }
 
 .opponent {
