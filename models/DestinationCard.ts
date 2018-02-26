@@ -1,11 +1,12 @@
 import * as mongoose from "mongoose";
 import { Schema } from "mongoose";
 
-export interface  DestinationCardModel extends mongoose.Document {
+export interface IDestinationCardModel extends mongoose.Document {
   city1: string,
   city2: string,
   pointValue: number
 }
+
 
 export var DestinationCardSchema: Schema = new Schema({
   city1: String,
@@ -13,7 +14,7 @@ export var DestinationCardSchema: Schema = new Schema({
   pointValue: Number
 });
 
-export const DestinationCard: mongoose.Model<DestinationCardModel> = mongoose.model<DestinationCardModel>(
+export const DestinationCard: mongoose.Model<IDestinationCardModel> = mongoose.model<IDestinationCardModel>(
    "DestinationCard",
     DestinationCardSchema
 );
