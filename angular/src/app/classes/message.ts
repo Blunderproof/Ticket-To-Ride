@@ -1,7 +1,7 @@
-import { Player } from './player';
+import { User } from './user';
 
 export class Message {
-    from: Player;
+    from: User;
     msg: string;
 
     constructor() {

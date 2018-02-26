@@ -1,10 +1,10 @@
-import {Player} from '../classes/player';
+import {User} from '../classes/user';
 
 
 export class Game {
     name: string;
-    playerList: Player[];
-    host: Player;
+    userList: User[];
+    host: User;
     status: string;
     _id: string;
 

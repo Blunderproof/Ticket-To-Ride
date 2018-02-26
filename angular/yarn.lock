@@ -371,6 +371,10 @@ angular-router-loader@^0.4.0:
   dependencies:
     loader-utils "^0.2.15"
 
+angular-svg-icon@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/angular-svg-icon/-/angular-svg-icon-5.0.0.tgz#ee4ea70436dd73d5d91e1c22c5b2c31a18567f33"
+
 ansi-html@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"

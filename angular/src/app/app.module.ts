@@ -10,11 +10,11 @@ import { AppComponent } from './app.component';
 import { ChatComponent } from './chat/chat.component';
 import { GameTileComponent } from './gametile/gametile.component';
 import { GameListComponent } from './gamelist/gamelist.component';
-import { PlayerListComponent } from './playerlist/playerlist.component';
+import { UserListComponent } from './userlist/userlist.component';
 import { GameLobbyComponent } from './gamelobby/gamelobby.component';
 import { LoginComponent } from './login/login.component';
 import { ChatMsgComponent } from './chat-msg/chat-msg.component';
-import { PlayerInventoryComponent } from './player-inventory/player-inventory.component';
+import { UserInventoryComponent } from './user-inventory/user-inventory.component';
 import { TrainCardListComponent } from './train-card-list/train-card-list.component';
 import { BankComponent } from './bank/bank.component';
 import { OpponentCardComponent } from './opponent-card/opponent-card.component';
@@ -26,7 +26,7 @@ import { ServerProxy } from './services/server_proxy.service';
 import { SocketCommunicator } from './services/socket_communicator.service';
 import { ClientCommunicator } from './services/client_communicator.service';
 
-import { PlayerInfo } from './services/player_info.service';
+import { UserInfo } from './services/user_info.service';
 import { AuthGuardService } from './core/auth-guard.service';
 import { ErrorsComponent } from './core/errors/errors.component';
 import { GameComponent } from './game/game.component';
@@ -41,12 +41,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     ChatComponent,
     GameTileComponent,
     GameListComponent,
-    PlayerListComponent,
+    UserListComponent,
     GameLobbyComponent,
     LoginComponent,
     GameTileComponent,
     ChatMsgComponent,
-    PlayerInventoryComponent,
+    UserInventoryComponent,
     GameComponent,
     TrainCardListComponent,
     BankComponent,
@@ -71,7 +71,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     CustomValidatorsService,
     SocketCommunicator,
     ClientCommunicator,
-    PlayerInfo,
+    UserInfo,
     AuthGuardService
   ],
   bootstrap: [AppComponent]

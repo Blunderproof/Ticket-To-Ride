@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerInfo } from '../services/player_info.service';
+import { UserInfo } from '../services/user_info.service';
 import { ServerProxy } from '../services/server_proxy.service';
 import { Router } from '@angular/router';
 import { SocketCommunicator } from '../services/socket_communicator.service';
@@ -12,7 +12,7 @@ import { SocketCommunicator } from '../services/socket_communicator.service';
 export class GameLobbyComponent implements OnInit {
   errorMessages = [];
 
-  constructor(public _playerInfo: PlayerInfo, private communicator: ServerProxy, private _router: Router,
+  constructor(public _userInfo: UserInfo, private communicator: ServerProxy, private _router: Router,
      private _socket: SocketCommunicator) { }
 
   ngOnInit() {

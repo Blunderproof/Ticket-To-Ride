@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../classes/game';
-import { Player } from '../classes/player';
+import { User } from '../classes/user';
 
 @Injectable()
-export class PlayerInfo {
+export class UserInfo {
     game: Game;
-    player = new Player();
+    user = new User();
 
     constructor() { }
 

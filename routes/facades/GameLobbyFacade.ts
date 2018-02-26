@@ -62,7 +62,7 @@ export default class GameLobbyFacade {
         var newGame = new Game({
           host: reqUserID,
           gameState: GameState.Open,
-          playerList: [reqUserID],
+          userList: [reqUserID],
         });
 
         // Save the new model instance, passing a callback
@@ -133,9 +133,9 @@ export default class GameLobbyFacade {
 
     const { gameID, reqUserID } = data;
 
-    // query DB for game with the user in its player list already. Await it, only respond if nothing
+    // query DB for game with the user in its user list already. Await it, only respond if nothing
     const results: any = await Game.findOne({
-      playerList: reqUserID,
+      userList: reqUserID,
     }).then(game => {
       if (game) {
         // doc may be null if no document matched
@@ -168,14 +168,14 @@ export default class GameLobbyFacade {
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        if (game.playerList.length >= 5) {
+        if (game.userList.length >= 5) {
           return {
             success: false,
             data: {},
-            errorInfo: "The specified game already has 5 players.",
+            errorInfo: "The specified game already has 5 users.",
           };
         } else {
-          game.playerList.push(reqUserID);
+          game.userList.push(reqUserID);
           return await game.save().then(game => {
             return {
               success: true,
@@ -203,7 +203,7 @@ export default class GameLobbyFacade {
 
     const { reqUserID } = data;
     return Game.findOne({
-      playerList: reqUserID,
+      userList: reqUserID,
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
@@ -214,8 +214,8 @@ export default class GameLobbyFacade {
             errorInfo: "You can't leave your own game!",
           };
         }
-        const index = game.playerList.indexOf(reqUserID);
-        game.playerList.splice(index, 1);
+        const index = game.userList.indexOf(reqUserID);
+        game.userList.splice(index, 1);
 
         return await game.save().then(game => {
           return {
@@ -249,11 +249,11 @@ export default class GameLobbyFacade {
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        if (game.playerList.length <= 1 || game.playerList.length > 5) {
+        if (game.userList.length <= 1 || game.userList.length > 5) {
           return {
             success: false,
             data: {},
-            errorInfo: "Your game doesn't have enough players to start!",
+            errorInfo: "Your game doesn't have enough users to start!",
           };
         } else {
           game.gameState = GameState.InProgress;

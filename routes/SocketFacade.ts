@@ -50,7 +50,7 @@ export default class SocketFacade {
   private getOpenGameList = (): Promise<any> => {
     return Game.find({ gameState: GameState.Open })
       .populate("host")
-      .populate("playerList")
+      .populate("userList")
       .then(games => {
         return games;
       });

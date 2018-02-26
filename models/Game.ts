@@ -13,7 +13,7 @@ export enum GameState {
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
-  playerList: IUserModel[];
+  userList: IUserModel[];
   gameState: GameState;
   unclaimedRouteFiles: IRouteModel[];
   faceUpTrainCards: ITrainCardModel[];
@@ -25,7 +25,7 @@ export interface IGameModel extends mongoose.Document {
 
 export var GameSchema: Schema = new Schema({
   host: { type: Schema.Types.ObjectId, required: true, ref: "User" },
-  playerList: [{ type: Schema.Types.ObjectId, required: true, ref: "User" }],
+  userList: [{ type: Schema.Types.ObjectId, required: true, ref: "User" }],
   gameState: Number,
   unclaimedRouteFiles: [{ type: Schema.Types.ObjectId, required: true, ref: "Route" }],
   faceUpTrainCards: [{ type: Schema.Types.ObjectId, required: true, ref: "TrainCard" }],

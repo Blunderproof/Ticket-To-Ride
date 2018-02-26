@@ -1,9 +1,9 @@
-.player-list{
+.user-list{
   max-height: 500px;
   min-height: 500px;
 }
 
-.player-card{
+.user-card{
   background-color: #bbb;
   overflow: hidden;
   padding: 10px;
@@ -12,6 +12,6 @@
   margin: 5px;
 }
 
-.kick-player-button{
+.kick-user-button{
   float:right;
 }
