@@ -1,4 +1,5 @@
 import { Game, GameState } from "../../models/Game";
+import { UserState } from "../../models/User";
 import CommandResults from "../../modules/commands/CommandResults";
 
 export default class GameLobbyFacade {
@@ -37,7 +38,6 @@ export default class GameLobbyFacade {
       return loginCheck;
     }
 
-    // TODO cannot create game if user is already in game
     const { reqUserID } = data;
     return Game.findOne({
       $or: [
@@ -47,6 +47,14 @@ export default class GameLobbyFacade {
         },
         {
           host: reqUserID,
+          gameState: GameState.InProgress,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          userList: reqUserID,
           gameState: GameState.InProgress,
         },
       ],
@@ -73,7 +81,7 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emit: [{command:"gameList"}],
+            emit: [{ command: "gameList" }],
           };
         });
       }
@@ -100,7 +108,7 @@ export default class GameLobbyFacade {
             data: {
               message: "Game deleted.",
             },
-            emit: [{command:"gameList"}],
+            emit: [{ command: "gameList" }],
           };
         });
       } else {
@@ -135,7 +143,24 @@ export default class GameLobbyFacade {
 
     // query DB for game with the user in its user list already. Await it, only respond if nothing
     const results: any = await Game.findOne({
-      userList: reqUserID,
+      $or: [
+        {
+          host: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          host: reqUserID,
+          gameState: GameState.InProgress,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.InProgress,
+        },
+      ],
     }).then(game => {
       if (game) {
         // doc may be null if no document matched
@@ -180,7 +205,7 @@ export default class GameLobbyFacade {
             return {
               success: true,
               data: { message: "Game joined." },
-              emit: [{command:"gameList"}],
+              emit: [{ command: "gameList" }],
             };
           });
         }
@@ -221,7 +246,7 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: { message: "Game left." },
-            emit: [{command:"gameList"}],
+            emit: [{ command: "gameList" }],
           };
         });
       } else {
@@ -261,7 +286,10 @@ export default class GameLobbyFacade {
             return {
               success: true,
               data: { message: "Game started!" },
-              emit: [{command:"gameList"},{command:"startGame",to:game._id}],
+              emit: [
+                { command: "gameList" },
+                { command: "startGame", to: game._id },
+              ],
             };
           });
         }
@@ -286,8 +314,53 @@ export default class GameLobbyFacade {
       resolve({
         success: true,
         data: {},
-        emit: [{command:"gameList"}],
+        emit: [{ command: "gameList" }],
       });
+    });
+  }
+
+  getUserGameStatus(data: any): Promise<any> {
+    if (!data.reqUserID) {
+      return new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: true,
+          data: {
+            status: UserState.LoggedOut,
+          },
+        });
+      });
+    }
+
+    const { reqUserID } = data;
+
+    return Game.findOne({
+      $or: [
+        {
+          host: reqUserID,
+          gameState: GameState.InProgress,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.InProgress,
+        },
+      ],
+    }).then(async game => {
+      if (game) {
+        // user IS in a game in progress
+        return {
+          success: true,
+          data: {
+            status: UserState.InGame,
+          },
+        };
+      } else {
+        return {
+          success: true,
+          data: {
+            status: UserState.LoggedIn,
+          },
+        };
+      }
     });
   }
 }

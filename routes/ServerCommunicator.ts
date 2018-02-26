@@ -30,7 +30,9 @@ export default class ServerCommunicator {
     this.commandMap.set("joinGame", facade.joinGame);
     this.commandMap.set("deleteGame", facade.deleteGame);
     this.commandMap.set("leaveGame", facade.leaveGame);
+
     this.commandMap.set("getOpenGameList", facade.getOpenGameList);
+    this.commandMap.set("getUserGameStatus", facade.getUserGameStatus);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -147,7 +149,7 @@ export default class ServerCommunicator {
                   this.socketConnection
                 );
               }
-            })
+            });
           }
 
           res.json({
