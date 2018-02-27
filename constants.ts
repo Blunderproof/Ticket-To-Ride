@@ -14,6 +14,7 @@ export enum TrainColor {
   Pink = 'pink',
   White = 'white',
   Orange = 'orange',
+  Gray = 'gray',
   Rainbow = 'rainbow',
 }
 

@@ -21,22 +21,21 @@ RouteSchema.methods.pointValue = function() {
   switch (this.length) {
     case 1:
       return 1;
-      break;
+
     case 2:
       return 2;
-      break;
+
     case 3:
       return 4;
-      break;
+
     case 4:
       return 7;
-      break;
+
     case 5:
       return 10;
-      break;
+
     case 6:
       return 15;
-      break;
 
     default:
       break;
