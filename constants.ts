@@ -11,4 +11,16 @@ export enum TrainColor {
   Blue = 'blue',
   Black = 'black',
   Yellow = 'yellow',
+  Pink = 'pink',
+  White = 'white',
+  Orange = 'orange',
+  Rainbow = 'rainbow',
+}
+
+export enum PlayerColor {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+  Black = 'black',
+  Yellow = 'yellow',
 }
