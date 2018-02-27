@@ -12,78 +12,79 @@ var Papa = require('papaparse');
 let db_name = 'tickettoride';
 mongoose.connect('mongodb://localhost/' + db_name);
 
-TrainCard.remove({}).exec();
-DestinationCard.remove({}).exec();
-Route.remove({}).exec();
-
 var fs = require('fs');
 var path = require('path');
 
-// TODO implement
+TrainCard.remove({})
+  .exec()
+  .then(() => {
+    // instantiate train cards for the game
+    let contents = fs.readFileSync(__dirname + '/train_cards.csv', 'utf8');
 
-// instantiate topic cards for the game
-let contents = fs.readFileSync(__dirname + '/train_cards.csv', 'utf8');
-
-if (contents) {
-  var tcresults = Papa.parse(contents, {
-    header: true,
-    comments: '#',
+    if (contents) {
+      var trainCardResults = Papa.parse(contents, {
+        header: true,
+        comments: '#',
+      });
+      trainCardResults.data.forEach((row, index) => {
+        for (let index = 0; index < row.numberToCreate; index++) {
+          let newCard = new TrainCard.model(row);
+          newCard.save();
+        }
+      });
+    } else {
+      console.log('contents was null for the train card data');
+    }
   });
-  tcresults.data.forEach((row, index) => {
-    let data = row;
-    // TODO color not specified on the csv right now
-    data.color = 'white';
-    let newCard = new TopicCard.model(data);
-    newCard.save();
+
+DestinationCard.remove({})
+  .exec()
+  .then(() => {
+    let contents = fs.readFileSync(
+      __dirname + '/destination_cards.csv',
+      'utf8'
+    );
+
+    const cardTypeMap = {
+      '.mp4': MediaCard.MEDIA_CARD_TYPE_VIDEO,
+      '.gif': MediaCard.MEDIA_CARD_TYPE_GIF,
+      '.jpg': MediaCard.MEDIA_CARD_TYPE_IMAGE,
+      '.png': MediaCard.MEDIA_CARD_TYPE_IMAGE,
+    };
+
+    if (contents) {
+      var destinationCardResults = Papa.parse(contents, {
+        header: true,
+        comments: '#',
+      });
+      destinationCardResults.data.forEach((row, index) => {
+        let newCard = new DestinationCard.model(row);
+        newCard.save();
+      });
+    } else {
+      console.log('contents was null for the destination card data');
+    }
   });
-} else {
-  console.log('contents was null for the topic card data');
-}
 
-contents = fs.readFileSync(__dirname + '/destination_cards.csv', 'utf8');
+Route.remove({})
+  .exec()
+  .then(() => {
+    // instantiate routes
+    let contents = fs.readFileSync(__dirname + '/routes.csv', 'utf8');
 
-const cardTypeMap = {
-  '.mp4': MediaCard.MEDIA_CARD_TYPE_VIDEO,
-  '.gif': MediaCard.MEDIA_CARD_TYPE_GIF,
-  '.jpg': MediaCard.MEDIA_CARD_TYPE_IMAGE,
-  '.png': MediaCard.MEDIA_CARD_TYPE_IMAGE,
-};
-
-if (contents) {
-  var mcresults = Papa.parse(contents, {
-    header: true,
-    comments: '#',
+    if (contents) {
+      var routeResults = Papa.parse(contents, {
+        header: true,
+        comments: '#',
+      });
+      routeResults.data.forEach((row, index) => {
+        let newRoute = new Route.model(row);
+        newRoute.save();
+      });
+    } else {
+      console.log('contents was null for the route data');
+    }
   });
-  mcresults.data.forEach((row, index) => {
-    let data = row;
-    // set media type based on file passed in
-    data.mediaType = cardTypeMap[path.extname(data.mediaURL)];
-    let newCard = new MediaCard.model(data);
-
-    newCard.save();
-  });
-} else {
-  console.log('contents was null for the media card data');
-}
-
-// instantiate topic cards for the game
-let contents = fs.readFileSync(__dirname + '/routes.csv', 'utf8');
-
-if (contents) {
-  var tcresults = Papa.parse(contents, {
-    header: true,
-    comments: '#',
-  });
-  tcresults.data.forEach((row, index) => {
-    let data = row;
-    // TODO color not specified on the csv right now
-    data.color = 'white';
-    let newCard = new TopicCard.model(data);
-    newCard.save();
-  });
-} else {
-  console.log('contents was null for the topic card data');
-}
 
 console.log('let this sit for a few seconds and it should be done');
 

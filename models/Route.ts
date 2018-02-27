@@ -6,6 +6,7 @@ import { TrainColor } from '../constants';
 export interface IRouteModel extends mongoose.Document {
   color: TrainColor;
   length: number;
+  routeNumber: number;
   city1: string;
   city2: string;
 }
@@ -13,6 +14,7 @@ export interface IRouteModel extends mongoose.Document {
 export var RouteSchema: Schema = new Schema({
   color: String,
   length: Number,
+  routeNumber: Number,
   city1: String,
   city2: String,
 });
