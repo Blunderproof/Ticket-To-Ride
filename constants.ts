@@ -26,7 +26,22 @@ export enum PlayerColor {
   Yellow = 'yellow',
 }
 
+export const TRAIN_CARD_HAND_SIZE = 4;
+export const DESTINATION_CARD_HAND_SIZE = 3;
+
 export enum MessageType {
   Chat = 'chat',
-  History = 'history'
+  History = 'history',
+}
+
+export enum GameState {
+  Open = 1,
+  InProgress,
+  Ended,
+}
+
+export enum UserState {
+  LoggedOut = 1,
+  LoggedIn,
+  InGame,
 }

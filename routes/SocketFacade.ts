@@ -1,6 +1,7 @@
-import { Game, GameState } from "../models/Game";
-import { SocketCommand } from "../constants";
 import { Message } from "../models/Message";
+import { Game } from '../models/Game';
+import { GameState } from '../constants';
+import { SocketCommand } from '../constants';
 
 export default class SocketFacade {
   socketCommandMap: Map<string, SocketCommand>;
@@ -12,9 +13,9 @@ export default class SocketFacade {
 
   private configureSocketCommandMap = () => {
     // user commands
-    this.socketCommandMap.set("gameList", this.getOpenGameList);
-    this.socketCommandMap.set("startGame", this.startGame);
-    this.socketCommandMap.set("updateGameState", this.updateGameState);
+    this.socketCommandMap.set('gameList', this.getOpenGameList);
+    this.socketCommandMap.set('startGame', this.startGame);
+    this.socketCommandMap.set('updateGameState', this.updateGameState);
   };
 
   private static instance = new SocketFacade();
@@ -27,14 +28,15 @@ export default class SocketFacade {
   }
 
   execute(emitRequest: any, socketConnection: any) {
-
     console.log(emitRequest);
     const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(
       emitRequest.command
     );
 
     if (!socketCommand) {
-      console.log(`Yikes, '${emitRequest.command}' is not a valid socket command.`);
+      console.log(
+        `Yikes, '${emitRequest.command}' is not a valid socket command.`
+      );
       return;
     }
 
@@ -51,8 +53,8 @@ export default class SocketFacade {
 
   private getOpenGameList = (data: any): Promise<any> => {
     return Game.find({ gameState: GameState.Open })
-      .populate("host")
-      .populate("userList")
+      .populate('host')
+      .populate('userList')
       .then(games => {
         return games;
       });
@@ -60,9 +62,9 @@ export default class SocketFacade {
 
   private startGame = (data: any): Promise<any> => {
     return new Promise((accept, reject) => {
-      accept({msg: "start game!"})
-    })
-  }
+      accept({ msg: 'start game!' });
+    });
+  };
 
   private updateGameState = (data: any): Promise<any> => {
     return Game.findById(data.id)

@@ -1,6 +1,6 @@
-import { Game, GameState } from "../../models/Game";
-import { UserState } from "../../models/User";
-import CommandResults from "../../modules/commands/CommandResults";
+import { Game } from '../../models/Game';
+import { GameState, UserState } from '../../constants';
+import CommandResults from '../../modules/commands/CommandResults';
 
 export default class GameLobbyFacade {
   // TODOs
@@ -23,7 +23,7 @@ export default class GameLobbyFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo: "User is must be logged in to execute this command.",
+          errorInfo: 'User is must be logged in to execute this command.',
         });
       });
       return promise;
@@ -64,7 +64,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User already has an open game or a game in progress.",
+          errorInfo: 'User already has an open game or a game in progress.',
         };
       } else {
         var newGame = new Game({
@@ -81,7 +81,7 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emit: [{ command: "gameList" }],
+            emit: [{ command: 'gameList' }],
           };
         });
       }
@@ -106,9 +106,9 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: {
-              message: "Game deleted.",
+              message: 'Game deleted.',
             },
-            emit: [{ command: "gameList" }],
+            emit: [{ command: 'gameList' }],
           };
         });
       } else {
@@ -116,7 +116,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User does not have an open game.",
+          errorInfo: 'User does not have an open game.',
         };
       }
     });
@@ -168,7 +168,7 @@ export default class GameLobbyFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "You have already joined this game!",
+            errorInfo: 'You have already joined this game!',
           };
         } else {
           return {
@@ -197,15 +197,15 @@ export default class GameLobbyFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "The specified game already has 5 users.",
+            errorInfo: 'The specified game already has 5 users.',
           };
         } else {
           game.userList.push(reqUserID);
           return await game.save().then(game => {
             return {
               success: true,
-              data: { message: "Game joined." },
-              emit: [{ command: "gameList" }],
+              data: { message: 'Game joined.' },
+              emit: [{ command: 'gameList' }],
             };
           });
         }
@@ -214,7 +214,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "The specified game does not exist!",
+          errorInfo: 'The specified game does not exist!',
         };
       }
     });
@@ -245,8 +245,8 @@ export default class GameLobbyFacade {
         return await game.save().then(game => {
           return {
             success: true,
-            data: { message: "Game left." },
-            emit: [{ command: "gameList" }],
+            data: { message: 'Game left.' },
+            emit: [{ command: 'gameList' }],
           };
         });
       } else {
@@ -254,7 +254,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "You are not in a game to leave!",
+          errorInfo: 'You are not in a game to leave!',
         };
       }
     });
@@ -285,10 +285,10 @@ export default class GameLobbyFacade {
           return await game.save().then(data => {
             return {
               success: true,
-              data: { message: "Game started!" },
+              data: { message: 'Game started!' },
               emit: [
-                { command: "gameList" },
-                { command: "startGame", to: game._id },
+                { command: 'gameList' },
+                { command: 'startGame', to: game._id },
               ],
             };
           });
@@ -298,7 +298,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User does not have an open game!",
+          errorInfo: 'User does not have an open game!',
         };
       }
     });
@@ -314,7 +314,7 @@ export default class GameLobbyFacade {
       resolve({
         success: true,
         data: {},
-        emit: [{ command: "gameList" }],
+        emit: [{ command: 'gameList' }],
       });
     });
   }
