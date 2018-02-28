@@ -1,6 +1,6 @@
-import CommandResults from "../../modules/commands/CommandResults";
-import { Promise } from "mongoose";
-import { Message } from "../../models/Message";
+import CommandResults from '../../modules/commands/CommandResults';
+import { Promise } from 'mongoose';
+import { Message } from '../../models/Message';
 
 export default class GameFacade {
   private constructor() {}
@@ -20,7 +20,7 @@ export default class GameFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo: "User is must be logged in to execute this command.",
+          errorInfo: 'User is must be logged in to execute this command.',
         });
       });
       return promise;
@@ -41,5 +41,4 @@ export default class GameFacade {
     })
 
   }
-  
 }

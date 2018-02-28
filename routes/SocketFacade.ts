@@ -1,4 +1,4 @@
-import { Message } from "../models/Message";
+import { Message } from '../models/Message';
 import { Game } from '../models/Game';
 import { GameState } from '../constants';
 import { SocketCommand } from '../constants';
@@ -68,16 +68,46 @@ export default class SocketFacade {
 
   private updateGameState = (data: any): Promise<any> => {
     return Game.findById(data.id)
-    .populate('host')
-    .populate('userList')
-    .populate('unclaimedRouteFiles')
-    .populate('faceUpTrainCards')
-    .populate('trainCardDeck')
-    .populate('trainCardDiscardPile')
-    .populate('destinationCardDeck')
-    .populate('destinationCardDiscardPile')
-    .then(game => {
-      return game
-    })
-  }
+      .populate('host')
+      .populate('userList')
+      .populate('unclaimedRouteFiles')
+      .populate('faceUpTrainCards')
+      .populate('trainCardDeck')
+      .populate('trainCardDiscardPile')
+      .populate('destinationCardDeck')
+      .populate('destinationCardDiscardPile')
+      .then(game => {
+        return game;
+      });
+  };
+
+  private updateChatHistory = (data: any): Promise<any> => {
+    return Game.findById(data.id)
+      .populate('host')
+      .populate('userList')
+      .populate('unclaimedRouteFiles')
+      .populate('faceUpTrainCards')
+      .populate('trainCardDeck')
+      .populate('trainCardDiscardPile')
+      .populate('destinationCardDeck')
+      .populate('destinationCardDiscardPile')
+      .then(game => {
+        return game;
+      });
+  };
+
+  private updateGameHistory = (data: any): Promise<any> => {
+    return Game.findById(data.id)
+      .populate('host')
+      .populate('userList')
+      .populate('unclaimedRouteFiles')
+      .populate('faceUpTrainCards')
+      .populate('trainCardDeck')
+      .populate('trainCardDiscardPile')
+      .populate('destinationCardDeck')
+      .populate('destinationCardDiscardPile')
+      .then(game => {
+        return game;
+      });
+  };
 }
