@@ -34,7 +34,11 @@ export default class GameFacade {
     if ((loginCheck = this.validateUserAuth(data)) != null) {
       return loginCheck;
     }
-    let message = new Message()
+    let message = new Message({
+        message: data.message,
+        user: data.reqUserID,
+        game: 
+    })
 
   }
   
