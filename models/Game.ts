@@ -5,13 +5,11 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE } from '../constants';
-
-export enum GameState {
-  Open = 1,
-  InProgress,
-  Ended,
-}
+import {
+  TRAIN_CARD_HAND_SIZE,
+  DESTINATION_CARD_HAND_SIZE,
+  GameState,
+} from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;

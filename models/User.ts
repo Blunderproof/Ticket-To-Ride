@@ -5,13 +5,6 @@ import { DestinationCard, IDestinationCardModel } from './DestinationCard';
 import { PlayerColor } from '../constants';
 import { Schema } from 'mongoose';
 
-export enum UserState {
-  LoggedOut = 1,
-  LoggedIn,
-  InGame,
-}
-
-// TODO put this in another file?
 export interface IUser {
   username: string;
   hashedPassword: string;

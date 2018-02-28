@@ -3,7 +3,7 @@ export const EXPRESS_SECRET = 'we-rock-alot';
 //                            hr * min * sec * milli
 export const MAX_COOKIE_AGE = 24 * 60 * 60 * 1000;
 export type FacadeCommand = (data: any) => Promise<any>;
-export type SocketCommand = () => Promise<any>;
+export type SocketCommand = (datA: any) => Promise<any>;
 
 export enum TrainColor {
   Red = 'red',
@@ -28,3 +28,20 @@ export enum PlayerColor {
 
 export const TRAIN_CARD_HAND_SIZE = 4;
 export const DESTINATION_CARD_HAND_SIZE = 3;
+
+export enum MessageType {
+  Chat = 'chat',
+  History = 'history',
+}
+
+export enum GameState {
+  Open = 1,
+  InProgress,
+  Ended,
+}
+
+export enum UserState {
+  LoggedOut = 1,
+  LoggedIn,
+  InGame,
+}
