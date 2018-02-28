@@ -22,6 +22,12 @@ export interface IGameModel extends mongoose.Document {
   destinationCardDiscardPile: IDestinationCardModel[];
   turnNumber: Number;
   numberOfPlayersReady: Number;
+  initGame(): Promise<any>;
+  shuffleDealCards(
+    unclaimedRoutes: IRouteModel[],
+    trainCardDeck: ITrainCardModel[],
+    destinationCardDeck: IDestinationCardModel[]
+  ): Promise<any>;
 }
 
 export var GameSchema: Schema = new Schema({
@@ -89,13 +95,15 @@ GameSchema.methods.initGame = async function() {
     }
   });
 
-  await this.shuffleDealCards(trainCardDeck, destinationCardDeck);
-  console.log('post shuffleDealCards');
-
-  return;
+  return this.shuffleDealCards(
+    unclaimedRoutes,
+    trainCardDeck,
+    destinationCardDeck
+  );
 };
 
 GameSchema.methods.shuffleDealCards = async function(
+  unclaimedRoutes: IRouteModel[],
   trainCardDeck: ITrainCardModel[],
   destinationCardDeck: IDestinationCardModel[]
 ) {
@@ -139,14 +147,15 @@ GameSchema.methods.shuffleDealCards = async function(
   for (let index = 0; index < shuffledDestinationCardDeck.length; index++) {
     that.destinationCardDeck.push(shuffledDestinationCardDeck[index]);
   }
+  for (let index = 0; index < unclaimedRoutes.length; index++) {
+    that.unclaimedRoutes.push(unclaimedRoutes[index]);
+  }
 
   that.turnNumber = -1;
   that.numberOfPlayersReady = 0;
   that.gameState = GameState.InProgress;
 
   return that.save();
-
-  console.log('end of shuffleDealCards');
 };
 
 export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>(
