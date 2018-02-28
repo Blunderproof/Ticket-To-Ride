@@ -13,6 +13,7 @@ export default class SocketFacade {
     // user commands
     this.socketCommandMap.set("gameList", this.getOpenGameList);
     this.socketCommandMap.set("startGame", this.startGame);
+    this.socketCommandMap.set("updateGameState", this.updateGameState);
   };
 
   private static instance = new SocketFacade();
@@ -59,6 +60,21 @@ export default class SocketFacade {
   private startGame = (): Promise<any> => {
     return new Promise((accept, reject) => {
       accept({msg: "start game!"})
+    })
+  }
+
+  private updateGameState = (): Promise<any> => {
+    return Game.findById("str")
+    .populate('host')
+    .populate('userList')
+    .populate('unclaimedRouteFiles')
+    .populate('faceUpTrainCards')
+    .populate('trainCardDeck')
+    .populate('trainCardDiscardPile')
+    .populate('destinationCardDeck')
+    .populate('destinationCardDiscardPile')
+    .then(game => {
+      return game
     })
   }
 }
