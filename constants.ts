@@ -25,3 +25,6 @@ export enum PlayerColor {
   Black = 'black',
   Yellow = 'yellow',
 }
+
+export const TRAIN_CARD_HAND_SIZE = 4;
+export const DESTINATION_CARD_HAND_SIZE = 3;
