@@ -56,6 +56,9 @@ export default class ServerCommunicator {
     // console.log("userCookie");
     // console.log(userCookie);
 
+    var gameID = connection.handshake.session.gmid || null;
+    data.gameID = gameID;
+
     // since we've already checked if facadeCommand is not null, we can force unwrap the optional type
     // using varName!
     let command: Command = new Command(data, facadeCommand!);
@@ -107,9 +110,11 @@ export default class ServerCommunicator {
     }
 
     // set the body's cookie basically
+    var reqGameID = req.session.gmid || null;
     var reqUserID = req.session.lgid || null;
     var body = req.body.data || {};
     body.reqUserID = reqUserID;
+    body.reqGameID = reqGameID;
 
     // debug
     // console.log("userCookie");
@@ -128,15 +133,29 @@ export default class ServerCommunicator {
         if (commandResults.wasSuccessful()) {
           // set and update cookie stuff
           const userCookie = commandResults.shouldSetSession();
-          if (userCookie == "") {
+          let lgid = userCookie.lgid;
+          let gmid = userCookie.gmid;
+
+          if (lgid === "") { //expire sess
             var sessData = req.session;
-            sessData.lgid = userCookie;
+            sessData.lgid = lgid;
             sessData.cookie.expires = new Date(Date.now() - 50000);
             sessData.cookie.maxAge = 1;
           } else if (userCookie) {
             // set sessions
             var sessData = req.session;
-            sessData.lgid = userCookie;
+            sessData.lgid = lgid;
+          }
+
+          if (gmid === "") { //expire sess
+            var sessData = req.session;
+            sessData.gmid = gmid;
+            sessData.cookie.expires = new Date(Date.now() - 50000);
+            sessData.cookie.maxAge = 1;
+          } else if (userCookie) {
+            // set sessions
+            var sessData = req.session;
+            sessData.gmid = gmid;
           }
 
           // emit stuff

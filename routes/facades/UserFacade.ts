@@ -45,7 +45,7 @@ export default class UserFacade {
             userID: user._id,
             username: username,
           },
-          userCookie: user._id,
+          userCookie: {lgid:user._id},
         };
       } else {
         // doc may be null if no document matched
@@ -65,7 +65,7 @@ export default class UserFacade {
       resolve({
         success: true,
         data: {},
-        userCookie: "",
+        userCookie: {lgid: "", gmid: ""},
       });
     });
   }
@@ -119,7 +119,7 @@ export default class UserFacade {
             userID: newUser._id,
             username: username,
           },
-          userCookie: newUser._id,
+          userCookie: {lgid: newUser._id},
         };
       }
     });

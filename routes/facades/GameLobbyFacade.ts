@@ -281,8 +281,8 @@ export default class GameLobbyFacade {
             errorInfo: "Your game doesn't have enough users to start!",
           };
         } else {
-          game.gameState = GameState.InProgress;
-          return await game.save().then(data => {
+          // game.gameState = GameState.InProgress;
+          return await game.initGame().then(game => {
             return {
               success: true,
               data: { message: 'Game started!' },
@@ -290,6 +290,9 @@ export default class GameLobbyFacade {
                 { command: 'gameList' },
                 { command: 'startGame', to: game._id },
               ],
+              userCookie: {
+                gmid: game._id
+              }
             };
           });
         }
@@ -298,7 +301,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: 'User does not have an open game!',
+          errorInfo: 'User does not have an open game!'
         };
       }
     });
