@@ -132,7 +132,7 @@ export default class ServerCommunicator {
 
         if (commandResults.wasSuccessful()) {
           // set and update cookie stuff
-          const userCookie = commandResults.shouldSetSession();
+          const userCookie = commandResults.shouldSetSession() || {};
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 
@@ -141,7 +141,7 @@ export default class ServerCommunicator {
             sessData.lgid = lgid;
             sessData.cookie.expires = new Date(Date.now() - 50000);
             sessData.cookie.maxAge = 1;
-          } else if (userCookie) {
+          } else if (lgid) {
             // set sessions
             var sessData = req.session;
             sessData.lgid = lgid;
@@ -152,7 +152,7 @@ export default class ServerCommunicator {
             sessData.gmid = gmid;
             sessData.cookie.expires = new Date(Date.now() - 50000);
             sessData.cookie.maxAge = 1;
-          } else if (userCookie) {
+          } else if (gmid) {
             // set sessions
             var sessData = req.session;
             sessData.gmid = gmid;
