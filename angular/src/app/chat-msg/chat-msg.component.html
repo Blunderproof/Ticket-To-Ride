@@ -1,12 +1,14 @@
-<div class="chat-msg user-msg">
-  <div class="chat-msg-sender">
-    {{message.sender}}
+<li>
+  <div class="chat-msg user-msg">
+    <div class="chat-msg-sender">
+      {{message.sender}}
+    </div>
+    <div class="chat-msg-timestamp">
+      {{message.timestamp | date: 'full'}}
+    </div>
+    <div class="chat-msg-text">
+      {{message.text}}
+    </div>
+    <div class="user-msg-triangle"></div>
   </div>
-  <div class="chat-msg-timestamp">
-    {{message.timestamp | date: 'full'}}
-  </div>
-  <div class="chat-msg-text">
-    {{message.text}}
-  </div>
-  <div class="user-msg-triangle"></div>
-</div>
+</li>
