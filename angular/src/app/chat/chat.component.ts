@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-// import { chat-message } from ''
+import { ChatMsgComponent } from '../chat-msg/chat-msg.component';
 
 @Component({
   selector: 'app-chat',
@@ -9,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  messageList = [
-
-  ]
+  messageList = [];
 
   constructor() { }
 
