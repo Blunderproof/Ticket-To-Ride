@@ -128,6 +128,8 @@ export default class GameLobbyFacade {
       return loginCheck;
     }
 
+    //TODO: Set game cookie
+
     if (!data.gameID) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({

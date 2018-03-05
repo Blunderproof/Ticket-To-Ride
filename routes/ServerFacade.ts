@@ -99,6 +99,10 @@ export default class ServerFacade implements IServer {
     return GameLobbyFacade.instanceOf().getUserGameStatus(data);
   }
 
+  /*
+  input:
+    message
+  */
   sendMessage(data: any): Promise<any> {
     return GameFacade.instanceOf().sendMessage(data);
   }

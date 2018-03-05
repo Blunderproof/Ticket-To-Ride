@@ -124,4 +124,6 @@ export default class UserFacade {
       }
     });
   }
+
+  //TODO: return current game of user, null if none
 }
