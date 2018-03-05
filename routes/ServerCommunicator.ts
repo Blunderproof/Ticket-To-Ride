@@ -23,6 +23,7 @@ export default class ServerCommunicator {
     this.commandMap.set("login", facade.login);
     this.commandMap.set("logout", facade.logout);
     this.commandMap.set("register", facade.register);
+    this.commandMap.set("getGame", facade.getGame);
 
     // game lobby commands
     this.commandMap.set("createGame", facade.createGame);

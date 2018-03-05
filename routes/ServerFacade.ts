@@ -69,6 +69,14 @@ export default class ServerFacade implements IServer {
 
   /*
   input:
+    { NONE }
+  */
+  getGame(data: any): Promise<any> {
+    return UserFacade.instanceOf().getGame(data);
+  }
+
+  /*
+  input:
     { NONE } => Authed user
   */
   leaveGame(data: any): Promise<any> {
