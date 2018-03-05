@@ -109,6 +109,7 @@ export default class GameLobbyFacade {
               message: 'Game deleted.',
             },
             emit: [{ command: 'gameList' }],
+            userCookie: {gmid: ''}
           };
         });
       } else {
@@ -208,6 +209,7 @@ export default class GameLobbyFacade {
               success: true,
               data: { message: 'Game joined.' },
               emit: [{ command: 'gameList' }],
+              userCookie: { gmid: game._id }
             };
           });
         }
@@ -249,6 +251,7 @@ export default class GameLobbyFacade {
             success: true,
             data: { message: 'Game left.' },
             emit: [{ command: 'gameList' }],
+            userCookie: {gmid: ''}
           };
         });
       } else {
@@ -291,10 +294,7 @@ export default class GameLobbyFacade {
               emit: [
                 { command: 'gameList' },
                 { command: 'startGame', to: game._id },
-              ],
-              userCookie: {
-                gmid: game._id
-              }
+              ]
             };
           });
         }

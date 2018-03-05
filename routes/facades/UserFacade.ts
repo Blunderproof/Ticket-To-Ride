@@ -2,6 +2,7 @@ import { User } from "../../models/User";
 import CommandResults from "../../modules/commands/CommandResults";
 import { HASHING_SECRET } from "../../constants";
 import { Promise } from "mongoose";
+import { Game } from "../../models/Game";
 const crypto = require("crypto");
 
 export default class UserFacade {
@@ -125,5 +126,22 @@ export default class UserFacade {
     });
   }
 
-  //TODO: return current game of user, null if none
+  getGame(data: any): Promise<any> {
+
+    return Game.findOne({
+      $or: [
+        {
+          host: data.reqUserID
+        },
+        {
+          userList: data.reqUserID
+        }
+      ]
+    }).then(data => {
+      return {
+        success: true,
+        data: data
+      }
+    })
+  }
 }
