@@ -1,14 +1,14 @@
-<li>
-  <div class="chat-msg user-msg">
+<!-- <li> -->
+  <div class="chat-msg" [class.user-msg]="message.sender.id == _userInfo.user.id" [class.other-msg]="message.sender.id != _userInfo.user.id">
     <div class="chat-msg-sender">
-      {{message.sender}}
+      {{message.sender.username}}
     </div>
     <div class="chat-msg-timestamp">
-      {{message.timestamp | date: 'full'}}
+      {{message.timestamp | date: 'shortTime'}}
     </div>
     <div class="chat-msg-text">
       {{message.text}}
     </div>
-    <div class="user-msg-triangle"></div>
+    <div [class.user-msg-triangle]="message.sender.id == _userInfo.user.id" [class.other-msg-triangle]="message.sender.id != _userInfo.user.id"></div>
   </div>
-</li>
+<!-- </li> -->

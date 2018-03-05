@@ -7,16 +7,9 @@
       <!-- <li *ngFor="let message of messageList">
         <app-history-message [ngClass]="fromUser? 'user-msg' : 'other-msg'"></app-history-message>
       </li> -->
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-      <app-chat-msg></app-chat-msg>
-
+      <li>
+        <app-chat-msg *ngFor="let message of messageList" [message]="message"></app-chat-msg>
+      </li>
    </ul>
   </div>
   <div class="chat-input">

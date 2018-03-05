@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatMsgComponent } from '../chat-msg/chat-msg.component';
+import { Message } from '../classes/message';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-chat',
@@ -13,6 +15,22 @@ export class ChatComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    let message = new Message();
+    let user = new User();
+    user.id = '5a949b76768b744dc494be38';
+    user.username = 'test';
+    message.sender = user;
+    message.timestamp = new Date();
+    message.text = 'Hi there!';
+    this.messageList.push(message);
+    message = new Message();
+    user = new User();
+    user.id = '5a9b67ac90754636984a3700';
+    user.username = 'test1';
+    message.sender = user;
+    message.timestamp = new Date();
+    message.text = 'Hey back!!';
+    this.messageList.push(message);
   }
 
 }
