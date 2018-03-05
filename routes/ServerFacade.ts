@@ -2,6 +2,7 @@ import IServer from "../interfaces/IServer";
 import CommandResults from "../modules/commands/CommandResults";
 import UserFacade from "./facades/UserFacade";
 import GameLobbyFacade from "./facades/GameLobbyFacade";
+import GameFacade from "./facades/GameFacade";
 
 export default class ServerFacade implements IServer {
   private constructor() {}
@@ -96,5 +97,9 @@ export default class ServerFacade implements IServer {
   */
   getUserGameStatus(data: any): Promise<any> {
     return GameLobbyFacade.instanceOf().getUserGameStatus(data);
+  }
+
+  sendMessage(data: any): Promise<any> {
+    return GameFacade.instanceOf().sendMessage(data);
   }
 }
