@@ -35,10 +35,15 @@ export class GameListComponent implements OnInit {
   sockets() {
     this.socket.receiveGameList(data => {
       this.gameList = data;
+
       // tslint:disable-next-line:max-line-length
-      this._userInfo.game = this.gameList.filter(x => x.userList
+      const game = this.gameList.filter(x => x.userList
                                             .indexOf(x.userList
                                               .find(y => y.username === this._userInfo.user.username)) !== -1)[0] || null;
+
+      if (game) {
+        this._userInfo.game = game;
+      }
       if (this._userInfo.game) {
         this.socket.joinRoom(this._userInfo.game._id);
       }

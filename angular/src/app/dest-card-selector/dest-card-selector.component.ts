@@ -6,32 +6,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dest-card-selector.component.scss']
 })
 export class DestCardSelectorComponent implements OnInit {
-  display='block';
+  display = true;
 
-  selectedCard1: boolean = false;
-  selectedCard2: boolean = false;
-  selectedCard3: boolean = false;
+  selectedCard1 = false;
+  selectedCard2 = false;
+  selectedCard3 = false;
 
   constructor() { }
-  onCloseHandled(){
-    this.display='block';
+  onCloseHandled() {
+    this.display = false;
   }
 
-  selectDestCard(event){
-    if(event.path[0].id == "1"){
+  selectDestCard(event) {
+    if (event.path[0].id === '1') {
       this.selectedCard1 = !this.selectedCard1;
       console.log(this.selectedCard1);
-    }else if(event.path[0].id == "2"){
+    } else if (event.path[0].id === '2') {
       this.selectedCard2 = !this.selectedCard2;
-    }else if(event.path[0].id == "3"){
+    } else if (event.path[0].id === '3') {
       this.selectedCard3 = !this.selectedCard3;
     }
     console.log(event.path[0].id);
 
   }
 
-  openModal(){
-    this.display='block';
+  openModal() {
+    this.display = true;
   }
 
   ngOnInit() {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GameHistory } from '../services/game-history.service';
+import { UserInfo } from '../services/user_info.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,13 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  // toggleGameHistory(){
-  //   // this.display='none';
-  // }
+  constructor(public _userInfo: UserInfo, private _gameHistory: GameHistory) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() { }
 }

@@ -34,6 +34,7 @@ import { DestCardSelectorComponent } from './dest-card-selector/dest-card-select
 import { GameHistoryComponent } from './game-history/game-history.component';
 import { HistoryMessageComponent } from './history-message/history-message.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { GameHistory } from './services/game-history.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
     SocketCommunicator,
     ClientCommunicator,
     UserInfo,
-    AuthGuardService
+    AuthGuardService,
+    GameHistory
   ],
   bootstrap: [AppComponent]
 })
