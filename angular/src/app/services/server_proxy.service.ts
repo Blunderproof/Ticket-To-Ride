@@ -48,4 +48,10 @@ export class ServerProxy {
   requestGameList() {
     return this.communicator.send('getOpenGameList', {});
   }
+
+  sendMessage(message: string) {
+    return this.communicator.send('sendMessage', {
+      message: message
+    });
+  }
 }

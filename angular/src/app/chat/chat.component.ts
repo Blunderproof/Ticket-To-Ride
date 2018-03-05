@@ -19,17 +19,17 @@ export class ChatComponent implements OnInit {
     let user = new User();
     user.id = '5a949b76768b744dc494be38';
     user.username = 'test';
-    message.sender = user;
+    message.user = user;
     message.timestamp = new Date();
-    message.text = 'Hi there!';
+    message.message = 'Hi there!';
     this.messageList.push(message);
     message = new Message();
     user = new User();
     user.id = '5a9b67ac90754636984a3700';
     user.username = 'test1';
-    message.sender = user;
+    message.user = user;
     message.timestamp = new Date();
-    message.text = 'Hey back!!';
+    message.message = 'Hey back!!';
     this.messageList.push(message);
   }
 
