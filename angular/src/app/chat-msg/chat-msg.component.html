@@ -1,6 +1,6 @@
 <div class="chat-msg" [class.user-msg]="message.sender.id == _userInfo.user.id" [class.other-msg]="message.sender.id != _userInfo.user.id">
   <div class="chat-msg-sender">
-    {{message.sender.username}}
+    {{message.user.username}}
   </div>
   <div class="chat-msg-timestamp">
     {{message.timestamp | date: 'shortTime'}}
