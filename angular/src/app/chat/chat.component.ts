@@ -19,24 +19,7 @@ export class ChatComponent implements OnInit {
   messageToSend = this._fb.control('', Validators.required);
   constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator) { }
 
-  ngOnInit() {
-    let message = new Message();
-    let user = new User();
-    user.id = '5a949b76768b744dc494be38';
-    user.username = 'test';
-    message.user = user;
-    message.timestamp = new Date();
-    message.message = 'Hi there!';
-    this.messageList.push(message);
-    message = new Message();
-    user = new User();
-    user.id = '5a9b67ac90754636984a3700';
-    user.username = 'test1';
-    message.user = user;
-    message.timestamp = new Date();
-    message.message = 'Hey back!!';
-    this.messageList.push(message);
-  }
+  ngOnInit() {  }
 
   sendMessage() {
     this.errorMessages = [];
@@ -49,6 +32,7 @@ export class ChatComponent implements OnInit {
   }
   sockets() {
     this.socket.updateChatHistory(data => {
+      console.log(data);
       this.messageList = data;
     });
   }
