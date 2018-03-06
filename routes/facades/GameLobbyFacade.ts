@@ -82,6 +82,7 @@ export default class GameLobbyFacade {
               gameID: game._id,
             },
             emit: [{ command: 'gameList' }],
+            userCookie: { gmid: game._id }
           };
         });
       }
