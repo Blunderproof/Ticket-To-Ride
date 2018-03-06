@@ -137,7 +137,10 @@ export default class UserFacade {
           userList: data.reqUserID
         }
       ]
-    }).then(data => {
+    })
+    .populate('host')
+    .populate('userList')
+    .then(data => {
       return {
         success: true,
         data: data
