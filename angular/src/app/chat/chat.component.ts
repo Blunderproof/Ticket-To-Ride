@@ -19,7 +19,9 @@ export class ChatComponent implements OnInit {
   messageToSend = this._fb.control('', Validators.required);
   constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator) { }
 
-  ngOnInit() {  }
+  ngOnInit() {
+    this.sockets();
+  }
 
   sendMessage() {
     this.errorMessages = [];
