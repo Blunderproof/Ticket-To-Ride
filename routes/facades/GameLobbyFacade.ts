@@ -110,7 +110,7 @@ export default class GameLobbyFacade {
               message: 'Game deleted.',
             },
             emit: [{ command: 'gameList' }],
-            userCookie: {gmid: ''}
+            userCookie: { gmid: '' },
           };
         });
       } else {
@@ -129,8 +129,6 @@ export default class GameLobbyFacade {
     if ((loginCheck = this.validateUserAuth(data)) != null) {
       return loginCheck;
     }
-
-    //TODO: Set game cookie
 
     if (!data.gameID) {
       const promise = new Promise((resolve: any, reject: any) => {
@@ -210,7 +208,7 @@ export default class GameLobbyFacade {
               success: true,
               data: { message: 'Game joined.' },
               emit: [{ command: 'gameList' }],
-              userCookie: { gmid: game._id }
+              userCookie: { gmid: game._id },
             };
           });
         }
@@ -252,7 +250,7 @@ export default class GameLobbyFacade {
             success: true,
             data: { message: 'Game left.' },
             emit: [{ command: 'gameList' }],
-            userCookie: {gmid: ''}
+            userCookie: { gmid: '' },
           };
         });
       } else {
@@ -295,7 +293,7 @@ export default class GameLobbyFacade {
               emit: [
                 { command: 'gameList' },
                 { command: 'startGame', to: game._id },
-              ]
+              ],
             };
           });
         }
@@ -304,7 +302,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: 'User does not have an open game!'
+          errorInfo: 'User does not have an open game!',
         };
       }
     });
