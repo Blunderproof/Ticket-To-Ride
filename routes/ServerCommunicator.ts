@@ -1,9 +1,9 @@
-import Command from "../modules/commands/command";
-import CommandHandler from "./commandHandler";
-import CommandResults from "../modules/commands/commandResults";
-import ServerFacade from "./ServerFacade";
-import { FacadeCommand } from "../constants";
-import SocketFacade from "./SocketFacade";
+import Command from '../modules/commands/command';
+import CommandHandler from './commandHandler';
+import CommandResults from '../modules/commands/commandResults';
+import ServerFacade from './ServerFacade';
+import { FacadeCommand } from '../constants';
+import SocketFacade from './SocketFacade';
 
 export default class ServerCommunicator {
   commandHandler: CommandHandler;
@@ -20,21 +20,21 @@ export default class ServerCommunicator {
   private configureCommandMap = () => {
     const facade = ServerFacade.instanceOf();
     // user commands
-    this.commandMap.set("login", facade.login);
-    this.commandMap.set("logout", facade.logout);
-    this.commandMap.set("register", facade.register);
-    this.commandMap.set("getGame", facade.getGame);
+    this.commandMap.set('login', facade.login);
+    this.commandMap.set('logout', facade.logout);
+    this.commandMap.set('register', facade.register);
+    this.commandMap.set('getGame', facade.getGame);
 
     // game lobby commands
-    this.commandMap.set("createGame", facade.createGame);
-    this.commandMap.set("startGame", facade.startGame);
-    this.commandMap.set("joinGame", facade.joinGame);
-    this.commandMap.set("deleteGame", facade.deleteGame);
-    this.commandMap.set("leaveGame", facade.leaveGame);
-    this.commandMap.set("sendMessage", facade.sendMessage);
+    this.commandMap.set('createGame', facade.createGame);
+    this.commandMap.set('startGame', facade.startGame);
+    this.commandMap.set('joinGame', facade.joinGame);
+    this.commandMap.set('deleteGame', facade.deleteGame);
+    this.commandMap.set('leaveGame', facade.leaveGame);
+    this.commandMap.set('sendMessage', facade.sendMessage);
 
-    this.commandMap.set("getOpenGameList", facade.getOpenGameList);
-    this.commandMap.set("getUserGameStatus", facade.getUserGameStatus);
+    this.commandMap.set('getOpenGameList', facade.getOpenGameList);
+    this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -70,7 +70,7 @@ export default class ServerCommunicator {
 
       if (commandResults.wasSuccessful()) {
         const userCookie = commandResults.shouldSetSession();
-        if (userCookie == "") {
+        if (userCookie == '') {
           connection.handshake.session.destroy();
         } else if (userCookie) {
           // set sessions
@@ -138,7 +138,8 @@ export default class ServerCommunicator {
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 
-          if (lgid === "") { //expire sess
+          if (lgid === '') {
+            //expire sess
             var sessData = req.session;
             sessData.lgid = lgid;
             sessData.cookie.expires = new Date(Date.now() - 50000);
@@ -149,7 +150,8 @@ export default class ServerCommunicator {
             sessData.lgid = lgid;
           }
 
-          if (gmid === "") { //expire sess
+          if (gmid === '') {
+            //expire sess
             var sessData = req.session;
             sessData.gmid = gmid;
             sessData.cookie.expires = new Date(Date.now() - 50000);
@@ -192,7 +194,8 @@ export default class ServerCommunicator {
         res
           .json({
             success: false,
-            message: "Backend error",
+            message: 'Backend error',
+            detailedMessage: err.toString(),
           })
           .status(500);
       });
