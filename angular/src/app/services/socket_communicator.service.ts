@@ -24,4 +24,8 @@ export class SocketCommunicator {
         });
     }
 
+    updateChatHistory(callback: any) {
+        return this.socket.on('updateChatHistory', callback);
+    }
+
 }

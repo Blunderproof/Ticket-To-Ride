@@ -1,5 +1,5 @@
 <div class="chat-window">
-  <div class="chat-header">Lobby Chat</div>
+  <div class="chat-header">Chat</div>
   <div class="chat-history">
     <ul>
       <!-- <li *ngFor="let message of messageList">
@@ -10,12 +10,14 @@
       </li>
    </ul>
   </div>
-  <div class="chat-input">
-    <div class="input-group mb-3 input-user-msg">
-      <input type="text" class="form-control" placeholder="User Message" aria-label="User Message" aria-describedby="basic-addon2"/>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button">Send</button>
+  <form [formGroup]="messageToSend">
+    <div class="chat-input">
+      <div class="input-group mb-3 input-user-msg">
+        <input [formControl]="messageToSend" type="text" class="form-control" placeholder="User Message" aria-label="User Message" aria-describedby="basic-addon2"/>
+        <div class="input-group-append">
+          <button (click)="sendMessage()" class="btn btn-outline-secondary" type="button">Send</button>
+        </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>

@@ -1,4 +1,4 @@
-<div class="chat-msg" [class.user-msg]="message.sender.id == _userInfo.user.id" [class.other-msg]="message.sender.id != _userInfo.user.id">
+<div class="chat-msg" [class.user-msg]="message.user.id == _userInfo.user.id" [class.other-msg]="message.user.id != _userInfo.user.id">
   <div class="chat-msg-sender">
     {{message.user.username}}
   </div>
@@ -8,5 +8,5 @@
   <div class="chat-msg-text">
     {{message.text}}
   </div>
-  <div [class.user-msg-triangle]="message.sender.id == _userInfo.user.id" [class.other-msg-triangle]="message.sender.id != _userInfo.user.id"></div>
+  <div [class.user-msg-triangle]="message.user.id == _userInfo.user.id" [class.other-msg-triangle]="message.user.id != _userInfo.user.id"></div>
 </div>
