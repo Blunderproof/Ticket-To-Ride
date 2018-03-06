@@ -2,9 +2,6 @@
   <div class="chat-header">Chat</div>
   <div class="chat-history">
     <ul>
-      <!-- <li *ngFor="let message of messageList">
-        <app-history-message [ngClass]="fromUser? 'user-msg' : 'other-msg'"></app-history-message>
-      </li> -->
       <li>
         <app-chat-msg *ngFor="let message of messageList" [message]="message"></app-chat-msg>
       </li>
