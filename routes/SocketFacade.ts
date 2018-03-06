@@ -16,6 +16,8 @@ export default class SocketFacade {
     this.socketCommandMap.set('gameList', this.getOpenGameList);
     this.socketCommandMap.set('startGame', this.startGame);
     this.socketCommandMap.set('updateGameState', this.updateGameState);
+    this.socketCommandMap.set('updateChatHistory', this.updateChatHistory);
+    this.socketCommandMap.set('updateGameHistory', this.updateGameHistory);
   };
 
   private static instance = new SocketFacade();
