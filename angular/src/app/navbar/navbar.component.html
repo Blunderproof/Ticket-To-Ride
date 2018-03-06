@@ -1,7 +1,7 @@
 <div class="navbar">
   Ticket to Ride
   <div>
-    <button class="logout btn btn-warning">Logout</button>
+    <button class="logout btn btn-warning" (click)="logout()">Logout</button>
     <button *ngIf="(_userInfo.game != null) && (_userInfo.game.gameState === '2')" class="game-history btn btn-info" (click)="_gameHistory.toggleHistoryOpen()">Game History</button>
   </div>
 </div>
