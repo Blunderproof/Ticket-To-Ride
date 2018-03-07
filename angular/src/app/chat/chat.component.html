@@ -3,7 +3,7 @@
   <div class="chat-history">
     <ul>
       <li>
-        <app-chat-msg *ngFor="let message of messageList" [message]="message"></app-chat-msg>
+        <app-chat-msg *ngFor="let message of messageList.reverse()" [message]="message"></app-chat-msg>
       </li>
    </ul>
   </div>
