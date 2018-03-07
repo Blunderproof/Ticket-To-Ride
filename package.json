@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "start npm run build && start npm run server",
+    "startw": "start npm run buildw && start npm run server",
+    "startm": "npm run build && npm run server",
     "server": "tsc && node dist/app.js",
     "angular": "npm run build",
-    "build": "cd angular/ && ng build --watch",
+    "buildw": "cd angular/ && ng build --watch",
+    "build": "cd angular/ && ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "delashum",
