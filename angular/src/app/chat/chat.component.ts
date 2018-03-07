@@ -27,7 +27,9 @@ export class ChatComponent implements OnInit {
     this.errorMessages = [];
     this._serverProxy.sendMessage(this.messageToSend.value)
       .then((x: any) => {
-        if (!x.success) {
+        if (x.success) {
+          this.messageToSend.reset();
+        } else {
           this.errorMessages.push(x.message);
         }
       });
