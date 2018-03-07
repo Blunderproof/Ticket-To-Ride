@@ -3503,41 +3503,7 @@ body {
           background-color: #FFF;
           color: #444;
       }
-<<<<<<< HEAD
 
-=======
-      .game-board{
-        grid-column: col2-start / col3-start;
-        grid-row: row1-start / row1-start;
-      }
-  
-  
-      .map-container{
-        margin: auto;
-        width: 80%;
-        position:relative;
-      }
-  
-      .gameMap{
-        max-height:100%; max-width:100%;
-      }
-  
-      .user-sidebar {
-        grid-column: col3-start / col3-end;
-        grid-row: row1-start / row2-end;
-      }
-  
-      .user-inventory {
-        grid-column: col3-start / col3-end;
-        grid-row: row1-start / row2-start;
-      }
-  
-      .chat{
-        grid-column: col3-start / col3-end;
-        grid-row: row2-start / row2-end;
-      }
-  
->>>>>>> 37987902eec1b2edfd84a818772a6758fe3a27b6
 
       body {
         margin: 40px;
@@ -3586,35 +3552,5 @@ body {
           }
 
           .game-tile{
-<<<<<<< HEAD
 
-=======
-      
-          }
-      
-      
-          .map-container{
-            margin: auto;
-            width: 80%;
-            position:relative;
-          }
-      
-          .gameMap{
-            max-height:100%; max-width:100%;
-          }
-      
-          .user-sidebar {
-            grid-column: col3-start / col3-end;
-            grid-row: row1-start / row2-end;
-          }
-      
-          .user-inventory {
-            grid-column: col3-start / col3-end;
-            grid-row: row1-start / row2-start;
-          }
-      
-          .chat{
-            grid-column: col3-start / col3-end;
-            grid-row: row2-start / row2-end;
->>>>>>> 37987902eec1b2edfd84a818772a6758fe3a27b6
           }
