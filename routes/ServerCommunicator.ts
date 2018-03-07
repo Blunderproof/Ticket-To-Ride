@@ -118,6 +118,8 @@ export default class ServerCommunicator {
     body.reqUserID = reqUserID;
     body.reqGameID = reqGameID;
 
+    console.log(req.session, "FIRST")
+
     // debug
     // console.log("userCookie");
     // console.log(userCookie);
@@ -139,28 +141,17 @@ export default class ServerCommunicator {
           let gmid = userCookie.gmid;
 
           if (lgid === '') {
-            //expire sess
-            var sessData = req.session;
-            sessData.lgid = lgid;
-            sessData.cookie.expires = new Date(Date.now() - 50000);
-            sessData.cookie.maxAge = 1;
+            delete req.session.ldig;
           } else if (lgid) {
-            // set sessions
-            var sessData = req.session;
-            sessData.lgid = lgid;
+            req.session.lgid = lgid;
           }
 
           if (gmid === '') {
-            //expire sess
-            var sessData = req.session;
-            sessData.gmid = gmid;
-            sessData.cookie.expires = new Date(Date.now() - 50000);
-            sessData.cookie.maxAge = 1;
+            delete req.session.gmid;
           } else if (gmid) {
-            // set sessions
-            var sessData = req.session;
-            sessData.gmid = gmid;
+            req.session.gmid = gmid;
           }
+
 
           // emit stuff
           const emitRequests = commandResults.shouldEmit();
