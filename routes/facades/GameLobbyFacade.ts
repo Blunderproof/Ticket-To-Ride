@@ -23,7 +23,7 @@ export default class GameLobbyFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo: 'User is must be logged in to execute this command.',
+          errorInfo: 'User must be logged in to execute this command.',
         });
       });
       return promise;

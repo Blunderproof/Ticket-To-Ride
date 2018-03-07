@@ -23,7 +23,7 @@ export default class GameFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo: 'User is must be logged in to execute this command.',
+          errorInfo: 'User must be logged in to execute this command.',
         });
       });
       return promise;
@@ -69,103 +69,103 @@ export default class GameFacade {
   }
 
   // implement
-  initialSelectDestinationCard(data: any): Promise<any> {
-    let loginCheck: any = null;
-    if ((loginCheck = this.validateUserAuth(data)) != null) {
-      return loginCheck;
-    }
+  // initialSelectDestinationCard(data: any): Promise<any> {
+  //   let loginCheck: any = null;
+  //   if ((loginCheck = this.validateUserAuth(data)) != null) {
+  //     return loginCheck;
+  //   }
 
-    return User.findOne({ user: data.reqUserID }).then(user => {
-      if (!user) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: "That user doesn't exist.",
-        };
-      }
+  //   return User.findOne({ user: data.reqUserID }).then(user => {
+  //     if (!user) {
+  //       return {
+  //         success: false,
+  //         data: {},
+  //         errorInfo: "That user doesn't exist.",
+  //       };
+  //     }
 
-      // unpopulated so we're just comparing ids
-      user.destinationCardHand = user.destinationCardHand.filter(function(i) {
-        return data.discardCards.indexOf(i.toString()) < 0;
-      });
+  //     // unpopulated so we're just comparing ids
+  //     user.destinationCardHand = user.destinationCardHand.filter(function(i) {
+  //       return data.discardCards.indexOf(i.toString()) < 0;
+  //     });
 
-      return user.save().then(savedUser => {
-        return {
-          success: true,
-          data: {},
-          emit: [
-            {
-              // TODO ensure this is the right command
-              command: 'updateGame',
-              data: { id: data.reqGameID },
-              room: data.reqGameID,
-              // TODO add the gameHistory thing
-            },
-          ],
-        };
-      });
-    });
-  }
+  //     return user.save().then(savedUser => {
+  //       return {
+  //         success: true,
+  //         data: {},
+  //         emit: [
+  //           {
+  //             // TODO ensure this is the right command
+  //             command: 'updateGame',
+  //             data: { id: data.reqGameID },
+  //             room: data.reqGameID,
+  //             // TODO add the gameHistory thing
+  //           },
+  //         ],
+  //       };
+  //     });
+  //   });
+  // }
 
-  async selectDestinationCard(data: any): Promise<any> {
-    let loginCheck: any = null;
-    if ((loginCheck = this.validateUserAuth(data)) != null) {
-      return loginCheck;
-    }
+  // async selectDestinationCard(data: any): Promise<any> {
+  //   let loginCheck: any = null;
+  //   if ((loginCheck = this.validateUserAuth(data)) != null) {
+  //     return loginCheck;
+  //   }
 
-    let game = await Game.findOne({ _id: data.reqGameID });
-    // TODO force unwrap game
+  //   let game = await Game.findOne({ _id: data.reqGameID });
+  //   // TODO force unwrap game
 
-    return User.findOne({ user: data.reqUserID }).then(async user => {
-      if (!user) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: "That user doesn't exist.",
-        };
-      }
+  //   return User.findOne({ user: data.reqUserID }).then(async user => {
+  //     if (!user) {
+  //       return {
+  //         success: false,
+  //         data: {},
+  //         errorInfo: "That user doesn't exist.",
+  //       };
+  //     }
 
-      let top3 = game.destinationCardDeck.slice(2);
+  //     let top3 = game.destinationCardDeck.slice(2);
 
-      let discard = top3.filter(function(cardID) {
-        return data.keepCards.indexOf(cardID.toString()) < 0;
-      });
-      let keep = top3.filter(function(cardID) {
-        return data.keepCards.indexOf(cardID.toString()) >= 0;
-      });
+  //     let discard = top3.filter(function(cardID) {
+  //       return data.keepCards.indexOf(cardID.toString()) < 0;
+  //     });
+  //     let keep = top3.filter(function(cardID) {
+  //       return data.keepCards.indexOf(cardID.toString()) >= 0;
+  //     });
 
-      // unpopulated so we're just comparing ids
-      for (let index = 0; index < keep.length; index++) {
-        const element = keep[index];
-        user.destinationCardHand.push(element);
-      }
+  //     // unpopulated so we're just comparing ids
+  //     for (let index = 0; index < keep.length; index++) {
+  //       const element = keep[index];
+  //       user.destinationCardHand.push(element);
+  //     }
 
-      // add the game
-      game.destinationCardDeck = game.destinationCardDeck.filter(function(
-        cardID
-      ) {
-        return discard.indexOf(cardID.toString()) < 0;
-      });
+  //     // add the game
+  //     game.destinationCardDeck = game.destinationCardDeck.filter(function(
+  //       cardID
+  //     ) {
+  //       return discard.indexOf(cardID.toString()) < 0;
+  //     });
 
-      // remove the cards from the deck
-      game.destinationCardDeck.splice(0, 3);
-      await game.save();
+  //     // remove the cards from the deck
+  //     game.destinationCardDeck.splice(0, 3);
+  //     await game.save();
 
-      return user.save().then(savedUser => {
-        return {
-          success: true,
-          data: {},
-          emit: [
-            {
-              // TODO ensure this is the right command
-              command: 'updateGame',
-              data: { id: data.reqGameID },
-              room: data.reqGameID,
-              // TODO add the gameHistory thing
-            },
-          ],
-        };
-      });
-    });
-  }
+  //     return user.save().then(savedUser => {
+  //       return {
+  //         success: true,
+  //         data: {},
+  //         emit: [
+  //           {
+  //             // TODO ensure this is the right command
+  //             command: 'updateGame',
+  //             data: { id: data.reqGameID },
+  //             room: data.reqGameID,
+  //             // TODO add the gameHistory thing
+  //           },
+  //         ],
+  //       };
+  //     });
+  //   });
+  // }
 }
