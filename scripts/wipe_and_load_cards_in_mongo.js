@@ -16,7 +16,7 @@ var fs = require('fs');
 var path = require('path');
 
 
-TrainCard.remove({})
+var promise1 = TrainCard.remove({})
   .then(() => {
     // instantiate train cards for the game
     let contents = fs.readFileSync(__dirname + '/train_cards.csv', 'utf8');
@@ -35,9 +35,10 @@ TrainCard.remove({})
     } else {
       console.log('contents was null for the train card data');
     }
+    console.log("Train Cards Done")
   });
 
-DestinationCard.remove({})
+  var promise2 = DestinationCard.remove({})
   .then(() => {
     let contents = fs.readFileSync(
       __dirname + '/destination_cards.csv',
@@ -56,9 +57,10 @@ DestinationCard.remove({})
     } else {
       console.log('contents was null for the destination card data');
     }
+    console.log("Destination Cards Done")
   });
 
-Route.remove({})
+var promise3 = Route.remove({})
   .then(() => {
     // instantiate routes
     let contents = fs.readFileSync(__dirname + '/routes.csv', 'utf8');
@@ -75,6 +77,11 @@ Route.remove({})
     } else {
       console.log('contents was null for the route data');
     }
+    console.log("Route Cards Done")
   });
 
-console.log('let this sit for a few seconds and it should be done');
+
+  Promise.all([promise1,promise2,promise3]).then(all => {
+    console.log("All Cards Loaded")
+    process.exit();
+  })

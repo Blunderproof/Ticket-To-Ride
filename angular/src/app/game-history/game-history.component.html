@@ -6,7 +6,7 @@
   <div class="history-window">
     <div class="history-textbox">
       <ul>
-        <app-history-message *ngFor="let historyItem of historyList" [class.user-msg]="fromUser" [class.other-msg]="!fromUser"></app-history-message>
+        <app-history-message *ngFor="let historyItem of historyList.reverse()" [class.user-msg]="fromUser" [class.other-msg]="!fromUser"></app-history-message>
      </ul>
     </div>
   </div>
