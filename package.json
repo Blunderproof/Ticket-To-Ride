@@ -21,6 +21,7 @@
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.1",
     "morgan": "^1.9.0",
+    "papaparse": "^4.3.7",
     "socket.io": "^2.0.4"
   },
   "devDependencies": {
