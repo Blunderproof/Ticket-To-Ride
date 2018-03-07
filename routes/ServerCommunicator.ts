@@ -2,8 +2,9 @@ import Command from '../modules/commands/command';
 import CommandHandler from './commandHandler';
 import CommandResults from '../modules/commands/commandResults';
 import ServerFacade from './ServerFacade';
-import { FacadeCommand } from '../constants';
+import { FacadeCommand, MessageType } from '../constants';
 import SocketFacade from './SocketFacade';
+import { Message } from '../models/Message';
 
 export default class ServerCommunicator {
   commandHandler: CommandHandler;
@@ -150,6 +151,19 @@ export default class ServerCommunicator {
             delete req.session.gmid;
           } else if (gmid) {
             req.session.gmid = gmid;
+          }
+          
+
+
+          //add gamehistory
+          if (commandResults.shouldAddHistory()) {
+            let history = new Message({
+              message: commandResults.shouldAddHistory(),
+              game: reqGameID,
+              user: reqUserID,
+              type: MessageType.History
+            })
+            history.save()
           }
 
 
