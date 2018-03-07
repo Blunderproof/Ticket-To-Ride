@@ -6,7 +6,7 @@ import { DestinationCard } from './destination-card';
 export class Game {
     host: User;
     userList: User[];
-    gameState: string;
+    gameState: number;
     unclaimedRoutes: Route[];
     trainCardDeck: TrainCard[];
     trainCardDiscardPile: TrainCard[];
