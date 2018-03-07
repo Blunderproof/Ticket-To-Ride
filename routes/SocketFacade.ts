@@ -84,6 +84,8 @@ export default class SocketFacade {
 
   private updateChatHistory = (data: any): Promise<any> => {
     return Message.find({ game: data.id, type: MessageType.Chat })
+      .populate('user')
+      .populate('game')
       .sort('-timestamp')
       .then(chatMessages => {
         return chatMessages;
@@ -92,6 +94,8 @@ export default class SocketFacade {
 
   private updateGameHistory = (data: any): Promise<any> => {
     return Message.find({ game: data.id, type: MessageType.History })
+      .populate('user')
+      .populate('game')
       .sort('-timestamp')
       .then(gameHistoryMessages => {
         return gameHistoryMessages;

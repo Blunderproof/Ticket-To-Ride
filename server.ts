@@ -60,7 +60,7 @@ export class Server {
       );
       next();
     });
-    this.session = session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, httpOnly: false } });
+    this.session = session({ secret: EXPRESS_SECRET, cookie: { maxAge: MAX_COOKIE_AGE, secure: false, httpOnly: false } });
 
     this.app.use(
       this.session
