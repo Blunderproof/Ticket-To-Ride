@@ -17,7 +17,7 @@ export class GameLobbyComponent implements OnInit {
 
   ngOnInit() {
     this.sockets();
-    this.communicator.getGame();
+    this._userInfo.getGame();
   }
 
   startGame() {
