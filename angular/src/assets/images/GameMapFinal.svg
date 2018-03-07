@@ -13,8 +13,8 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    viewBox="400 0 1050 1200"
    version="1.0"
-   width="600px"
-   height="400px"
+   width="1800px"
+   height="1200px"
    id="GameMap"
    sodipodi:docname="GameMapFinal.svg"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
@@ -269,94 +269,6 @@
        inkscape:collect="always"
        xlink:href="#linearGradient10344"
        id="linearGradient1103"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-71"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-7" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient1374"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-71-5"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-7-3" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient1448"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-71-5-6"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-7-3-5" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient1485"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-71-5-6-5"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-7-3-5-6" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient1522"
        gradientUnits="userSpaceOnUse"
        x1="136.30061"
        y1="241.5918"
@@ -1045,50 +957,6 @@
        inkscape:collect="always"
        xlink:href="#linearGradient10344"
        id="linearGradient2064"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-72-4-0"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-4-9-4" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient2101"
-       gradientUnits="userSpaceOnUse"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-72-4-0-8"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-4-9-4-2" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient2138"
        gradientUnits="userSpaceOnUse"
        x1="136.30061"
        y1="241.5918"
@@ -2511,50 +2379,6 @@
          inkscape:collect="always"
          stdDeviation="0.50983646"
          id="feGaussianBlur10600-1-8-2-6" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient10348-5-5-7"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237"
-       gradientUnits="userSpaceOnUse" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-25"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-1" />
-    </svg:filter>
-    <svg:linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient10344"
-       id="linearGradient10348-5-5-7-4"
-       x1="136.30061"
-       y1="241.5918"
-       x2="166.94748"
-       y2="252.18237"
-       gradientUnits="userSpaceOnUse" />
-    <svg:filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter10598-2-2-25-7"
-       x="-0.066498965"
-       width="1.1329979"
-       y="-0.023566322"
-       height="1.0471326">
-      <svg:feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.50983646"
-         id="feGaussianBlur10600-1-8-1-4" />
     </svg:filter>
     <svg:linearGradient
        inkscape:collect="always"
@@ -7393,6 +7217,182 @@
          stdDeviation="0.091869741"
          id="feGaussianBlur5823-3-6-3-2-8-8-7-0-0-2-6-0-5-9-1-2-5-9-2-6-0-3-1" />
     </svg:filter>
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11115"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-4"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-68" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11158"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11223"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61-0"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17-2" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11308"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61-6"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17-9" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11349"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61-6-2"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17-9-1" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11386"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61-6-2-6"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17-9-1-3" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11423"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
+    <svg:filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter10598-2-2-61-6-2-6-4"
+       x="-0.066498965"
+       width="1.1329979"
+       y="-0.023566322"
+       height="1.0471326">
+      <svg:feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.50983646"
+         id="feGaussianBlur10600-1-8-17-9-1-3-0" />
+    </svg:filter>
+    <svg:linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient10344"
+       id="linearGradient11460"
+       gradientUnits="userSpaceOnUse"
+       x1="136.30061"
+       y1="241.5918"
+       x2="166.94748"
+       y2="252.18237" />
   </svg:defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -7407,13 +7407,13 @@
      inkscape:window-height="2019"
      id="namedview4347"
      showgrid="false"
-     inkscape:zoom="3.0575022"
-     inkscape:cx="323.98195"
-     inkscape:cy="128.23298"
+     inkscape:zoom="17.295844"
+     inkscape:cx="92.32833"
+     inkscape:cy="315.53245"
      inkscape:window-x="-14"
      inkscape:window-y="-14"
      inkscape:window-maximized="1"
-     inkscape:current-layer="USA"
+     inkscape:current-layer="GameMap"
      inkscape:snap-text-baseline="false"
      inkscape:snap-page="false" />
   <svg:g
@@ -8148,7 +8148,7 @@
      id="CityRoutes"
      inkscape:label="City Routes">
     <svg:g
-       id="Gy-Vancouver-Calgary"
+       id="Gy-1-Vancouver-Calgary"
        class="route"
        transform="translate(0,-3.7003108)">
       <svg:g
@@ -8199,71 +8199,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Seattle-Calgary"
-       transform="matrix(0.78645082,0.36208142,-0.41820496,0.9083527,392.81541,-119.1014)"
-       style="fill:#a8a8a8;fill-opacity:1">
-      <svg:path
-         d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z"
-         style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-         id="rect9848-6-5-2-3-2-1"
-         inkscape:connector-curvature="0" />
-      <svg:g
-         id="g2332">
-        <svg:g
-           style="fill:#a8a8a8;fill-opacity:1"
-           transform="matrix(0.55295933,0.72139082,-0.96235764,0.55295934,160.48952,146.04299)"
-           id="GrayPath-0">
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect9848-6-5-2"
-             style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-             d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect10124-4-0-8"
-             style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient1374);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-71)"
-             d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-        </svg:g>
-        <svg:g
-           style="fill:#a8a8a8;fill-opacity:1"
-           transform="matrix(0.65425251,0.65478312,-0.8735009,0.65425252,183.61602,95.313695)"
-           id="GrayPath-0-4">
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect9848-6-5-2-3"
-             style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-             d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect10124-4-0-8-0"
-             style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient1448);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-71-5)"
-             d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-        </svg:g>
-        <svg:g
-           style="fill:#a8a8a8;fill-opacity:1"
-           transform="matrix(0.86421367,0.43560507,-0.58111062,0.86421368,134.28809,30.336802)"
-           id="GrayPath-0-4-0">
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect9848-6-5-2-3-2"
-             style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-             d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-          <svg:path
-             inkscape:connector-curvature="0"
-             id="rect10124-4-0-8-0-8"
-             style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient1485);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-71-5-6)"
-             d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-        </svg:g>
-        <svg:path
-           inkscape:connector-curvature="0"
-           id="rect10124-4-0-8-0-8-4"
-           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient1522);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-71-5-6-5)"
-           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-      </svg:g>
-    </svg:g>
-    <svg:g
-       class="route"
-       id="Gy-Calgary-Helena">
+       id="Gy-1-Calgary-Helena">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.79457317,-0.34389143,0.39719547,0.91773403,241.91841,-16.128466)"
@@ -8327,7 +8263,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-SaltLakeCity-Helena">
+       id="P-1-SaltLakeCity-Helena">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(0.65531312,0.34201284,-0.3950257,0.75688833,533.73566,184.28849)"
@@ -8376,7 +8312,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-SanFrancisco-SaltLakeCity">
+       id="O-1-SanFrancisco-SaltLakeCity">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(0.13299013,0.72713252,-0.83983991,0.15360394,568.79019,458.02379)"
@@ -8470,7 +8406,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-SanFrancisco-SaltLakeCity">
+       id="W-1-SanFrancisco-SaltLakeCity">
       <svg:g
          transform="matrix(0.12969579,0.72772734,-0.84052692,0.14979897,611.50617,550.31007)"
          id="WhiteBlock-0">
@@ -8594,7 +8530,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-SaltLakeCity-Denver">
+       id="Y-1-SaltLakeCity-Denver">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
          transform="matrix(0.12038868,-0.72932479,0.84237198,0.13904923,308.42228,665.95256)"
@@ -8643,7 +8579,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-SaltLakeCity-Denver">
+       id="R-1-SaltLakeCity-Denver">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.12038868,-0.72932479,0.84237198,0.13904923,312.89807,643.79237)"
@@ -8692,7 +8628,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-Helena-Denver">
+       id="Gn-1-Helena-Denver">
       <svg:g
          inkscape:transform-center-y="6.9380825"
          inkscape:transform-center-x="0.46253884"
@@ -8754,7 +8690,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-SantaFe-Denver">
+       id="Gy-1-SantaFe-Denver">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.71792134,0.17605975,-0.20334947,0.82920096,612.14871,437.53216)"
@@ -8788,42 +8724,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-SantaFe-ElPaso"
-       transform="matrix(1,0,0,1.0845062,0,-78.072918)">
-      <svg:g
-         style="fill:#a8a8a8;fill-opacity:1"
-         transform="matrix(0.735889,-0.07487832,0.08412822,1.0490006,527.09098,585.44203)"
-         id="GrayPath-02-7-8">
-        <svg:path
-           inkscape:connector-curvature="0"
-           id="rect9848-6-5-8-5-2"
-           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-        <svg:path
-           inkscape:connector-curvature="0"
-           id="rect10124-4-0-3-8-9"
-           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient2101);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-72-4-0)"
-           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-      </svg:g>
-      <svg:g
-         style="fill:#a8a8a8;fill-opacity:1"
-         transform="matrix(0.7359827,-0.07246967,0.08199627,0.99419935,534.23209,665.21807)"
-         id="GrayPath-02-7-8-1">
-        <svg:path
-           inkscape:connector-curvature="0"
-           id="rect9848-6-5-8-5-2-0"
-           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-        <svg:path
-           inkscape:connector-curvature="0"
-           id="rect10124-4-0-3-8-9-9"
-           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient2138);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-72-4-0-8)"
-           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
-      </svg:g>
-    </svg:g>
-    <svg:g
-       class="route"
-       id="O-LasVegas-SaltLakeCity"
+       id="O-1-LasVegas-SaltLakeCity"
        transform="translate(0.46253886,3.237772)">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
@@ -8873,7 +8774,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-LosAngeles-LasVegas">
+       id="Gy-1-LosAngeles-LasVegas">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.25996525,0.69197265,-0.79923016,0.30026053,473.67476,591.04999)"
@@ -8907,7 +8808,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-LosAngeles-Phoenix">
+       id="Gy-1-LosAngeles-Phoenix">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.13281878,0.72716384,-0.83987608,0.15340603,495.85129,699.52565)"
@@ -8956,7 +8857,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-LosAngeles-ElPaso">
+       id="Bk-1-LosAngeles-ElPaso">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(-0.51020941,0.56930646,-0.69265425,-0.55452454,548.59763,937.17414)"
@@ -9050,7 +8951,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Phoenix-SantaFe">
+       id="Gy-1-Phoenix-SantaFe">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.48238945,0.56009686,-0.64691331,0.55716103,592.51592,599.75239)"
@@ -9099,7 +9000,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-Denver-KansasCity">
+       id="Bk-1-Denver-KansasCity">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(0.0152526,0.73905761,-0.93614455,0.02220378,954.70358,501.23249)"
@@ -9163,7 +9064,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-Denver-KansasCity">
+       id="O-1-Denver-KansasCity">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(0.0152526,0.73905761,-0.93614455,0.02220378,955.18446,523.67331)"
@@ -9227,7 +9128,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-Denver-Omaha"
+       id="P-1-Denver-Omaha"
        transform="translate(-1.0407124,4.1628497)">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
@@ -9310,7 +9211,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Omaha-KansasCity">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -9364,7 +9265,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-Helena-Winnipeg">
+       id="Be-1-Helena-Winnipeg">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(0.59512488,0.4384455,-0.50640567,0.68737076,635.53855,102.2998)"
@@ -9428,7 +9329,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-Winnipeg-SaultStMarie">
+       id="W-1-Winnipeg-SaultStMarie">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(-0.16813619,0.70863245,-1.2245644,-0.29055062,1122.7937,137.37808)"
@@ -9522,7 +9423,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Duluth-SaultStMarie">
+       id="Gy-1-Duluth-SaultStMarie">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.28985878,0.77096875,-0.84459642,0.34885621,1233.5729,151.6233)"
@@ -9570,7 +9471,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Omaha-Duluth">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -9638,7 +9539,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-OklahomaCity-KansasCity">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -9706,7 +9607,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-OklahomaCity-Dallas">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -9759,7 +9660,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Dallas-Houston"
        transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,786.76206,795.2662)"
        style="fill:#a8a8a8;fill-opacity:1">
@@ -9776,7 +9677,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-Phoenix-Denver">
+       id="W-1-Phoenix-Denver">
       <svg:g
          transform="matrix(0.7317417,0.10470038,-0.1209292,0.84516352,466.49062,618.75581)"
          id="WhiteBlock-2">
@@ -9898,7 +9799,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Seattle-Vancouver">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -9918,39 +9819,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-1-Portland-Seattle"
-       transform="matrix(0.72559391,0.14155741,-0.17926465,0.89434872,88.006981,51.886226)"
-       style="fill:#a8a8a8;fill-opacity:1">
-      <svg:path
-         d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z"
-         style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-         id="rect9848-6-5-28"
-         inkscape:connector-curvature="0" />
-      <svg:path
-         d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z"
-         style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient10348-5-5-7);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-25)"
-         id="rect10124-4-0-55"
-         inkscape:connector-curvature="0" />
-    </svg:g>
-    <svg:g
-       class="route"
-       id="Gy-2-Portland-Seattle"
-       transform="matrix(0.72559391,0.14155741,-0.17926465,0.89434872,109.11791,55.287218)"
-       style="fill:#a8a8a8;fill-opacity:1">
-      <svg:path
-         d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z"
-         style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-         id="rect9848-6-5-28-2"
-         inkscape:connector-curvature="0" />
-      <svg:path
-         d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z"
-         style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient10348-5-5-7-4);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-25-7)"
-         id="rect10124-4-0-55-7"
-         inkscape:connector-curvature="0" />
-    </svg:g>
-    <svg:g
-       class="route"
-       id="P-SanFrancisco-Portland">
+       id="P-1-SanFrancisco-Portland">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(0.72752582,-0.13082154,0.15109921,0.84029416,-18.985884,419.04564)"
@@ -10035,7 +9904,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-SanFrancisco-Portland">
+       id="Gn-1-SanFrancisco-Portland">
       <svg:g
          transform="matrix(0.72752582,-0.13082154,0.15109921,0.84029416,-40.983686,422.41196)"
          id="GreenBlock-8">
@@ -10115,7 +9984,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-SanFrancisco-LosAngeles">
+       id="Y-1-SanFrancisco-LosAngeles">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
          transform="matrix(0.5616722,-0.48074829,0.60887845,0.72288673,-3.2736626,710.84348)"
@@ -10164,7 +10033,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-SanFrancisco-LosAngeles">
+       id="P-1-SanFrancisco-LosAngeles">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(0.5616722,-0.48074829,0.60887845,0.72288673,13.848804,696.61764)"
@@ -10213,7 +10082,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-Seattle-Helena">
+       id="Y-1-Seattle-Helena">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
          transform="matrix(0.23988125,-0.74917768,0.86820065,0.30660978,-15.015685,303.76237)"
@@ -10307,7 +10176,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-Portland-SaltLakeCity">
+       id="Be-1-Portland-SaltLakeCity">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(0.01661821,0.73931052,-1.0601328,0.00583426,460.50744,229.75306)"
@@ -10401,7 +10270,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-SaultStMarie-Montreal">
+       id="Gy-1-SaultStMarie-Montreal">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(0.09240676,0.7334266,-1.1209947,0.134444,1794.7921,-5.63851)"
@@ -10513,7 +10382,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Montreal-Boston">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -10548,7 +10417,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-Montreal-NewYork">
+       id="Be-1-Montreal-NewYork">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(0.72930598,-0.12370466,0.16813978,1.1789477,1439.0532,-77.766038)"
@@ -10597,7 +10466,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-Pittsburgh-NewYork">
+       id="W-1-Pittsburgh-NewYork">
       <svg:g
          transform="matrix(0.28671251,0.68192864,-1.1239633,0.43674766,1783.7402,283.2515)"
          id="WhiteBlock-02">
@@ -10641,7 +10510,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-Pittsburgh-NewYork">
+       id="Gn-1-Pittsburgh-NewYork">
       <svg:g
          transform="matrix(0.28671251,0.68192864,-1.1239633,0.43674766,1799.9087,220.51667)"
          id="GreenBlock-1">
@@ -10673,7 +10542,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Pittsburgh-Toronto">
+       id="Gy-1-Pittsburgh-Toronto">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.73582053,0.06950826,-0.06712891,0.77249732,1348.9713,227.36648)"
@@ -10707,7 +10576,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Toronto-Montreal"
+       id="Gy-1-Toronto-Montreal"
        transform="translate(1.3876166,0.34690414)">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -10757,7 +10626,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-SaultStMarie-Toronto">
+       id="Gy-1-SaultStMarie-Toronto">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.08050539,-0.7354592,1.247355,0.17582804,1073.3008,374.45692)"
@@ -10791,7 +10660,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-ElPaso-OklahomaCity"
+       id="Y-1-ElPaso-OklahomaCity"
        transform="translate(-0.46253886,4.6253886)">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
@@ -10871,7 +10740,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-SantaFe-OklahomaCity">
+       id="Be-1-SantaFe-OklahomaCity">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(-0.00187486,0.73979729,-1.2315433,-0.03905717,1012.083,659.20732)"
@@ -10920,7 +10789,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-Denver-OklahomaCity">
+       id="R-1-Denver-OklahomaCity">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.64827651,-0.30589427,0.42460737,0.92165704,506.29944,495.64769)"
@@ -10984,7 +10853,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-ElPaso-Houston">
+       id="Gn-1-ElPaso-Houston">
       <svg:g
          transform="matrix(0.53005535,-0.51560485,0.71324894,0.75621072,459.88191,883.35046)"
          id="GreenBlock-6">
@@ -11072,7 +10941,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Houston-NewOrleans">
+       id="Gy-1-Houston-NewOrleans">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.0568375,0.73762618,-1.0694066,0.05643982,1353.7554,868.74926)"
@@ -11106,7 +10975,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Dallas-LittleRock">
+       id="Gy-1-Dallas-LittleRock">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.57348975,0.46696454,-0.70927594,0.83685408,1103.2163,596.76922)"
@@ -11140,7 +11009,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-OklahomaCity-LittleRock">
+       id="Gy-1-OklahomaCity-LittleRock">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.10021514,-0.77453939,1.0083161,0.12537742,790.00427,851.61783)"
@@ -11174,7 +11043,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-Duluth-Chicago">
+       id="R-1-Duluth-Chicago">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.62802999,-0.39040753,0.54127508,0.90354665,841.53509,263.1358)"
@@ -11223,7 +11092,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-SaintLouis-Chicago">
+       id="Gn-1-SaintLouis-Chicago">
       <svg:g
          transform="matrix(0.70537476,0.22103063,-0.25529094,0.81470963,1131.3568,394.22232)"
          id="GreenBlock-16">
@@ -11255,7 +11124,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-SaintLouis-Chicago">
+       id="W-1-SaintLouis-Chicago">
       <svg:g
          transform="matrix(0.70537476,0.22103063,-0.25529094,0.81470963,1215.6421,451.43522)"
          id="WhiteBlock-3">
@@ -11299,7 +11168,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-KansasCity-Chicago">
+       id="Be-1-KansasCity-Chicago">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(0.35261956,0.64966725,-0.75036731,0.40727649,1150.9017,372.16469)"
@@ -11363,7 +11232,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-KansasCity-SaintLouis">
+       id="Be-1-KansasCity-SaintLouis">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(-0.32126652,0.66611189,-1.0365409,-0.5260081,1349.7488,634.0693)"
@@ -11397,7 +11266,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-KansasCity-SaintLouis">
+       id="P-1-KansasCity-SaintLouis">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(-0.32126652,0.66611189,-1.0365409,-0.5260081,1339.9361,655.84919)"
@@ -11431,7 +11300,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-LittleRock-SaintLouis">
+       id="Gy-1-LittleRock-SaintLouis">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.64004626,0.5237653,-0.42705529,0.49871483,1130.1114,544.18307)"
@@ -11465,7 +11334,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-SaintLouis-Nashville">
+       id="Gy-1-SaintLouis-Nashville">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.09166068,-0.70842401,0.92224532,0.11467509,983.20028,759.88059)"
@@ -11499,7 +11368,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Nashville-Atlanta">
+       id="Gy-1-Nashville-Atlanta">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.67263869,-0.56747516,0.42255782,0.63637716,1158.2842,660.6711)"
@@ -11518,7 +11387,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-LittleRock-Nashville">
+       id="W-1-LittleRock-Nashville">
       <svg:g
          transform="matrix(0.02491214,0.73900093,-1.0117787,0.02065307,1360.0451,733.93349)"
          id="WhiteBlock-025">
@@ -11582,7 +11451,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-LittleRock-NewOrleans">
+       id="Gn-1-LittleRock-NewOrleans">
       <svg:g
          transform="matrix(0.62080768,-0.40173212,0.54804469,0.87519681,901.63966,667.89874)"
          id="GreenBlock-3">
@@ -11628,7 +11497,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-NewOrleans-Atlanta">
+       id="Y-1-NewOrleans-Atlanta">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
          transform="matrix(0.73154497,0.12256928,-0.12250678,0.97640149,1151.5708,673.08295)"
@@ -11694,7 +11563,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-NewOrleans-Atlanta">
+       id="O-1-NewOrleans-Atlanta">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(0.73154497,0.10606624,-0.12250678,0.84493629,1172.4827,713.54647)"
@@ -11760,7 +11629,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-NewOrleans-Miami"
+       id="R-1-NewOrleans-Miami"
        transform="translate(-5.8871585,-0.49059654)">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
@@ -11840,7 +11709,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Be-Atlanta-Miami">
+       id="Be-1-Atlanta-Miami">
       <svg:g
          style="fill:#4b91da;fill-opacity:1"
          transform="matrix(0.59966038,-0.43250101,0.55982052,0.79277337,1196.0672,682.23002)"
@@ -11919,7 +11788,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-Charleston-Miami">
+       id="P-1-Charleston-Miami">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(0.72810667,0.31961572,-0.46869262,0.94589266,1536.0166,528.54083)"
@@ -11983,7 +11852,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Atlanta-Charleston">
+       id="Gy-1-Atlanta-Charleston">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.2179601,0.71230321,-0.9229299,0.22440837,1638.3257,594.21672)"
@@ -12050,7 +11919,7 @@
       </svg:g>
     </svg:g>
     <svg:g
-       class="route"
+       class="route secondroute"
        id="Gy-2-Atlanta-Raleigh">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
@@ -12085,7 +11954,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-Nashville-Raleigh">
+       id="Bk-1-Nashville-Raleigh">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(0.64647863,0.35843195,-0.41398981,0.74668446,1360.4387,426.36001)"
@@ -12134,7 +12003,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gn-SaintLouis-Pittsburgh"
+       id="Gn-1-SaintLouis-Pittsburgh"
        transform="translate(-4.0661442e-5,1.6685233e-6)">
       <svg:g
          transform="matrix(0.44196849,0.59251324,-0.68435429,0.51047472,1320.7158,438.33668)"
@@ -12209,7 +12078,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Raleigh-Charleston">
+       id="Gy-1-Raleigh-Charleston">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.57601088,-0.4632705,0.5350786,0.66529402,1293.4549,583.53932)"
@@ -12311,7 +12180,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Pittsburgh-Raleigh">
+       id="Gy-1-Pittsburgh-Raleigh">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.70563555,-0.22020214,0.28486131,0.90984242,1282.5373,332.40634)"
@@ -12345,7 +12214,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Pittsburgh-WashingtonDC">
+       id="Gy-1-Pittsburgh-WashingtonDC">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(-0.24451137,0.69765908,-0.98796677,-0.35168122,1833.8668,508.8626)"
@@ -12379,7 +12248,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-WashingtonDC-NewYork">
+       id="O-1-WashingtonDC-NewYork">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(0.73713982,0.05556524,-0.06844047,0.87880948,1521.1659,289.75266)"
@@ -12413,7 +12282,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-WashingtonDC-NewYork">
+       id="Bk-1-WashingtonDC-NewYork">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(0.73713982,0.05556524,-0.06844047,0.87880948,1543.5443,292.68623)"
@@ -12447,7 +12316,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Y-NewYork-Boston">
+       id="Y-1-NewYork-Boston">
       <svg:g
          style="fill:#dad44b;fill-opacity:1"
          transform="matrix(0.61982006,0.40338896,-0.60446533,0.89260861,1704.6713,78.170757)"
@@ -12481,7 +12350,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-NewYork-Boston">
+       id="R-1-NewYork-Boston">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.61982006,0.40338896,-0.60446533,0.89260861,1722.8898,89.814819)"
@@ -12515,7 +12384,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="P-Duluth-Toronto">
+       id="P-1-Duluth-Toronto">
       <svg:g
          style="fill:#b478b2;fill-opacity:1"
          transform="matrix(0.10347326,0.73214876,-0.98830026,0.12685554,1310.9325,238.5241)"
@@ -12609,7 +12478,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-Chicago-Toronto">
+       id="W-1-Chicago-Toronto">
       <svg:g
          transform="matrix(0.658807,0.33575792,-0.47542562,0.90173449,1305.1944,273.17386)"
          id="WhiteBlock-57">
@@ -12693,7 +12562,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-Helena-Duluth">
+       id="O-1-Helena-Duluth">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(-4.147438e-4,0.73948767,-1.0744103,-0.01701745,881.72038,268.99144)"
@@ -12787,7 +12656,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-Winnipeg-Duluth">
+       id="Bk-1-Winnipeg-Duluth">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(0.42434974,-0.60612647,1.0299626,0.77270008,475.16705,105.35767)"
@@ -12851,7 +12720,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="W-Calgary-Winnipeg">
+       id="W-1-Calgary-Winnipeg">
       <svg:g
          transform="matrix(0.30370469,0.67382275,-0.71004592,0.32595528,600.76881,-13.627426)"
          id="WhiteBlock-4">
@@ -12975,7 +12844,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-Helena-Omaha">
+       id="R-1-Helena-Omaha">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.17600842,-0.71648747,0.97754517,0.24791021,376.67044,447.10173)"
@@ -13054,7 +12923,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="R-ElPaso-Dallas">
+       id="R-1-ElPaso-Dallas">
       <svg:g
          style="fill:#da674b;fill-opacity:1"
          transform="matrix(0.15797122,0.72233575,-0.98307285,0.20201527,954.76857,798.33961)"
@@ -13118,7 +12987,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Gy-Phoenix-ElPaso">
+       id="Gy-1-Phoenix-ElPaso">
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(-0.32798349,0.67688312,-0.78543731,-0.37706829,758.30979,864.30554)"
@@ -13167,7 +13036,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="O-Chicago-Pittsburgh">
+       id="O-1-Chicago-Pittsburgh">
       <svg:g
          style="fill:#da944b;fill-opacity:1"
          transform="matrix(-0.22947925,-0.7027494,0.86494308,-0.27782301,1091.1809,673.71396)"
@@ -13216,7 +13085,7 @@
     </svg:g>
     <svg:g
        class="route"
-       id="Bk-Chicago-Pittsburgh">
+       id="Bk-1-Chicago-Pittsburgh">
       <svg:g
          style="fill:#3d3f45;fill-opacity:1"
          transform="matrix(-0.22947925,-0.7027494,0.86494308,-0.27782301,1096.7199,695.21934)"
@@ -13263,6 +13132,141 @@
            d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
       </svg:g>
     </svg:g>
+    <svg:g
+       id="Gy-1-SantaFe-ElPaso"
+       class="route">
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.73788714,-0.05273753,0.05209935,1.1598243,535.01386,548.6017)"
+         id="GrayPath">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11115);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.7356314,-0.07813529,0.09203828,1.1573399,531.33945,624.29122)"
+         id="GrayPath-54">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-54"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-0"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11158);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-4)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+    </svg:g>
+    <svg:g
+       id="Gy-2-Portland-Seattle">
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.72330357,0.15244689,-0.17607654,0.83541744,108.78091,71.195604)"
+         id="GrayPath-27-8">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70-7"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85-6"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11308);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61-0)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+    </svg:g>
+    <svg:g
+       id="Gy-1-Portland-Seattle"
+       class="route">
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.72290445,0.15432846,-0.17824974,0.83495643,86.026165,64.773156)"
+         id="GrayPath-27">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11223);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+    </svg:g>
+    <svg:g
+       id="Gy-1-Seattle-Calgary"
+       class="route">
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.10046409,0.73241628,-0.90508184,0.11934297,441.01078,96.275704)"
+         id="GrayPath-27-7">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70-70"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85-0"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11349);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61-6)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.19793206,0.71228473,-0.88084978,0.23983235,486.67632,59.701552)"
+         id="GrayPath-27-7-9">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70-70-3"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85-0-8"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11386);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61-6-2)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.44002751,0.5940559,-0.73641221,0.53954882,476.91344,-20.584526)"
+         id="GrayPath-27-7-9-9">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70-70-3-9"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85-0-8-9"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11423);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61-6-2-6)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+      <svg:g
+         style="fill:#a8a8a8;fill-opacity:1"
+         transform="matrix(0.64983451,0.3524794,-0.43944907,0.80018773,418.95545,-92.077049)"
+         id="GrayPath-27-7-9-9-3">
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect9848-6-5-70-70-3-9-9"
+           style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+           d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+        <svg:path
+           inkscape:connector-curvature="0"
+           id="rect10124-4-0-85-0-8-9-8"
+           style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient11460);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-61-6-2-6-4)"
+           d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+      </svg:g>
+    </svg:g>
   </svg:g>
   <svg:g
      inkscape:groupmode="layer"
@@ -13270,7 +13274,7 @@
      inkscape:label="Token Routes">
     <svg:g
        class="trainPath"
-       id="tp-Helena-Duluth">
+       id="tp-1-Helena-Duluth">
       <svg:g
          transform="matrix(0.00584789,3.5440884,-4.6414514,0.00446529,849.89686,356.97273)"
          inkscape:label="Layer 1"
@@ -13724,7 +13728,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Helena-Winnipeg"
+       id="tp-1-Helena-Winnipeg"
        transform="translate(-4.1591621,-3.1373145)">
       <svg:g
          id="car-4-5"
@@ -14029,7 +14033,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Calgary-Winnipeg"
+       id="tp-1-Calgary-Winnipeg"
        transform="translate(3.2464975,-4.90618)">
       <svg:g
          id="car-4-1"
@@ -14484,7 +14488,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Calgary-Helena"
+       id="tp-1-Calgary-Helena"
        transform="translate(8.7141439,-9.3453153)">
       <svg:g
          id="car-4-4"
@@ -14789,7 +14793,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Winnipeg-SaultStMarie">
+       id="tp-1-Winnipeg-SaultStMarie">
       <svg:g
          inkscape:transform-center-y="3.4317007"
          inkscape:transform-center-x="0.48851106"
@@ -15255,7 +15259,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Duluth-SaultStMarie">
+       id="tp-1-Duluth-SaultStMarie">
       <svg:g
          id="car-4-9"
          inkscape:label="Layer 1"
@@ -15484,7 +15488,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Helena-Omaha">
+       id="tp-1-Helena-Omaha">
       <svg:g
          id="car-4-81"
          inkscape:label="Layer 1"
@@ -15863,7 +15867,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Duluth-Toronto">
+       id="tp-1-Duluth-Toronto">
       <svg:g
          id="car-4-87"
          inkscape:label="Layer 1"
@@ -16625,7 +16629,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Duluth-Chicago">
+       id="tp-1-Duluth-Chicago">
       <svg:g
          id="car-4-6"
          inkscape:label="Layer 1"
@@ -16854,7 +16858,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Winnipeg-Duluth">
+       id="tp-1-Winnipeg-Duluth">
       <svg:g
          id="car-4-44"
          inkscape:label="Layer 1"
@@ -17616,7 +17620,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Helena-Denver">
+       id="tp-1-Helena-Denver">
       <svg:g
          id="car-4-54"
          inkscape:label="Layer 1"
@@ -17920,7 +17924,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Denver-Omaha">
+       id="tp-1-Denver-Omaha">
       <svg:g
          id="car-4-16"
          inkscape:label="Layer 1"
@@ -18686,7 +18690,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SaultStMarie-Montreal">
+       id="tp-1-SaultStMarie-Montreal">
       <svg:g
          id="car-4-55"
          inkscape:label="Layer 1"
@@ -19065,7 +19069,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Montreal-NewYork">
+       id="tp-1-Montreal-NewYork">
       <svg:g
          id="car-4-2"
          inkscape:label="Layer 1"
@@ -19602,7 +19606,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-KansasCity-Chicago">
+       id="tp-1-KansasCity-Chicago">
       <svg:g
          id="car-4-83"
          inkscape:label="Layer 1"
@@ -19906,7 +19910,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Pittsburgh-Toronto">
+       id="tp-1-Pittsburgh-Toronto">
       <svg:g
          id="car-4-14"
          inkscape:label="Layer 1"
@@ -21292,7 +21296,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SaintLouis-Pittsburgh">
+       id="tp-1-SaintLouis-Pittsburgh">
       <svg:g
          id="car-4-65"
          inkscape:label="Layer 1"
@@ -21671,7 +21675,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Pittsburgh-Raleigh">
+       id="tp-1-Pittsburgh-Raleigh">
       <svg:g
          id="car-4-564"
          inkscape:label="Layer 1"
@@ -21825,7 +21829,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Pittsburgh-WashingtonDC">
+       id="tp-1-Pittsburgh-WashingtonDC">
       <svg:g
          id="car-4-643"
          inkscape:label="Layer 1"
@@ -21979,7 +21983,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Nashville-Raleigh">
+       id="tp-1-Nashville-Raleigh">
       <svg:g
          id="car-4-76"
          inkscape:label="Layer 1"
@@ -22824,7 +22828,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Omaha-LittleRock">
+       id="tp-1-Omaha-LittleRock">
       <svg:g
          id="car-4-04"
          inkscape:label="Layer 1"
@@ -22978,7 +22982,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SantaFe-OklahomaCity">
+       id="tp-1-SantaFe-OklahomaCity">
       <svg:g
          id="car-4-27"
          inkscape:label="Layer 1"
@@ -23819,7 +23823,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Dallas-LittleRock">
+       id="tp-1-Dallas-LittleRock">
       <svg:g
          id="car-4-09"
          inkscape:label="Layer 1"
@@ -23973,7 +23977,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LittleRock-SaintLouis">
+       id="tp-1-LittleRock-SaintLouis">
       <svg:g
          id="car-4-82"
          inkscape:label="Layer 1"
@@ -24127,7 +24131,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SaintLouis-Nashville">
+       id="tp-1-SaintLouis-Nashville">
       <svg:g
          id="car-4-443"
          inkscape:label="Layer 1"
@@ -24739,7 +24743,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SaltLakeCity-Helena">
+       id="tp-1-SaltLakeCity-Helena">
       <svg:g
          id="car-4-93"
          inkscape:label="Layer 1"
@@ -24968,7 +24972,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Seattle-Calgary">
+       id="tp-1-Seattle-Calgary">
       <svg:g
          id="car-4-51"
          inkscape:label="Layer 1"
@@ -25272,7 +25276,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Vancouver-Calgary">
+       id="tp-1-Vancouver-Calgary">
       <svg:g
          id="car-4-763"
          inkscape:label="Layer 1"
@@ -25817,7 +25821,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Seattle-Helena">
+       id="tp-1-Seattle-Helena">
       <svg:g
          id="car-4-46"
          inkscape:label="Layer 1"
@@ -26271,7 +26275,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Portland-SaltLakeCity">
+       id="tp-1-Portland-SaltLakeCity">
       <svg:g
          id="car-4-551"
          inkscape:label="Layer 1"
@@ -28849,7 +28853,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LasVegas-SaltLakeCity">
+       id="tp-1-LasVegas-SaltLakeCity">
       <svg:g
          id="car-4-065-4"
          inkscape:label="Layer 1"
@@ -29078,7 +29082,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LosAngeles-LasVegas">
+       id="tp-1-LosAngeles-LasVegas">
       <svg:g
          id="car-4-065-6"
          inkscape:label="Layer 1"
@@ -29232,7 +29236,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Phoenix-Denver">
+       id="tp-1-Phoenix-Denver">
       <svg:g
          id="car-4-065-7"
          inkscape:label="Layer 1"
@@ -29611,7 +29615,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Denver-OklahomaCity">
+       id="tp-1-Denver-OklahomaCity">
       <svg:g
          id="car-4-065-3"
          inkscape:label="Layer 1"
@@ -29915,7 +29919,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Phoenix-SantaFe">
+       id="tp-1-Phoenix-SantaFe">
       <svg:g
          id="car-4-065-2"
          inkscape:label="Layer 1"
@@ -30144,7 +30148,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SantaFe-Denver">
+       id="tp-1-SantaFe-Denver">
       <svg:g
          id="car-4-065-5"
          inkscape:label="Layer 1"
@@ -30298,7 +30302,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LosAngeles-Phoenix">
+       id="tp-1-LosAngeles-Phoenix">
       <svg:g
          id="car-4-065-9"
          inkscape:label="Layer 1"
@@ -30527,7 +30531,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LosAngeles-ElPaso">
+       id="tp-1-LosAngeles-ElPaso">
       <svg:g
          id="car-4-065-46"
          inkscape:label="Layer 1"
@@ -30981,7 +30985,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Phoenix-ElPaso">
+       id="tp-1-Phoenix-ElPaso">
       <svg:g
          id="car-4-065-22"
          inkscape:label="Layer 1"
@@ -31210,7 +31214,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SantaFe-ElPaso">
+       id="tp-1-SantaFe-ElPaso">
       <svg:g
          id="car-4-065-8"
          inkscape:label="Layer 1"
@@ -31364,7 +31368,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-ElPaso-OklahomaCity">
+       id="tp-1-ElPaso-OklahomaCity">
       <svg:g
          id="car-4-065-67"
          inkscape:label="Layer 1"
@@ -31743,7 +31747,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-ElPaso-Dallas">
+       id="tp-1-ElPaso-Dallas">
       <svg:g
          id="car-4-065-32"
          inkscape:label="Layer 1"
@@ -32047,7 +32051,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-ElPaso-Houston">
+       id="tp-1-ElPaso-Houston">
       <svg:g
          id="car-4-065-91"
          inkscape:label="Layer 1"
@@ -32659,7 +32663,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Houston-NewOrleans">
+       id="tp-1-Houston-NewOrleans">
       <svg:g
          id="car-4-065-976"
          inkscape:label="Layer 1"
@@ -32813,7 +32817,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LittleRock-NewOrleans">
+       id="tp-1-LittleRock-NewOrleans">
       <svg:g
          id="car-4-065-31"
          inkscape:label="Layer 1"
@@ -33042,7 +33046,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-LittleRock-Nashville">
+       id="tp-1-LittleRock-Nashville">
       <svg:g
          id="car-4-065-69"
          inkscape:label="Layer 1"
@@ -33273,7 +33277,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Nashville-Atlanta"
+       id="tp-1-Nashville-Atlanta"
        transform="matrix(1.0878343,0,0,1.0878343,-117.19839,-66.236653)">
       <svg:g
          id="car-4-065-175"
@@ -33353,7 +33357,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Atlanta-Charleston">
+       id="tp-1-Atlanta-Charleston">
       <svg:g
          id="car-4-065-34"
          inkscape:label="Layer 1"
@@ -33968,7 +33972,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Atlanta-Miami">
+       id="tp-1-Atlanta-Miami">
       <svg:g
          id="car-4-065-72"
          inkscape:label="Layer 1"
@@ -34347,7 +34351,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-NewOrleans-Miami">
+       id="tp-1-NewOrleans-Miami">
       <svg:g
          id="car-4-065-24"
          inkscape:label="Layer 1"
@@ -35642,7 +35646,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Charleston-Miami">
+       id="tp-1-Charleston-Miami">
       <svg:g
          id="car-4-065-75"
          inkscape:label="Layer 1"
@@ -35946,7 +35950,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Chicago-Toronto">
+       id="tp-1-Chicago-Toronto">
       <svg:g
          id="car-4-065-02"
          inkscape:label="Layer 1"
@@ -36250,7 +36254,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-SaultStMarie-Toronto">
+       id="tp-1-SaultStMarie-Toronto">
       <svg:g
          id="car-4-065-979"
          inkscape:label="Layer 1"
@@ -36404,7 +36408,7 @@
     </svg:g>
     <svg:g
        class="trainPath"
-       id="tp-Toronto-Montreal">
+       id="tp-1-Toronto-Montreal">
       <svg:g
          id="car-4-065-01"
          inkscape:label="Layer 1"

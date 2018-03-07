@@ -12,16 +12,26 @@ If there are multiple connections between two cities there is a 1 or 2 inserted 
 Train Paths:
 tp-LeftMostCity-RightMostCity
 Like the routes one, there are many paths with an included 1 or 2 with 1 being the upper left most one.
+EX: tp-1-Denver-KansasCity
 */
 .route{
-  transition: all .5s ease-in-out;
-  transform-origin: center;
+  transition: all 2s ease-in-out;
+  transition-duration: 2s;
+  // z-index: 5000;
+  padding: 100px;
+
+
 }
 
 .route:hover{
-  z-index: 5050;
-  transform: scale(1.2);
-  border-radius: 5px;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+  transform-origin: center;
+
+  transform: scale(1.05);
+
+  // z-index: 5050;
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 80px #FFF;

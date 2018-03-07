@@ -2,15 +2,30 @@
   grid-area: player-inventory;
 
   display: grid;
-  grid-template-columns: 8fr 2fr;
-  grid-template-rows: .25fr 8fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 8fr;
   grid-template-areas:
-        "inventory-header train-token-pile"
-        "train-card-list  dest-card-list";
+        "dest-card-list"
+        "train-card-list";
+}
+
+.dest-card-button{
+  width: 100%;
 }
 
 .inventory-header{
   grid-area: inventory-header;
+}
+
+.card-container{
+  position: relative;
+  background-color: gray;
+  border-radius: 3px;
+  margin: 5px;
+  min-height: 60px;
+  min-width: 140px;
+  max-width: 140px;
+  max-height: 60px;
 }
 
 .train-card-list{

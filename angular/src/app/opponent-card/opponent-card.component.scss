@@ -1,16 +1,28 @@
 .opponent-card{
-  height: 180px;
+  position: relative;
+  padding: 10px;
+  height: 150px;
   border-radius: 3px;
   background-color: gray;
-  padding: 3px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 3px;
+  grid-gap: 5px;
   grid-template-areas:
         "opponent-icon ....... opponent-name"
         "opponent-train-tokens opponent-dest-cards opponent-train-cards";
 }
+
+
+.token{
+  min-height: 50px;
+  max-height: 50px;
+  width: auto;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+
 
 .card{
   max-width: 100px;
@@ -18,6 +30,10 @@
 }
 
 .opponent-icon{
+  position: absolute;
+  left: 30px;
+  top: -15px;
+  max-width: 60px;
   grid-area: opponent-icon;
 }
 
