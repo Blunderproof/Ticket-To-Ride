@@ -36,10 +36,8 @@ export class GameLobbyComponent implements OnInit {
     this.errorMessages = [];
     this.communicator.leaveGame()
       .then((x: any) => {
-        // TODO: Don't navigate until socket emits to start game
         if (x.success) {
           this.errorMessages = [];
-          this._router.navigate(['/lobby']);
         } else {
           this.errorMessages.push(x.message);
         }
@@ -50,10 +48,8 @@ export class GameLobbyComponent implements OnInit {
     this.errorMessages = [];
     this.communicator.deleteGame()
       .then((x: any) => {
-        // TODO: Don't navigate until socket emits to start game
         if (x.success) {
           this.errorMessages = [];
-          this._router.navigate(['/lobby']);
         } else {
           this.errorMessages.push(x.message);
         }
