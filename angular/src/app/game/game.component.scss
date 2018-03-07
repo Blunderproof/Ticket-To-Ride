@@ -16,7 +16,7 @@
   grid-template-columns: [g-col1-start] 350px [g-col2-start] 1fr [g-col3-start] 300px [g-col3-end];
 }
 
-.active-player{
+.active-user{
   outline: none;
   border-color: #9ecaed;
   box-shadow: 0 0 80px #FFF;
@@ -62,7 +62,6 @@
   grid-column: 1fr;
   min-width: 375px;
   max-width: 375px;
-  max-height: 1000px;
 }
 
 .player-inventory {

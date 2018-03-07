@@ -2,11 +2,11 @@
 <div class="game-tile">
   <app-errors [messages]="errorMessages"></app-errors>
   <div class="game-tile-header">
-    {{game.playerList.length}} / 5 Players
+    {{game.userList.length}} / 5 Users
   </div>
   <div class="game-tile-name">
     {{game.host.username}}'s Game
   </div>
-  <button *ngIf="playerinfo.player.id != game.host._id && playerinfo.game == null" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()" [disabled]="game.playerList.length >= 5">Join Game</button>
+  <button *ngIf="userinfo.user.id != game.host._id && userinfo.game == null" type="button" class="btn btn-primary join-game-btn" (click)="joinGame()" [disabled]="game.userList.length >= 5">Join Game</button>
   <!-- TODO: Make the join game button actually join the given game unless game is full-->
 </div>

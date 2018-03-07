@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameHistory } from '../services/game-history.service';
 
 @Component({
   selector: 'app-game-history',
@@ -7,13 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameHistoryComponent implements OnInit {
 
-  //TODO: Set up toggle from the button in the navbar when clicked.
-  display='none';
-  // display='block';
+  // https://www.youtube.com/watch?v=I317BhehZKM&t=37s
 
-  //https://www.youtube.com/watch?v=I317BhehZKM&t=37s
-
-  constructor() { }
+  constructor(public _gameHistory: GameHistory) { }
 
   ngOnInit() {
   }

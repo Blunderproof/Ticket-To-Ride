@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerProxy } from '../services/server_proxy.service';
 import { SocketCommunicator } from '../services/socket_communicator.service';
 import { Game } from '../classes/game';
-import { PlayerInfo } from '../services/player_info.service';
+import { UserInfo } from '../services/user_info.service';
 
 @Component({
   selector: 'app-gamelist',
@@ -13,7 +13,7 @@ export class GameListComponent implements OnInit {
   gameList: Game[];
   errorMessages = [];
 
-  constructor(private communicator: ServerProxy, private socket: SocketCommunicator, public _playerInfo: PlayerInfo) {
+  constructor(private communicator: ServerProxy, private socket: SocketCommunicator, public _userInfo: UserInfo) {
     this.sockets();
    }
 
@@ -34,14 +34,8 @@ export class GameListComponent implements OnInit {
 
   sockets() {
     this.socket.receiveGameList(data => {
+      this._userInfo.getGame();
       this.gameList = data;
-      // tslint:disable-next-line:max-line-length
-      this._playerInfo.game = this.gameList.filter(x => x.playerList
-                                            .indexOf(x.playerList
-                                              .find(y => y.username === this._playerInfo.player.username)) !== -1)[0] || null;
-      if (this._playerInfo.game) {
-        this.socket.joinRoom(this._playerInfo.game._id);
-      }
     });
   }
 

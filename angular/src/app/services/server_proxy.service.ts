@@ -35,6 +35,10 @@ export class ServerProxy {
     });
   }
 
+  logout() {
+    return this.communicator.send('logout', {});
+  }
+
   register(username: string, password: string, confirmPassword: string) {
     // needs to include username password and confirmPassword
     // tslint:disable-next-line:max-line-length
@@ -47,5 +51,15 @@ export class ServerProxy {
 
   requestGameList() {
     return this.communicator.send('getOpenGameList', {});
+  }
+
+  sendMessage(message: string) {
+    return this.communicator.send('sendMessage', {
+      message: message
+    });
+  }
+
+  getGame() {
+    return this.communicator.send('getGame', {});
   }
 }

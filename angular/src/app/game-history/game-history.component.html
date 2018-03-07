@@ -1,14 +1,13 @@
-<div [ngStyle]="{'display':display}">
-  <div class="backdrop"></div>
+<div>
+  <div class="backdrop" (click)="_gameHistory.toggleHistoryOpen()"></div>
 
   <div class="arrow"></div>
 
   <div class="history-window">
     <div class="history-textbox">
-      <!-- TODO: ng-repeat over the game's history messages, if the message is from the user,
-      then set the class to "history-msg-user" so that the text aligns properly -->
+      <!-- TODO: ngFor over the game's history messages -->
       <ul>
-        <app-history-message [ngClass]="fromUser? 'user-msg' : 'other-msg'"></app-history-message>
+        <app-history-message [class.user-msg]="fromUser" [class.other-msg]="!fromUser"></app-history-message>
         <app-history-message></app-history-message>
         <app-history-message></app-history-message>
      </ul>

@@ -2,6 +2,7 @@ import { User } from "../../models/User";
 import CommandResults from "../../modules/commands/CommandResults";
 import { HASHING_SECRET } from "../../constants";
 import { Promise } from "mongoose";
+import { Game } from "../../models/Game";
 const crypto = require("crypto");
 
 export default class UserFacade {
@@ -45,7 +46,7 @@ export default class UserFacade {
             userID: user._id,
             username: username,
           },
-          userCookie: user._id,
+          userCookie: {lgid:user._id},
         };
       } else {
         // doc may be null if no document matched
@@ -65,7 +66,7 @@ export default class UserFacade {
       resolve({
         success: true,
         data: {},
-        userCookie: "",
+        userCookie: {lgid: "", gmid: ""},
       });
     });
   }
@@ -119,9 +120,31 @@ export default class UserFacade {
             userID: newUser._id,
             username: username,
           },
-          userCookie: newUser._id,
+          userCookie: {lgid: newUser._id},
         };
       }
     });
+  }
+
+  getGame(data: any): Promise<any> {
+
+    return Game.findOne({
+      $or: [
+        {
+          host: data.reqUserID
+        },
+        {
+          userList: data.reqUserID
+        }
+      ]
+    })
+    .populate('host')
+    .populate('userList')
+    .then(data => {
+      return {
+        success: true,
+        data: data
+      }
+    })
   }
 }

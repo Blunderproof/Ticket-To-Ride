@@ -4,10 +4,10 @@
 <div class="borders">
 
   <div class="game-container">
-    <div *ngIf="historyOpen">
+    <div *ngIf="this._gameHistory.historyOpen">
       <app-game-history></app-game-history>
     </div>
-    <div *ngIf="gameStart;">
+    <div *ngIf="gameStart">
       <app-dest-card-selector></app-dest-card-selector>
     </div>
 

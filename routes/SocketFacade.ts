@@ -1,5 +1,7 @@
-import { Game, GameState } from "../models/Game";
-import { SocketCommand } from "../constants";
+import { Message } from '../models/Message';
+import { Game } from '../models/Game';
+import { GameState, MessageType } from '../constants';
+import { SocketCommand } from '../constants';
 
 export default class SocketFacade {
   socketCommandMap: Map<string, SocketCommand>;
@@ -11,8 +13,11 @@ export default class SocketFacade {
 
   private configureSocketCommandMap = () => {
     // user commands
-    this.socketCommandMap.set("gameList", this.getOpenGameList);
-    this.socketCommandMap.set("startGame", this.startGame);
+    this.socketCommandMap.set('gameList', this.getOpenGameList);
+    this.socketCommandMap.set('startGame', this.startGame);
+    this.socketCommandMap.set('updateGameState', this.updateGameState);
+    this.socketCommandMap.set('updateChatHistory', this.updateChatHistory);
+    this.socketCommandMap.set('updateGameHistory', this.updateGameHistory);
   };
 
   private static instance = new SocketFacade();
@@ -25,19 +30,20 @@ export default class SocketFacade {
   }
 
   execute(emitRequest: any, socketConnection: any) {
-
     console.log(emitRequest);
     const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(
       emitRequest.command
     );
 
     if (!socketCommand) {
-      console.log(`Yikes, '${emitRequest.command}' is not a valid socket command.`);
+      console.log(
+        `Yikes, '${emitRequest.command}' is not a valid socket command.`
+      );
       return;
     }
 
     let sureSocketCommand: SocketCommand = socketCommand!;
-    sureSocketCommand().then(emitData => {
+    sureSocketCommand(emitRequest.data).then(emitData => {
       console.log(emitData);
       if (emitRequest.to) {
         socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
@@ -47,18 +53,48 @@ export default class SocketFacade {
     });
   }
 
-  private getOpenGameList = (): Promise<any> => {
+  private getOpenGameList = (data: any): Promise<any> => {
     return Game.find({ gameState: GameState.Open })
-      .populate("host")
-      .populate("playerList")
+      .populate('host')
+      .populate('userList')
       .then(games => {
         return games;
       });
   };
 
-  private startGame = (): Promise<any> => {
+  private startGame = (data: any): Promise<any> => {
     return new Promise((accept, reject) => {
-      accept({msg: "start game!"})
-    })
-  }
+      accept({ msg: 'start game!' });
+    });
+  };
+
+  private updateGameState = (data: any): Promise<any> => {
+    return Game.findById(data.id)
+      .populate('host')
+      .populate('userList')
+      .populate('unclaimedRoutes')
+      .populate('trainCardDeck')
+      .populate('trainCardDiscardPile')
+      .populate('destinationCardDeck')
+      .populate('destinationCardDiscardPile')
+      .then(game => {
+        return game;
+      });
+  };
+
+  private updateChatHistory = (data: any): Promise<any> => {
+    return Message.find({ game: data.id, type: MessageType.Chat })
+      .sort('-timestamp')
+      .then(chatMessages => {
+        return chatMessages;
+      });
+  };
+
+  private updateGameHistory = (data: any): Promise<any> => {
+    return Message.find({ game: data.id, type: MessageType.History })
+      .sort('-timestamp')
+      .then(gameHistoryMessages => {
+        return gameHistoryMessages;
+      });
+  };
 }

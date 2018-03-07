@@ -1,5 +1,6 @@
-import { Game, GameState } from "../../models/Game";
-import CommandResults from "../../modules/commands/CommandResults";
+import { Game } from '../../models/Game';
+import { GameState, UserState } from '../../constants';
+import CommandResults from '../../modules/commands/CommandResults';
 
 export default class GameLobbyFacade {
   // TODOs
@@ -22,7 +23,7 @@ export default class GameLobbyFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo: "User is must be logged in to execute this command.",
+          errorInfo: 'User must be logged in to execute this command.',
         });
       });
       return promise;
@@ -37,7 +38,6 @@ export default class GameLobbyFacade {
       return loginCheck;
     }
 
-    // TODO cannot create game if user is already in game
     const { reqUserID } = data;
     return Game.findOne({
       $or: [
@@ -49,6 +49,14 @@ export default class GameLobbyFacade {
           host: reqUserID,
           gameState: GameState.InProgress,
         },
+        {
+          userList: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.InProgress,
+        },
       ],
     }).then(async game => {
       if (game) {
@@ -56,13 +64,13 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User already has an open game or a game in progress.",
+          errorInfo: 'User already has an open game or a game in progress.',
         };
       } else {
         var newGame = new Game({
           host: reqUserID,
           gameState: GameState.Open,
-          playerList: [reqUserID],
+          userList: [reqUserID],
         });
 
         // Save the new model instance, passing a callback
@@ -73,7 +81,8 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emit: [{command:"gameList"}],
+            emit: [{ command: 'gameList' }],
+            userCookie: { gmid: game._id }
           };
         });
       }
@@ -98,9 +107,10 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: {
-              message: "Game deleted.",
+              message: 'Game deleted.',
             },
-            emit: [{command:"gameList"}],
+            emit: [{ command: 'gameList' }],
+            userCookie: { gmid: '' },
           };
         });
       } else {
@@ -108,7 +118,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User does not have an open game.",
+          errorInfo: 'User does not have an open game.',
         };
       }
     });
@@ -133,9 +143,26 @@ export default class GameLobbyFacade {
 
     const { gameID, reqUserID } = data;
 
-    // query DB for game with the user in its player list already. Await it, only respond if nothing
+    // query DB for game with the user in its user list already. Await it, only respond if nothing
     const results: any = await Game.findOne({
-      playerList: reqUserID,
+      $or: [
+        {
+          host: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          host: reqUserID,
+          gameState: GameState.InProgress,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.Open,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.InProgress,
+        },
+      ],
     }).then(game => {
       if (game) {
         // doc may be null if no document matched
@@ -143,7 +170,7 @@ export default class GameLobbyFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "You have already joined this game!",
+            errorInfo: 'You have already joined this game!',
           };
         } else {
           return {
@@ -168,19 +195,20 @@ export default class GameLobbyFacade {
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        if (game.playerList.length >= 5) {
+        if (game.userList.length >= 5) {
           return {
             success: false,
             data: {},
-            errorInfo: "The specified game already has 5 players.",
+            errorInfo: 'The specified game already has 5 users.',
           };
         } else {
-          game.playerList.push(reqUserID);
+          game.userList.push(reqUserID);
           return await game.save().then(game => {
             return {
               success: true,
-              data: { message: "Game joined." },
-              emit: [{command:"gameList"}],
+              data: { message: 'Game joined.' },
+              emit: [{ command: 'gameList' }],
+              userCookie: { gmid: game._id },
             };
           });
         }
@@ -189,7 +217,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "The specified game does not exist!",
+          errorInfo: 'The specified game does not exist!',
         };
       }
     });
@@ -203,7 +231,7 @@ export default class GameLobbyFacade {
 
     const { reqUserID } = data;
     return Game.findOne({
-      playerList: reqUserID,
+      userList: reqUserID,
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
@@ -214,14 +242,15 @@ export default class GameLobbyFacade {
             errorInfo: "You can't leave your own game!",
           };
         }
-        const index = game.playerList.indexOf(reqUserID);
-        game.playerList.splice(index, 1);
+        const index = game.userList.indexOf(reqUserID);
+        game.userList.splice(index, 1);
 
         return await game.save().then(game => {
           return {
             success: true,
-            data: { message: "Game left." },
-            emit: [{command:"gameList"}],
+            data: { message: 'Game left.' },
+            emit: [{ command: 'gameList' }],
+            userCookie: { gmid: '' },
           };
         });
       } else {
@@ -229,7 +258,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "You are not in a game to leave!",
+          errorInfo: 'You are not in a game to leave!',
         };
       }
     });
@@ -249,19 +278,22 @@ export default class GameLobbyFacade {
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        if (game.playerList.length <= 1 || game.playerList.length > 5) {
+        if (game.userList.length <= 1 || game.userList.length > 5) {
           return {
             success: false,
             data: {},
-            errorInfo: "Your game doesn't have enough players to start!",
+            errorInfo: "Your game doesn't have enough users to start!",
           };
         } else {
-          game.gameState = GameState.InProgress;
-          return await game.save().then(data => {
+          // game.gameState = GameState.InProgress;
+          return await game.initGame().then(game => {
             return {
               success: true,
-              data: { message: "Game started!" },
-              emit: [{command:"gameList"},{command:"startGame",to:game._id}],
+              data: { message: 'Game started!' },
+              emit: [
+                { command: 'gameList' },
+                { command: 'startGame', to: game._id },
+              ],
             };
           });
         }
@@ -270,7 +302,7 @@ export default class GameLobbyFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "User does not have an open game!",
+          errorInfo: 'User does not have an open game!',
         };
       }
     });
@@ -286,8 +318,53 @@ export default class GameLobbyFacade {
       resolve({
         success: true,
         data: {},
-        emit: [{command:"gameList"}],
+        emit: [{ command: 'gameList' }],
       });
+    });
+  }
+
+  getUserGameStatus(data: any): Promise<any> {
+    if (!data.reqUserID) {
+      return new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: true,
+          data: {
+            status: UserState.LoggedOut,
+          },
+        });
+      });
+    }
+
+    const { reqUserID } = data;
+
+    return Game.findOne({
+      $or: [
+        {
+          host: reqUserID,
+          gameState: GameState.InProgress,
+        },
+        {
+          userList: reqUserID,
+          gameState: GameState.InProgress,
+        },
+      ],
+    }).then(async game => {
+      if (game) {
+        // user IS in a game in progress
+        return {
+          success: true,
+          data: {
+            status: UserState.InGame,
+          },
+        };
+      } else {
+        return {
+          success: true,
+          data: {
+            status: UserState.LoggedIn,
+          },
+        };
+      }
     });
   }
 }

@@ -24,12 +24,12 @@
       grid-template-rows: 20% 60% 20%;
       grid-template-areas:
             "game-header ...."
-            "player-list chat"
+            "user-list chat"
             "......... start-leave-button";
 }
 
-app-playerlist{
-  grid-area: player-list;
+app-userlist{
+  grid-area: user-list;
 }
 
 app-chat{

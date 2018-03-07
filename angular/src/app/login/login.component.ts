@@ -4,7 +4,7 @@ import { createFormGroup } from '../core/utils/forms';
 import { ServerProxy } from '../services/server_proxy.service';
 import { Router } from '@angular/router';
 import { CustomValidatorsService } from '../core/custom-validators.service';
-import { PlayerInfo } from '../services/player_info.service';
+import { UserInfo } from '../services/user_info.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   form = createFormGroup(this.login_controls);
 
   // tslint:disable-next-line:max-line-length
-  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService, private playerinfo: PlayerInfo) { }
+  constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService, private userinfo: UserInfo) { }
 
   ngOnInit() { }
 
@@ -54,8 +54,8 @@ export class LoginComponent implements OnInit {
     if (!this.registering) {
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
         .then((x: any) => {
-          this.playerinfo.player.id = x.result.userID;
-          this.playerinfo.player.username = x.result.username;
+          this.userinfo.user.id = x.result.userID;
+          this.userinfo.user.username = x.result.username;
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
@@ -67,8 +67,8 @@ export class LoginComponent implements OnInit {
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
         .then((x: any) => {
           if (x.success) {
-            this.playerinfo.player.id = x.result.userID;
-            this.playerinfo.player.username = x.result.username;
+            this.userinfo.user.id = x.result.userID;
+            this.userinfo.user.username = x.result.username;
             this._router.navigate(['/lobby']);
           } else {
             this.errorMessages.push(x.message);

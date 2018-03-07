@@ -2,7 +2,7 @@ export default class CommandResults {
   private success: boolean;
   private data: any;
   private errorInfo: string;
-  private userCookie: string;
+  private userCookie: any;
   private emitRequests: any[];
 
   constructor(responseData: any) {
@@ -22,7 +22,7 @@ export default class CommandResults {
   public getErrorInfo(): string {
     return this.errorInfo;
   }
-  public shouldSetSession(): string {
+  public shouldSetSession(): any {
     return this.userCookie;
   }
   public shouldEmit(): any[] {
