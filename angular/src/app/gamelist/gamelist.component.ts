@@ -36,10 +36,6 @@ export class GameListComponent implements OnInit {
     this.socket.receiveGameList(data => {
       this._userInfo.getGame();
       this.gameList = data;
-
-      if (this._userInfo.game) {
-        this.socket.joinRoom(this._userInfo.game._id);
-      }
     });
   }
 

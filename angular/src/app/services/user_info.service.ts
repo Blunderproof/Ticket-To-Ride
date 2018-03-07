@@ -10,7 +10,7 @@ export class UserInfo {
     user = new User();
     errorMessages = [];
 
-    constructor(private _serverProxy: ServerProxy) {
+    constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
         this.getGame();
     }
 
@@ -19,6 +19,9 @@ export class UserInfo {
             .then((x: any) => {
                 if (x.success) {
                     this.game = x.result;
+                    if (this.game) {
+                        this.socket.joinRoom(this.game._id);
+                      }
                 } else {
                     this.errorMessages.push(x.message);
                 }
