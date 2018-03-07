@@ -3,9 +3,9 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const mongoose = require('mongoose');
-const TrainCard = require('../models/TrainCard');
-const DestinationCard = require('../models/DestinationCard');
-const Route = require('../models/Route');
+const TrainCard = require('../dist/models/TrainCard').TrainCard;
+const DestinationCard = require('../dist/models/DestinationCard').DestinationCard;
+const Route = require('../dist/models/Route').Route;
 
 var Papa = require('papaparse');
 
@@ -15,8 +15,8 @@ mongoose.connect('mongodb://localhost/' + db_name);
 var fs = require('fs');
 var path = require('path');
 
+
 TrainCard.remove({})
-  .exec()
   .then(() => {
     // instantiate train cards for the game
     let contents = fs.readFileSync(__dirname + '/train_cards.csv', 'utf8');
@@ -28,7 +28,7 @@ TrainCard.remove({})
       });
       trainCardResults.data.forEach((row, index) => {
         for (let index = 0; index < row.numberToCreate; index++) {
-          let newCard = new TrainCard.model(row);
+          let newCard = new TrainCard(row);
           newCard.save();
         }
       });
@@ -38,19 +38,11 @@ TrainCard.remove({})
   });
 
 DestinationCard.remove({})
-  .exec()
   .then(() => {
     let contents = fs.readFileSync(
       __dirname + '/destination_cards.csv',
       'utf8'
     );
-
-    const cardTypeMap = {
-      '.mp4': MediaCard.MEDIA_CARD_TYPE_VIDEO,
-      '.gif': MediaCard.MEDIA_CARD_TYPE_GIF,
-      '.jpg': MediaCard.MEDIA_CARD_TYPE_IMAGE,
-      '.png': MediaCard.MEDIA_CARD_TYPE_IMAGE,
-    };
 
     if (contents) {
       var destinationCardResults = Papa.parse(contents, {
@@ -58,7 +50,7 @@ DestinationCard.remove({})
         comments: '#',
       });
       destinationCardResults.data.forEach((row, index) => {
-        let newCard = new DestinationCard.model(row);
+        let newCard = new DestinationCard(row);
         newCard.save();
       });
     } else {
@@ -67,7 +59,6 @@ DestinationCard.remove({})
   });
 
 Route.remove({})
-  .exec()
   .then(() => {
     // instantiate routes
     let contents = fs.readFileSync(__dirname + '/routes.csv', 'utf8');
@@ -78,7 +69,7 @@ Route.remove({})
         comments: '#',
       });
       routeResults.data.forEach((row, index) => {
-        let newRoute = new Route.model(row);
+        let newRoute = new Route(row);
         newRoute.save();
       });
     } else {
@@ -87,5 +78,3 @@ Route.remove({})
   });
 
 console.log('let this sit for a few seconds and it should be done');
-
-// process.exit();
