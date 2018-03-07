@@ -8,10 +8,10 @@
 }
 
 .bank-navbar{ //Used to allow the cards to float upward
-  pointer-events: none;
+  z-index: 5000;
   overflow: hidden;
   width:100%;
-  height: 350px;
+  height: 330px;
   background-color: rgba(0, 0, 0, 0);
   position: fixed;
   bottom: 0;
@@ -21,8 +21,7 @@
 .bottom-bar{
   overflow: hidden;
   object-fit: cover;
-  height: 100px;
-  z-index: 20;
+  height: 80px;
   bottom: 0px;
   background-color: rgba(80, 80, 80, 1);
   text-align: center;
@@ -38,8 +37,8 @@
   position: relative;
   display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 deck";
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 traincard-deck destcard-deck";
     justify-items: center;
     width: 100%;
     height: inherit;
@@ -51,6 +50,7 @@
   background-color: rgba(150, 150, 150, 1);
   width: 100px;
   height: inherit;
+  border-radius: 3px;
 }
 
 .card{
@@ -110,8 +110,12 @@
   grid-area: traincard-5;
 }
 
-.deck{
-  grid-area: deck;
+.traincard-deck{
+  grid-area: traincard-deck;
   width: 100px;
   height: auto;
+}
+
+.destcard-deck{
+  grid-area: destcard-deck;
 }

@@ -1,15 +1,19 @@
 .borders{
-  margin: 60px;
+  margin-top: 60px;
+  margin-left: 20px;
+  margin-right: 100px;
   font-size: 14pt;
   overflow: visible;
 }
 .game-container {
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  z-index: 1;
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: [col1-start] 20%  [col2-start] 50%  [col3-start] 30% [col3-end];
-  grid-template-rows: [row1-start] 70% [row2-start] 20% [row2-end];
-  background-color: #fff;
-  color: #444;
+  grid-template-columns: [g-col1-start] 350px [g-col2-start] 1fr [g-col3-start] 300px [g-col3-end];
 }
 
 .active-user{
@@ -20,28 +24,22 @@
 }
 
 .opponent-sidebar {
-  grid-column: col1-start / col2-start;
-  grid-row: row1-start / row2-end;
+  grid-column: g-col1-start / g-col2-start;
+  min-width: 350px;
+  max-width: 350px;
+  max-height: 700px;
+  float:left;
   /*NEW INTERNAL GRID*/
   display: grid;
-    grid-gap: 3px;
-    grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
-}
-
-.opponent {
-  grid-column: 1fr;
-  grid-row: 1fr;
-}
-
-.opponent-card{
-  height: 180px;
+    grid-gap: 15px;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
 .box {
     background-color: #444;
     color: #fff;
     border-radius: 5px;
-    padding: 20px;
+    padding: 10px;
     font-size: 150%;
 
 }
@@ -51,23 +49,30 @@
     color: #444;
 }
 .game-board{
-  grid-column: col2-start / col3-start;
-  grid-row: row1-start / row1-start;
+  overflow: auto;
+  grid-column: g-col2-start / g-col3-start;
+  max-height: 65%;
+  overflow-y: hidden;
+  margin: 0 10px;
 }
 
 
-.user-sidebar {
-  grid-column: col3-start / col3-end;
-  grid-row: row1-start / row2-end;
+.player-sidebar {
+  float:right;
+  grid-column: 1fr;
+  min-width: 375px;
+  max-width: 375px;
 }
 
-.user-inventory {
-  grid-column: col3-start / col3-end;
+.player-inventory {
   grid-row: row1-start / row2-start;
+  min-width: 350px;
+  max-width: 350px;
   font-size: 14px;
 }
 
 .chat{
+  margin-top: 10px;
   grid-column: col3-start / col3-end;
-  grid-row: row2-start / row2-end;
+  grid-row: row2-start / row3-end;
 }
