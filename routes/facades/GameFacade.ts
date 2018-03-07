@@ -94,11 +94,12 @@ export default class GameFacade {
           data: {},
           emit: [
             {
-              // TODO ensure this is the right command
-              command: 'updateGame',
+              command: 'updateGameState',
               data: { id: data.reqGameID },
               room: data.reqGameID,
-              // TODO add the gameHistory thing
+              gameHistory: `selected ${
+                savedUser.destinationCardHand.length
+              } destination cards.`,
             },
           ],
         };
@@ -163,11 +164,12 @@ export default class GameFacade {
   //         data: {},
   //         emit: [
   //           {
-  //             // TODO ensure this is the right command
-  //             command: 'updateGame',
+  //             command: 'updateGameState',
   //             data: { id: data.reqGameID },
   //             room: data.reqGameID,
-  //             // TODO add the gameHistory thing
+  //             gameHistory: `selected ${
+  //                savedUser.destinationCardHand.length
+  //             } destination cards.`,
   //           },
   //         ],
   //       };

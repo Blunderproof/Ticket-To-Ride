@@ -209,6 +209,7 @@ export default class GameLobbyFacade {
               data: { message: 'Game joined.' },
               emit: [{ command: 'gameList' }],
               userCookie: { gmid: game._id },
+              gameHistory: "joined game."
             };
           });
         }
