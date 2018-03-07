@@ -5,11 +5,8 @@
 
   <div class="history-window">
     <div class="history-textbox">
-      <!-- TODO: ngFor over the game's history messages -->
       <ul>
-        <app-history-message [class.user-msg]="fromUser" [class.other-msg]="!fromUser"></app-history-message>
-        <app-history-message></app-history-message>
-        <app-history-message></app-history-message>
+        <app-history-message *ngFor="let historyItem of historyList" [class.user-msg]="fromUser" [class.other-msg]="!fromUser"></app-history-message>
      </ul>
     </div>
   </div>
