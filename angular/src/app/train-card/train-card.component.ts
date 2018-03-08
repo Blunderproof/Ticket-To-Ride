@@ -14,6 +14,4 @@ export class TrainCardComponent implements OnInit {
   ngOnInit() {
   }
 
-  drawTrainCard() {  }
-
 }

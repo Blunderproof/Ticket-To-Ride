@@ -80,4 +80,16 @@ export class ServerProxy {
       discardCards: data
     });
   }
+
+ chooseDestinationCard(data: any) {
+    return this.communicator.send('chooseDestinationCard', {});
+  }
+
+  claimRoute(data: any) {
+    return this.communicator.send('claimRoute', {});
+  }
+
+  chooseTrainCard(data: any) {
+    return this.communicator.send('chooseTrainCard', {});
+  }
 }
