@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GameHistory } from '../services/game-history.service';
+import { UserInfo } from '../services/user_info.service';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-dest-card-selector',
@@ -8,24 +11,18 @@ import { Component, OnInit } from '@angular/core';
 export class DestCardSelectorComponent implements OnInit {
   display = true;
 
-  selectedCard1 = false;
-  selectedCard2 = false;
-  selectedCard3 = false;
+  selectedCard = [ false, false, false ];
 
-  constructor() {}
+  constructor(public _userInfo: UserInfo) { }
+
   onCloseHandled() {
-    this.display = false;
+    let numberSelected = this.selectedCard.filter( (value, index) => { return value }).length;
+    console.log(numberSelected);
+    // this.display = false;
   }
 
   selectDestCard(event) {
-    if (event.path[0].id === '1') {
-      this.selectedCard1 = !this.selectedCard1;
-      console.log(this.selectedCard1);
-    } else if (event.path[0].id === '2') {
-      this.selectedCard2 = !this.selectedCard2;
-    } else if (event.path[0].id === '3') {
-      this.selectedCard3 = !this.selectedCard3;
-    }
+    this.selectedCard[event.path[0].id] = !this.selectedCard[event.path[0].id];
     console.log(event.path[0].id);
   }
 
@@ -33,5 +30,8 @@ export class DestCardSelectorComponent implements OnInit {
     this.display = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("HAND");
+    console.log(this._userInfo);
+  }
 }

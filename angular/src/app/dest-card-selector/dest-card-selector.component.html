@@ -11,28 +11,12 @@
       <div class="modal-body">
 
         <div class="row">
-            <div class="col">
-              <img (click)="selectDestCard($event)" id="1"
-              class="destcard overlay" src="../../assets/images/destcards/dest-card-back.png"
-              [class.card-selected]="selectedCard1"
-              />
-            </div>
-            <div class="col">
-              <img (click)="selectDestCard($event)" id="2"
-              class="destcard" src="../../assets/images/destcards/dest-card-back.png"
-              [class.card-selected]="selectedCard2"
-              />
-            </div>
+          <app-dest-card [destCard]="_userInfo.user.destinationCardHand[0]"></app-dest-card>
+          <app-dest-card [destCard]="_userInfo.user.destinationCardHand[1]"></app-dest-card>
         </div>
         <div class="row">
-          <div class="col">
-            <img (click)="selectDestCard($event)" id="3"
-            class="destcard" src="../../assets/images/destcards/dest-card-back.png"
-            [class.card-selected]="selectedCard3"
-            />
-          </div>
+          <app-dest-card [destCard]="_userInfo.user.destinationCardHand[2]"></app-dest-card>
         </div>
-
       </div>
       <div class="modal-footer">
         <!--TODO: Disable select button if less than appropriate number of cards are selected -->
