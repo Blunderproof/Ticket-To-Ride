@@ -37,6 +37,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { GameHistory } from './services/game-history.service';
 import { TrainCardComponent } from './train-card/train-card.component';
 import { PlayerTrainCardComponent } from './player-train-card/player-train-card.component';
+import { DestinationCardComponent } from './destination-card/destination-card.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { PlayerTrainCardComponent } from './player-train-card/player-train-card.
     HistoryMessageComponent,
     TrainCardComponent,
     PlayerTrainCardComponent,
+    DestinationCardComponent,
   ],
   imports: [
     AngularSvgIconModule,

@@ -13,7 +13,7 @@ export class GameHistoryComponent implements OnInit {
   // https://www.youtube.com/watch?v=I317BhehZKM&t=37s
   historyList = [];
 
-  constructor(public _gameHistory: GameHistory, private socket: SocketCommunicator,private _serverProxy: ServerProxy) { }
+  constructor(public _gameHistory: GameHistory, private socket: SocketCommunicator) { }
 
   ngOnInit() {
     this.sockets();

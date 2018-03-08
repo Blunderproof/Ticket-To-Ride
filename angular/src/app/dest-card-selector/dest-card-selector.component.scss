@@ -12,11 +12,6 @@
   display: flex;
 }
 
-.card-selected{
-  transition: transform 1s;
-  transform: translate(10px, -10px);
-  opacity: 1 !important;
-}
 
 .modal-dialog {
   max-width: 800px;
@@ -36,9 +31,4 @@
 }
 
 
-.destcard{
-  margin: 5px;
-  width: 300px;
-  height: auto;
-  opacity: .6;
-}
+

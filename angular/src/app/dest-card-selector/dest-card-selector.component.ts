@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfo } from '../services/user_info.service';
+import { ServerProxy } from '../services/server_proxy.service';
 
 @Component({
   selector: 'app-dest-card-selector',
@@ -8,30 +10,24 @@ import { Component, OnInit } from '@angular/core';
 export class DestCardSelectorComponent implements OnInit {
   display = true;
 
-  selectedCard1 = false;
-  selectedCard2 = false;
-  selectedCard3 = false;
 
-  constructor() {}
+  constructor( public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
+
   onCloseHandled() {
     this.display = false;
-  }
-
-  selectDestCard(event) {
-    if (event.path[0].id === '1') {
-      this.selectedCard1 = !this.selectedCard1;
-      console.log(this.selectedCard1);
-    } else if (event.path[0].id === '2') {
-      this.selectedCard2 = !this.selectedCard2;
-    } else if (event.path[0].id === '3') {
-      this.selectedCard3 = !this.selectedCard3;
+    let notSelected = [];
+    let cards = this._userInfo.user.destinationCardHand
+    for (let i = 0; i < cards.length; i++) {
+      if (!cards[i].selected) notSelected.push(cards[i]._id)
     }
-    console.log(event.path[0].id);
+    this._serverProxy.initialSelectDestinationCard(notSelected);
   }
 
   openModal() {
     this.display = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this._userInfo)
+  }
 }

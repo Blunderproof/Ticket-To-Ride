@@ -1,5 +1,3 @@
-<!-- <button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button> -->
-<!-- Modal section -->
 <div class="backdrop" [hidden]="!display"></div>
 
 <div class="modal" tabindex="-1" role="dialog"  [hidden]="!display" >
@@ -11,26 +9,7 @@
       <div class="modal-body">
 
         <div class="row">
-            <div class="col">
-              <img (click)="selectDestCard($event)" id="1"
-              class="destcard overlay" src="../../assets/images/destcards/dest-card-back.png"
-              [class.card-selected]="selectedCard1"
-              />
-            </div>
-            <div class="col">
-              <img (click)="selectDestCard($event)" id="2"
-              class="destcard" src="../../assets/images/destcards/dest-card-back.png"
-              [class.card-selected]="selectedCard2"
-              />
-            </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <img (click)="selectDestCard($event)" id="3"
-            class="destcard" src="../../assets/images/destcards/dest-card-back.png"
-            [class.card-selected]="selectedCard3"
-            />
-          </div>
+            <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [card]="card"></app-destination-card>
         </div>
 
       </div>
@@ -38,6 +17,6 @@
         <!--TODO: Disable select button if less than appropriate number of cards are selected -->
         <button type="button" class="btn btn-success" (click)="onCloseHandled()">Choose</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal !-->
+    </div>
+  </div>
+</div>
