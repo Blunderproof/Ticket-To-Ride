@@ -9,6 +9,7 @@ import { UserInfo } from '../services/user_info.service';
   styleUrls: ['./opponent-card.component.scss']
 })
 export class OpponentCardComponent implements OnInit {
+  @Input() index: number;
 
   constructor(public _userInfo: UserInfo) { }
 

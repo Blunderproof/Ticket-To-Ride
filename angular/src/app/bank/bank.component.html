@@ -9,73 +9,24 @@
     </div>
     <div (click)="drawTrainCard()" class="card-slot traincard-deck">
         <div class="card">
-         <!-- TODO: Mantain counter, no click event needed for phase2-->
+         <!-- TODO: no click event needed for phase2-->
           <img class="side" src="../../assets/images/traincards/vertical/cardback.png"/>
            <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
+        </div>
+        <div id="trainCardCount">
+            {{_userInfo.game.trainCardDeck.length}} left
         </div>
       </div>
     <div class="card-slot destcard-deck">
         <div class="card">
-          <!--TODO: Mantain counter, no click event needed for phase2 -->
+          <!--TODO: no click event needed for phase2 -->
           <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.png"/>
-          <!-- <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/> -->
+          <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.png"/>
+        </div>
+        <div id="destCardCount">
+            {{_userInfo.game.destinationCardDeck.length}} left
         </div>
     </div>
-    
-
-    <!-- <div class="card-slot traincard-2">
-      <div class="card">
-        
-        <img class="side" src="../../assets/images/traincards/vertical/black.png"/>
-        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div>
-
-    <div class="card-slot traincard-3">
-      <div class="card">
-      
-        <img class="side" src="../../assets/images/traincards/vertical/white.png"/>
-        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div>
-
-    <div class="card-slot traincard-4">
-      <div class="card">
-        
-        <img class="side" src="../../assets/images/traincards/vertical/yellow.png"/>
-        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div>
-
-    <div class="card-slot traincard-5">
-      <div class="card">
-        
-        <img class="side" src="../../assets/images/traincards/vertical/red.png"/>
-        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div>
-
-    <div class="card-slot traincard-deck">
-      <div class="card">
-        TODO: Mantain counter, no click event
-        <img class="side" src="../../assets/images/traincards/vertical/cardback.png"/>
-         <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div>
-
-    <div class="card-slot destcard-deck">
-      <div class="card">
-        TODO: Mantain counter, no click event
-        <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.png"/>
-        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-      </div>
-    </div> -->
-
-
-
-    <!--TODO: onClick event for dest card  -->
-
-
   </div>
   <div class="bottom-bar">
     <img class="bottom-bar-tracks" src="../../assets/border2.png"/>

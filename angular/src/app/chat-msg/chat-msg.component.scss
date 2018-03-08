@@ -21,13 +21,15 @@
 
 .chat-msg-sender{
   grid-area: chat-msg-sender;
-  font-size: 60%
+  font-size: 70%;
+  font-weight: bold;
 }
 
 .chat-msg-timestamp{
   grid-area: chat-msg-timestamp;
-  font-size: 60%;
-  float:right;
+  font-size: 70%;
+  float: right;
+  font-weight: bold;
 
 }
 
