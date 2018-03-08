@@ -22,10 +22,7 @@ export class GameComponent implements OnInit {
 
   printUserInfo() {
     console.log(this._userInfo);
-<<<<<<< HEAD
 
-=======
     console.log('YES');
->>>>>>> 37a7ec91c227c5c81789f5283bc44bc00414b0d5
   }
 }
