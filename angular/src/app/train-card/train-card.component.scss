@@ -1,26 +1,27 @@
-
-.counter{
-    float:right;
+.card {
+    width: 100px;
+    height: 150px;
+    margin: 0;
+    display: block;
     position: absolute;
-    top:25%;
-    right:10px;
-    font-size: 15pt;
-  }
-
-.card{
-    min-height: 60px;
-    min-width: 100px;
-    max-width: 100px;
-    max-height: 60px;
-  }
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: all 1s ease-in-out;
+}
   
-  .card-container{
-    position: relative;
-    background-color: gray;
-    border-radius: 3px;
-    margin: 5px;
-    min-height: 60px;
-    min-width: 140px;
-    max-width: 140px;
-    max-height: 60px;
-  }
+.side {
+backface-visibility: hidden;
+border-radius: 6px;
+height: 100%;
+position: absolute;
+overflow: hidden;
+width: 100%;
+animation-iteration-count: 2;
+}
+.back {
+background: #eaeaed;
+color: #0087cc;
+line-height: 150px;
+text-align: center;
+transform: rotateY(180deg);
+}
