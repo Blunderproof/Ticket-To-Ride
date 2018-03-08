@@ -66,4 +66,12 @@ export class ServerProxy {
   getUser() {
     return this.communicator.send('getUser', {});
   }
+
+  getChatHistory() {
+    return this.communicator.send("getChatHistory",{});
+  }
+
+  getGameHistory() {
+    return this.communicator.send("getGameHistory",{});
+  }
 }

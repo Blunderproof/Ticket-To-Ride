@@ -189,15 +189,20 @@ export default class UserFacade {
   }
 
   getChatHistory(data: any): Promise<any> {
-    return Message.find({
-      game: data.reqGameID,
-      user: data.reqUserID,
-      type: MessageType.History,
-    }).then(data => {
-      return {
-        success: true,
-        data: data,
-      };
-    });
+    return new Promise((resolve,reject) => {
+      resolve({
+        success:true,
+        emit: [{command:"updateChatHistory", to: data.reqGameID, data: {id: data.reqGameID}}]
+      })
+    })
+  }
+
+  getGameHistory(data: any): Promise<any> {
+    return new Promise((resolve,reject) => {
+      resolve({
+        success:true,
+        emit: [{command:"updateGameHistory", to: data.reqGameID, data: {id: data.reqGameID}}]
+      })
+    })
   }
 }
