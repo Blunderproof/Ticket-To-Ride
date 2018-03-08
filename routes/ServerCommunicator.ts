@@ -37,6 +37,7 @@ export default class ServerCommunicator {
 
     this.commandMap.set('getOpenGameList', facade.getOpenGameList);
     this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
+    this.commandMap.set('getChatHistory', facade.getUserGameStatus);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {

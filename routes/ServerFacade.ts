@@ -122,4 +122,12 @@ export default class ServerFacade implements IServer {
   sendMessage(data: any): Promise<any> {
     return GameFacade.instanceOf().sendMessage(data);
   }
+
+  /*
+  input:
+    message
+  */
+  getChatHistory(data: any): Promise<any> {
+    return UserFacade.instanceOf().getChatHistory(data);
+  }
 }
