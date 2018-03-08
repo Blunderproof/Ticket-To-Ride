@@ -3,12 +3,15 @@
     width: 300px;
     height: auto;
     opacity: .6;
+    cursor: pointer;
   }
-
-
 
 .card-selected{
     transition: transform 1s;
     transform: translate(10px, -10px);
     opacity: 1 !important;
+  }
+
+  .overlay{
+    cursor: pointer;
   }
