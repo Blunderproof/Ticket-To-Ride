@@ -159,18 +159,38 @@ export default class UserFacade {
   }
 
   getGame(data: any): Promise<any> {
-    return Game.findOne({
-      $or: [
-        {
-          host: data.reqUserID,
-        },
-        {
-          userList: data.reqUserID,
-        },
-      ],
-    })
-      .populate('host')
-      .populate('userList')
+    return (
+      Game.findOne({
+        $or: [
+          {
+            host: data.reqUserID,
+          },
+          {
+            userList: data.reqUserID,
+          },
+        ],
+      })
+        .populate('host')
+        .populate('userList')
+        .populate('unclaimedRoutes')
+        // TODO just top 6
+        .populate('trainCardDeck')
+        // TODO just top 3
+        .populate('destinationCardDeck')
+        .then(data => {
+          return {
+            success: true,
+            data: data,
+          };
+        })
+    );
+  }
+
+  getUser(data: any): Promise<any> {
+    return User.findById(data.reqUserID)
+      .populate('trainCardHand')
+      .populate('destinationCardHand')
+      .populate('claimedRouteList')
       .then(data => {
         return {
           success: true,
@@ -179,33 +199,33 @@ export default class UserFacade {
       });
   }
 
-  getUser(data: any): Promise<any> {
-    return User.findById(data.reqUserID)
-    .populate('trainCardHand')
-    .populate('destinationCardHand')
-    .then(data => {
-      return {
+  getChatHistory(data: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      resolve({
         success: true,
-        data: data,
-      };
+        emit: [
+          {
+            command: 'updateChatHistory',
+            to: data.reqGameID,
+            data: { id: data.reqGameID },
+          },
+        ],
+      });
     });
   }
 
-  getChatHistory(data: any): Promise<any> {
-    return new Promise((resolve,reject) => {
-      resolve({
-        success:true,
-        emit: [{command:"updateChatHistory", to: data.reqGameID, data: {id: data.reqGameID}}]
-      })
-    })
-  }
-
   getGameHistory(data: any): Promise<any> {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
       resolve({
-        success:true,
-        emit: [{command:"updateGameHistory", to: data.reqGameID, data: {id: data.reqGameID}}]
-      })
-    })
+        success: true,
+        emit: [
+          {
+            command: 'updateGameHistory',
+            to: data.reqGameID,
+            data: { id: data.reqGameID },
+          },
+        ],
+      });
+    });
   }
 }

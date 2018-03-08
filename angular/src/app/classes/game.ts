@@ -9,12 +9,16 @@ export class Game {
     gameState: number;
     unclaimedRoutes: Route[];
     trainCardDeck: TrainCard[];
-    trainCardDiscardPile: TrainCard[];
     destinationCardDeck: DestinationCard[];
-    destinationCardDiscardPile: DestinationCard[];
     turnNumber: number;
-    numberOfPlayersReady: number;
     _id: string;
 
-    constructor() { }
+    constructor(data?: Object) {
+        Object.keys(data || {}).forEach(key => this[key] = data[key]);
+
+        this.userList = (this.userList || []).map(x => new User(x));
+        this.unclaimedRoutes = (this.unclaimedRoutes || []).map(x => new Route(x));
+        this.trainCardDeck = (this.trainCardDeck || []).map(x => new TrainCard(x));
+        this.destinationCardDeck = (this.destinationCardDeck || []).map(x => new DestinationCard(x));
+    }
 }

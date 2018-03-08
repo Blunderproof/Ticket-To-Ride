@@ -7,17 +7,13 @@ import { TrainCard } from '../classes/train-card';
   styleUrls: ['./train-card.component.scss']
 })
 export class TrainCardComponent implements OnInit {
-@Input() count: number
-@Input() color: string
-image: string;
-class: string;
+  @Input() trainCard: TrainCard;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.image = `../../assets/images/traincards/${this.color}.png`
-    this.class = `${this.color}-cards card-container`
   }
+
+  drawTrainCard() {  }
 
 }
