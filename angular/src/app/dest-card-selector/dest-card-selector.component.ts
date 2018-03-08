@@ -9,18 +9,23 @@ import { ServerProxy } from '../services/server_proxy.service';
 })
 export class DestCardSelectorComponent implements OnInit {
   display = true;
+  message = null;
 
-
-  constructor( public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
+  constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
   onCloseHandled() {
-    this.display = false;
     let notSelected = [];
-    let cards = this._userInfo.user.destinationCardHand
+    let cards = this._userInfo.user.destinationCardHand;
     for (let i = 0; i < cards.length; i++) {
-      if (!cards[i].selected) notSelected.push(cards[i]._id)
+      if (!cards[i].selected) notSelected.push(cards[i]._id);
     }
-    this._serverProxy.initialSelectDestinationCard(notSelected);
+
+    if (notSelected.length <= 1) {
+      this.display = false;
+      this._serverProxy.initialSelectDestinationCard(notSelected);
+    } else {
+      this.message = 'Make sure you choose 2 or 3 destination cards to keep.';
+    }
   }
 
   openModal() {
@@ -28,6 +33,6 @@ export class DestCardSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this._userInfo)
+    console.log(this._userInfo);
   }
 }

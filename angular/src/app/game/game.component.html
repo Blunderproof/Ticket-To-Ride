@@ -1,5 +1,5 @@
 <app-bank></app-bank>
-<app-dest-card-selector></app-dest-card-selector>
+<app-dest-card-selector *ngIf="this._userInfo.game && this._userInfo.game.playersReady.indexOf(this._userInfo.user._id) < 0;"></app-dest-card-selector>
 
 <div class="borders">
 
