@@ -25,6 +25,7 @@ export default class ServerCommunicator {
     this.commandMap.set('logout', facade.logout);
     this.commandMap.set('register', facade.register);
     this.commandMap.set('getGame', facade.getGame);
+    this.commandMap.set('getUser', facade.getUser);
 
     // game lobby commands
     this.commandMap.set('createGame', facade.createGame);
@@ -119,8 +120,6 @@ export default class ServerCommunicator {
     body.reqUserID = reqUserID;
     body.reqGameID = reqGameID;
 
-    console.log(req.session, "FIRST")
-
     // debug
     // console.log("userCookie");
     // console.log(userCookie);
@@ -163,6 +162,7 @@ export default class ServerCommunicator {
               user: reqUserID,
               type: MessageType.History
             })
+            console.log("history added", history)
             history.save()
           }
 
