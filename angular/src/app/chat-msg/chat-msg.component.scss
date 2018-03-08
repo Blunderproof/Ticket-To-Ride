@@ -17,6 +17,7 @@
 .chat-msg-text{
   grid-area:  chat-msg-text;
   font-size: 80%;
+  word-wrap: break-word;
 }
 
 .chat-msg-sender{
