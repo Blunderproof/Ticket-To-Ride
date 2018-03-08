@@ -8,9 +8,14 @@
   z-index: 1049;
 }
 
+.modal{
+  display: flex;
+}
+
 .card-selected{
   transition: transform 1s;
-  transform: translate(40px, -10px);
+  transform: translate(10px, -10px);
+  opacity: 1 !important;
 }
 
 .modal-dialog {
@@ -20,7 +25,7 @@
 }
 
 .modal-body{
-  max-width: 800px;
+  max-width: 1000px;
   min-height: 500px;
   margin: 10px auto;
 }
@@ -35,4 +40,5 @@
   margin: 5px;
   width: 300px;
   height: auto;
+  opacity: .6;
 }

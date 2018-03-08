@@ -27,7 +27,6 @@ export class DestCardSelectorComponent implements OnInit {
       this.selectedCard3 = !this.selectedCard3;
     }
     console.log(event.path[0].id);
-
   }
 
   openModal() {

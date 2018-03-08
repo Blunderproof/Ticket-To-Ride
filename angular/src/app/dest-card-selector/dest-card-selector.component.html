@@ -1,6 +1,6 @@
-<button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
+<!-- <button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button> -->
 <!-- Modal section -->
-<div class="backdrop" [hidden]="display"></div>
+<div class="backdrop" [hidden]="!display"></div>
 
 <div class="modal" tabindex="-1" role="dialog"  [hidden]="!display" >
   <div class="modal-dialog" style="height:80%;" role="document">
@@ -13,13 +13,13 @@
         <div class="row">
             <div class="col">
               <img (click)="selectDestCard($event)" id="1"
-              class="destcard overlay" src="../../assets/images/destcards/Duluth-Houston.png"
+              class="destcard overlay" src="../../assets/images/destcards/dest-card-back.png"
               [class.card-selected]="selectedCard1"
               />
             </div>
             <div class="col">
               <img (click)="selectDestCard($event)" id="2"
-              class="destcard" src="../../assets/images/destcards/Duluth-Houston.png"
+              class="destcard" src="../../assets/images/destcards/dest-card-back.png"
               [class.card-selected]="selectedCard2"
               />
             </div>
@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col">
             <img (click)="selectDestCard($event)" id="3"
-            class="destcard" src="../../assets/images/destcards/Duluth-Houston.png"
+            class="destcard" src="../../assets/images/destcards/dest-card-back.png"
             [class.card-selected]="selectedCard3"
             />
           </div>
