@@ -21,14 +21,10 @@ export interface IUserModel extends IUser, mongoose.Document {}
 export var UserSchema: mongoose.Schema = new mongoose.Schema({
   username: { type: String, required: true, index: { unique: true } },
   hashedPassword: { type: String, required: true },
-  claimedRouteList: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'Route' },
-  ],
-  trainCardHand: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'TrainCard' },
-  ],
+  claimedRouteList: [{ type: Schema.Types.ObjectId, ref: 'Route' }],
+  trainCardHand: [{ type: Schema.Types.ObjectId, ref: 'TrainCard' }],
   destinationCardHand: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' },
+    { type: Schema.Types.ObjectId, ref: 'DestinationCard' },
   ],
   score: Number,
   tokenCount: Number,
