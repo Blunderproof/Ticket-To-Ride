@@ -1,8 +1,9 @@
 import { User } from "../../models/User";
 import CommandResults from "../../modules/commands/CommandResults";
-import { HASHING_SECRET } from "../../constants";
+import { HASHING_SECRET, MessageType } from "../../constants";
 import { Promise } from "mongoose";
 import { Game } from "../../models/Game";
+import { Message } from "../../models/Message";
 const crypto = require("crypto");
 
 export default class UserFacade {
@@ -158,4 +159,21 @@ export default class UserFacade {
       }
     })
   }
+
+
+  getChatHistory(data: any): Promise<any> {
+
+    return Message.find({
+      game: data.reqGameID,
+      user: data.reqUserID,
+      type: MessageType.History
+    })
+    .then(data => {
+      return {
+        success: true,
+        data: data
+      }
+    })
+  }
+
 }
