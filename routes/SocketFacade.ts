@@ -2,6 +2,7 @@ import { Message } from '../models/Message';
 import { Game } from '../models/Game';
 import { GameState, MessageType } from '../constants';
 import { SocketCommand } from '../constants';
+import { emit } from 'cluster';
 
 export default class SocketFacade {
   socketCommandMap: Map<string, SocketCommand>;
@@ -44,7 +45,7 @@ export default class SocketFacade {
 
     let sureSocketCommand: SocketCommand = socketCommand!;
     sureSocketCommand(emitRequest.data).then(emitData => {
-      console.log(emitData);
+      console.log(emitRequest.to,emitRequest.command,emitData);
       if (emitRequest.to) {
         socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
       } else {

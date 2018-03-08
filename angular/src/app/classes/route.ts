@@ -7,5 +7,7 @@ export class Route {
     city1: string;
     city2: string;
 
-    constructor() { }
+    constructor(data?: Object) {
+        Object.keys(data || {}).forEach(key => this[key] = data[key]);
+    }
 }

@@ -33,12 +33,21 @@ export default class ServerCommunicator {
     this.commandMap.set('joinGame', facade.joinGame);
     this.commandMap.set('deleteGame', facade.deleteGame);
     this.commandMap.set('leaveGame', facade.leaveGame);
-    this.commandMap.set('sendMessage', facade.sendMessage);
 
+    // game commands
+    this.commandMap.set('sendMessage', facade.sendMessage);
     this.commandMap.set('getOpenGameList', facade.getOpenGameList);
     this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
     this.commandMap.set('getChatHistory', facade.getChatHistory);
     this.commandMap.set('getGameHistory', facade.getGameHistory);
+    this.commandMap.set(
+      'initialSelectDestinationCard',
+      facade.initialSelectDestinationCard
+    );
+    // this.commandMap.set(
+    //   'selectDestinationCard',
+    //   facade.selectDestinationCard
+    // );
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -100,7 +109,7 @@ export default class ServerCommunicator {
       return;
     }
 
-    console.log(req.body)
+    console.log(req.body);
 
     const facadeCommand: FacadeCommand | undefined = this.commandMap.get(
       req.body.methodName

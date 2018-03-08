@@ -24,7 +24,7 @@ export interface IGameModel extends mongoose.Document {
   destinationCardDeck: IDestinationCardModel[];
   destinationCardDiscardPile: IDestinationCardModel[];
   turnNumber: Number;
-  numberOfPlayersReady: Number;
+  playersReady: IUserModel[];
   initGame(): Promise<any>;
   shuffleDealCards(
     unclaimedRoutes: IRouteModel[],
@@ -53,7 +53,7 @@ export var GameSchema: Schema = new Schema({
     { type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' },
   ],
   turnNumber: Number,
-  numberOfPlayersReady: Number,
+  playersReady: [{ type: Schema.Types.ObjectId, required: true, ref: 'User' }],
 });
 
 GameSchema.methods.initGame = async function() {
@@ -128,8 +128,17 @@ GameSchema.methods.shuffleDealCards = async function(
       if (!player) {
         return null;
       }
+
+      player.claimedRouteList = [];
+      player.trainCardHand = [];
+      player.destinationCardHand = [];
+      player.score = 0;
+
+      player.tokenCount = INITIAL_TOKEN_COUNT;
+      player.color = color;
+
       for (let cardIndex = 0; cardIndex < TRAIN_CARD_HAND_SIZE; cardIndex++) {
-        player.trainCardHand.push(shuffledTrainCardDeck[0]);
+        player.trainCardHand.push(shuffledTrainCardDeck[0]._id);
         shuffledTrainCardDeck.splice(0, 1);
       }
 
@@ -138,28 +147,26 @@ GameSchema.methods.shuffleDealCards = async function(
         cardIndex < DESTINATION_CARD_HAND_SIZE;
         cardIndex++
       ) {
-        player.destinationCardHand.push(shuffledDestinationCardDeck[0]);
+        player.destinationCardHand.push(shuffledDestinationCardDeck[0]._id);
         shuffledDestinationCardDeck.splice(0, 1);
       }
 
-      player.tokenCount = INITIAL_TOKEN_COUNT;
-      player.color = color;
       return player.save();
     });
   }
 
   for (let index = 0; index < shuffledTrainCardDeck.length; index++) {
-    that.trainCardDeck.push(shuffledTrainCardDeck[index]);
+    that.trainCardDeck.push(shuffledTrainCardDeck[index]._id);
   }
   for (let index = 0; index < shuffledDestinationCardDeck.length; index++) {
-    that.destinationCardDeck.push(shuffledDestinationCardDeck[index]);
+    that.destinationCardDeck.push(shuffledDestinationCardDeck[index]._id);
   }
   for (let index = 0; index < unclaimedRoutes.length; index++) {
-    that.unclaimedRoutes.push(unclaimedRoutes[index]);
+    that.unclaimedRoutes.push(unclaimedRoutes[index]._id);
   }
 
   that.turnNumber = -1;
-  that.numberOfPlayersReady = 0;
+  that.playersReady = [];
   that.gameState = GameState.InProgress;
 
   return that.save();

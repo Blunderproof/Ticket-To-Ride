@@ -12,7 +12,11 @@ export class User {
     score: number;
     color: PlayerColor;
 
-    constructor() {
+    constructor(data?: Object) {
+        Object.keys(data || {}).forEach(key => this[key] = data[key]);
 
+        this.claimedRouteList = (this.claimedRouteList || []).map(x => new Route(x));
+        this.trainCardHand = (this.trainCardHand || []).map(x => new TrainCard(x));
+        this.destinationCardHand = (this.destinationCardHand || []).map(x => new DestinationCard(x));
     }
 }

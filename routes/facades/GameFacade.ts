@@ -68,13 +68,60 @@ export default class GameFacade {
   }
 
   // implement
-  initialSelectDestinationCard(data: any): Promise<any> {
+  async initialSelectDestinationCard(data: any): Promise<any> {
     let loginCheck: any = null;
     if ((loginCheck = this.validateUserAuth(data)) != null) {
       return loginCheck;
     }
 
-    return User.findOne({ user: data.reqUserID }).then(async user => {
+    if (!data.discardCards) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: "Request is missing parameter 'discardCards'.",
+        });
+      });
+      return promise;
+    } else if (data.discardCards.length > 1) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: 'You must choose two or three destination cards to keep.',
+        });
+      });
+      return promise;
+    }
+
+    let game = await Game.findOne({ _id: data.reqGameID });
+
+    if (!game) {
+      return {
+        success: false,
+        data: {},
+        errorInfo: "That game doesn't exist.",
+      };
+    }
+    // force unwrap game
+    let unwrappedGame = game!;
+
+    if (unwrappedGame.turnNumber >= 0) {
+      return {
+        success: false,
+        data: {},
+        errorInfo:
+          'The game has already been initialized and all users have performed their initial card selection!',
+      };
+    } else if (unwrappedGame.playersReady.indexOf(data.reqUserID) >= 0) {
+      return {
+        success: false,
+        data: {},
+        errorInfo: 'You already performed your initial card selection!',
+      };
+    }
+
+    return User.findOne({ _id: data.reqUserID }).then(async user => {
       if (!user) {
         return {
           success: false,
@@ -83,23 +130,50 @@ export default class GameFacade {
         };
       }
 
-      // unpopulated so we're just comparing ids
-      user.destinationCardHand = user.destinationCardHand.filter(function(i) {
-        return data.discardCards.indexOf(i.toString()) < 0;
-      });
+      if (data.discardCards.length == 0) {
+        // pass
+      } else {
+        // unpopulated so we're just comparing ids
+        user.destinationCardHand = user.destinationCardHand.filter(function(i) {
+          return data.discardCards.indexOf(i.toString()) < 0;
+        });
+
+        // the only amount that we could subtract is by 1! so length should be 2.
+        // if it's not 2, then the discardCard submitted wasn't in the users hand.
+        // this is sorta strange way to do it, but whatever. it's as good as checking it before.
+        if (user.destinationCardHand.length != 2) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "The card you submitted to discard isn't in your hand.",
+          };
+        }
+
+        for (let index = 0; index < data.discardCards.length; index++) {
+          const element = data.discardCards[index];
+          unwrappedGame.destinationCardDiscardPile.push(element);
+        }
+      }
+
+      unwrappedGame.playersReady.push(user._id);
+      if (unwrappedGame.playersReady.length == unwrappedGame.userList.length) {
+        unwrappedGame.turnNumber = 0;
+      }
+
+      await unwrappedGame.save();
 
       return user.save().then(savedUser => {
         return {
           success: true,
           data: {},
+          gameHistory: `selected ${
+            savedUser.destinationCardHand.length
+          } destination cards.`,
           emit: [
             {
               command: 'updateGameState',
               data: { id: data.reqGameID },
               room: data.reqGameID,
-              gameHistory: `selected ${
-                savedUser.destinationCardHand.length
-              } destination cards.`,
             },
           ],
         };
@@ -121,7 +195,8 @@ export default class GameFacade {
   //       data: {}
   //     }
   //   }
-  //   // TODO force unwrap game
+  //   // force unwrap game
+  //   let unwrappedGame = game!;
 
   //   return User.findOne({ user: data.reqUserID }).then(async user => {
   //     if (!user) {
@@ -153,6 +228,11 @@ export default class GameFacade {
   //     ) {
   //       return discard.indexOf(cardID.toString()) < 0;
   //     });
+
+  // for (let index = 0; index < discard.length; index++) {
+  //   const element = discard[index];
+  //   unwrappedGame.destinationCardDiscardPile.push(element);
+  // }
 
   //     // remove the cards from the deck
   //     game.destinationCardDeck.splice(0, 3);
