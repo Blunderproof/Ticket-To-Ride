@@ -119,7 +119,7 @@ export default class ServerCommunicator {
     body.reqUserID = reqUserID;
     body.reqGameID = reqGameID;
 
-    console.log(req.session, "FIRST")
+    console.log(req.session, 'FIRST');
 
     // debug
     // console.log("userCookie");
@@ -141,19 +141,13 @@ export default class ServerCommunicator {
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 
-          if (lgid === '') {
-            delete req.session.ldig;
-          } else if (lgid) {
+          if (lgid !== null) {
             req.session.lgid = lgid;
           }
 
-          if (gmid === '') {
-            delete req.session.gmid;
-          } else if (gmid) {
+          if (gmid !== null) {
             req.session.gmid = gmid;
           }
-          
-
 
           //add gamehistory
           if (commandResults.shouldAddHistory()) {
@@ -161,11 +155,10 @@ export default class ServerCommunicator {
               message: commandResults.shouldAddHistory(),
               game: reqGameID,
               user: reqUserID,
-              type: MessageType.History
-            })
-            history.save()
+              type: MessageType.History,
+            });
+            history.save();
           }
-
 
           // emit stuff
           const emitRequests = commandResults.shouldEmit();
