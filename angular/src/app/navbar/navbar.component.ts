@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   errorMessages = [];
 
-  constructor(public _userInfo: UserInfo, private _gameHistory: GameHistory, private _serverProxy: ServerProxy, private _router: Router) { }
+  constructor(public _userInfo: UserInfo, public _gameHistory: GameHistory, private _serverProxy: ServerProxy, private _router: Router) { }
 
   ngOnInit() { }
 
