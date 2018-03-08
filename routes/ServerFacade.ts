@@ -154,4 +154,28 @@ export default class ServerFacade implements IServer {
   getGameHistory(data: any): Promise<any> {
     return UserFacade.instanceOf().getGameHistory(data);
   }
+
+  /*
+  input:
+    message
+  */
+ chooseDestinationCard(data: any): Promise<any> {
+    return GameFacade.instanceOf().chooseDestinationCard(data);
+  }
+
+  /*
+  input:
+    message
+  */
+ claimRoute(data: any): Promise<any> {
+    return GameFacade.instanceOf().claimRoute(data);
+  }
+
+  /*
+  input:
+    message
+  */
+ chooseTrainCard(data: any): Promise<any> {
+    return GameFacade.instanceOf().chooseTrainCard(data);
+  }
 }

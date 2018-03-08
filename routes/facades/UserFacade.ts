@@ -180,7 +180,10 @@ export default class UserFacade {
   }
 
   getUser(data: any): Promise<any> {
-    return User.findById(data.reqUserID).then(data => {
+    return User.findById(data.reqUserID)
+    .populate('trainCardHand')
+    .populate('destinationCardHand')
+    .then(data => {
       return {
         success: true,
         data: data,

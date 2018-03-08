@@ -1,10 +1,10 @@
 <div class="card-list">
   <!--TODO: Add proper numbers for ALL EIGHT inventory types  -->
-  <div class="pink-cards card-container">
+  <!-- <div class="pink-cards card-container">
     <span>
       <img class="card" src="../../assets/images/traincards/pink.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -13,7 +13,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/black.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
 
@@ -23,7 +23,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/white.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -32,7 +32,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/green.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -41,7 +41,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/blue.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -50,7 +50,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/red.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -59,7 +59,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/yellow.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -68,7 +68,7 @@
     <span>
       <img class="card" src="../../assets/images/traincards/orange.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
   </div>
@@ -77,16 +77,17 @@
     <span>
       <img class="card" src="../../assets/images/traincards/rainbow.png"/>
       <div class="counter">
-        x0
+        0
       </div>
     </span>
-  </div>
+  </div> -->
+  <app-train-card *ngFor="let color of cardOrder" [count]="_userInfo.user.trainCardCount[color]" [color]="color"></app-train-card>
 
   <div class="train-tokens card-container">
     <span>
       <img class="token" src="../../assets/images/traintokens/blackcar.png"/>
       <div class="counter">
-        x0
+        {{_userInfo.user.tokenCount}}
       </div>
     </span>
   </div>

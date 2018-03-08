@@ -256,4 +256,61 @@ export default class GameFacade {
   //     });
   //   });
   // }
+
+
+
+  claimRoute(data: any): Promise<any> {
+    return Game.findById(data.reqGameID).then(game => {
+      if (!game) {
+        return {
+          success: false
+        }
+      }
+      game = game!;
+      game.turnNumber++;
+      game.turnNumber %= game.userList.length;
+
+      return {
+        success: true,
+        emit:[{command: 'updateGameState', data: { id: game._id }, room: game._id,}]
+      }
+    })
+  }
+
+  chooseDestinationCard(data: any): Promise<any> {
+    return Game.findById(data.reqGameID).then(game => {
+      if (!game) {
+        return {
+          success: false
+        }
+      }
+      game = game!;
+      game.turnNumber++;
+      game.turnNumber %= game.userList.length;
+
+      return {
+        success: true,
+        emit:[{command: 'updateGameState', data: { id: game._id }, room: game._id,}]
+      }
+    })
+  }
+
+  chooseTrainCard(data: any): Promise<any> {
+    return Game.findById(data.reqGameID).then(game => {
+      if (!game) {
+        return {
+          success: false
+        }
+      }
+      game = game!;
+      game.turnNumber++;
+      game.turnNumber %= game.userList.length;
+
+      return {
+        success: true,
+        emit:[{command: 'updateGameState', data: { id: game._id }, room: game._id,}]
+      }
+    })
+  }
+
 }

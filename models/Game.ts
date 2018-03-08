@@ -23,7 +23,7 @@ export interface IGameModel extends mongoose.Document {
   trainCardDiscardPile: ITrainCardModel[];
   destinationCardDeck: IDestinationCardModel[];
   destinationCardDiscardPile: IDestinationCardModel[];
-  turnNumber: Number;
+  turnNumber: number;
   playersReady: IUserModel[];
   initGame(): Promise<any>;
   shuffleDealCards(
