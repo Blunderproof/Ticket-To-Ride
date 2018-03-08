@@ -81,7 +81,7 @@ export default class GameLobbyFacade {
             data: {
               gameID: game._id,
             },
-            emit: [{ command: 'gameList' }],
+            emit: [{ command: 'gameList' },{ command: 'updateGameHistory', to: game._id, data: {id: game._id}}],
             userCookie: { gmid: game._id },
             gameHistory: 'created the game.',
           };
@@ -208,7 +208,7 @@ export default class GameLobbyFacade {
             return {
               success: true,
               data: { message: 'Game joined.' },
-              emit: [{ command: 'gameList' }],
+              emit: [{ command: 'gameList' },{ command: 'updateGameHistory', to: game._id, data: {id: game._id}}],
               userCookie: { gmid: game._id },
               gameHistory: 'joined the game.',
             };
@@ -251,7 +251,7 @@ export default class GameLobbyFacade {
           return {
             success: true,
             data: { message: 'Game left.' },
-            emit: [{ command: 'gameList' }],
+            emit: [{ command: 'gameList' },{ command: 'updateGameHistory', to: game._id, data: {id: game._id}}],
             userCookie: { gmid: '' },
             gameHistory: 'left the game.',
           };
@@ -296,6 +296,8 @@ export default class GameLobbyFacade {
               emit: [
                 { command: 'gameList' },
                 { command: 'startGame', to: game._id },
+                { command: 'updateGameHistory', to: game._id, data:{id:game._id}},
+                { command: 'updateChatHistory', to: game._id, data:{id:game._id}},
               ],
               gameHistory: 'started the game.',
             };
