@@ -1,7 +1,8 @@
 import { User } from '../../models/User';
-import CommandResults from '../../modules/commands/CommandResults';
-import { HASHING_SECRET, GameState } from '../../constants';
+import { Message } from '../../models/Message';
 import { Game } from '../../models/Game';
+import CommandResults from '../../modules/commands/CommandResults';
+import { HASHING_SECRET, GameState, MessageType } from '../../constants';
 const crypto = require('crypto');
 
 export default class UserFacade {
