@@ -22,7 +22,6 @@ export class GameHistoryComponent implements OnInit {
 
   sockets() {
     this.socket.updateGameHistory(data => {
-      console.log(data);
       this.historyList = data;
     });
   }
