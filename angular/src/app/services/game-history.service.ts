@@ -4,10 +4,12 @@ import { Injectable } from '@angular/core';
 export class GameHistory {
 
   historyOpen = false;
+  historyList = [];
 
   constructor() { }
 
   toggleHistoryOpen() {
     this.historyOpen = !this.historyOpen;
   }
+  
 }

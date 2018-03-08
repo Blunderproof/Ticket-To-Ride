@@ -21,6 +21,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.sockets();
+    this._serverProxy.getChatHistory()
   }
 
   sendMessage() {
@@ -36,7 +37,6 @@ export class ChatComponent implements OnInit {
   }
   sockets() {
     this.socket.updateChatHistory(data => {
-      console.log(data);
       this.messageList = data;
     });
   }

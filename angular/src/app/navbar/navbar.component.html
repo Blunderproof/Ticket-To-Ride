@@ -1,6 +1,6 @@
 <div class="navbar">
   Ticket to Ride
-  <div *ngIf="this._gameHistory.historyOpen">
+  <div [hidden]="!this._gameHistory.historyOpen">
     <app-game-history></app-game-history>
   </div>
   <div>

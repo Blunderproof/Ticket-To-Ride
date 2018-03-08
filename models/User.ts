@@ -12,6 +12,7 @@ export interface IUser {
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
   score: number;
+  tokenCount: number;
   color: PlayerColor;
 }
 
@@ -30,6 +31,7 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema({
     { type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' },
   ],
   score: Number,
+  tokenCount: Number,
   color: String,
 });
 
