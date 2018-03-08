@@ -10,8 +10,10 @@
 .bank-navbar{ //Used to allow the cards to float upward
   z-index: 5000;
   overflow: hidden;
-  width:100%;
-  height: 330px;
+  width: -webkit-calc(100% - 400px);
+  width:    -moz-calc(100% - 400px);
+  width:         calc(100% - 400px);
+  height: 250px;
   background-color: rgba(0, 0, 0, 0);
   position: fixed;
   bottom: 0;
@@ -20,7 +22,6 @@
 
 .bottom-bar{
   overflow: hidden;
-  object-fit: cover;
   height: 80px;
   bottom: 0px;
   background-color: rgba(80, 80, 80, 1);
@@ -33,7 +34,8 @@
 }
 
 .bank-items{
-  top: 150px;
+  // pointer-events: none;
+  top: 80px;
   position: relative;
   display: grid;
     grid-gap: 10px;
@@ -42,8 +44,7 @@
     justify-items: center;
     width: 100%;
     height: inherit;
-    padding-left: 20%;
-    padding-right: 20%;
+  padding-left: 100px;
 }
 
 .card-slot{

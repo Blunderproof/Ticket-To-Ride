@@ -1,12 +1,19 @@
 .chat-window{
   grid-area: chat;
-  min-height: 500px;
-  max-height: 500px;
+  min-height: 350px;
+  max-height: 350px;
   position: relative;
   background-color: #FFF;
   color: #444;
   border-radius: 5px;
   font-size: 100%;
+}
+
+.chat-send{
+  margin-bottom: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: lightgray;
 }
 
 .chat-header{
@@ -16,8 +23,10 @@
 
 .chat-history{
   overflow-y: auto;
-  min-height: 300px;
-  max-height: 350px;
+  min-height: 240px;
+  max-height: 240px;
+  vertical-align:bottom;
+
 }
 
 .chat-input{
@@ -27,7 +36,7 @@
 
 .input-user-msg{
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   height: 40px;
     width: 90%;
   margin: 25px;
