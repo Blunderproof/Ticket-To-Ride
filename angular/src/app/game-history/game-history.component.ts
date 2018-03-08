@@ -17,7 +17,6 @@ export class GameHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.sockets();
-    this._serverProxy.getGameHistory()
   }
 
   sockets() {

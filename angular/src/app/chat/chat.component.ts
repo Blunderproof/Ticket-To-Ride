@@ -21,7 +21,6 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     this.sockets();
-    this._serverProxy.getChatHistory()
   }
 
   sendMessage() {

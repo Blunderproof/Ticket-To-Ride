@@ -22,6 +22,8 @@ export class UserInfo {
                     this.game = x.result;
                     if (this.game) {
                         this.socket.joinRoom(this.game._id);
+                        this._serverProxy.getGameHistory();
+                        this._serverProxy.getChatHistory();
                     }
                 } else {
                     this.errorMessages.push(x.message);
