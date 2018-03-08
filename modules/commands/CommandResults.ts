@@ -4,6 +4,7 @@ export default class CommandResults {
   private errorInfo: string;
   private userCookie: any;
   private emitRequests: any[];
+  private gameHistory: string;
 
   constructor(responseData: any) {
     this.success = responseData.success;
@@ -11,6 +12,7 @@ export default class CommandResults {
     this.errorInfo = responseData.errorInfo;
     this.userCookie = responseData.userCookie;
     this.emitRequests = responseData.emit;
+    this.gameHistory = responseData.gameHistory;
   }
 
   public getData(): any {
@@ -27,5 +29,8 @@ export default class CommandResults {
   }
   public shouldEmit(): any[] {
     return this.emitRequests;
+  }
+  public shouldAddHistory(): string {
+    return this.gameHistory;
   }
 }

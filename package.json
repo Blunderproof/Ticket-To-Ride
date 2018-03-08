@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && tsc && node dist/app.js",
+    "startw": "start npm run buildw && start npm run server",
+    "startm": "npm run build && npm run server",
     "server": "tsc && node dist/app.js",
     "angular": "npm run build",
+    "buildw": "cd angular/ && ng build --watch",
     "build": "cd angular/ && ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

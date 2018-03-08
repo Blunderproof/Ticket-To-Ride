@@ -1,5 +1,4 @@
 import CommandResults from '../../modules/commands/CommandResults';
-import { Promise } from 'mongoose';
 import { Message } from '../../models/Message';
 import { MessageType } from '../../constants';
 import { User } from '../../models/User';
@@ -69,43 +68,44 @@ export default class GameFacade {
   }
 
   // implement
-  // initialSelectDestinationCard(data: any): Promise<any> {
-  //   let loginCheck: any = null;
-  //   if ((loginCheck = this.validateUserAuth(data)) != null) {
-  //     return loginCheck;
-  //   }
+  initialSelectDestinationCard(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
 
-  //   return User.findOne({ user: data.reqUserID }).then(user => {
-  //     if (!user) {
-  //       return {
-  //         success: false,
-  //         data: {},
-  //         errorInfo: "That user doesn't exist.",
-  //       };
-  //     }
+    return User.findOne({ user: data.reqUserID }).then(async user => {
+      if (!user) {
+        return {
+          success: false,
+          data: {},
+          errorInfo: "That user doesn't exist.",
+        };
+      }
 
-  //     // unpopulated so we're just comparing ids
-  //     user.destinationCardHand = user.destinationCardHand.filter(function(i) {
-  //       return data.discardCards.indexOf(i.toString()) < 0;
-  //     });
+      // unpopulated so we're just comparing ids
+      user.destinationCardHand = user.destinationCardHand.filter(function(i) {
+        return data.discardCards.indexOf(i.toString()) < 0;
+      });
 
-  //     return user.save().then(savedUser => {
-  //       return {
-  //         success: true,
-  //         data: {},
-  //         emit: [
-  //           {
-  //             // TODO ensure this is the right command
-  //             command: 'updateGame',
-  //             data: { id: data.reqGameID },
-  //             room: data.reqGameID,
-  //             // TODO add the gameHistory thing
-  //           },
-  //         ],
-  //       };
-  //     });
-  //   });
-  // }
+      return user.save().then(savedUser => {
+        return {
+          success: true,
+          data: {},
+          emit: [
+            {
+              command: 'updateGameState',
+              data: { id: data.reqGameID },
+              room: data.reqGameID,
+              gameHistory: `selected ${
+                savedUser.destinationCardHand.length
+              } destination cards.`,
+            },
+          ],
+        };
+      });
+    });
+  }
 
   // async selectDestinationCard(data: any): Promise<any> {
   //   let loginCheck: any = null;
@@ -114,6 +114,13 @@ export default class GameFacade {
   //   }
 
   //   let game = await Game.findOne({ _id: data.reqGameID });
+
+  //   if (!game) {
+  //     return {
+  //       success: false,
+  //       data: {}
+  //     }
+  //   }
   //   // TODO force unwrap game
 
   //   return User.findOne({ user: data.reqUserID }).then(async user => {
@@ -157,11 +164,12 @@ export default class GameFacade {
   //         data: {},
   //         emit: [
   //           {
-  //             // TODO ensure this is the right command
-  //             command: 'updateGame',
+  //             command: 'updateGameState',
   //             data: { id: data.reqGameID },
   //             room: data.reqGameID,
-  //             // TODO add the gameHistory thing
+  //             gameHistory: `selected ${
+  //                savedUser.destinationCardHand.length
+  //             } destination cards.`,
   //           },
   //         ],
   //       };
