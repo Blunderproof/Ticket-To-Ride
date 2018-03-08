@@ -147,4 +147,15 @@ export default class UserFacade {
       }
     })
   }
+
+  getUser(data: any): Promise<any> {
+
+    return User.findById(data.reqUserID)
+    .then(data => {
+      return {
+        success: true,
+        data: data
+      }
+    })
+  }
 }

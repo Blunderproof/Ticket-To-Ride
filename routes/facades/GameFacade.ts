@@ -60,7 +60,7 @@ export default class GameFacade {
           {
             command: 'updateChatHistory',
             data: { id: data.reqGameID },
-            room: data.reqGameID,
+            to: data.reqGameID,
           },
         ],
       };
