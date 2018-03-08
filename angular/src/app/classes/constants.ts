@@ -16,7 +16,7 @@ export enum PlayerColor {
     Green = 'green',
     Blue = 'blue',
     Black = 'black',
-    Yellow = 'yellow'
+    White = 'white'
 }
 
 export enum MessageType {

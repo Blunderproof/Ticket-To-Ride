@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-info btn-lg" (click)="openModal()">click to open</button>
 <!-- Modal section -->
-<div class="backdrop" [hidden]="!display"></div>
+<div class="backdrop" [hidden]="display"></div>
 
 <div class="modal" tabindex="-1" role="dialog"  [hidden]="!display" >
   <div class="modal-dialog" style="height:80%;" role="document">

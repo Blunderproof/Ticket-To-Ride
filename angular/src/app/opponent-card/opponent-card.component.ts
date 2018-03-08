@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-opponent-card',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./opponent-card.component.scss']
 })
 export class OpponentCardComponent implements OnInit {
+  @Input() user : User;
+  @Input() index: number;
 
   constructor() { }
 
   ngOnInit() {
+    console.log("Created Opponent Card");
+  }
+
+  setColor(){
+
   }
 
 }

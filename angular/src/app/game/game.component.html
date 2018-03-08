@@ -12,18 +12,12 @@
     </div>
 
     <div class="box opponent-sidebar">
-      <div class="active-player opponent-card">
-        <app-opponent-card></app-opponent-card>
+      <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class ="opponent-card">
+        <!-- <ng-container *ngIf="user._id != _userInfo.user._id"> -->
+          <app-opponent-card [user]="user" [index]=i></app-opponent-card>
+        <!-- </ng-container> -->
       </div>
-      <div class="opponent-card">
-        <app-opponent-card></app-opponent-card>
-      </div>
-      <div class="opponent-card">
-        <app-opponent-card></app-opponent-card>
-      </div>
-      <div class="opponent-card">
-        <app-opponent-card></app-opponent-card>
-      </div>
+
 
     </div>
 

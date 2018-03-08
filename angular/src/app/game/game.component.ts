@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameHistory } from '../services/game-history.service';
+import { UserInfo } from '../services/user_info.service';
+
 
 @Component({
   selector: 'app-game',
@@ -11,9 +13,14 @@ export class GameComponent implements OnInit {
   historyOpen = true;
   gameStart = false;
 
-  constructor(public _gameHistory: GameHistory) { }
+  constructor(public _gameHistory: GameHistory, private _userInfo: UserInfo) { }
 
   ngOnInit() {
+    this.printUserInfo();
+  }
+
+  printUserInfo(){
+    console.log(this._userInfo);
   }
 
 }
