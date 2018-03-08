@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../classes/user';
+import { UserInfo } from '../services/user_info.service';
 
 
 @Component({
@@ -8,16 +9,14 @@ import { User } from '../classes/user';
   styleUrls: ['./opponent-card.component.scss']
 })
 export class OpponentCardComponent implements OnInit {
-  @Input() user : User;
-  @Input() index: number;
 
-  constructor() { }
+  constructor(public _userInfo: UserInfo) { }
 
   ngOnInit() {
-    console.log("Created Opponent Card");
+    console.log('Created Opponent Card');
   }
 
-  setColor(){
+  setColor() {
 
   }
 

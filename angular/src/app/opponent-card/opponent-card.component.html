@@ -4,7 +4,7 @@
 
   <!--TODO: Add proper player name  -->
   <div class="opponent-name">
-    {{user.username}}
+    {{ _userInfo.user.username }}
   </div>
 
   <div class="opponent-train-tokens card-container">
@@ -12,19 +12,19 @@
       <!--TODO: Add proper traintoken file depending on the assigned color, add the counter  -->
       <img class="token" src="../../assets/images/traintokens/blackcar.png"/>
       <div class="counter">
-        x0
+        x{{ _userInfo.user.tokenCount }}
       </div>
     </span>
   </div>
   <!--TODO: Add counter totals for the dest cards and train cards -->
   <div class="opponent-dest-cards">
     <img class="card" src="../../assets/images/destcards/dest-card-back.png"/>
-    {{ user.destinationCardHand.length }}
+    {{ _userInfo.user.destinationCardHand.length }}
   </div>
 
   <div class="opponent-train-cards">
     <img class="card" src="../../assets/images/traincards/cardback.png"/>
-    {{ user.trainCardHand.length }}
+    {{ _userInfo.user.trainCardHand.length }}
   </div>
 
 </div>
