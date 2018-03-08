@@ -16,13 +16,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
-  mapClicked(event, correspondingTrainPath){
-    //console.log("MAP CLICKED");
-    //console.log(event);
-    console.log("MAP STRING");
-    console.log(correspondingTrainPath);
+  mapClicked(correspondingTrainPath) {
     this.trainPathStates[correspondingTrainPath] = this._userInfo.user.color;
-    console.log(this.trainPathStates[correspondingTrainPath]);
   }
 
 }
