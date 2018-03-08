@@ -75,7 +75,7 @@ export default class GameLobbyFacade {
 
         // Save the new model instance, passing a callback
 
-        return await newGame.save().then(game => {
+        return newGame.save().then(game => {
           return {
             success: true,
             data: {
