@@ -4,7 +4,7 @@ import { DestinationCard } from './destination-card';
 import { PlayerColor } from './constants';
 
 export class User {
-    id: string;
+    _id: string;
     username: string;
     claimedRouteList: Route[];
     trainCardHand: TrainCard[];
