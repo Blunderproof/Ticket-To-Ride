@@ -141,11 +141,11 @@ export default class ServerCommunicator {
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 
-          if (lgid !== null) {
+          if (lgid !== undefined) {
             req.session.lgid = lgid;
           }
 
-          if (gmid !== null) {
+          if (gmid !== undefined) {
             req.session.gmid = gmid;
           }
 
@@ -155,10 +155,10 @@ export default class ServerCommunicator {
               message: commandResults.shouldAddHistory(),
               game: reqGameID,
               user: reqUserID,
-              type: MessageType.History
-            })
-            console.log("history added", history)
-            history.save()
+              type: MessageType.History,
+            });
+            console.log('history added', history);
+            history.save();
           }
 
           // emit stuff
