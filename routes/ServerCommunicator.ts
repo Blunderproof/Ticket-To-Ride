@@ -37,7 +37,8 @@ export default class ServerCommunicator {
 
     this.commandMap.set('getOpenGameList', facade.getOpenGameList);
     this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
-    this.commandMap.set('getChatHistory', facade.getUserGameStatus);
+    this.commandMap.set('getChatHistory', facade.getChatHistory);
+    this.commandMap.set('getGameHistory', facade.getGameHistory);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -98,6 +99,8 @@ export default class ServerCommunicator {
     if (!this.validateCommandRequest(req, res)) {
       return;
     }
+
+    console.log(req.body)
 
     const facadeCommand: FacadeCommand | undefined = this.commandMap.get(
       req.body.methodName
