@@ -50,6 +50,14 @@ export default class UserFacade {
               userList: user._id,
               gameState: GameState.InProgress,
             },
+            {
+              host: user._id,
+              gameState: GameState.Open,
+            },
+            {
+              userList: user._id,
+              gameState: GameState.Open,
+            },
           ],
         }).then(async game => {
           return game;
@@ -62,6 +70,9 @@ export default class UserFacade {
                 lgid: user._id,
                 gmid: game._id,
               };
+
+        console.log(userCookie);
+        console.log(game);
         let gameState = game == null ? null : game.gameState;
 
         return {
