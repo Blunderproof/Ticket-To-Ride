@@ -26,16 +26,17 @@ var promise1 = TrainCard.remove({})
         header: true,
         comments: '#',
       });
+      var saving = []
       trainCardResults.data.forEach((row, index) => {
         for (let index = 0; index < row.numberToCreate; index++) {
-          let newCard = new TrainCard(row);
-          newCard.save();
+          var newCard = new TrainCard(row);
+          saving.push(newCard.save())
         }
       });
+      return Promise.all(saving)
     } else {
       console.log('contents was null for the train card data');
     }
-    console.log("Train Cards Done")
   });
 
   var promise2 = DestinationCard.remove({})
@@ -50,10 +51,12 @@ var promise1 = TrainCard.remove({})
         header: true,
         comments: '#',
       });
+      var saving = []
       destinationCardResults.data.forEach((row, index) => {
-        let newCard = new DestinationCard(row);
-        newCard.save();
+        var newCard = new DestinationCard(row);
+        saving.push(newCard.save())
       });
+      return Promise.all(saving)
     } else {
       console.log('contents was null for the destination card data');
     }
@@ -70,10 +73,12 @@ var promise3 = Route.remove({})
         header: true,
         comments: '#',
       });
+      var saving = []
       routeResults.data.forEach((row, index) => {
-        let newRoute = new Route(row);
-        newRoute.save();
+        var newRoute = new Route(row);
+        saving.push(newRoute.save());
       });
+      return Promise.all(saving)
     } else {
       console.log('contents was null for the route data');
     }
