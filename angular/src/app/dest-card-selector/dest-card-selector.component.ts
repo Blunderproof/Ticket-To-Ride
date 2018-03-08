@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dest-card-selector',
   templateUrl: './dest-card-selector.component.html',
-  styleUrls: ['./dest-card-selector.component.scss']
+  styleUrls: ['./dest-card-selector.component.scss'],
 })
 export class DestCardSelectorComponent implements OnInit {
   display = true;
@@ -12,7 +12,7 @@ export class DestCardSelectorComponent implements OnInit {
   selectedCard2 = false;
   selectedCard3 = false;
 
-  constructor() { }
+  constructor() {}
   onCloseHandled() {
     this.display = false;
   }
@@ -27,14 +27,11 @@ export class DestCardSelectorComponent implements OnInit {
       this.selectedCard3 = !this.selectedCard3;
     }
     console.log(event.path[0].id);
-
   }
 
   openModal() {
     this.display = true;
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

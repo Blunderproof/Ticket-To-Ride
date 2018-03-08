@@ -13,7 +13,6 @@ pink,Charleston,Miami,4,1
 white,Chicago,Toronto,4,1
 orange,Chicago,Pittsburgh,3,1
 black,Chicago,Pittsburgh,3,1
-green,Chicago,Pittsburgh,5,1
 #
 gray,Dallas,Houston,1,1
 gray,Dallas,Houston,1,2
@@ -55,7 +54,7 @@ black,LosAngeles,ElPaso,6,1
 #
 gray,Montreal,Boston,2,1
 gray,Montreal,Boston,2,2
-blue,Montreal,NewYork,2,1
+blue,Montreal,NewYork,3,1
 #
 gray,Nashville,Atlanta,1,1
 black,Nashville,Raleigh,3,1
@@ -98,13 +97,14 @@ gray,Raleigh,Charleston,2,1
 green,SaintLouis,Chicago,2,1
 white,SaintLouis,Chicago,2,1
 gray,SaintLouis,Nashville,2,1
+green,SaintLouis,Pittsburgh,5,1
 #
 red,SaltLakeCity,Denver,3,1
 yellow,SaltLakeCity,Denver,3,1
 pink,SaltLakeCity,Helena,3,1
 #
-yellow,SanFrancisco,LosAngeles,5,1
-pink,SanFrancisco,LosAngeles,5,1
+yellow,SanFrancisco,LosAngeles,3,1
+pink,SanFrancisco,LosAngeles,3,1
 pink,SanFrancisco,Portland,5,1
 green,SanFrancisco,Portland,5,1
 white,SanFrancisco,SaltLakeCity,6,1

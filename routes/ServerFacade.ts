@@ -1,8 +1,8 @@
-import IServer from "../interfaces/IServer";
-import CommandResults from "../modules/commands/CommandResults";
-import UserFacade from "./facades/UserFacade";
-import GameLobbyFacade from "./facades/GameLobbyFacade";
-import GameFacade from "./facades/GameFacade";
+import IServer from '../interfaces/IServer';
+import CommandResults from '../modules/commands/CommandResults';
+import UserFacade from './facades/UserFacade';
+import GameLobbyFacade from './facades/GameLobbyFacade';
+import GameFacade from './facades/GameFacade';
 
 export default class ServerFacade implements IServer {
   private constructor() {}
@@ -114,6 +114,22 @@ export default class ServerFacade implements IServer {
   getUserGameStatus(data: any): Promise<any> {
     return GameLobbyFacade.instanceOf().getUserGameStatus(data);
   }
+
+  /*
+  input:
+    discardCards
+  */
+  initialSelectDestinationCard(data: any): Promise<any> {
+    return GameFacade.instanceOf().initialSelectDestinationCard(data);
+  }
+
+  // /*
+  // input:
+  //   keepCards
+  // */
+  // selectDestinationCard(data: any): Promise<any> {
+  //   return GameFacade.instanceOf().selectDestinationCard(data);
+  // }
 
   /*
   input:
