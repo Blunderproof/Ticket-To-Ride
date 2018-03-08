@@ -5,6 +5,7 @@ import { ServerProxy } from '../services/server_proxy.service';
 import { Router } from '@angular/router';
 import { CustomValidatorsService } from '../core/custom-validators.service';
 import { UserInfo } from '../services/user_info.service';
+import { User } from '../classes/user';
 
 @Component({
   selector: 'app-login',
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit {
     if (!this.registering) {
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
         .then((x: any) => {
-          this.userinfo.user = x.result.user;
+          this.userinfo.user = new User(x.result.user);
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit {
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
         .then((x: any) => {
           if (x.success) {
-            this.userinfo.user = x.result.user;
+            this.userinfo.user = new User(x.result.user);
             this._router.navigate(['/lobby']);
           } else {
             this.errorMessages.push(x.message);

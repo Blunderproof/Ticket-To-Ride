@@ -3,5 +3,7 @@ export class DestinationCard {
     city2: string;
     pointValue: number;
 
-    constructor() { }
+    constructor(data?: Object) {
+        Object.keys(data || {}).forEach(key => this[key] = data[key]);
+    }
 }

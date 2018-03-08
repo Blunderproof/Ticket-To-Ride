@@ -22,7 +22,7 @@ export class UserInfo {
                     this.game = x.result;
                     if (this.game) {
                         this.socket.joinRoom(this.game._id);
-                      }
+                    }
                 } else {
                     this.errorMessages.push(x.message);
                 }
@@ -33,7 +33,7 @@ export class UserInfo {
         this._serverProxy.getUser()
             .then((x: any) => {
                 if (x.success) {
-                    this.user = x.result || new User();
+                    this.user = new User(x.result) || new User();
                 } else {
                     this.errorMessages.push(x.message);
                 }
