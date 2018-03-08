@@ -9,6 +9,9 @@ import {
   TRAIN_CARD_HAND_SIZE,
   DESTINATION_CARD_HAND_SIZE,
   GameState,
+  INITIAL_TOKEN_COUNT,
+  PLAYER_COLOR_MAP,
+  PlayerColor,
 } from '../constants';
 
 export interface IGameModel extends mongoose.Document {
@@ -113,11 +116,13 @@ GameSchema.methods.shuffleDealCards = async function(
   let that = this;
 
   for (let index = 0; index < this.userList.length; index++) {
-    let userID = this.userList[index];
+    let userID = this.userList[index].toString();
     // just in case we have real User objects, we just need the id
     if (typeof userID != 'string') {
       userID = userID._id;
     }
+
+    let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
     await User.findOne({ _id: userID }).then(async player => {
       if (!player) {
@@ -137,6 +142,8 @@ GameSchema.methods.shuffleDealCards = async function(
         shuffledDestinationCardDeck.splice(0, 1);
       }
 
+      player.tokenCount = INITIAL_TOKEN_COUNT;
+      player.color = color;
       return player.save();
     });
   }
