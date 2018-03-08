@@ -62,4 +62,8 @@ export class ServerProxy {
   getGame() {
     return this.communicator.send('getGame', {});
   }
+
+  getUser() {
+    return this.communicator.send('getUser', {});
+  }
 }
