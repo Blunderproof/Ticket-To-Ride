@@ -68,10 +68,10 @@ export class ServerProxy {
   }
 
   getChatHistory() {
-    return this.communicator.send("getChatHistory",{});
+    return this.communicator.send('getChatHistory', {});
   }
 
   getGameHistory() {
-    return this.communicator.send("getGameHistory",{});
+    return this.communicator.send('getGameHistory', {});
   }
 }
