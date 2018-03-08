@@ -74,4 +74,22 @@ export class ServerProxy {
   getGameHistory() {
     return this.communicator.send('getGameHistory', {});
   }
+
+  initialSelectDestinationCard(data: string[]) {
+    return this.communicator.send('initialSelectDestinationCard', {
+      discardCards: data
+    });
+  }
+
+ chooseDestinationCard(data: any) {
+    return this.communicator.send('chooseDestinationCard', {});
+  }
+
+  claimRoute(data: any) {
+    return this.communicator.send('claimRoute', {});
+  }
+
+  chooseTrainCard(data: any) {
+    return this.communicator.send('chooseTrainCard', {});
+  }
 }

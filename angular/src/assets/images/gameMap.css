@@ -15,12 +15,20 @@ Like the routes one, there are many paths with an included 1 or 2 with 1 being t
 EX: tp-1-Denver-KansasCity
 */
 .route{
-  transition: all 2s ease-in-out;
-  transition-duration: 2s;
+  transition: all .5s ease-in-out;
   // z-index: 5000;
   padding: 100px;
+}
 
 
+.noselect{
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 .route:hover{
@@ -28,9 +36,7 @@ EX: tp-1-Denver-KansasCity
   -webkit-box-shadow: 5px 5px 5px #888;
   box-shadow: 5px 5px 5px #888;
   transform-origin: center;
-
-  transform: scale(1.05);
-
+  transform: translate(0px, -5px);
   // z-index: 5050;
   outline: none;
   border-color: #9ecaed;

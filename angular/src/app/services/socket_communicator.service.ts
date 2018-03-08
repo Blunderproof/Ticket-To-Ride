@@ -32,4 +32,7 @@ export class SocketCommunicator {
         return this.socket.on('updateGameHistory', callback);
     }
 
+    updateGameState(callback: any) {
+        return this.socket.on('updateGameState', callback);
+    }
 }

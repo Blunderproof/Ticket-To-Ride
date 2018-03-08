@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameHistory } from '../services/game-history.service';
 import { UserInfo } from '../services/user_info.service';
-import { User } from '../classes/user';
+import { ServerProxy } from '../services/server_proxy.service';
 
 @Component({
   selector: 'app-dest-card-selector',
@@ -11,19 +10,17 @@ import { User } from '../classes/user';
 export class DestCardSelectorComponent implements OnInit {
   display = true;
 
-  selectedCard = [ false, false, false ];
 
-  constructor(public _userInfo: UserInfo) { }
+  constructor( public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
   onCloseHandled() {
-    let numberSelected = this.selectedCard.filter( (value, index) => { return value }).length;
-    console.log(numberSelected);
-    // this.display = false;
-  }
-
-  selectDestCard(event) {
-    this.selectedCard[event.path[0].id] = !this.selectedCard[event.path[0].id];
-    console.log(event.path[0].id);
+    this.display = false;
+    let notSelected = [];
+    let cards = this._userInfo.user.destinationCardHand
+    for (let i = 0; i < cards.length; i++) {
+      if (!cards[i].selected) notSelected.push(cards[i]._id)
+    }
+    this._serverProxy.initialSelectDestinationCard(notSelected);
   }
 
   openModal() {
@@ -31,7 +28,6 @@ export class DestCardSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("HAND");
-    console.log(this._userInfo);
+    console.log(this._userInfo)
   }
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "startw": "start npm run buildw && start npm run server",
     "startm": "npm run build && npm run server",
-    "server": "node scripts/wipe_and_load_cards_in_mongo && tsc && node dist/app.js",
+    "server": "tsc && node dist/app.js",
     "angular": "npm run build",
     "buildw": "cd angular/ && ng build --watch",
     "build": "cd angular/ && ng build",

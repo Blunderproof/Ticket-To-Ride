@@ -45,7 +45,7 @@ export default class SocketFacade {
 
     let sureSocketCommand: SocketCommand = socketCommand!;
     sureSocketCommand(emitRequest.data).then(emitData => {
-      console.log(emitRequest.to,emitRequest.command,emitData);
+      console.log(emitRequest.command,emitRequest.to,emitData);
       if (emitRequest.to) {
         socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
       } else {
