@@ -12,6 +12,7 @@ export class UserInfo {
 
     constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
         this.getGame();
+        this.getUser();
     }
 
     getGame() {
@@ -22,6 +23,17 @@ export class UserInfo {
                     if (this.game) {
                         this.socket.joinRoom(this.game._id);
                       }
+                } else {
+                    this.errorMessages.push(x.message);
+                }
+            });
+    }
+
+    getUser() {
+        this._serverProxy.getUser()
+            .then((x: any) => {
+                if (x.success) {
+                    this.user = x.result;
                 } else {
                     this.errorMessages.push(x.message);
                 }

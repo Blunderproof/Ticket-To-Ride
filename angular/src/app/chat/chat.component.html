@@ -1,6 +1,6 @@
 <div class="chat-window">
   <div class="chat-header">Chat</div>
-  <div class="chat-history">
+  <div class="chat-history" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <ul>
       <li>
         <app-chat-msg *ngFor="let message of messageList.reverse()" [message]="message"></app-chat-msg>
@@ -12,7 +12,7 @@
       <div class="input-group mb-3 input-user-msg">
         <input [formControl]="messageToSend" type="text" class="form-control" placeholder="User Message" aria-label="User Message" aria-describedby="basic-addon2"/>
         <div class="input-group-append">
-          <button (click)="sendMessage()" class="btn btn-outline-secondary" type="button">Send</button>
+          <button (click)="sendMessage()" class="btn btn-outline-secondary chat-send" type="button">Send</button>
         </div>
       </div>
     </div>
