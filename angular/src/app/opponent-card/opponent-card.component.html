@@ -1,6 +1,6 @@
 <div class="opponent-card">
   <!--TODO: Use the proper playericon file depending on the assigned color  -->
-  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.user.color }}.png"/>
+  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png"/>
 
   <!--TODO: Add proper player name  -->
   <div class="opponent-name">
@@ -10,7 +10,7 @@
   <div class="opponent-train-tokens card-container">
     <span>
       <!--TODO: Add proper traintoken file depending on the assigned color, add the counter  -->
-      <img class="token" src="../../assets/images/traintokens/{{ _userInfo.user.color }}car.png"/>
+      <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png"/>
       <div class="counter">
         x{{ _userInfo.game.userList[index].tokenCount }}
       </div>
