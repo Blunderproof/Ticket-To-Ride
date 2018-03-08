@@ -1,10 +1,11 @@
-<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber % _userInfo.game.userList.length">
+<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber % _userInfo.game.userList.length" [class.current-user]="this._userInfo.game.userList[index]._id == this._userInfo.user._id">
   <!--TODO: Use the proper playericon file depending on the assigned color  -->
   <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
 
   <!--TODO: Add proper player name  -->
   <div class="opponent-name">
     {{ index + 1 }}. {{ _userInfo.game.userList[index].username }}
+    <!-- <span *ngIf="this._userInfo.game.userList[index]._id == this._userInfo.user._id">(you)</span>-->
   </div>
   <div class="opponent-score">
     {{ _userInfo.game.userList[index].score }} pts

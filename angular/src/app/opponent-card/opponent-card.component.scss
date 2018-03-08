@@ -16,8 +16,16 @@
     'opponent-train-tokens opponent-dest-cards opponent-train-cards';
 }
 
+.opponent-card.current-user {
+  background-color: lightgreen;
+}
+
 .opponent-card.current-turn {
   background-color: rgb(200, 200, 200);
+}
+
+.opponent-card.current-turn.current-user {
+  background-color: green;
 }
 
 .token {
