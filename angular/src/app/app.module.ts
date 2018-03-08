@@ -35,6 +35,7 @@ import { GameHistoryComponent } from './game-history/game-history.component';
 import { HistoryMessageComponent } from './history-message/history-message.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { GameHistory } from './services/game-history.service';
+import { TrainCardComponent } from './train-card/train-card.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { GameHistory } from './services/game-history.service';
     DestCardSelectorComponent,
     GameHistoryComponent,
     HistoryMessageComponent,
+    TrainCardComponent,
   ],
   imports: [
     AngularSvgIconModule,
