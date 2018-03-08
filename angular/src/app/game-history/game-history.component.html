@@ -4,10 +4,8 @@
   <div class="arrow"></div>
 
   <div class="history-window">
-    <div class="history-textbox">
-      <ul>
+      <ul class="history-textbox">
         <app-history-message *ngFor="let historyItem of historyList.reverse()" [message]="message"></app-history-message>
      </ul>
-    </div>
   </div>
 </div>

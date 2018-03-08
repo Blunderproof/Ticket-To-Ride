@@ -1,9 +1,9 @@
 .history-window{
   padding: 10px;
-  //z-index: 2000;
+  z-index: 10000 !important;
   grid-area: history;
-  min-height: 250px;
-  max-height: 250px;
+  min-height: 270px;
+  max-height: 270px;
   position: relative;
   background-color: #555;
   color: #444;
@@ -50,8 +50,10 @@
 .history-textbox{
   background-color: #FFF;
   overflow-y: auto;
-  min-height: 230px;
-  max-height: 230px;
+  min-height: 250px !important;
+  max-height: 250px !important;
+  min-width: 350px !important;
+  max-width: 350px !important;
 }
 
 .history-input{
