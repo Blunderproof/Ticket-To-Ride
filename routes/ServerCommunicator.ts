@@ -153,7 +153,8 @@ export default class ServerCommunicator {
           if (commandResults.shouldAddHistory()) {
             let history = new Message({
               message: commandResults.shouldAddHistory(),
-              game: reqGameID,
+              // when you join, the reqGameID is null so use the session one we just set
+              game: reqGameID || req.session.gmid,
               user: reqUserID,
               type: MessageType.History,
             });

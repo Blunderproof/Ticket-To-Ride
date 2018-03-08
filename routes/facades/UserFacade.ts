@@ -71,15 +71,11 @@ export default class UserFacade {
                 gmid: game._id,
               };
 
-        console.log(userCookie);
-        console.log(game);
         let gameState = game == null ? null : game.gameState;
 
         return {
           success: true,
           data: {
-            userID: user._id,
-            username: username,
             user,
             gameState,
           },
@@ -154,8 +150,7 @@ export default class UserFacade {
         return {
           success: true,
           data: {
-            userID: newUser._id,
-            username: username,
+            user: newUser,
           },
           userCookie: { lgid: newUser._id },
         };
