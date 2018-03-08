@@ -8,8 +8,11 @@
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
+  /* grid-template-areas:
+     'opponent-icon ....... opponent-name'
+     'opponent-train-tokens opponent-dest-cards opponent-train-cards'; */
   grid-template-areas:
-    'opponent-icon ....... opponent-name'
+    'opponent-icon opponent-name opponent-score'
     'opponent-train-tokens opponent-dest-cards opponent-train-cards';
 }
 
@@ -40,6 +43,13 @@
 
 .opponent-name {
   grid-area: opponent-name;
+}
+
+.opponent-score {
+  grid-area: opponent-score;
+  text-align: right;
+  font-size: 22px;
+  padding-top: 6px;
 }
 
 .opponent-train-tokens {

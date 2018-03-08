@@ -10,8 +10,10 @@
 
     <div class="box opponent-sidebar">
       <div *ngIf="this._userInfo.game">
-        <div *ngFor="let user of this._userInfo.game.userList; let i = index" [attr.data-index]="i" class ="opponent-card" >
-          <div *ngIf="user._id != this._userInfo.user._id" style="margin-top: 20px;">
+        <div *ngFor="let user of this._userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
+          <!--<div *ngIf="user._id != this._userInfo.user._id" style="margin-top: 20px;">
+            </div>-->
+          <div style="margin-top: 20px;">
             <app-opponent-card [index]="i"></app-opponent-card>
           </div>
         </div>
