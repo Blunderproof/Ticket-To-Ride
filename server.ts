@@ -99,6 +99,7 @@ export class Server {
         this.communicator.handleSocketCommand(data, socket);
       });
       socket.on("join", (data: any) => {
+        console.log(data,"joining")
         if (data.room) socket.join(data.room);
       })
     });

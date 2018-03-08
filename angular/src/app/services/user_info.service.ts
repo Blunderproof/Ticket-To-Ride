@@ -22,7 +22,7 @@ export class UserInfo {
                     this.game = x.result;
                     if (this.game) {
                         this.socket.joinRoom(this.game._id);
-                      }
+                    }
                 } else {
                     this.errorMessages.push(x.message);
                 }
