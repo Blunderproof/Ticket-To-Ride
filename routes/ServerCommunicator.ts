@@ -40,10 +40,10 @@ export default class ServerCommunicator {
     this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
     this.commandMap.set('getChatHistory', facade.getChatHistory);
     this.commandMap.set('getGameHistory', facade.getGameHistory);
-    this.commandMap.set(
-      'initialSelectDestinationCard',
-      facade.initialSelectDestinationCard
-    );
+    this.commandMap.set('initialSelectDestinationCard', facade.initialSelectDestinationCard);
+    this.commandMap.set('chooseDestinationCard', facade.chooseDestinationCard);
+    this.commandMap.set('claimRoute', facade.claimRoute);
+    this.commandMap.set('chooseTrainCard', facade.chooseTrainCard);
     // this.commandMap.set(
     //   'selectDestinationCard',
     //   facade.selectDestinationCard

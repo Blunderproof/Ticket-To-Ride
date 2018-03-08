@@ -11,6 +11,9 @@ export var DestinationCardSchema: Schema = new Schema({
   city1: String,
   city2: String,
   pointValue: Number
+},{
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
 DestinationCardSchema.methods.isCompletedFromPath = function() {
