@@ -1,4 +1,4 @@
-.opponent-card{
+.opponent-card {
   position: relative;
   padding: 10px;
   height: 150px;
@@ -9,12 +9,15 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 5px;
   grid-template-areas:
-        "opponent-icon ....... opponent-name"
-        "opponent-train-tokens opponent-dest-cards opponent-train-cards";
+    'opponent-icon ....... opponent-name'
+    'opponent-train-tokens opponent-dest-cards opponent-train-cards';
 }
 
+.opponent-card.current-turn {
+  background-color: rgb(200, 200, 200);
+}
 
-.token{
+.token {
   min-height: 50px;
   max-height: 50px;
   width: auto;
@@ -22,14 +25,12 @@
   padding-top: 5px;
 }
 
-
-
-.card{
+.card {
   max-width: 100px;
   max-height: 60px;
 }
 
-.opponent-icon{
+.opponent-icon {
   position: absolute;
   left: 30px;
   top: -15px;
@@ -37,18 +38,18 @@
   grid-area: opponent-icon;
 }
 
-.opponent-name{
+.opponent-name {
   grid-area: opponent-name;
 }
 
-.opponent-train-tokens{
+.opponent-train-tokens {
   grid-area: opponent-train-tokens;
 }
 
-.opponent-dest-cards{
+.opponent-dest-cards {
   grid-area: opponent-dest-cards;
 }
 
-.opponent-train-cards{
+.opponent-train-cards {
   grid-area: opponent-train-cards;
 }
