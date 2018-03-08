@@ -1,16 +1,20 @@
-<div class="opponent-card">
+<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber % _userInfo.game.userList.length" [class.current-user]="this._userInfo.game.userList[index]._id == this._userInfo.user._id">
   <!--TODO: Use the proper playericon file depending on the assigned color  -->
-  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png"/>
+  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
 
   <!--TODO: Add proper player name  -->
   <div class="opponent-name">
-    {{ _userInfo.game.userList[index].username }}
+    {{ index + 1 }}. {{ _userInfo.game.userList[index].username }}
+    <!-- <span *ngIf="this._userInfo.game.userList[index]._id == this._userInfo.user._id">(you)</span>-->
+  </div>
+  <div class="opponent-score">
+    {{ _userInfo.game.userList[index].score }} pts
   </div>
 
   <div class="opponent-train-tokens card-container">
     <span>
       <!--TODO: Add proper traintoken file depending on the assigned color, add the counter  -->
-      <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png"/>
+      <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png" />
       <div class="counter">
         x{{ _userInfo.game.userList[index].tokenCount }}
       </div>
@@ -18,13 +22,11 @@
   </div>
   <!--TODO: Add counter totals for the dest cards and train cards -->
   <div class="opponent-dest-cards">
-    <img class="card" src="../../assets/images/destcards/dest-card-back.png"/>
-    {{ _userInfo.game.userList[index].destinationCardHand.length }}
+    <img class="card" src="../../assets/images/destcards/dest-card-back.png" /> {{ _userInfo.game.userList[index].destinationCardHand.length }}
   </div>
 
   <div class="opponent-train-cards">
-    <img class="card" src="../../assets/images/traincards/cardback.png"/>
-    {{ _userInfo.game.userList[index].trainCardHand.length }}
+    <img class="card" src="../../assets/images/traincards/cardback.png" /> {{ _userInfo.game.userList[index].trainCardHand.length }}
   </div>
 
 </div>

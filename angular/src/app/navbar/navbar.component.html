@@ -1,10 +1,12 @@
 <div class="navbar">
   <span>Ticket to Ride</span>
+  <span *ngIf="(_userInfo.game != null && this._userInfo.game.turnNumber != null)" [hidden]="this._userInfo.game.turnNumber >= 0">Initial Set Up</span>
+  <span *ngIf="(_userInfo.game != null && this._userInfo.game.turnNumber != null)" [hidden]="this._userInfo.game.turnNumber < 0">Turn {{ this._userInfo.game.turnNumber + 1 }}</span>
   <div [hidden]="!this._gameHistory.historyOpen">
     <app-game-history></app-game-history>
   </div>
   <div>
     <button class="logout btn btn-warning" (click)="logout()">Logout</button>
     <button *ngIf="(_userInfo.game != null)" class="game-history btn btn-info" (click)="_gameHistory.toggleHistoryOpen()">Game History</button>
-  </div>  
+  </div>
 </div>
