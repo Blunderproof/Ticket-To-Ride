@@ -54,8 +54,7 @@ export class LoginComponent implements OnInit {
     if (!this.registering) {
       this._serverProxy.login(this.login_controls.username.value, this.login_controls.password.value)
         .then((x: any) => {
-          this.userinfo.user.id = x.result.userID;
-          this.userinfo.user.username = x.result.username;
+          this.userinfo.user = x.result.user;
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
@@ -67,8 +66,7 @@ export class LoginComponent implements OnInit {
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
         .then((x: any) => {
           if (x.success) {
-            this.userinfo.user.id = x.result.userID;
-            this.userinfo.user.username = x.result.username;
+            this.userinfo.user = x.result.user;
             this._router.navigate(['/lobby']);
           } else {
             this.errorMessages.push(x.message);

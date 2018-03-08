@@ -28,4 +28,8 @@ export class SocketCommunicator {
         return this.socket.on('updateChatHistory', callback);
     }
 
+    updateGameHistory(callback: any) {
+        return this.socket.on('updateGameHistory', callback);
+    }
+
 }

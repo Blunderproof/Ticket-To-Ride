@@ -1,9 +1,9 @@
-import { User } from "../../models/User";
-import CommandResults from "../../modules/commands/CommandResults";
-import { HASHING_SECRET } from "../../constants";
-import { Promise } from "mongoose";
-import { Game } from "../../models/Game";
-const crypto = require("crypto");
+import { User } from '../../models/User';
+import { Message } from '../../models/Message';
+import { Game } from '../../models/Game';
+import CommandResults from '../../modules/commands/CommandResults';
+import { HASHING_SECRET, GameState, MessageType } from '../../constants';
+const crypto = require('crypto');
 
 export default class UserFacade {
   private constructor() {}
@@ -30,23 +30,56 @@ export default class UserFacade {
     const username: string = data.username;
 
     const hashedPassword = crypto
-      .createHmac("sha256", HASHING_SECRET)
+      .createHmac('sha256', HASHING_SECRET)
       .update(data.password)
-      .digest("hex");
+      .digest('hex');
 
     // console.log("checking username and password:");
     // console.log(username);
     // console.log(hashedPassword);
 
-    return User.findOne({ username, hashedPassword }).then(user => {
+    return User.findOne({ username, hashedPassword }).then(async user => {
       if (user) {
+        let game = await Game.findOne({
+          $or: [
+            {
+              host: user._id,
+              gameState: GameState.InProgress,
+            },
+            {
+              userList: user._id,
+              gameState: GameState.InProgress,
+            },
+            {
+              host: user._id,
+              gameState: GameState.Open,
+            },
+            {
+              userList: user._id,
+              gameState: GameState.Open,
+            },
+          ],
+        }).then(async game => {
+          return game;
+        });
+
+        let userCookie =
+          game == null
+            ? { lgid: user._id }
+            : {
+                lgid: user._id,
+                gmid: game._id,
+              };
+
+        let gameState = game == null ? null : game.gameState;
+
         return {
           success: true,
           data: {
-            userID: user._id,
-            username: username,
+            user,
+            gameState,
           },
-          userCookie: {lgid:user._id},
+          userCookie,
         };
       } else {
         // doc may be null if no document matched
@@ -66,7 +99,7 @@ export default class UserFacade {
       resolve({
         success: true,
         data: {},
-        userCookie: {lgid: "", gmid: ""},
+        userCookie: { lgid: '', gmid: '' },
       });
     });
   }
@@ -97,9 +130,9 @@ export default class UserFacade {
     const username: string = data.username;
 
     const hashedPassword = crypto
-      .createHmac("sha256", HASHING_SECRET)
+      .createHmac('sha256', HASHING_SECRET)
       .update(data.password)
-      .digest("hex");
+      .digest('hex');
 
     return User.findOne({ username }).then(user => {
       if (user) {
@@ -107,7 +140,7 @@ export default class UserFacade {
         return {
           success: false,
           data: {},
-          errorInfo: "That username is already taken! Try another username.",
+          errorInfo: 'That username is already taken! Try another username.',
         };
       } else {
         var newUser = new User({ username, hashedPassword });
@@ -117,45 +150,54 @@ export default class UserFacade {
         return {
           success: true,
           data: {
-            userID: newUser._id,
-            username: username,
+            user: newUser,
           },
-          userCookie: {lgid: newUser._id},
+          userCookie: { lgid: newUser._id },
         };
       }
     });
   }
 
   getGame(data: any): Promise<any> {
-
     return Game.findOne({
       $or: [
         {
-          host: data.reqUserID
+          host: data.reqUserID,
         },
         {
-          userList: data.reqUserID
-        }
-      ]
+          userList: data.reqUserID,
+        },
+      ],
     })
-    .populate('host')
-    .populate('userList')
-    .then(data => {
-      return {
-        success: true,
-        data: data
-      }
-    })
+      .populate('host')
+      .populate('userList')
+      .then(data => {
+        return {
+          success: true,
+          data: data,
+        };
+      });
   }
 
   getUser(data: any): Promise<any> {
-
-    return User.findById(data.reqUserID)
-    .then(data => {
+    return User.findById(data.reqUserID).then(data => {
       return {
         success: true,
-        data: data
-      }
-    })
+        data: data,
+      };
+    });
+  }
+
+  getChatHistory(data: any): Promise<any> {
+    return Message.find({
+      game: data.reqGameID,
+      user: data.reqUserID,
+      type: MessageType.History,
+    }).then(data => {
+      return {
+        success: true,
+        data: data,
+      };
+    });
   }
 }

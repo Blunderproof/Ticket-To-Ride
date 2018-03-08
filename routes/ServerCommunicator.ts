@@ -37,6 +37,7 @@ export default class ServerCommunicator {
 
     this.commandMap.set('getOpenGameList', facade.getOpenGameList);
     this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
+    this.commandMap.set('getChatHistory', facade.getUserGameStatus);
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -140,11 +141,11 @@ export default class ServerCommunicator {
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 
-          if (lgid !== null) {
+          if (lgid !== undefined) {
             req.session.lgid = lgid;
           }
 
-          if (gmid !== null) {
+          if (gmid !== undefined) {
             req.session.gmid = gmid;
           }
 
@@ -152,12 +153,13 @@ export default class ServerCommunicator {
           if (commandResults.shouldAddHistory()) {
             let history = new Message({
               message: commandResults.shouldAddHistory(),
-              game: reqGameID,
+              // when you join, the reqGameID is null so use the session one we just set
+              game: reqGameID || req.session.gmid,
               user: reqUserID,
-              type: MessageType.History
-            })
-            console.log("history added", history)
-            history.save()
+              type: MessageType.History,
+            });
+            console.log('history added', history);
+            history.save();
           }
 
           // emit stuff
