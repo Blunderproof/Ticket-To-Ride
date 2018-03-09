@@ -1,9 +1,10 @@
-import Command from "../modules/commands/command";
-import CommandHandler from "./commandHandler";
-import CommandResults from "../modules/commands/commandResults";
-import ServerFacade from "./ServerFacade";
-import { FacadeCommand } from "../constants";
-import SocketFacade from "./SocketFacade";
+import Command from '../modules/commands/command';
+import CommandHandler from './commandHandler';
+import CommandResults from '../modules/commands/commandResults';
+import ServerFacade from './ServerFacade';
+import { FacadeCommand, MessageType } from '../constants';
+import SocketFacade from './SocketFacade';
+import { Message } from '../models/Message';
 
 export default class ServerCommunicator {
   commandHandler: CommandHandler;
@@ -20,17 +21,33 @@ export default class ServerCommunicator {
   private configureCommandMap = () => {
     const facade = ServerFacade.instanceOf();
     // user commands
-    this.commandMap.set("login", facade.login);
-    this.commandMap.set("logout", facade.logout);
-    this.commandMap.set("register", facade.register);
+    this.commandMap.set('login', facade.login);
+    this.commandMap.set('logout', facade.logout);
+    this.commandMap.set('register', facade.register);
+    this.commandMap.set('getGame', facade.getGame);
+    this.commandMap.set('getUser', facade.getUser);
 
     // game lobby commands
-    this.commandMap.set("createGame", facade.createGame);
-    this.commandMap.set("startGame", facade.startGame);
-    this.commandMap.set("joinGame", facade.joinGame);
-    this.commandMap.set("deleteGame", facade.deleteGame);
-    this.commandMap.set("leaveGame", facade.leaveGame);
-    this.commandMap.set("getOpenGameList", facade.getOpenGameList);
+    this.commandMap.set('createGame', facade.createGame);
+    this.commandMap.set('startGame', facade.startGame);
+    this.commandMap.set('joinGame', facade.joinGame);
+    this.commandMap.set('deleteGame', facade.deleteGame);
+    this.commandMap.set('leaveGame', facade.leaveGame);
+
+    // game commands
+    this.commandMap.set('sendMessage', facade.sendMessage);
+    this.commandMap.set('getOpenGameList', facade.getOpenGameList);
+    this.commandMap.set('getUserGameStatus', facade.getUserGameStatus);
+    this.commandMap.set('getChatHistory', facade.getChatHistory);
+    this.commandMap.set('getGameHistory', facade.getGameHistory);
+    this.commandMap.set('initialSelectDestinationCard', facade.initialSelectDestinationCard);
+    this.commandMap.set('chooseDestinationCard', facade.chooseDestinationCard);
+    this.commandMap.set('claimRoute', facade.claimRoute);
+    this.commandMap.set('chooseTrainCard', facade.chooseTrainCard);
+    // this.commandMap.set(
+    //   'selectDestinationCard',
+    //   facade.selectDestinationCard
+    // );
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
@@ -54,6 +71,9 @@ export default class ServerCommunicator {
     // console.log("userCookie");
     // console.log(userCookie);
 
+    var gameID = connection.handshake.session.gmid || null;
+    data.gameID = gameID;
+
     // since we've already checked if facadeCommand is not null, we can force unwrap the optional type
     // using varName!
     let command: Command = new Command(data, facadeCommand!);
@@ -63,7 +83,7 @@ export default class ServerCommunicator {
 
       if (commandResults.wasSuccessful()) {
         const userCookie = commandResults.shouldSetSession();
-        if (userCookie == "") {
+        if (userCookie == '') {
           connection.handshake.session.destroy();
         } else if (userCookie) {
           // set sessions
@@ -89,6 +109,8 @@ export default class ServerCommunicator {
       return;
     }
 
+    console.log(req.body);
+
     const facadeCommand: FacadeCommand | undefined = this.commandMap.get(
       req.body.methodName
     );
@@ -105,9 +127,11 @@ export default class ServerCommunicator {
     }
 
     // set the body's cookie basically
+    var reqGameID = req.session.gmid || null;
     var reqUserID = req.session.lgid || null;
     var body = req.body.data || {};
     body.reqUserID = reqUserID;
+    body.reqGameID = reqGameID;
 
     // debug
     // console.log("userCookie");
@@ -125,16 +149,29 @@ export default class ServerCommunicator {
 
         if (commandResults.wasSuccessful()) {
           // set and update cookie stuff
-          const userCookie = commandResults.shouldSetSession();
-          if (userCookie == "") {
-            var sessData = req.session;
-            sessData.lgid = userCookie;
-            sessData.cookie.expires = new Date(Date.now() - 50000);
-            sessData.cookie.maxAge = 1;
-          } else if (userCookie) {
-            // set sessions
-            var sessData = req.session;
-            sessData.lgid = userCookie;
+          const userCookie = commandResults.shouldSetSession() || {};
+          let lgid = userCookie.lgid;
+          let gmid = userCookie.gmid;
+
+          if (lgid !== undefined) {
+            req.session.lgid = lgid;
+          }
+
+          if (gmid !== undefined) {
+            req.session.gmid = gmid;
+          }
+
+          //add gamehistory
+          if (commandResults.shouldAddHistory()) {
+            let history = new Message({
+              message: commandResults.shouldAddHistory(),
+              // when you join, the reqGameID is null so use the session one we just set
+              game: reqGameID || req.session.gmid,
+              user: reqUserID,
+              type: MessageType.History,
+            });
+            console.log('history added', history);
+            history.save();
           }
 
           // emit stuff
@@ -147,7 +184,7 @@ export default class ServerCommunicator {
                   this.socketConnection
                 );
               }
-            })
+            });
           }
 
           res.json({
@@ -169,7 +206,8 @@ export default class ServerCommunicator {
         res
           .json({
             success: false,
-            message: "Backend error",
+            message: 'Backend error',
+            detailedMessage: err.toString(),
           })
           .status(500);
       });

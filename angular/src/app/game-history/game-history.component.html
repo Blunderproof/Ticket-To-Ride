@@ -1,0 +1,11 @@
+<div>
+  <div class="backdrop" (click)="_gameHistory.toggleHistoryOpen()"></div>
+
+  <div class="arrow"></div>
+
+  <div class="history-window">
+      <ul class="history-textbox" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <app-history-message *ngFor="let historyItem of historyList.reverse()" [message]="historyItem"></app-history-message>
+     </ul>
+  </div>
+</div>

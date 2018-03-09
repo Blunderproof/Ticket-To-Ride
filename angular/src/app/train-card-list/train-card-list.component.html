@@ -1,0 +1,95 @@
+<div class="card-list">
+  <!--TODO: Add proper numbers for ALL EIGHT inventory types  -->
+  <!-- <div class="pink-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/pink.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="black-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/black.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+
+  </div>
+
+  <div class="white-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/white.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="green-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/green.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="blue-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/blue.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="red-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/red.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="yellow-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/yellow.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="orange-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/orange.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div>
+
+  <div class="rainbow-cards card-container">
+    <span>
+      <img class="card" src="../../assets/images/traincards/rainbow.png"/>
+      <div class="counter">
+        0
+      </div>
+    </span>
+  </div> -->
+  <app-player-train-card *ngFor="let color of cardOrder" [count]="_userInfo.user.trainCardCount[color]" [color]="color"></app-player-train-card>
+
+  <div class="train-tokens card-container">
+    <span>
+      <img class="token" src="../../assets/images/traintokens/{{_userInfo.user.color}}car.png"/>
+      <div class="counter">
+        {{_userInfo.user.tokenCount}}
+      </div>
+    </span>
+  </div>
+
+</div>

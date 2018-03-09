@@ -1,9 +1,11 @@
-body {
-  margin: 40px;
+.borders{
+  margin: 60px;
   font-size: 14pt;
+  overflow: visible;
 }
 
 .lobby-container{
+  overflow-x: hidden;
   display: grid;
    grid-gap: 10px;
    grid-template-columns: 60% 40%;
@@ -22,12 +24,12 @@ body {
       grid-template-rows: 20% 60% 20%;
       grid-template-areas:
             "game-header ...."
-            "player-list chat"
+            "user-list chat"
             "......... start-leave-button";
 }
 
-app-playerlist{
-  grid-area: player-list;
+app-userlist{
+  grid-area: user-list;
 }
 
 app-chat{

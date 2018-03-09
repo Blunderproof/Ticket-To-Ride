@@ -1,0 +1,11 @@
+<li class="history-msg">
+  <div class="chat-msg-sender">
+    {{message.user.username}}
+  </div>
+  <div class="chat-msg-timestamp">
+    {{message.timestamp | date: 'shortTime'}}
+  </div>
+  <div class="chat-msg-text">
+    {{message.message}}
+  </div>
+</li>

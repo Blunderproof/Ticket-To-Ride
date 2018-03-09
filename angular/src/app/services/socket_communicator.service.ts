@@ -24,4 +24,15 @@ export class SocketCommunicator {
         });
     }
 
+    updateChatHistory(callback: any) {
+        return this.socket.on('updateChatHistory', callback);
+    }
+
+    updateGameHistory(callback: any) {
+        return this.socket.on('updateGameHistory', callback);
+    }
+
+    updateGameState(callback: any) {
+        return this.socket.on('updateGameState', callback);
+    }
 }

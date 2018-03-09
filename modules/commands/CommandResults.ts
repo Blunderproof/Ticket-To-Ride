@@ -2,8 +2,9 @@ export default class CommandResults {
   private success: boolean;
   private data: any;
   private errorInfo: string;
-  private userCookie: string;
+  private userCookie: any;
   private emitRequests: any[];
+  private gameHistory: string;
 
   constructor(responseData: any) {
     this.success = responseData.success;
@@ -11,6 +12,7 @@ export default class CommandResults {
     this.errorInfo = responseData.errorInfo;
     this.userCookie = responseData.userCookie;
     this.emitRequests = responseData.emit;
+    this.gameHistory = responseData.gameHistory;
   }
 
   public getData(): any {
@@ -22,10 +24,13 @@ export default class CommandResults {
   public getErrorInfo(): string {
     return this.errorInfo;
   }
-  public shouldSetSession(): string {
+  public shouldSetSession(): any {
     return this.userCookie;
   }
   public shouldEmit(): any[] {
     return this.emitRequests;
+  }
+  public shouldAddHistory(): string {
+    return this.gameHistory;
   }
 }

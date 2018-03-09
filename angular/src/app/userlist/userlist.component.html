@@ -1,0 +1,9 @@
+<div class="box user-list"> User List
+  <!-- TODO: ng-repeat over the users in the given game,
+  if the user is the admin then make the user cards the kickable variety -->
+  <div *ngFor="let user of userList" class="user-card">
+    <div class="user-card-username">
+      {{user.username}}
+    </div>
+  </div>
+</div>

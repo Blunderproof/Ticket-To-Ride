@@ -35,6 +35,10 @@ export class ServerProxy {
     });
   }
 
+  logout() {
+    return this.communicator.send('logout', {});
+  }
+
   register(username: string, password: string, confirmPassword: string) {
     // needs to include username password and confirmPassword
     // tslint:disable-next-line:max-line-length
@@ -47,5 +51,45 @@ export class ServerProxy {
 
   requestGameList() {
     return this.communicator.send('getOpenGameList', {});
+  }
+
+  sendMessage(message: string) {
+    return this.communicator.send('sendMessage', {
+      message: message
+    });
+  }
+
+  getGame() {
+    return this.communicator.send('getGame', {});
+  }
+
+  getUser() {
+    return this.communicator.send('getUser', {});
+  }
+
+  getChatHistory() {
+    return this.communicator.send('getChatHistory', {});
+  }
+
+  getGameHistory() {
+    return this.communicator.send('getGameHistory', {});
+  }
+
+  initialSelectDestinationCard(data: string[]) {
+    return this.communicator.send('initialSelectDestinationCard', {
+      discardCards: data
+    });
+  }
+
+ chooseDestinationCard(data: any) {
+    return this.communicator.send('chooseDestinationCard', {});
+  }
+
+  claimRoute(data: any) {
+    return this.communicator.send('claimRoute', {});
+  }
+
+  chooseTrainCard(data: any) {
+    return this.communicator.send('chooseTrainCard', {});
   }
 }

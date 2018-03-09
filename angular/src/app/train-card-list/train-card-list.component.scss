@@ -1,0 +1,64 @@
+.card-list{
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3px;
+  grid-template-areas:
+        "pink-cards black-cards"
+        "white-cards green-cards"
+        "red-cards blue-cards"
+        "yellow-cards orange-cards"
+        "rainbow-cards train-tokens";
+}
+
+.train-tokens{
+  grid-area: train-tokens;
+}
+
+.token{
+  min-height: 50px;
+  max-height: 50px;
+  width: auto;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.pink-cards{
+  grid-area: pink-cards;
+}
+
+.black-cards{
+  grid-area: black-cards;
+}
+
+.white-cards{
+  grid-area: white-cards;
+}
+
+.green-cards{
+  grid-area: green-cards;
+}
+
+.red-cards{
+  grid-area: red-cards;
+}
+
+.blue-cards{
+  grid-area: blue-cards;
+}
+
+.yellow-cards{
+  grid-area: yellow-cards;
+}
+
+.orange-cards{
+  grid-area: orange-cards;
+}
+
+.pink-cards{
+  grid-area: pink-cards;
+}
+
+.rainbow-cards{
+  grid-area: rainbow-cards;
+}

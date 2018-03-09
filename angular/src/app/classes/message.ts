@@ -1,10 +1,15 @@
-import { Player } from './player';
+import { User } from './user';
+import { Game } from './game';
+import { MessageType } from './constants';
 
 export class Message {
-    from: Player;
-    msg: string;
+  timestamp: Date;
+  message: string;
+  user: User;
+  game: Game;
+  type: MessageType;
 
-    constructor() {
-
-    }
+  constructor(data?: Object) {
+    Object.keys(data || {}).forEach(key => (this[key] = data[key]));
+  }
 }

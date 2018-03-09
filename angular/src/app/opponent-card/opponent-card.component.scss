@@ -1,0 +1,80 @@
+.opponent-card {
+  position: relative;
+  padding: 10px;
+  height: 150px;
+  border-radius: 3px;
+  background-color: gray;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+  /* grid-template-areas:
+     'opponent-icon ....... opponent-name'
+     'opponent-train-tokens opponent-dest-cards opponent-train-cards'; */
+  grid-template-areas:
+    'opponent-icon opponent-name opponent-score'
+    'opponent-train-tokens opponent-dest-cards opponent-train-cards';
+}
+
+.opponent-card.current-user {
+  background-color: lightgreen;
+}
+
+.opponent-card.current-turn {
+  background-color: rgb(200, 200, 200);
+}
+
+.opponent-card.current-turn.current-user {
+  background-color: green;
+}
+
+.token {
+  min-height: 50px;
+  max-height: 50px;
+  width: auto;
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.card {
+  max-width: 100px;
+  max-height: 60px;
+}
+
+.opponent-icon {
+  position: absolute;
+  left: 30px;
+  top: -15px;
+  max-width: 60px;
+  grid-area: opponent-icon;
+}
+
+.opponent-name {
+  grid-area: opponent-name;
+}
+
+.opponent-score {
+  grid-area: opponent-score;
+  text-align: right;
+  font-size: 22px;
+  padding-top: 6px;
+}
+
+.opponent-train-tokens {
+  grid-area: opponent-train-tokens;
+}
+
+.opponent-dest-cards {
+  grid-area: opponent-dest-cards;
+}
+
+.opponent-train-cards {
+  grid-area: opponent-train-cards;
+}
+
+.active-user{
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 80px #FFF;
+  border-radius: 3px;
+}

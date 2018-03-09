@@ -1,11 +1,12 @@
-<li class="chat-msg user-msg">
+<div class="chat-msg" [class.user-msg]="message.user._id == _userInfo.user._id" [class.other-msg]="message.user._id != _userInfo.user._id">
   <div class="chat-msg-sender">
-    BigKillz
+    {{message.user.username}}
   </div>
   <div class="chat-msg-timestamp">
-    12:00:00
+    {{message.timestamp | date: 'shortTime'}}
   </div>
   <div class="chat-msg-text">
-    Proin fringilla mi sit amet mauris dictum, a venenatis velit ultricies. Sed ornare eget magna ac sodales. Duis lobortis velit non felis tristique vestibulum.
+    {{message.message}}
   </div>
-</li>
+  <div [class.user-msg-triangle]="message.user._id == _userInfo.user._id" [class.other-msg-triangle]="message.user._id != _userInfo.user._id"></div>
+</div>
