@@ -60,24 +60,27 @@ export class GameComponent implements OnInit {
           }
         }
         for (let i = 0; i < 3; i++) {
-          cardIndex = Math.floor(
-            Math.random() * this._userInfo.game.trainCardDeck.length
-          );
+          // cardIndex = Math.floor(
+          //   Math.random() * this._userInfo.game.trainCardDeck.length
+          // );
+          const card = this._userInfo.game.trainCardDeck.splice(i, 1)[0];
           this._userInfo.user.trainCardCount[
-            this._userInfo.game.trainCardDeck[cardIndex].color
+            card.color
+            // this._userInfo.game.trainCardDeck[cardIndex].color
           ] += 1;
 
           this._userInfo.game.userList[index].trainCardHand.push(
-            this._userInfo.game.trainCardDeck[cardIndex]
+            card
           );
         }
 
         for (let i = 0; i < 2; i++) {
-          cardIndex = Math.floor(
-            Math.random() * this._userInfo.game.destinationCardDeck.length
-          );
+          // cardIndex = Math.floor(
+          //   Math.random() * this._userInfo.game.destinationCardDeck.length
+          // );
+          const card = this._userInfo.game.destinationCardDeck.splice(i, 1)[0];
           this._userInfo.game.userList[index].destinationCardHand.push(
-            this._userInfo.game.destinationCardDeck[cardIndex]
+            card
           );
         }
         alert(
@@ -156,7 +159,7 @@ export class GameComponent implements OnInit {
         );
         break;
       case 4:
-        alert('Use the claim button below to add a claimed route');
+        alert('Click a route to claim it');
 
         break;
       case 5:
