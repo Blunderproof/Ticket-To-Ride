@@ -40,16 +40,12 @@
   position: relative;
   display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-areas: "claim-route traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 traincard-deck destcard-deck";
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 traincard-deck destcard-deck";
     justify-items: center;
     width: 100%;
     height: inherit;
   padding-left: 100px;
-}
-
-.claim-route{
-  grid-area: claim-route;
 }
 
 .card-slot{

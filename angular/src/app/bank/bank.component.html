@@ -1,11 +1,6 @@
 <div class="bank-navbar">
 
   <div class="bank-items">
-    <div (click)="claimRoute()" class="card-slot claim-route">
-      CLAIM
-    </div>
-
-
     <!-- 5 Face Up Cards -->
     <div *ngFor="let trainCard of _userInfo.game.trainCardDeck; let i = index" class="card-slot traincard-{{i}}">
         <app-train-card *ngIf="i <= 5" (click)="chooseTrainCard(trainCard)" [trainCard]="trainCard" class="card">

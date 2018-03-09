@@ -24,8 +24,4 @@ export class BankComponent implements OnInit {
   chooseDestinationCard(destinationCard: DestinationCard) {
     this.communicator.chooseDestinationCard(destinationCard);
   }
-
-  claimRoute(){
-    console.log("CLAIMING");
-  }
 }
