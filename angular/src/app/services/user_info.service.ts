@@ -26,6 +26,7 @@ export class UserInfo {
                         this._serverProxy.getChatHistory();
                         this.socket.updateGameState(data => {
                             console.log('Game State Updated');
+                            console.log(data);
                             this.game = data;
                         });
                     }
