@@ -1,4 +1,4 @@
-<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber % _userInfo.game.userList.length" [class.current-user]="this._userInfo.game.userList[index]._id == this._userInfo.user._id">
+<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber" [class.current-user]="_userInfo.game.userList[index]._id == _userInfo.user._id" [class.active-user]="index == _userInfo.game.turnNumber">
   <!--TODO: Use the proper playericon file depending on the assigned color  -->
   <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
 

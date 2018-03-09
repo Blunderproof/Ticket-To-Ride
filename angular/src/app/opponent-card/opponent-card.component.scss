@@ -71,3 +71,10 @@
 .opponent-train-cards {
   grid-area: opponent-train-cards;
 }
+
+.active-user{
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 80px #FFF;
+  border-radius: 3px;
+}
