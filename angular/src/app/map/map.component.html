@@ -7939,6 +7939,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-Omaha-KansasCity')"
          id="Gy-2-Omaha-KansasCity"
          class="route secondroute, 'tp-2-Omaha-KansasCity'">
         <svg:g
@@ -8167,6 +8168,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-Omaha-Duluth')"
          id="Gy-2-Omaha-Duluth"
          class="route secondroute">
         <svg:g
@@ -8227,6 +8229,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-OklahomaCity-KansasCity')"
          id="Gy-2-OklahomaCity-KansasCity"
          class="route secondroute">
         <svg:g
@@ -8287,6 +8290,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-OklahomaCity-Dallas')"
          id="Gy-2-OklahomaCity-Dallas"
          class="route secondroute">
         <svg:g
@@ -8336,6 +8340,7 @@
       <svg:g
          style="fill:#a8a8a8;fill-opacity:1"
          transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,786.76206,795.2662)"
+         class="route" (click)="mapClicked('tp-2-Dallas-Houston')"
          id="Gy-2-Dallas-Houston"
          class="route secondroute">
         <svg:path
@@ -8464,6 +8469,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-Seattle-Vancouver')"
          id="Gy-2-Seattle-Vancouver"
          class="route secondroute">
         <svg:g
@@ -8934,7 +8940,7 @@
       </svg:g>
       <svg:g
          id="Gy-1-Montreal-Boston"
-         class="route" (click)="mapClicked('tp-1-Montreal-Boston')">
+         class="route" (click)="mapClicked('tp-2-Montreal-Boston')">
         <svg:g
            id="GrayPath-78"
            transform="matrix(0.59827101,-0.58209583,0.74090327,0.77729973,1357.6913,72.798397)"
@@ -8963,6 +8969,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-1-Montreal-Boston')"
          id="Gy-2-Montreal-Boston"
          class="route secondroute">
         <svg:g
@@ -10319,6 +10326,7 @@
         </svg:g>
       </svg:g>
       <svg:g
+        class="route" (click)="mapClicked('tp-2-Atlanta-Raleigh')"
          id="Gy-2-Atlanta-Raleigh"
          class="route secondroute">
         <svg:g
@@ -11429,7 +11437,8 @@
         </svg:g>
       </svg:g>
       <svg:g
-         id="Gy-2-Portland-Seattle">
+        class="route" (click)="mapClicked('tp-2-Portland-Seattle')"
+        id="Gy-2-Portland-Seattle">
         <svg:g
            id="GrayPath-27-8"
            transform="matrix(0.72330357,0.15244689,-0.17607654,0.83541744,108.78091,71.195604)"
@@ -11462,7 +11471,7 @@
         </svg:g>
       </svg:g>
       <svg:g
-         class="route"
+         class="route" (click)="mapClicked('tp-1-Seattle-Calgary')"
          id="Gy-1-Seattle-Calgary">
         <svg:g
            id="GrayPath-27-7"
@@ -20313,8 +20322,8 @@
         </svg:g>
       </svg:g>
       <svg:g
-         id="tp-1-Omaha-LittleRock"
-         class="trainPath" [ngStyle]="{ 'fill': (trainPathStates['tp-1-Omaha-LittleRock'] || '#CCC'), 'display': (trainPathStates['tp-1-Omaha-LittleRock'] ? 'block' : 'none')}">
+         id="tp-1-OklahomaCity-LittleRock"
+         class="trainPath" [ngStyle]="{ 'fill': (trainPathStates['tp-1-OklahomaCity-LittleRock'] || '#CCC'), 'display': (trainPathStates['tp-1-OklahomaCity-LittleRock'] ? 'block' : 'none')}">
         <svg:g
            transform="matrix(-0.46305523,3.3966989,-3.9576412,-0.54108499,1012.1568,745.60116)"
            id="car-4-04">
