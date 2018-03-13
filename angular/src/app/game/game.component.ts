@@ -42,7 +42,7 @@ export class GameComponent implements OnInit {
       case 0:
         alert('Changing player points.');
         index = Math.floor(Math.random() * this._userInfo.game.userList.length);
-        let score = Math.floor(Math.random() * 50);
+        const score = Math.floor(Math.random() * 50);
         this._userInfo.game.userList[index].score = score;
 
         alert(
@@ -55,7 +55,7 @@ export class GameComponent implements OnInit {
         alert(`Changing my number of train cards and destination cards.`);
         for (index = 0; index < this._userInfo.game.userList.length; index++) {
           const element = this._userInfo.game.userList[index];
-          if (element._id == this._userInfo.user._id) {
+          if (element._id === this._userInfo.user._id) {
             break;
           }
         }
@@ -100,10 +100,9 @@ export class GameComponent implements OnInit {
           index = Math.floor(
             Math.random() * this._userInfo.game.userList.length
           );
-          if (
-            this._userInfo.game.userList[index]._id != this._userInfo.user._id
-          )
+          if (this._userInfo.game.userList[index]._id !== this._userInfo.user._id) {
             break;
+          }
         }
 
         for (let i = 0; i < 3; i++) {
@@ -145,12 +144,12 @@ export class GameComponent implements OnInit {
           `Changing the number of train cards and destination cards in the decks.`
         );
 
-        let destCountToDelete = Math.floor(
+        const destCountToDelete = Math.floor(
           Math.random() * this._userInfo.game.destinationCardDeck.length / 2
         );
         this._userInfo.game.destinationCardDeck.splice(0, destCountToDelete);
 
-        let trainCountToDelete = Math.floor(
+        const trainCountToDelete = Math.floor(
           Math.random() * this._userInfo.game.trainCardDeck.length / 2
         );
         this._userInfo.game.trainCardDeck.splice(6, trainCountToDelete);

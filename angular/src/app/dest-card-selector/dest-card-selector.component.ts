@@ -14,10 +14,12 @@ export class DestCardSelectorComponent implements OnInit {
   constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
   onCloseHandled() {
-    let notSelected = [];
-    let cards = this._userInfo.user.destinationCardHand;
+    const notSelected = [];
+    const cards = this._userInfo.user.destinationCardHand;
     for (let i = 0; i < cards.length; i++) {
-      if (!cards[i].selected) notSelected.push(cards[i]._id);
+      if (!cards[i].selected) {
+        notSelected.push(cards[i]._id);
+      }
     }
 
     if (notSelected.length <= 1) {

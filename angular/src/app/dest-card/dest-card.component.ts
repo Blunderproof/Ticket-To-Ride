@@ -21,7 +21,7 @@ export class DestCardComponent implements OnInit {
     this.getAsset();
   }
 
-  getAsset(){
+  getAsset() {
     console.log(this.destCard);
     // this.city1 = this.destCard.city1.concat("-");
     // this.cityString = this.city1.concat(this.destCard.city2);
