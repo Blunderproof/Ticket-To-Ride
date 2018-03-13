@@ -11,9 +11,9 @@ export class DestCardComponent implements OnInit {
   @Output() update = new EventEmitter();
 
   selected = false;
-  assetString = "../../assets/images/destcards/";
-  city1 : string;
-  cityString : string;
+  assetString = '../../assets/images/destcards/';
+  city1: string;
+  cityString: string;
 
   constructor() { }
 
