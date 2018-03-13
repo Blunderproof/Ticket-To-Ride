@@ -1,7 +1,8 @@
 .chat-window{
   grid-area: chat;
   min-height: 350px;
-  max-height: 350px;
+  max-height: inherit;
+  height: inherit;
   position: relative;
   background-color: #FFF;
   color: #444;
