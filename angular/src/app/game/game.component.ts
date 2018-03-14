@@ -37,7 +37,7 @@ export class GameComponent implements OnInit {
 
   simulateChanges() {
     let index = 0;
-    let cardIndex = 0;
+    const cardIndex = 0;
     switch (this.simState) {
       case 0:
         alert('Changing player points.');
@@ -45,11 +45,8 @@ export class GameComponent implements OnInit {
         const score = Math.floor(Math.random() * 50);
         this._userInfo.game.userList[index].score = score;
 
-        alert(
-          `Changed player ${
-            this._userInfo.game.userList[index].username
-          }'s points to ${score}.`
-        );
+        alert(`Changed player ${this._userInfo.game.userList[index].username}'s points to ${score}.`);
+
         break;
       case 1:
         alert(`Changing my number of train cards and destination cards.`);
@@ -60,28 +57,15 @@ export class GameComponent implements OnInit {
           }
         }
         for (let i = 0; i < 3; i++) {
-          // cardIndex = Math.floor(
-          //   Math.random() * this._userInfo.game.trainCardDeck.length
-          // );
           const card = this._userInfo.game.trainCardDeck.splice(i, 1)[0];
-          this._userInfo.user.trainCardCount[
-            card.color
-            // this._userInfo.game.trainCardDeck[cardIndex].color
-          ] += 1;
+          this._userInfo.user.trainCardCount[card.color] += 1;
 
-          this._userInfo.game.userList[index].trainCardHand.push(
-            card
-          );
+          this._userInfo.game.userList[index].trainCardHand.push(card);
         }
 
         for (let i = 0; i < 2; i++) {
-          // cardIndex = Math.floor(
-          //   Math.random() * this._userInfo.game.destinationCardDeck.length
-          // );
           const card = this._userInfo.game.destinationCardDeck.splice(i, 1)[0];
-          this._userInfo.game.userList[index].destinationCardHand.push(
-            card
-          );
+          this._userInfo.game.userList[index].destinationCardHand.push(card);
         }
         alert(
           `Changed my train card hand to ${
@@ -90,11 +74,10 @@ export class GameComponent implements OnInit {
             this._userInfo.game.userList[index].destinationCardHand.length
           }.`
         );
+
         break;
       case 2:
-        alert(
-          `Now changing other user's number of train cards, destination cards, and train car tokens.`
-        );
+        alert(`Now changing other user's number of train cards, destination cards, and train car tokens.`);
 
         while (true) {
           index = Math.floor(
@@ -106,21 +89,13 @@ export class GameComponent implements OnInit {
         }
 
         for (let i = 0; i < 3; i++) {
-          cardIndex = Math.floor(
-            Math.random() * this._userInfo.game.trainCardDeck.length
-          );
-          this._userInfo.game.userList[index].trainCardHand.push(
-            this._userInfo.game.trainCardDeck[cardIndex]
-          );
+          const card = this._userInfo.game.trainCardDeck.splice(i, 1)[0];
+          this._userInfo.game.userList[index].trainCardHand.push(card);
         }
 
         for (let i = 0; i < 4; i++) {
-          cardIndex = Math.floor(
-            Math.random() * this._userInfo.game.destinationCardDeck.length
-          );
-          this._userInfo.game.userList[index].destinationCardHand.push(
-            this._userInfo.game.destinationCardDeck[cardIndex]
-          );
+          const card = this._userInfo.game.destinationCardDeck.splice(i, 1)[0];
+          this._userInfo.game.userList[index].destinationCardHand.push(card);
         }
 
         this._userInfo.game.userList[index].tokenCount = Math.floor(
@@ -140,9 +115,7 @@ export class GameComponent implements OnInit {
 
         break;
       case 3:
-        alert(
-          `Changing the number of train cards and destination cards in the decks.`
-        );
+        alert(`Changing the number of train cards and destination cards in the decks.`);
 
         const destCountToDelete = Math.floor(
           Math.random() * this._userInfo.game.destinationCardDeck.length / 2
@@ -153,9 +126,7 @@ export class GameComponent implements OnInit {
           Math.random() * this._userInfo.game.trainCardDeck.length / 2
         );
         this._userInfo.game.trainCardDeck.splice(6, trainCountToDelete);
-        alert(
-          `Removed ${destCountToDelete} destination cards and ${trainCountToDelete} train cards.`
-        );
+        alert(`Removed ${destCountToDelete} destination cards and ${trainCountToDelete} train cards.`);
         break;
       case 4:
         alert('Click a route to claim it');
@@ -170,12 +141,9 @@ export class GameComponent implements OnInit {
 
         break;
       case 6:
-        alert(
-          'Note how gameHistory was changed upon selecting the destination cards.'
-        );
+        alert('Note how gameHistory was changed upon selecting the destination cards.');
 
         break;
-
       default:
         break;
     }
