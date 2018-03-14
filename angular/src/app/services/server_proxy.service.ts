@@ -41,7 +41,6 @@ export class ServerProxy {
 
   register(username: string, password: string, confirmPassword: string) {
     // needs to include username password and confirmPassword
-    // tslint:disable-next-line:max-line-length
     return this.communicator.send('register', {
       username: username,
       password: password,
@@ -81,7 +80,7 @@ export class ServerProxy {
     });
   }
 
- chooseDestinationCard(data: any) {
+  chooseDestinationCard(data: any) {
     return this.communicator.send('chooseDestinationCard', {});
   }
 
@@ -91,5 +90,9 @@ export class ServerProxy {
 
   chooseTrainCard(data: any) {
     return this.communicator.send('chooseTrainCard', {});
+  }
+
+  getUserGameStatus() {
+    return this.communicator.send('getUserGameStatus', {});
   }
 }

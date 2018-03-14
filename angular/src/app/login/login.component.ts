@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   };
   form = createFormGroup(this.login_controls);
 
-  // tslint:disable-next-line:max-line-length
   constructor(private _fb: FormBuilder, private _serverProxy: ServerProxy, private _router: Router, private _customValidators: CustomValidatorsService, private userinfo: UserInfo) { }
 
   ngOnInit() { }
@@ -63,7 +62,6 @@ export class LoginComponent implements OnInit {
           }
         });
     } else {
-      // tslint:disable-next-line:max-line-length
       this._serverProxy.register(this.register_controls.username.value, this.register_controls.password.value, this.register_controls.confirmPassword.value)
         .then((x: any) => {
           if (x.success) {
