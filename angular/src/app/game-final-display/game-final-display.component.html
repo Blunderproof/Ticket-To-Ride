@@ -1,5 +1,10 @@
 <div class="backdrop" [hidden]="!display"></div>
 
+<!-- <div class="final-display-window">
+  Hey
+</div> -->
+
+
 <div class="modal" tabindex="-1" role="dialog" [hidden]="!display">
   <div class="modal-dialog" style="height:80%;" role="document">
     <div class="modal-content">
@@ -8,14 +13,11 @@
       </div>
       <div class="modal-body">
 
-        <!-- <div class="row">
-          <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [card]="card"></app-destination-card>
-        </div> -->
+
         <div class="box opponent-sidebar">
           <div *ngIf="_userInfo.game">
             <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
-              <!--<div *ngIf="user._id != this._userInfo.user._id" style="margin-top: 20px;">
-                </div>-->
+
               <div style="margin-top: 20px;">
                 <app-opponent-card [index]="i"></app-opponent-card>
               </div>
@@ -23,7 +25,54 @@
           </div>
         </div>
         <div class="graph">
-          <img style="max-width: 500px;" src = "../../assets/graph.png"/>
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+
+
+          <!-- <img style="max-width: 500px;"src = "../../assets/graph.png"/> -->
+          <table class="table">
+            <caption>List of users</caption>
+            <thead>
+              <tr>
+                <th scope="col">Players</th>
+                <th scope="col">Points from Routes</th>
+                <th scope="col">Completed Contracts</th>
+                <th scope="col">Incompleted Contracts</th>
+                <th scope="col">Longest Route</th>
+                <th scope="col">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">P1</th>
+                <td>+50</td>
+                <td>+20</td>
+                <td>-12</td>
+                <td>+15</td>
+                <td>73</td>
+              </tr>
+              <tr>
+                <th scope="row">P2</th>
+                <td>+60</td>
+                <td>+30</td>
+                <td>-20</td>
+                <td>+0</td>
+                <td>70</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <div class="box chat">
           <app-chat></app-chat>
@@ -33,7 +82,6 @@
       </div>
       <p *ngIf="this.message != null" style="color: red;">{{ this.message }}</p>
       <div class="modal-footer">
-        <!--TODO: Disable select button if less than appropriate number of cards are selected -->
         <button type="button" class="btn btn-success" (click)="onCloseHandled()">Return to Lobby</button>
       </div>
     </div>

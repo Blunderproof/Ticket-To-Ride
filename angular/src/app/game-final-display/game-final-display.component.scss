@@ -8,6 +8,12 @@
   z-index: 1000;
 }
 
+.final-display-window{
+  width: 800px;
+  margin: 0 auto;
+  z-index: 5000;
+}
+
 .modal{
   min-width: 1000px !important;
   display: flex;
