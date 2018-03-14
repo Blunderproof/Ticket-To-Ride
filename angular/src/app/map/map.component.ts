@@ -10,6 +10,7 @@ import { User } from '../classes/user';
 })
 export class MapComponent implements OnInit {
 
+  overlayApplied = true;
   trainPathStates = {};
   constructor(public _gameHistory: GameHistory, public _userInfo: UserInfo) { }
 

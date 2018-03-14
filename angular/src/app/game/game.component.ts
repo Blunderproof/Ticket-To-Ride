@@ -14,6 +14,8 @@ import { GameHistory } from '../services/game-history.service';
 export class GameComponent implements OnInit {
   historyOpen = true;
   gameStart = false;
+  
+  gameOver = true;
 
   simState = 0;
 

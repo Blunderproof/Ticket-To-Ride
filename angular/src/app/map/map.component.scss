@@ -8,6 +8,27 @@
   position:relative;
 }
 
+.game-board{
+  overflow: auto;
+  grid-column: g-col2-start / g-col3-start;
+  overflow-y: hidden;
+  margin: 0 10px;
+}
+
+.box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 150%;
+}
+
+
+.map-overlay{
+  opacity: 0.5;
+  transition: .5s ease;
+  pointer-events: none;
+}
 
 
 /*

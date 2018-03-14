@@ -1,5 +1,8 @@
 <app-bank></app-bank>
 <app-dest-card-selector *ngIf="_userInfo.game && _userInfo.game.playersReady.indexOf(_userInfo.user._id) < 0;"></app-dest-card-selector>
+<app-game-final-display *ngIf="gameOver"></app-game-final-display>
+
+
 
 <div class="borders">
 
@@ -20,10 +23,10 @@
       </div>
     </div>
 
-    <div class="box game-board">
-      <button type="button" class="btn btn-success" (click)="simulateChanges()">Simulate Changes</button>
+    <!-- <div class=""> -->
+      <!-- <button type="button" class="btn btn-success" (click)="simulateChanges()">Simulate Changes</button> -->
       <app-map></app-map>
-    </div>
+    <!-- </div> -->
 
     <div class="box player-sidebar">
       <div class="box player-inventory">

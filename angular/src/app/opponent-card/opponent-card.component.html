@@ -1,8 +1,6 @@
 <div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber" [class.current-user]="_userInfo.game.userList[index]._id == _userInfo.user._id" [class.active-user]="index == _userInfo.game.turnNumber">
-  <!--TODO: Use the proper playericon file depending on the assigned color  -->
   <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
 
-  <!--TODO: Add proper player name  -->
   <div class="opponent-name">
     {{ index + 1 }}. {{ _userInfo.game.userList[index].username }}
     <!-- <span *ngIf="this._userInfo.game.userList[index]._id == this._userInfo.user._id">(you)</span>-->
@@ -11,22 +9,30 @@
     {{ _userInfo.game.userList[index].score }} pts
   </div>
 
-  <div class="opponent-train-tokens card-container">
+  <div class="opponent-train-tokens token-container">
     <span>
-      <!--TODO: Add proper traintoken file depending on the assigned color, add the counter  -->
       <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png" />
       <div class="counter">
-        x{{ _userInfo.game.userList[index].tokenCount }}
+        {{ _userInfo.game.userList[index].tokenCount }}
       </div>
     </span>
   </div>
   <!--TODO: Add counter totals for the dest cards and train cards -->
-  <div class="opponent-dest-cards">
-    <img class="card" src="../../assets/images/destcards/dest-card-back.png" /> {{ _userInfo.game.userList[index].destinationCardHand.length }}
-  </div>
 
-  <div class="opponent-train-cards">
-    <img class="card" src="../../assets/images/traincards/cardback.png" /> {{ _userInfo.game.userList[index].trainCardHand.length }}
-  </div>
+    <div class="opponent-dest-cards card-container">
+      <span>
+        <img class="card" src="../../assets/images/destcards/dest-card-back.png" />
+        <div class="counter">
+          {{ _userInfo.game.userList[index].destinationCardHand.length }}
+        </div>
+      </span>
+    </div>
+
+    <div class="opponent-train-cards card-container">
+      <img class="card" src="../../assets/images/traincards/cardback.png" />
+      <div class="counter">
+        {{ _userInfo.game.userList[index].trainCardHand.length }}
+      </div>
+    </div>
 
 </div>

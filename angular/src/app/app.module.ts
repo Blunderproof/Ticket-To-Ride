@@ -39,6 +39,7 @@ import { TrainCardComponent } from './train-card/train-card.component';
 import { PlayerTrainCardComponent } from './player-train-card/player-train-card.component';
 import { DestinationCardComponent } from './destination-card/destination-card.component';
 import { DestCardComponent } from './dest-card/dest-card.component';
+import { GameFinalDisplayComponent } from './game-final-display/game-final-display.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { DestCardComponent } from './dest-card/dest-card.component';
     TrainCardComponent,
     PlayerTrainCardComponent,
     DestinationCardComponent,
-    DestCardComponent
+    DestCardComponent,
+    GameFinalDisplayComponent
   ],
   imports: [
     AngularSvgIconModule,

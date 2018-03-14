@@ -1,7 +1,7 @@
 .borders{
   margin-top: 60px;
-  margin-left: 20px;
-  margin-right: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 14pt;
   overflow: visible;
 }
@@ -13,7 +13,7 @@
   -o-user-select: none;
   z-index: 1;
   display: grid;
-  grid-template-columns: [g-col1-start] 350px [g-col2-start] 1fr [g-col3-start] 300px [g-col3-end];
+  grid-template-columns: [g-col1-start] 340px [g-col2-start] 1fr [g-col3-start] 325px [g-col3-end];
 }
 
 .active-user{
@@ -25,8 +25,8 @@
 
 .opponent-sidebar {
   grid-column: g-col1-start / g-col2-start;
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 340px;
+  max-width: 340px;
   max-height: 700px;
   float:left;
   /*NEW INTERNAL GRID*/
@@ -41,7 +41,6 @@
     border-radius: 5px;
     padding: 10px;
     font-size: 150%;
-
 }
 
 .box .box {
@@ -60,15 +59,15 @@
 .player-sidebar {
   float:right;
   grid-column: 1fr;
-  min-width: 375px;
-  max-width: 375px;
+  min-width: 325px;
+  max-width: 325px;
   margin-bottom: 100px;
 }
 
 .player-inventory {
   grid-row: row1-start / row2-start;
-  min-width: 350px;
-  max-width: 350px;
+  min-width: 300px;
+  max-width: 300px;
   font-size: 14px;
 }
 

@@ -11,6 +11,31 @@
         "rainbow-cards train-tokens";
 }
 
+.card-container{
+  position: relative;
+  background-color: gray;
+  border-radius: 3px;
+  margin: 5px;
+  min-height: 60px;
+  min-width: 120px;
+  max-width: 120px;
+  max-height: 60px;
+}
+
+.counter{
+    float:right;
+    position: absolute;
+    top:25%;
+    right:10px;
+    font-size: 15pt;
+}
+
+
+
+.train-token-counter{
+  float: right;
+}
+
 .train-tokens{
   grid-area: train-tokens;
 }
