@@ -266,7 +266,7 @@ export default class GameFacade {
       }
       game = game!;
       game.turnNumber++;
-      game.turnNumber %= game.userList.length;
+      //game.turnNumber %= game.userList.length;
 
       return game.save().then(savedGame => {
         return {
@@ -292,7 +292,7 @@ export default class GameFacade {
       }
       game = game!;
       game.turnNumber++;
-      game.turnNumber %= game.userList.length;
+      //game.turnNumber %= game.userList.length;
 
       return game.save().then(savedGame => {
         return {
@@ -318,7 +318,7 @@ export default class GameFacade {
       }
       game = game!;
       game.turnNumber++;
-      game.turnNumber %= game.userList.length;
+      //game.turnNumber %= game.userList.length;
 
       return game.save().then(savedGame => {
         return {
