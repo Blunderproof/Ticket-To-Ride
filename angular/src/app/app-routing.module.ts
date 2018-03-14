@@ -15,11 +15,11 @@ const routes: Routes = [{
 }, {
   path: 'lobby',
   component: GameLobbyComponent,
-  // canActivate: [AuthGuardService]
+  canActivate: [AuthGuardService]
 }, {
   path: 'game',
   component: GameComponent,
-  // canActivate: [AuthGuardService]
+  canActivate: [AuthGuardService]
 }];
 
 @NgModule({

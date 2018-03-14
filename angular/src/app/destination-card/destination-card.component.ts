@@ -9,11 +9,10 @@ import { DestinationCard } from '../classes/destination-card';
 export class DestinationCardComponent implements OnInit {
   @Input() card: DestinationCard;
 
-  constructor() { 
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.card.selected = false;    
+    this.card.selected = false;
   }
 
 }

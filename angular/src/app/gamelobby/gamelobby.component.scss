@@ -51,3 +51,8 @@ app-chat{
   grid-gap: 10px;
   grid-template-rows: 80% 20%;
 }
+
+.chat-window {
+  max-height: none;
+  height: 100%;
+}

@@ -1,5 +1,6 @@
-<div class="opponent-card" [class.current-turn]="index == _userInfo.game.turnNumber" [class.current-user]="_userInfo.game.userList[index]._id == _userInfo.user._id" [class.active-user]="index == _userInfo.game.turnNumber">
-  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
+<div class="opponent-card" [class.current-turn]="index == (_userInfo.game.turnNumber % _userInfo.game.userList.length)" [class.current-user]="_userInfo.game.userList[index]._id == _userInfo.user._id" [class.active-user]="index == (_userInfo.game.turnNumber % _userInfo.game.userList.length)">
+  <!--TODO: Use the proper playericon file depending on the assigned color  -->
+  <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.jpg" />
 
   <div class="opponent-name">
     {{ index + 1 }}. {{ _userInfo.game.userList[index].username }}
@@ -18,6 +19,9 @@
     </span>
   </div>
   <!--TODO: Add counter totals for the dest cards and train cards -->
+  <div class="opponent-dest-cards">
+    <img class="card" src="../../assets/images/destcards/dest-card-back.jpg" /> {{ _userInfo.game.userList[index].destinationCardHand.length }}
+  </div>
 
     <div class="opponent-dest-cards card-container">
       <span>

@@ -11,5 +11,5 @@ export class GameHistory {
   toggleHistoryOpen() {
     this.historyOpen = !this.historyOpen;
   }
-  
+
 }

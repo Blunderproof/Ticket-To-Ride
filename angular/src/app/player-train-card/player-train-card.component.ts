@@ -6,16 +6,16 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./player-train-card.component.scss']
 })
 export class PlayerTrainCardComponent implements OnInit {
-@Input() count: number
-@Input() color: string
+@Input() count: number;
+@Input() color: string;
 image: string;
 class: string;
 
   constructor() {}
 
   ngOnInit() {
-    this.image = `../../assets/images/traincards/${this.color}.png`
-    this.class = `${this.color}-cards card-container`
+    this.image = `../../assets/images/traincards/${this.color}.png`;
+    this.class = `${this.color}-cards card-container`;
   }
 
 }
