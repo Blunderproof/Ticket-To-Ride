@@ -3,12 +3,14 @@ import { Game } from '../classes/game';
 import { User } from '../classes/user';
 import { ServerProxy } from './server_proxy.service';
 import { SocketCommunicator } from './socket_communicator.service';
+import { UserState } from '../classes/constants';
 
 @Injectable()
 export class UserInfo {
     game: Game;
     user = new User();
     errorMessages = [];
+    userState = UserState.LoggedOut;
 
     constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
         this.getGame();
@@ -44,6 +46,24 @@ export class UserInfo {
                 } else {
                     this.errorMessages.push(x.message);
                 }
+            });
+    }
+
+    getUserGameStatus() {
+        return this._serverProxy.getUserGameStatus()
+            .then((x: any) => {
+                if (x.success) {
+                    this.userState = x.result.status;
+                    return this.userState;
+                } else {
+                    console.log(x.message);
+                    this.userState = UserState.LoggedOut;
+                    return this.userState;
+                }
+            })
+            .catch(x => {
+                this.userState = UserState.LoggedOut;
+                return this.userState;
             });
     }
 }
