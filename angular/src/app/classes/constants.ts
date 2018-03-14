@@ -23,3 +23,9 @@ export enum MessageType {
     Chat = 'chat',
     History = 'history'
 }
+
+export enum UserState {
+    LoggedOut = 1,
+    LoggedIn,
+    InGame,
+}
