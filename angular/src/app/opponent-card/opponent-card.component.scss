@@ -16,30 +16,25 @@
 
 .card-container{
   position: relative;
-  background-color: lightgray;
   border-radius: 3px;
-  min-height: 55px;
-  min-width: 120px;
-  max-width: 120px;
-  max-height: 55px;
+  width: 100%;
+  height: 55px;
 }
 
 .token-container{
   position: relative;
-  background-color: lightgray;
   border-radius: 3px;
-  min-width: 50px;
-  max-width: 50px;
-  min-height: 55px;
-  max-height: 55px;
+  width: 50px;
+  height: 55px;
 }
 
 .counter{
-    float:right;
+    float: right;
     position: absolute;
-    top:25%;
-    right:5px;
+    bottom: 0;
+    right: 10px;
     font-size: 15pt;
+    text-shadow: 1px 1px black;
 }
 
 .opponent-card.current-user {
@@ -55,15 +50,22 @@
 }
 
 .token {
-  min-height: 50px;
-  max-height: 50px;
+  height: 60px;
   width: auto;
-  padding-left: 5px;
-  padding-top: 5px;
+  position: absolute;
+  left: 13px;
+  top: -3px;
+}
+
+.token+.counter {
+  position: absolute;
+  top: 10px;
+  left: 15px;
 }
 
 .card {
   max-width: 100px;
+  float: right;
 }
 
 .opponent-icon-container {
@@ -72,11 +74,9 @@
   top: -15px;
 }
 
-.opponent-score{
-  //z-index: 4000;
-  position: absolute;
-  top: 5px;
-  left: 10px;
+.opponent-icon-inner-container {
+  width: 55px;
+  height: 55px;
 }
 
 .opponent-icon{
@@ -87,18 +87,22 @@
 }
 
 .opponent-name {
-  padding-left: 30px;
+  padding-left: 15px;
+  padding-bottom: 40px;
   grid-area: opponent-name;
   white-space: nowrap;
   overflow: hidden;
+  text-shadow: 1px 1px black;
 }
 
 .opponent-score {
   grid-area: opponent-score;
-  text-align: right;
+  text-align: center;
   font-size: 22px;
-  padding-top: 6px;
-  padding-left: 5px;
+  top: 10px;
+  position: relative;
+  z-index: 5000;
+  text-shadow: 1px 1px black;
 }
 
 .opponent-train-tokens {
@@ -116,8 +120,22 @@
 }
 
 .active-user{
+  @extend .throb;
   outline: none;
   border-color: #9ecaed;
-  box-shadow: 0 0 80px #FFF;
   border-radius: 3px;
+  box-shadow: 0 0 10px #FFF;
+}
+
+.throb {
+  animation-name: throb;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
+
+@keyframes throb {
+  from { box-shadow: 0 0 10px #FFF }
+  to { box-shadow: 0 0 80px #FFF }
 }
