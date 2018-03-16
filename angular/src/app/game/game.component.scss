@@ -5,6 +5,13 @@
   font-size: 14pt;
   overflow: visible;
 }
+
+.inventory-overlay{
+  opacity: 0.5;
+  transition: .75s ease-in-out;
+  pointer-events: none;
+}
+
 .game-container {
   user-select: none;
   -moz-user-select: none;

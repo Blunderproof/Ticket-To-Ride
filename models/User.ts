@@ -12,6 +12,7 @@ export interface IUser {
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
   score: number;
+  userIndex: number;
   tokenCount: number;
   color: PlayerColor;
 }
@@ -27,6 +28,7 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema({
     { type: Schema.Types.ObjectId, ref: 'DestinationCard' },
   ],
   score: Number,
+  userIndex: Number,
   tokenCount: Number,
   color: String,
 },{
@@ -60,7 +62,7 @@ UserSchema.virtual("trainCardCount").get(function(this: IUserModel) {
   return counts
 });
 
-  
+
 
 export const User: mongoose.Model<IUserModel> = mongoose.model<IUserModel>(
   'User',

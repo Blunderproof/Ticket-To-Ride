@@ -2,12 +2,12 @@
 
   <div *ngIf="_userInfo.game != null" class="bank-items">
     <!-- 5 Face Up Cards -->
-    <div *ngFor="let trainCard of _userInfo.game.trainCardDeck; let i = index" class="card-slot traincard-{{i}}">
+    <div *ngFor="let trainCard of _userInfo.game.trainCardDeck | slice:0:5; let i = index" class="card-slot traincard-{{i}}">
       <!--TODO: setup onclick event  -->
-      <app-train-card *ngIf="i <= 5" (click)="chooseTrainCard(trainCard)" [trainCard]="trainCard" class="card"></app-train-card>
+      <app-train-card (click)="chooseTrainCard(trainCard)" [trainCard]="trainCard" ></app-train-card>
     </div>
     <div (click)="chooseTrainCard(_userInfo.game.trainCardDeck[5])" class="card-slot traincard-deck">
-        <div class="card">
+        <div class="card"  [class.valid-card] = "isCurrentTurn()" [class.invalid-card] = "!isCurrentTurn()">
          <!-- TODO: no click event needed for phase2-->
           <img class="side" src="../../assets/images/traincards/vertical/cardback.png"/>
            <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
@@ -17,7 +17,7 @@
         </div>
       </div>
     <div (click)="chooseDestinationCard(_userInfo.game.destinationCardDeck[0])" class="card-slot destcard-deck">
-        <div class="card">
+        <div class="card"   [class.valid-card] = "isCurrentTurn()" [class.invalid-card] = "!isCurrentTurn()">
           <!--TODO: no click event needed for phase2 -->
           <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
           <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>

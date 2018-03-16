@@ -10,6 +10,7 @@ export class User {
   trainCardHand: TrainCard[];
   destinationCardHand: DestinationCard[];
   score: number;
+  userIndex: number;
   tokenCount: number;
   color: PlayerColor;
   trainCardCount: any;

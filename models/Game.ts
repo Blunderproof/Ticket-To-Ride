@@ -133,7 +133,7 @@ GameSchema.methods.shuffleDealCards = async function(
       player.trainCardHand = [];
       player.destinationCardHand = [];
       player.score = 0;
-
+      player.userIndex = index;
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
 

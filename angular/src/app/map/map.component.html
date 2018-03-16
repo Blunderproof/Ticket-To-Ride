@@ -1,5 +1,5 @@
 <div class = "box game-board">
-  <div class="map-container" [class.map-overlay]="overlayApplied">
+  <div class="map-container" [class.map-overlay]="!isCurrentTurn()">
     <svg:svg
        xmlns:xhtml="http://www.w3.org/1999/xhtml"
        xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"

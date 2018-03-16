@@ -17,6 +17,14 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
+  isCurrentTurn(){
+    if (this._userInfo.user.userIndex == (this._userInfo.game.turnNumber % this._userInfo.game.userList.length)){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
   mapClicked(correspondingTrainPath) {
     this.trainPathStates[correspondingTrainPath] = this._userInfo.user.color;
   }

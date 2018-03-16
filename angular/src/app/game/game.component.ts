@@ -14,7 +14,10 @@ import { GameHistory } from '../services/game-history.service';
 export class GameComponent implements OnInit {
   historyOpen = true;
   gameStart = false;
-  
+
+
+  intentoryOverlayApplied = true;
+
   gameOver = true;
 
   simState = 0;
@@ -33,8 +36,14 @@ export class GameComponent implements OnInit {
 
   printUserInfo() {
     console.log(this._userInfo);
+  }
 
-    console.log('YES');
+  isCurrentTurn(){
+    if (this._userInfo.user.userIndex == (this._userInfo.game.turnNumber % this._userInfo.game.userList.length)){
+      return true;
+    } else{
+      return false;
+    }
   }
 
   simulateChanges() {

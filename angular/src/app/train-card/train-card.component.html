@@ -1,4 +1,7 @@
-<div class="card">
+<div
+  class="card" (click)="trainCardClicked()" [class.clicked] = "isClicked()" 
+  [class.valid-card] = "isCurrentTurn()" [class.invalid-card] = "!isCurrentTurn()"
+  >
   <img class="side" src="../../assets/images/traincards/vertical/{{trainCard.color}}.png"/>
   <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
 </div>

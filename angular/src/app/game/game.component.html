@@ -14,8 +14,6 @@
     <div class="box opponent-sidebar">
       <div *ngIf="_userInfo.game">
         <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
-          <!--<div *ngIf="user._id != this._userInfo.user._id" style="margin-top: 20px;">
-            </div>-->
           <div style="margin-top: 20px;">
             <app-opponent-card [index]="i"></app-opponent-card>
           </div>
@@ -29,7 +27,7 @@
     <!-- </div> -->
 
     <div class="box player-sidebar">
-      <div class="box player-inventory">
+      <div class="box player-inventory" [class.inventory-overlay]="!isCurrentTurn()">
         <app-user-inventory></app-user-inventory>
       </div>
       <div class="chat">
