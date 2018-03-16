@@ -38,14 +38,6 @@ export class GameComponent implements OnInit {
     console.log(this._userInfo);
   }
 
-  isCurrentTurn(){
-    if (this._userInfo.user.userIndex == (this._userInfo.game.turnNumber % this._userInfo.game.userList.length)){
-      return true;
-    } else{
-      return false;
-    }
-  }
-
   simulateChanges() {
     let index = 0;
     const cardIndex = 0;

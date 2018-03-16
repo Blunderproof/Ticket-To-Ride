@@ -15,24 +15,16 @@ export class TrainCardComponent implements OnInit {
 
   clicked = false;
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  isCurrentTurn(){
-    if (this._userInfo.user.userIndex == (this._userInfo.game.turnNumber % this._userInfo.game.userList.length)){
-      return true;
-    } else{
-      return false;
-    }
-  }
-  trainCardClicked(){
+  trainCardClicked() {
     this.clicked = true;
-    window.setTimeout(() => {this.clicked = false}, 1000)
+    window.setTimeout(() => {
+      this.clicked = false;
+    }, 1000);
   }
 
-
-  isClicked(){
+  isClicked() {
     return this.clicked;
   }
-
 }

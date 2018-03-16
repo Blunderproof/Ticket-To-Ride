@@ -27,7 +27,7 @@
     <!-- </div> -->
 
     <div class="box player-sidebar">
-      <div class="box player-inventory" [class.inventory-overlay]="!isCurrentTurn()">
+      <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()">
         <app-user-inventory></app-user-inventory>
       </div>
       <div class="chat">

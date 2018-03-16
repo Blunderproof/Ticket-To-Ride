@@ -15,23 +15,13 @@ export class BankComponent implements OnInit {
   constructor(public _userInfo: UserInfo, private communicator: ServerProxy) { }
 
 
-  ngOnInit() {
-  }
-
-  isCurrentTurn(){
-    if (this._userInfo.user.userIndex == (this._userInfo.game.turnNumber % this._userInfo.game.userList.length)){
-      return true;
-    } else{
-      return false;
-    }
-  }
+  ngOnInit() {}
 
   chooseTrainCard(trainCard: TrainCard) {
-    window.setTimeout(() => {this.communicator.chooseTrainCard(trainCard)}, 1500)
-
-    //this.communicator.chooseTrainCard(trainCard);
+    window.setTimeout(() => {
+      this.communicator.chooseTrainCard(trainCard);
+    }, 1500);
   }
-
 
   chooseDestinationCard(destinationCard: DestinationCard) {
     this.communicator.chooseDestinationCard(destinationCard);

@@ -66,4 +66,12 @@ export class UserInfo {
                 return this.userState;
             });
     }
+
+    isCurrentTurn() {
+        if (this.user._id == this.game.userList[(this.game.turnNumber % this.game.userList.length)]._id) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
