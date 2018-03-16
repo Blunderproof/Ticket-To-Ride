@@ -1,34 +1,32 @@
-<div class="opponent-card" [class.current-turn]="index == (_userInfo.game.turnNumber % _userInfo.game.userList.length)" [class.current-user]="_userInfo.game.userList[index]._id == _userInfo.user._id" [class.active-user]="index == (_userInfo.game.turnNumber % _userInfo.game.userList.length)">
+<div class="opponent-card" [class.active-user]="index == (_userInfo.game.turnNumber % _userInfo.game.userList.length)" [ngStyle]="{ 'background-color': colorEnum[_userInfo.game.userList[index].color] }">
   <!--TODO: Use the proper playericon file depending on the assigned color  -->
-  <div class= "opponent-icon-container">
-    <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
-    <div class="opponent-score">
-      {{ _userInfo.game.userList[index].score }}
+  <div class="opponent-icon-container">
+    <div class="opponent-icon-inner-container">
+      <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
+      <div class="opponent-score">
+        {{ _userInfo.game.userList[index].score }}
+      </div>
     </div>
   </div>
 
   <div class="opponent-name">
     {{ index + 1 }}. {{ _userInfo.game.userList[index].username }}
-    <!-- <span *ngIf="this._userInfo.game.userList[index]._id == this._userInfo.user._id">(you)</span>-->
+    <span *ngIf="_userInfo.game.userList[index]._id == _userInfo.user._id">(you)</span>
   </div>
 
 
   <div class="opponent-train-tokens token-container">
-    <span>
-      <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png" />
-      <div class="counter">
-        {{ _userInfo.game.userList[index].tokenCount }}
-      </div>
-    </span>
+    <img class="token" src="../../assets/images/traintokens/{{ _userInfo.game.userList[index].color }}car.png" />
+    <div class="counter">
+      {{ _userInfo.game.userList[index].tokenCount }}
+    </div>
   </div>
 
   <div class="opponent-dest-cards card-container">
-    <span>
-      <img class="card" src="../../assets/images/destcards/dest-card-back.png" />
-      <div class="counter">
-        {{ _userInfo.game.userList[index].destinationCardHand.length }}
-      </div>
-    </span>
+    <img class="card" src="../../assets/images/destcards/dest-card-back.png" />
+    <div class="counter">
+      {{ _userInfo.game.userList[index].destinationCardHand.length }}
+    </div>
   </div>
 
   <div class="opponent-train-cards card-container">
