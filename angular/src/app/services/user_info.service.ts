@@ -68,10 +68,15 @@ export class UserInfo {
     }
 
     isCurrentTurn() {
-        if (this.user._id == this.game.userList[(this.game.turnNumber % this.game.userList.length)]._id) {
-            return true;
-        } else {
-            return false;
+        if (this.user != null && this.game != null) {
+            if (this.user._id != null && this.game.turnNumber >= 0) {
+                if (this.user._id == this.game.userList[(this.game.turnNumber % this.game.userList.length)]._id) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
+        return false;
     }
 }

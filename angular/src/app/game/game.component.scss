@@ -32,9 +32,8 @@
 
 .opponent-sidebar {
   grid-column: g-col1-start / g-col2-start;
-  min-width: 340px;
-  max-width: 340px;
-  max-height: 700px;
+  width: 340px;
+  max-height: 740px;
   float:left;
   /*NEW INTERNAL GRID*/
   display: grid;
