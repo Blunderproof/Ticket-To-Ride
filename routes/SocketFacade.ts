@@ -87,7 +87,7 @@ export default class SocketFacade {
     return Message.find({ game: data.id, type: MessageType.Chat })
       .populate('user')
       .populate('game')
-      .sort('-timestamp')
+      .sort('timestamp')
       .then(chatMessages => {
         return chatMessages;
       });

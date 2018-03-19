@@ -3,14 +3,16 @@
   <div class="chat-history" #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <ul>
       <li>
-        <app-chat-msg *ngFor="let message of messageList.reverse()" [message]="message"></app-chat-msg>
+        <!-- TODO make sure that messages are in the right order -->
+        <app-chat-msg *ngFor="let message of messageList" [message]="message"></app-chat-msg>
       </li>
-   </ul>
+    </ul>
   </div>
   <form [formGroup]="messageToSend">
     <div class="chat-input">
       <div class="input-group mb-3 input-user-msg">
-        <input [formControl]="messageToSend" type="text" class="form-control" placeholder="User Message" aria-label="User Message" aria-describedby="basic-addon2"/>
+        <input [formControl]="messageToSend" type="text" class="form-control" placeholder="User Message" aria-label="User Message"
+          aria-describedby="basic-addon2" />
         <div class="input-group-append">
           <button (click)="sendMessage()" class="btn btn-outline-secondary chat-send" type="button">Send</button>
         </div>
