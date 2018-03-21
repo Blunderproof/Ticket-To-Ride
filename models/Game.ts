@@ -31,6 +31,7 @@ export interface IGameModel extends mongoose.Document {
     trainCardDeck: ITrainCardModel[],
     destinationCardDeck: IDestinationCardModel[]
   ): Promise<any>;
+  getCurrentUserIndex(): number;
 }
 
 export var GameSchema: Schema = new Schema({
@@ -169,6 +170,10 @@ GameSchema.methods.shuffleDealCards = async function(
   that.gameState = GameState.InProgress;
 
   return that.save();
+};
+
+GameSchema.methods.getCurrentUserIndex = function() {
+  return this.turnNumber % this.userList.length;
 };
 
 export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>(

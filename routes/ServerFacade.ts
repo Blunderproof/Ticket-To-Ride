@@ -117,22 +117,6 @@ export default class ServerFacade implements IServer {
 
   /*
   input:
-    discardCards
-  */
-  initialSelectDestinationCard(data: any): Promise<any> {
-    return GameFacade.instanceOf().initialSelectDestinationCard(data);
-  }
-
-  // /*
-  // input:
-  //   keepCards
-  // */
-  // selectDestinationCard(data: any): Promise<any> {
-  //   return GameFacade.instanceOf().selectDestinationCard(data);
-  // }
-
-  /*
-  input:
     message
   */
   sendMessage(data: any): Promise<any> {
@@ -157,25 +141,33 @@ export default class ServerFacade implements IServer {
 
   /*
   input:
-    message
+    discardCards
   */
- chooseDestinationCard(data: any): Promise<any> {
+  initialSelectDestinationCard(data: any): Promise<any> {
+    return GameFacade.instanceOf().initialSelectDestinationCard(data);
+  }
+
+  /*
+  input:
+    keepCards
+  */
+  chooseDestinationCard(data: any): Promise<any> {
     return GameFacade.instanceOf().chooseDestinationCard(data);
   }
 
   /*
   input:
-    message
+    routeID
   */
- claimRoute(data: any): Promise<any> {
+  claimRoute(data: any): Promise<any> {
     return GameFacade.instanceOf().claimRoute(data);
   }
 
   /*
   input:
-    message
+    cardIndex
   */
- chooseTrainCard(data: any): Promise<any> {
+  chooseTrainCard(data: any): Promise<any> {
     return GameFacade.instanceOf().chooseTrainCard(data);
   }
 }
