@@ -13,7 +13,7 @@ export class DestCardSelectorComponent implements OnInit {
 
   constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
-  onCloseHandled() {
+  chooseInitialDestinationCard() {
     const notSelected = [];
     const cards = this._userInfo.user.destinationCardHand;
     for (let i = 0; i < cards.length; i++) {
@@ -32,6 +32,23 @@ export class DestCardSelectorComponent implements OnInit {
 
   openModal() {
     this.display = true;
+  }
+
+  chooseDestinationCard() {
+    const selected = [];
+    const cards = this._userInfo.game.destinationCardDeck.slice(0, 2);
+    for (let i = 0; i < cards.length; i++) {
+      if (cards[i].selected) {
+        selected.push(cards[i]._id);
+      }
+    }
+
+    if (selected.length < 1) {
+      this.display = false;
+      this._serverProxy.chooseDestinationCard(selected);
+    } else {
+      this.message = 'Make sure you choose at least 1 destination card to keep.';
+    }
   }
 
   ngOnInit() {
