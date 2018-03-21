@@ -8,9 +8,8 @@
     </div>
     <div (click)="chooseTrainCard(_userInfo.game.trainCardDeck[5])" class="card-slot traincard-deck">
         <div class="card"  [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
-         <!-- TODO: no click event needed for phase2-->
-          <img class="side" src="../../assets/images/traincards/vertical/cardback.png"/>
-           <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
+          <img class="side" src="../../assets/images/traincards/vertical/cardback.jpg"/>
+          <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
         </div>
         <div id="trainCardCount">
             {{_userInfo.game.trainCardDeck.length}} left
@@ -18,7 +17,6 @@
       </div>
     <div (click)="chooseDestinationCard(_userInfo.game.destinationCardDeck[0])" class="card-slot destcard-deck">
         <div class="card"   [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
-          <!--TODO: no click event needed for phase2 -->
           <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
           <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
         </div>
@@ -27,9 +25,5 @@
         </div>
     </div>
   </div>
-  <div class="bottom-bar">
-    <img class="bottom-bar-tracks" src="../../assets/border2.png"/>
-  </div>
-
 
 </div>
