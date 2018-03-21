@@ -127,8 +127,7 @@ export default class GameFacade {
       return {
         success: false,
         data: {},
-        errorInfo:
-          'The game has already been initialized and all users have performed their initial card selection!',
+        errorInfo: 'The game has already been initialized and all users have performed their initial card selection!',
       };
     } else if (unwrappedGame.playersReady.indexOf(data.reqUserID) >= 0) {
       return {
@@ -183,9 +182,7 @@ export default class GameFacade {
         return {
           success: true,
           data: {},
-          gameHistory: `selected ${
-            savedUser.destinationCardHand.length
-          } destination cards.`,
+          gameHistory: `selected ${savedUser.destinationCardHand.length} destination cards.`,
           emit: [
             {
               command: 'updateGameState',
@@ -332,22 +329,18 @@ export default class GameFacade {
         // force unwrap route
         route = route!;
 
-        let cardColor: TrainColor =
-          route.color == TrainColor.Gray ? data.colorToUse : route.color;
+        let cardColor: TrainColor = route.color == TrainColor.Gray ? data.colorToUse : route.color;
         if (!cardColor) {
           return {
             success: false,
             data: {},
-            errorInfo:
-              "Gray routes require a 'colorToUse' attribute in the request.",
+            errorInfo: "Gray routes require a 'colorToUse' attribute in the request.",
           };
         }
 
-        let userCardsOfColor = currentUser.trainCardHand.filter(
-          (card, index) => {
-            card.color == cardColor;
-          }
-        );
+        let userCardsOfColor = currentUser.trainCardHand.filter((card, index) => {
+          card.color == cardColor;
+        });
 
         if (userCardsOfColor.length < route.length) {
           return {
@@ -377,17 +370,21 @@ export default class GameFacade {
         });
 
         // filter the trainCardHand by cards not in the discard list
-        currentUser.trainCardHand = currentUser.trainCardHand.filter(
-          (card, index) => {
-            // < 0 means not in the discard list
-            return cardIDsToDiscard.indexOf(card._id) < 0;
-          }
-        );
+        currentUser.trainCardHand = currentUser.trainCardHand.filter((card, index) => {
+          // < 0 means not in the discard list
+          return cardIDsToDiscard.indexOf(card._id) < 0;
+        });
 
         // TODO uncomment once public and total scores have been changed
         // currentUser.publicScore += route.pointValue();
         // currentUser.totalScore += route.pointValue();
         currentUser.score += route.pointValue();
+
+        // let graphs = currentUser.generateRouteGraph();
+        // findLongestRoute(graphs);
+
+        // for destcard in currentUser.unmetdestinationcard:
+        // 	is destcard met(graphs);
 
         // construct set of graphs from routes. detect which ones only have 1 edge. start length process from each leaf node.
         // do this for all users, find longest route
@@ -412,7 +409,7 @@ export default class GameFacade {
         } else if (currentUser.tokenCount <= 2) {
           // initiate end game thing; we have else if because
           // we don't need to check if you have less than 2 if you're already in the final phase
-          game.lastRoute = game.userList.length;
+          game.lastRound = game.userList.length;
         }
 
         return game.save().then(savedGame => {

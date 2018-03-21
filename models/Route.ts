@@ -20,32 +20,6 @@ export var RouteSchema: Schema = new Schema({
   city2: String,
 });
 
-RouteSchema.methods.pointValue = function() {
-  switch (this.length) {
-    case 1:
-      return 1;
-
-    case 2:
-      return 2;
-
-    case 3:
-      return 4;
-
-    case 4:
-      return 7;
-
-    case 5:
-      return 10;
-
-    case 6:
-      return 15;
-
-    default:
-      break;
-  }
-  return 0;
-};
-
 RouteSchema.virtual('pointValue').get(function(this: IRouteModel) {
   const points: any = {
     1: 1,
@@ -58,7 +32,4 @@ RouteSchema.virtual('pointValue').get(function(this: IRouteModel) {
   return this.length && points[this.length] ? points[this.length] : 0;
 });
 
-export const Route: mongoose.Model<IRouteModel> = mongoose.model<IRouteModel>(
-  'Route',
-  RouteSchema
-);
+export const Route: mongoose.Model<IRouteModel> = mongoose.model<IRouteModel>('Route', RouteSchema);
