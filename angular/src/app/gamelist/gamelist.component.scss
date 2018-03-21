@@ -1,9 +1,9 @@
-.lobby-sidebar{
+.lobby-sidebar {
   grid-area: lobby-sidebar;
   position: relative;
 }
 
-.game-tile-list{
+.game-tile-list {
   border-radius: 5px;
   min-height: 500px;
   grid-column: 1/2;
@@ -14,20 +14,20 @@
 }
 
 .box {
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    font-size: 100%;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 100%;
 }
 
 .box .box {
-    background-color: #FFF;
-    color: #444;
+  background-color: #fff;
+  color: #444;
 }
 
-.create-game-btn{
+.create-game-btn {
   grid-column: 2/3;
-  width:95%;
-  margin: 10px;
+  width: 100%;
+  margin-top: 10px;
 }
