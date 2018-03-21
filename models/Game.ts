@@ -5,14 +5,7 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import {
-  TRAIN_CARD_HAND_SIZE,
-  DESTINATION_CARD_HAND_SIZE,
-  GameState,
-  INITIAL_TOKEN_COUNT,
-  PLAYER_COLOR_MAP,
-  PlayerColor,
-} from '../constants';
+import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor } from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
@@ -24,13 +17,10 @@ export interface IGameModel extends mongoose.Document {
   destinationCardDeck: IDestinationCardModel[];
   destinationCardDiscardPile: IDestinationCardModel[];
   turnNumber: number;
+  lastRound: number;
   playersReady: IUserModel[];
   initGame(): Promise<any>;
-  shuffleDealCards(
-    unclaimedRoutes: IRouteModel[],
-    trainCardDeck: ITrainCardModel[],
-    destinationCardDeck: IDestinationCardModel[]
-  ): Promise<any>;
+  shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
 }
 
@@ -38,22 +28,13 @@ export var GameSchema: Schema = new Schema({
   host: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
   userList: [{ type: Schema.Types.ObjectId, required: true, ref: 'User' }],
   gameState: Number,
-  unclaimedRoutes: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'Route' },
-  ],
-  trainCardDeck: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'TrainCard' },
-  ],
-  trainCardDiscardPile: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'TrainCard' },
-  ],
-  destinationCardDeck: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' },
-  ],
-  destinationCardDiscardPile: [
-    { type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' },
-  ],
+  unclaimedRoutes: [{ type: Schema.Types.ObjectId, required: true, ref: 'Route' }],
+  trainCardDeck: [{ type: Schema.Types.ObjectId, required: true, ref: 'TrainCard' }],
+  trainCardDiscardPile: [{ type: Schema.Types.ObjectId, required: true, ref: 'TrainCard' }],
+  destinationCardDeck: [{ type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' }],
+  destinationCardDiscardPile: [{ type: Schema.Types.ObjectId, required: true, ref: 'DestinationCard' }],
   turnNumber: Number,
+  lastRound: Number,
   playersReady: [{ type: Schema.Types.ObjectId, required: true, ref: 'User' }],
 });
 
@@ -80,9 +61,7 @@ GameSchema.methods.initGame = async function() {
         trainCardDeck.push(trainCards[index]);
       }
     } else {
-      console.log(
-        'Unexpected error – there should be train cards in the database.'
-      );
+      console.log('Unexpected error – there should be train cards in the database.');
     }
   });
 
@@ -93,17 +72,11 @@ GameSchema.methods.initGame = async function() {
         destinationCardDeck.push(destinationCards[index]);
       }
     } else {
-      console.log(
-        'Unexpected error – there should be destination cards in the database.'
-      );
+      console.log('Unexpected error – there should be destination cards in the database.');
     }
   });
 
-  return this.shuffleDealCards(
-    unclaimedRoutes,
-    trainCardDeck,
-    destinationCardDeck
-  );
+  return this.shuffleDealCards(unclaimedRoutes, trainCardDeck, destinationCardDeck);
 };
 
 GameSchema.methods.shuffleDealCards = async function(
@@ -142,11 +115,7 @@ GameSchema.methods.shuffleDealCards = async function(
         shuffledTrainCardDeck.splice(0, 1);
       }
 
-      for (
-        let cardIndex = 0;
-        cardIndex < DESTINATION_CARD_HAND_SIZE;
-        cardIndex++
-      ) {
+      for (let cardIndex = 0; cardIndex < DESTINATION_CARD_HAND_SIZE; cardIndex++) {
         player.destinationCardHand.push(shuffledDestinationCardDeck[0]._id);
         shuffledDestinationCardDeck.splice(0, 1);
       }
@@ -166,6 +135,7 @@ GameSchema.methods.shuffleDealCards = async function(
   }
 
   that.turnNumber = -1;
+  that.lastRound = -1;
   that.playersReady = [];
   that.gameState = GameState.InProgress;
 
@@ -176,7 +146,4 @@ GameSchema.methods.getCurrentUserIndex = function() {
   return this.turnNumber % this.userList.length;
 };
 
-export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>(
-  'Game',
-  GameSchema
-);
+export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>('Game', GameSchema);
