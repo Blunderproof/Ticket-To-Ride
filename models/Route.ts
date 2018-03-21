@@ -9,6 +9,7 @@ export interface IRouteModel extends mongoose.Document {
   routeNumber: number;
   city1: string;
   city2: string;
+  pointValue(): number;
 }
 
 export var RouteSchema: Schema = new Schema({
@@ -19,33 +20,16 @@ export var RouteSchema: Schema = new Schema({
   city2: String,
 });
 
-RouteSchema.methods.pointValue = function() {
-  switch (this.length) {
-    case 1:
-      return 1;
+RouteSchema.virtual('pointValue').get(function(this: IRouteModel) {
+  const points: any = {
+    1: 1,
+    2: 2,
+    3: 4,
+    4: 7,
+    5: 10,
+    6: 15,
+  };
+  return this.length && points[this.length] ? points[this.length] : 0;
+});
 
-    case 2:
-      return 2;
-
-    case 3:
-      return 4;
-
-    case 4:
-      return 7;
-
-    case 5:
-      return 10;
-
-    case 6:
-      return 15;
-
-    default:
-      break;
-  }
-  return 0;
-};
-
-export const Route: mongoose.Model<IRouteModel> = mongoose.model<IRouteModel>(
-  'Route',
-  RouteSchema
-);
+export const Route: mongoose.Model<IRouteModel> = mongoose.model<IRouteModel>('Route', RouteSchema);
