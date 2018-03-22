@@ -24,6 +24,7 @@ export class DestCardSelectorComponent implements OnInit {
 
     if (notSelected.length <= 1) {
       this.display = false;
+      // TODO: Use promise (.then) and display the server error instead of the one we have hard-coded in the else
       this._serverProxy.initialSelectDestinationCard(notSelected);
     } else {
       this.message = 'Make sure you choose 2 or 3 destination cards to keep.';
@@ -43,8 +44,10 @@ export class DestCardSelectorComponent implements OnInit {
       }
     }
 
-    if (selected.length < 1) {
+    if (selected.length > 0) {
       this.display = false;
+
+      // TODO: Use promise (.then) and display the server error instead of the one we have hard-coded in the else
       this._serverProxy.chooseDestinationCard(selected);
     } else {
       this.message = 'Make sure you choose at least 1 destination card to keep.';
