@@ -158,6 +158,7 @@ export default class ServerFacade implements IServer {
   /*
   input:
     routeID
+    colorToUse --> if the color of the route for routeID is Gray
   */
   claimRoute(data: any): Promise<any> {
     return GameFacade.instanceOf().claimRoute(data);

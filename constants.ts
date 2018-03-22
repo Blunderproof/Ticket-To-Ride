@@ -26,13 +26,13 @@ export enum PlayerColor {
   Yellow = 'yellow',
 }
 
-export const PLAYER_COLOR_MAP = [
-  PlayerColor.Red,
-  PlayerColor.Green,
-  PlayerColor.Blue,
-  PlayerColor.Black,
-  PlayerColor.Yellow,
-];
+export enum TurnState {
+  BeginningOfTurn = 'BeginningOfTurn',
+  OneTrainCardChosen = 'OneTrainCardChosen',
+  ChoosingDestinationCards = 'ChoosingDestinationCards',
+}
+
+export const PLAYER_COLOR_MAP = [PlayerColor.Red, PlayerColor.Green, PlayerColor.Blue, PlayerColor.Black, PlayerColor.Yellow];
 
 export const TRAIN_CARD_HAND_SIZE = 4;
 export const DESTINATION_CARD_HAND_SIZE = 3;

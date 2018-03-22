@@ -305,9 +305,13 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel = turnCheck.currentUser;
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point
+        currentUser = currentUser!;
 
         // TODO check current user in state BeginningOfTurn
+
+        let currentUserState = currentUser.getTurnStateObject();
 
         let routeIndex = game.unclaimedRoutes.indexOf(data.routeID);
         if (routeIndex < 0) {
@@ -338,47 +342,18 @@ export default class GameFacade {
           };
         }
 
-        let userCardsOfColor = currentUser.trainCardHand.filter((card, index) => {
-          card.color == cardColor;
-        });
-
-        if (userCardsOfColor.length < route.length) {
+        if ((currentUser = currentUserState.claimRoute(route, cardColor)) == null) {
           return {
             success: false,
             data: {},
-            errorInfo: `You don't have enough ${cardColor} cards to claim this route.`,
+            errorInfo: currentUserState.error,
           };
         }
 
-        if (currentUser.tokenCount < route.length) {
-          return {
-            success: false,
-            data: {},
-            errorInfo: `You don't have enough train tokens to claim this route.`,
-          };
-        }
+        // it won't be null at this point
+        currentUser = currentUser!;
 
-        // claim route
-        currentUser.claimedRouteList.push(route._id);
-        currentUser.tokenCount -= route.length;
-
-        // take only the number of cards required
-        let cardsToDiscard = userCardsOfColor.slice(0, route.length);
-        // map them to ids
-        let cardIDsToDiscard = cardsToDiscard.map(card => {
-          card._id;
-        });
-
-        // filter the trainCardHand by cards not in the discard list
-        currentUser.trainCardHand = currentUser.trainCardHand.filter((card, index) => {
-          // < 0 means not in the discard list
-          return cardIDsToDiscard.indexOf(card._id) < 0;
-        });
-
-        // TODO uncomment once public and total scores have been changed
-        // currentUser.publicScore += route.pointValue();
-        // currentUser.totalScore += route.pointValue();
-        currentUser.score += route.pointValue();
+        // currentUser.destinationCardCheck()
 
         // let graphs = currentUser.generateRouteGraph();
         // findLongestRoute(graphs);
@@ -398,6 +373,7 @@ export default class GameFacade {
         //    if not, do nothing
 
         await currentUser.save();
+
         game.turnNumber++;
 
         if (game.lastRound > 0) {
