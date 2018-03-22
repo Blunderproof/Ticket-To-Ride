@@ -42,6 +42,7 @@ export default class ServerCommunicator {
     this.commandMap.set('getGameHistory', facade.getGameHistory);
     this.commandMap.set('initialSelectDestinationCard', facade.initialSelectDestinationCard);
     this.commandMap.set('chooseDestinationCard', facade.chooseDestinationCard);
+    this.commandMap.set('setChooseDestinationCardState', facade.setChooseDestinationCardState);
     this.commandMap.set('claimRoute', facade.claimRoute);
     this.commandMap.set('chooseTrainCard', facade.chooseTrainCard);
     // this.commandMap.set(
@@ -52,16 +53,12 @@ export default class ServerCommunicator {
 
   public handleSocketCommand = (data: any, connection: any) => {
     // TODO implement and test
-    const facadeCommand: FacadeCommand | undefined = this.commandMap.get(
-      data.methodName
-    );
+    const facadeCommand: FacadeCommand | undefined = this.commandMap.get(data.methodName);
 
     if (!facadeCommand) {
       connection.emit({
         success: false,
-        message: `Invalid request. ${
-          data.methodName
-        } is not a valid method name.`,
+        message: `Invalid request. ${data.methodName} is not a valid method name.`,
       });
     }
 
@@ -111,17 +108,13 @@ export default class ServerCommunicator {
 
     console.log(req.body);
 
-    const facadeCommand: FacadeCommand | undefined = this.commandMap.get(
-      req.body.methodName
-    );
+    const facadeCommand: FacadeCommand | undefined = this.commandMap.get(req.body.methodName);
 
     if (!facadeCommand) {
       res
         .json({
           success: false,
-          message: `Invalid request. ${
-            req.body.methodName
-          } is not a valid method name.`,
+          message: `Invalid request. ${req.body.methodName} is not a valid method name.`,
         })
         .status(404);
     }
@@ -179,10 +172,7 @@ export default class ServerCommunicator {
           if (emitRequests && emitRequests.length > 0) {
             emitRequests.map((emitRequest: any) => {
               if (emitRequest && emitRequest.command) {
-                SocketFacade.instanceOf().execute(
-                  emitRequest,
-                  this.socketConnection
-                );
+                SocketFacade.instanceOf().execute(emitRequest, this.socketConnection);
               }
             });
           }

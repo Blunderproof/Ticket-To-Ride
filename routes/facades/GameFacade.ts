@@ -1,6 +1,6 @@
 import CommandResults from '../../modules/commands/CommandResults';
 import { Message } from '../../models/Message';
-import { MessageType, TrainColor, GameState } from '../../constants';
+import { MessageType, TrainColor, GameState, TurnState } from '../../constants';
 import { User, IUserModel, IUser } from '../../models/User';
 import { Game, IGameModel } from '../../models/Game';
 import { Route } from '../../models/Route';
@@ -277,12 +277,39 @@ export default class GameFacade {
       return loginCheck;
     }
 
-    if (!data.routeID) {
+    if (!data.color) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({
           success: false,
           data: {},
-          errorInfo: "Request is missing parameter 'routeID'.",
+          errorInfo: "Request is missing parameter 'color'.",
+        });
+      });
+      return promise;
+    } else if (!data.routeNumber) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: "Request is missing parameter 'routeNumber'.",
+        });
+      });
+      return promise;
+    } else if (!data.city1) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: "Request is missing parameter 'city1'.",
+        });
+      });
+      return promise;
+    } else if (!data.city2) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: "Request is missing parameter 'city2'.",
         });
       });
       return promise;
@@ -290,6 +317,13 @@ export default class GameFacade {
 
     return Game.findById(data.reqGameID)
       .populate('userList')
+      .populate({
+        path: 'userList',
+        populate: {
+          path: 'trainCardHand',
+          model: 'TrainCard',
+        },
+      })
       .then(async game => {
         if (!game) {
           return {
@@ -306,32 +340,33 @@ export default class GameFacade {
           return turnCheck;
         }
         let currentUser: IUserModel | null = turnCheck.currentUser;
-        // it won't be null at this point
+        // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
-        // TODO check current user in state BeginningOfTurn
+        let route = await Route.findOne({
+          color: data.color,
+          routeNumber: data.routeNumber,
+          city1: data.city1,
+          city2: data.city2,
+        });
 
-        let currentUserState = currentUser.getTurnStateObject();
+        if (!route) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: "The route specified doesn't exist.",
+          };
+        }
+        // force unwrap route
+        route = route!;
 
-        let routeIndex = game.unclaimedRoutes.indexOf(data.routeID);
+        let routeIndex = game.unclaimedRoutes.indexOf(route._id);
         if (routeIndex < 0) {
           return {
             success: false,
             errorInfo: 'That route has already been claimed.',
           };
         }
-
-        let route = await Route.findById(data.routeID);
-
-        if (!route) {
-          return {
-            success: false,
-            data: {},
-            errorInfo: "That route doesn't exist.",
-          };
-        }
-        // force unwrap route
-        route = route!;
 
         let cardColor: TrainColor = route.color == TrainColor.Gray ? data.colorToUse : route.color;
         if (!cardColor) {
@@ -342,7 +377,9 @@ export default class GameFacade {
           };
         }
 
-        if ((currentUser = currentUserState.claimRoute(route, cardColor)) == null) {
+        let currentUserState = currentUser.getTurnStateObject();
+
+        if ((currentUser = currentUserState.claimRoute(route, cardColor, game)) == null) {
           return {
             success: false,
             data: {},
@@ -350,7 +387,7 @@ export default class GameFacade {
           };
         }
 
-        // it won't be null at this point
+        // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
         // currentUser.destinationCardCheck()
@@ -403,7 +440,7 @@ export default class GameFacade {
       });
   }
 
-  setChoosingDestinationCard(data: any): Promise<any> {
+  setChooseDestinationCardState(data: any): Promise<any> {
     let loginCheck: any = null;
     if ((loginCheck = this.validateUserAuth(data)) != null) {
       return loginCheck;
@@ -429,7 +466,8 @@ export default class GameFacade {
         }
         let currentUser: IUserModel = turnCheck.currentUser;
 
-        // TODO set userState to ChoosingDestinationCards
+        currentUser.turnState = TurnState.ChoosingDestinationCards;
+        await currentUser.save();
 
         return game.save().then(savedGame => {
           return {
@@ -447,8 +485,34 @@ export default class GameFacade {
   }
 
   chooseDestinationCard(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
+    if (!data.keepCards) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: "Request is missing parameter 'keepCards'.",
+        });
+      });
+      return promise;
+    } else if (data.keepCards.length > 3 || data.keepCards.length < 1) {
+      const promise = new Promise((resolve: any, reject: any) => {
+        resolve({
+          success: false,
+          data: {},
+          errorInfo: 'You must choose one, two, or three destination cards to keep.',
+        });
+      });
+      return promise;
+    }
+
     return Game.findById(data.reqGameID)
       .populate('userList')
+      .populate('destinationCardDeck')
       .then(async game => {
         if (!game) {
           return {
@@ -464,14 +528,45 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel = turnCheck.currentUser;
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
 
-        // TODO check current user in state ChoosingDestinationCard
+        // check if the keep cards specified are in the game destination card deck
+        let keep = game.destinationCardDeck.filter(function(cardID) {
+          return data.keepCards.indexOf(cardID.toString()) >= 0;
+        });
+
+        if (keep.length != data.keepCards.length) {
+          return {
+            success: false,
+            errorInfo: `One of the specified keep cards is not in the game's destination card deck.`,
+          };
+        }
+
+        let currentUserState = currentUser.getTurnStateObject();
+        if ((currentUser = currentUserState.chooseDestinationCard(data.keepCards, game)) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+
+        await currentUser.save();
 
         game.turnNumber++;
-        // set userState to BeginningOfTurn
 
-        //game.turnNumber %= game.userList.length;
+        if (game.lastRound > 0) {
+          game.lastRound -= 1;
+          if (game.lastRound == 0) {
+            // end the game
+            game.gameState = GameState.Ended;
+          }
+        }
 
         return game.save().then(savedGame => {
           return {
@@ -515,11 +610,8 @@ export default class GameFacade {
     }
 
     return Game.findById(data.reqGameID)
+      .populate('trainCardDeck')
       .populate('userList')
-      .populate({
-        path: 'userList',
-        populate: 'trainCardHand',
-      })
       .then(async game => {
         if (!game) {
           return {
@@ -535,7 +627,30 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel = turnCheck.currentUser;
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+
+        if (data.cardIndex >= game.trainCardDeck.length) {
+          return {
+            success: false,
+            errorInfo: "That cardIndex is outside the bounds of the game's train card deck.",
+          };
+        }
+
+        let currentUserState = currentUser.getTurnStateObject();
+
+        if ((currentUser = currentUserState.drawTrainCard(data.cardIndex, game)) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+        await currentUser.save();
 
         return game.save().then(savedGame => {
           return {

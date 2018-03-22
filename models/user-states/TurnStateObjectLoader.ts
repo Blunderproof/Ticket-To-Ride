@@ -28,6 +28,10 @@ export default class TurnStateObjectLoader {
   }
 
   createStateObject(user: IUserModel) {
-    return this.stateLookupTable[user.turnState](user);
+    console.log('creatingState Object');
+    console.log('user.turnState', user.turnState);
+    if (user.turnState == TurnState.BeginningOfTurn) return new BeginningTurnStateObject(user);
+    if (user.turnState == TurnState.OneTrainCardChosen) return new TrainCardTurnStateObject(user);
+    if (user.turnState == TurnState.ChoosingDestinationCards) return new DestinationCardTurnStateObject(user);
   }
 }

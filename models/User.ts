@@ -13,6 +13,7 @@ export interface IUser {
   claimedRouteList: IRouteModel[];
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
+
   score: number;
   tokenCount: number;
   color: PlayerColor;
@@ -37,9 +38,12 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema(
     claimedRouteList: [{ type: Schema.Types.ObjectId, ref: 'Route' }],
     trainCardHand: [{ type: Schema.Types.ObjectId, ref: 'TrainCard' }],
     destinationCardHand: [{ type: Schema.Types.ObjectId, ref: 'DestinationCard' }],
+
     score: Number,
     tokenCount: Number,
     color: String,
+
+    turnState: String,
   },
   {
     toObject: { virtuals: true },

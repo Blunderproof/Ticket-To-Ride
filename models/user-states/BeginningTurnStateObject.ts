@@ -1,7 +1,8 @@
 import TurnStateObject from './TurnStateObject';
 import { IUserModel } from '../User';
 import { IRouteModel } from '../Route';
-import { TrainColor } from '../../constants';
+import { TrainColor, TurnState } from '../../constants';
+import { IGameModel } from '../Game';
 
 export default class BeginningTurnStateObject implements TurnStateObject {
   user: IUserModel;
@@ -11,10 +12,27 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     this.user = user;
   }
 
-  drawTrainCard() {
-    // TODO implement
-    this.error = 'not implemented yet but will be';
-    return null;
+  drawTrainCard(cardIndex: number, game: IGameModel) {
+    let trainCardToTake = game.trainCardDeck[cardIndex];
+    let nextState = TurnState.OneTrainCardChosen;
+
+    if (cardIndex < 5 && trainCardToTake.color == TrainColor.Rainbow) {
+      // face up rainbow train card selected – should set nextState to Beginning and advance turns
+      nextState = TurnState.BeginningOfTurn;
+      game.turnNumber += 1;
+    }
+
+    this.user.turnState = nextState;
+
+    // add card to user's hand, then remove it from game
+    this.user.trainCardHand.push(trainCardToTake);
+    game.trainCardDeck.splice(cardIndex, 1);
+
+    if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
+      // TODO implement the reshuffle algorithm
+      // TODO refactor our game's init stuff
+    }
+    return this.user;
   }
 
   chooseDestinationCard() {
@@ -23,18 +41,39 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     return null;
   }
 
-  claimRoute(route: IRouteModel, cardColor: TrainColor) {
-    // TODO update this to allow rainbows.
+  claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
     let userCardsOfColor = this.user.trainCardHand.filter((card, index) => {
-      card.color == cardColor;
+      console.log('card', card);
+      return card.color == cardColor;
     });
 
+    let userRainbowCards = this.user.trainCardHand.filter((card, index) => {
+      return card.color == TrainColor.Rainbow;
+    });
+
+    console.log('cardColor', cardColor);
+    console.log('length of userCardsOfColor', userCardsOfColor.length);
+    console.log('length of userRainbowCards', userRainbowCards.length);
+    console.log('length of route', route.length);
+
     let usingRainbows: boolean = false;
+    let difference: number = 0;
     if (userCardsOfColor.length < route.length) {
-      // check rainbows – if enough, go for it
-      this.error = `You don't have enough ${cardColor} cards to claim this route.`;
-      return null;
+      difference = route.length - userCardsOfColor.length;
+      // if we have enough rainbows to make up the difference
+      console.log('difference:', difference);
+      if (userRainbowCards.length >= difference) {
+        // use the rainbows
+        usingRainbows = true;
+      } else {
+        // return error
+        this.error = `You don't have enough ${cardColor} cards or wild cards to claim this route.`;
+        return null;
+      }
     }
+
+    console.log('usingRainbows:', usingRainbows);
+    console.log('difference:', difference);
 
     if (this.user.tokenCount < route.length) {
       this.error = `You don't have enough train tokens to claim this route.`;
@@ -47,16 +86,39 @@ export default class BeginningTurnStateObject implements TurnStateObject {
 
     // take only the number of cards required
     let cardsToDiscard = userCardsOfColor.slice(0, route.length);
+    console.log('cardsToDiscard');
+    console.log(cardsToDiscard);
+
+    if (usingRainbows) {
+      // if we need to use rainbows, add also the number of rainbow cards
+      cardsToDiscard = cardsToDiscard.concat(userRainbowCards.slice(0, difference));
+      console.log('using rainbows, updated cardsToDiscard');
+      console.log(cardsToDiscard);
+    }
     // map them to ids
     let cardIDsToDiscard = cardsToDiscard.map(card => {
-      card._id;
+      return card._id.toString();
     });
+
+    console.log('cardIDsToDiscard');
+    console.log(cardIDsToDiscard);
 
     // filter the trainCardHand by cards not in the discard list
     this.user.trainCardHand = this.user.trainCardHand.filter((card, index) => {
       // < 0 means not in the discard list
-      return cardIDsToDiscard.indexOf(card._id) < 0;
+      return cardIDsToDiscard.indexOf(card._id.toString()) < 0;
     });
+
+    // TODO test this
+    game.trainCardDiscardPile = game.trainCardDiscardPile.concat(cardsToDiscard);
+
+    // remove the route from the unclaimed routes
+    let routeIndex = game.unclaimedRoutes.indexOf(route._id);
+    game.unclaimedRoutes.splice(routeIndex, 1);
+
+    if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
+      // TODO shuffle and insert
+    }
 
     // no need to change state because user is already in BeginningTurnState
     return this.user;

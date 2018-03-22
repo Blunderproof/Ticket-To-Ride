@@ -149,6 +149,14 @@ export default class ServerFacade implements IServer {
 
   /*
   input:
+    {{ none }}
+  */
+  setChooseDestinationCardState(data: any): Promise<any> {
+    return GameFacade.instanceOf().setChooseDestinationCardState(data);
+  }
+
+  /*
+  input:
     keepCards
   */
   chooseDestinationCard(data: any): Promise<any> {
