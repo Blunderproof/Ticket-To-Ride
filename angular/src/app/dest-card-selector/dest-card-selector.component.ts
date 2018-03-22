@@ -36,7 +36,7 @@ export class DestCardSelectorComponent implements OnInit {
 
   chooseDestinationCard() {
     const selected = [];
-    const cards = this._userInfo.game.destinationCardDeck.slice(0, 2);
+    const cards = this._userInfo.game.destinationCardDeck.slice(0, 3);
     for (let i = 0; i < cards.length; i++) {
       if (cards[i].selected) {
         selected.push(cards[i]._id);
