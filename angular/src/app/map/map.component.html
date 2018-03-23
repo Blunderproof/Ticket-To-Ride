@@ -7002,7 +7002,7 @@
          id="CityRoutes">
         <svg:g
            transform="translate(0,-3.7003108)"
-           class="route" (click)="mapClicked('tp-1-Vancouver-Calgary')"
+           class="route" (click)="mapClicked($event, 'tp-1-Vancouver-Calgary')"
            id="Gy-1-Vancouver-Calgary">
           <svg:g
              id="GrayPath-36-5-4"
@@ -7046,7 +7046,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Calgary-Helena"
-           class="route" (click)="mapClicked('tp-1-Calgary-Helena')">
+           class="route" (click)="mapClicked($event, 'tp-1-Calgary-Helena')">
           <svg:g
              id="GrayPath-36-5-2"
              transform="matrix(0.79457317,-0.34389143,0.39719547,0.91773403,241.91841,-16.128466)"
@@ -7102,7 +7102,7 @@
         </svg:g>
         <svg:g
            id="P-1-SaltLakeCity-Helena"
-           class="route" (click)="mapClicked('tp-1-SaltLakeCity-Helena')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaltLakeCity-Helena')">
           <svg:g
              id="Pink Path-9"
              transform="matrix(0.65531312,0.34201284,-0.3950257,0.75688833,533.73566,184.28849)"
@@ -7145,7 +7145,7 @@
         </svg:g>
         <svg:g
            id="O-1-SanFrancisco-SaltLakeCity"
-           class="route" (click)="mapClicked('tp-1-SanFrancisco-SaltLakeCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-SanFrancisco-SaltLakeCity')">
           <svg:g
              id="OrangePath-7"
              transform="matrix(0.13299013,0.72713252,-0.83983991,0.15360394,568.79019,458.02379)"
@@ -7227,7 +7227,7 @@
         </svg:g>
         <svg:g
            id="W-1-SanFrancisco-SaltLakeCity"
-           class="route" (click)="mapClicked('tp-2-SanFrancisco-SaltLakeCity')">
+           class="route" (click)="mapClicked($event, 'tp-2-SanFrancisco-SaltLakeCity')">
           <svg:g
              id="WhiteBlock-0"
              transform="matrix(0.12969579,0.72772734,-0.84052692,0.14979897,611.50617,550.31007)">
@@ -7345,7 +7345,7 @@
         </svg:g>
         <svg:g
            id="Y-1-SaltLakeCity-Denver"
-           class="route" (click)="mapClicked('tp-2-SaltLakeCity-Denver')">
+           class="route" (click)="mapClicked($event, 'tp-2-SaltLakeCity-Denver')">
           <svg:g
              id="YellowPath-5"
              transform="matrix(0.12038868,-0.72932479,0.84237198,0.13904923,308.42228,665.95256)"
@@ -7388,7 +7388,7 @@
         </svg:g>
         <svg:g
            id="R-1-SaltLakeCity-Denver"
-           class="route" (click)="mapClicked('tp-1-SaltLakeCity-Denver')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaltLakeCity-Denver')">
           <svg:g
              id="RedPath-6"
              transform="matrix(0.12038868,-0.72932479,0.84237198,0.13904923,312.89807,643.79237)"
@@ -7431,7 +7431,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-Helena-Denver"
-           class="route" (click)="mapClicked('tp-1-Helena-Denver')">
+           class="route" (click)="mapClicked($event, 'tp-1-Helena-Denver')">
           <svg:g
              id="GreenBlock-4"
              transform="matrix(0.59708589,-0.43577117,0.50331681,0.68963572,374.66229,307.38297)">
@@ -7483,7 +7483,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-SantaFe-Denver"
-           class="route" (click)="mapClicked('tp-1-SantaFe-Denver')">
+           class="route" (click)="mapClicked($event, 'tp-1-SantaFe-Denver')">
           <svg:g
              id="GrayPath-02"
              transform="matrix(0.71792134,0.17605975,-0.20334947,0.82920096,612.14871,437.53216)"
@@ -7514,7 +7514,7 @@
         <svg:g
            transform="translate(0.46253886,3.237772)"
            id="O-1-LasVegas-SaltLakeCity"
-           class="route" (click)="mapClicked('tp-1-LasVegas-SaltLakeCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-LasVegas-SaltLakeCity')">
           <svg:g
              id="OrangePath-2"
              transform="matrix(0.73021047,0.11489453,-0.13270347,0.84339495,407.52708,411.62537)"
@@ -7557,7 +7557,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-LosAngeles-LasVegas"
-           class="route" (click)="mapClicked('tp-1-LosAngeles-LasVegas')">
+           class="route" (click)="mapClicked($event, 'tp-1-LosAngeles-LasVegas')">
           <svg:g
              id="GrayPath-9"
              transform="matrix(0.25996525,0.69197265,-0.79923016,0.30026053,473.67476,591.04999)"
@@ -7587,7 +7587,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-LosAngeles-Phoenix"
-           class="route" (click)="mapClicked('tp-1-LosAngeles-Phoenix')">
+           class="route" (click)="mapClicked($event, 'tp-1-LosAngeles-Phoenix')">
           <svg:g
              id="GrayPath-5"
              transform="matrix(0.13281878,0.72716384,-0.83987608,0.15340603,495.85129,699.52565)"
@@ -7630,7 +7630,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-LosAngeles-ElPaso"
-           class="route" (click)="mapClicked('tp-1-LosAngeles-ElPaso')">
+           class="route" (click)="mapClicked($event, 'tp-1-LosAngeles-ElPaso')">
           <svg:g
              id="Black Path-3"
              transform="matrix(-0.51020941,0.56930646,-0.69265425,-0.55452454,548.59763,937.17414)"
@@ -7712,7 +7712,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Phoenix-SantaFe"
-           class="route" (click)="mapClicked('tp-1-Phoenix-SantaFe')">
+           class="route" (click)="mapClicked($event, 'tp-1-Phoenix-SantaFe')">
           <svg:g
              id="GrayPath-7"
              transform="matrix(0.48238945,0.56009686,-0.64691331,0.55716103,592.51592,599.75239)"
@@ -7755,7 +7755,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-Denver-KansasCity"
-           class="route" (click)="mapClicked('tp-1-Denver-KansasCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-Denver-KansasCity')">
           <svg:g
              id="Black Path-0"
              transform="matrix(0.0152526,0.73905761,-0.93614455,0.02220378,954.70358,501.23249)"
@@ -7811,7 +7811,7 @@
         </svg:g>
         <svg:g
            id="O-1-Denver-KansasCity"
-           class="route" (click)="mapClicked('tp-2-Denver-KansasCity')">
+           class="route" (click)="mapClicked($event, 'tp-2-Denver-KansasCity')">
           <svg:g
              id="OrangePath-3"
              transform="matrix(0.0152526,0.73905761,-0.93614455,0.02220378,955.18446,523.67331)"
@@ -7868,7 +7868,7 @@
         <svg:g
            transform="translate(-1.0407124,4.1628497)"
            id="P-1-Denver-Omaha"
-           class="route" (click)="mapClicked('tp-1-Denver-Omaha')">
+           class="route" (click)="mapClicked($event, 'tp-1-Denver-Omaha')">
           <svg:g
              id="Pink Path-7"
              transform="matrix(0.59201764,0.44263212,-0.51124121,0.68378188,745.25305,346.23256)"
@@ -7924,7 +7924,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Omaha-KansasCity"
-           class="route" (click)="mapClicked('tp-1-Omaha-KansasCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-Omaha-KansasCity')">
           <svg:g
              id="GrayPath-8"
              transform="matrix(0.69539468,-0.25066773,0.28952187,0.80318263,789.24442,392.39408)"
@@ -7940,7 +7940,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-Omaha-KansasCity')"
+          class="route" (click)="mapClicked($event, 'tp-2-Omaha-KansasCity')"
            id="Gy-2-Omaha-KansasCity"
            class="route secondroute">
           <svg:g
@@ -7959,7 +7959,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Omaha-Duluth"
-           class="route" (click)="mapClicked('tp-1-Omaha-Duluth')">
+           class="route" (click)="mapClicked($event, 'tp-1-Omaha-Duluth')">
           <svg:g
              id="GrayPath-8-3"
              transform="matrix(0.60936103,0.41843424,-0.48329262,0.70381354,991.08723,223.10314)"
@@ -7989,7 +7989,7 @@
         </svg:g>
         <svg:g
            id="Be-1-Helena-Winnipeg"
-           class="route" (click)="mapClicked('tp-1-Helena-Winnipeg')">
+           class="route" (click)="mapClicked($event, 'tp-1-Helena-Winnipeg')">
           <svg:g
              id="BluePath-4"
              transform="matrix(0.59512488,0.4384455,-0.50640567,0.68737076,635.53855,102.2998)"
@@ -8044,8 +8044,8 @@
           </svg:g>
         </svg:g>
         <svg:g
-           id="W-1-Winnipeg-SaultStMarie"
-           class="route" (click)="mapClicked('tp-1-Winnipeg-SaultStMarie')">
+           id="Gy-1-Winnipeg-SaultStMarie"
+           class="route" (click)="mapClicked($event, 'tp-1-Winnipeg-SaultStMarie')">
           <svg:g
              id="GrayPath-85"
              transform="matrix(-0.16813619,0.70863245,-1.2245644,-0.29055062,1122.7937,137.37808)"
@@ -8127,7 +8127,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Duluth-SaultStMarie"
-           class="route" (click)="mapClicked('tp-1-Duluth-SaultStMarie')">
+           class="route" (click)="mapClicked($event, 'tp-1-Duluth-SaultStMarie')">
           <svg:g
              id="GrayPath-8-3-0"
              transform="matrix(0.28985878,0.77096875,-0.84459642,0.34885621,1233.5729,151.6233)"
@@ -8169,7 +8169,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-Omaha-Duluth')"
+          class="route" (click)="mapClicked($event, 'tp-2-Omaha-Duluth')"
            id="Gy-2-Omaha-Duluth"
            class="route secondroute">
           <svg:g
@@ -8201,7 +8201,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-OklahomaCity-KansasCity"
-           class="route" (click)="mapClicked('tp-1-OklahomaCity-KansasCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-OklahomaCity-KansasCity')">
           <svg:g
              id="GrayPath-8-3-2"
              transform="matrix(0.70205425,0.27470902,-0.30812593,0.8349899,904.44896,461.34504)"
@@ -8230,7 +8230,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-OklahomaCity-KansasCity')"
+          class="route" (click)="mapClicked($event, 'tp-2-OklahomaCity-KansasCity')"
            id="Gy-2-OklahomaCity-KansasCity"
            class="route secondroute">
           <svg:g
@@ -8262,7 +8262,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-OklahomaCity-Dallas"
-           class="route" (click)="mapClicked('tp-1-OklahomaCity-Dallas')">
+           class="route" (click)="mapClicked($event, 'tp-1-OklahomaCity-Dallas')">
           <svg:g
              id="GrayPath-8-9"
              transform="matrix(0.70743415,-0.20032892,0.24747054,0.7788661,772.83406,655.57313)"
@@ -8291,7 +8291,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-OklahomaCity-Dallas')"
+          class="route" (click)="mapClicked($event, 'tp-2-OklahomaCity-Dallas')"
            id="Gy-2-OklahomaCity-Dallas"
            class="route secondroute">
           <svg:g
@@ -8323,7 +8323,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Dallas-Houston"
-           class="route" (click)="mapClicked('tp-1-Dallas-Houston')">
+           class="route" (click)="mapClicked($event, 'tp-1-Dallas-Houston')">
           <svg:g
              id="GrayPath-8-0"
              transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,764.19043,808.09048)"
@@ -8357,7 +8357,7 @@
         </svg:g>
         <svg:g
            id="W-1-Phoenix-Denver"
-           class="route" (click)="mapClicked('tp-1-Phoenix-Denver')">
+           class="route" (click)="mapClicked($event, 'tp-1-Phoenix-Denver')">
           <svg:g
              id="WhiteBlock-2"
              transform="matrix(0.7317417,0.10470038,-0.1209292,0.84516352,466.49062,618.75581)">
@@ -8456,7 +8456,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Seattle-Vancouver"
-           class="route" (click)="mapClicked('tp-1-Seattle-Vancouver')">
+           class="route" (click)="mapClicked($event, 'tp-1-Seattle-Vancouver')">
           <svg:g
              id="g2330"
              transform="matrix(0.70489391,0.22317404,-0.30781308,0.93577729,148.08652,-71.864473)"
@@ -8472,7 +8472,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-Seattle-Vancouver')"
+          class="route" (click)="mapClicked($event, 'tp-2-Seattle-Vancouver')"
            id="Gy-2-Seattle-Vancouver"
            class="route secondroute">
           <svg:g
@@ -8491,7 +8491,7 @@
         </svg:g>
         <svg:g
            id="P-1-SanFrancisco-Portland"
-           class="route" (click)="mapClicked('tp-2-SanFrancisco-Portland')">
+           class="route" (click)="mapClicked($event, 'tp-2-SanFrancisco-Portland')">
           <svg:g
              id="Pink Path-0"
              transform="matrix(0.72752582,-0.13082154,0.15109921,0.84029416,-18.985884,419.04564)"
@@ -8560,7 +8560,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-SanFrancisco-Portland"
-           class="route" (click)="mapClicked('tp-1-SanFrancisco-Portland')">
+           class="route" (click)="mapClicked($event, 'tp-1-SanFrancisco-Portland')">
           <svg:g
              id="GreenBlock-8"
              transform="matrix(0.72752582,-0.13082154,0.15109921,0.84029416,-40.983686,422.41196)">
@@ -8624,7 +8624,7 @@
         </svg:g>
         <svg:g
            id="Y-1-SanFrancisco-LosAngeles"
-           class="route" (click)="mapClicked('tp-1-SanFrancisco-LosAngeles')">
+           class="route" (click)="mapClicked($event, 'tp-1-SanFrancisco-LosAngeles')">
           <svg:g
              id="YellowPath-9"
              transform="matrix(0.5616722,-0.48074829,0.60887845,0.72288673,-3.2736626,710.84348)"
@@ -8667,7 +8667,7 @@
         </svg:g>
         <svg:g
            id="P-1-SanFrancisco-LosAngeles"
-           class="route" (click)="mapClicked('tp-2-SanFrancisco-LosAngeles')">
+           class="route" (click)="mapClicked($event, 'tp-2-SanFrancisco-LosAngeles')">
           <svg:g
              id="Pink Path-1"
              transform="matrix(0.5616722,-0.48074829,0.60887845,0.72288673,13.848804,696.61764)"
@@ -8710,7 +8710,7 @@
         </svg:g>
         <svg:g
            id="Y-1-Seattle-Helena"
-           class="route" (click)="mapClicked('tp-1-Seattle-Helena')">
+           class="route" (click)="mapClicked($event, 'tp-1-Seattle-Helena')">
           <svg:g
              id="YellowPath-1"
              transform="matrix(0.23988125,-0.74917768,0.86820065,0.30660978,-15.015685,303.76237)"
@@ -8792,7 +8792,7 @@
         </svg:g>
         <svg:g
            id="Be-1-Portland-SaltLakeCity"
-           class="route" (click)="mapClicked('tp-1-Portland-SaltLakeCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-Portland-SaltLakeCity')">
           <svg:g
              id="BluePath-7"
              transform="matrix(0.01661821,0.73931052,-1.0601328,0.00583426,460.50744,229.75306)"
@@ -8873,8 +8873,8 @@
           </svg:g>
         </svg:g>
         <svg:g
-           id="Gy-1-SaultStMarie-Montreal"
-           class="route" (click)="mapClicked('tp-1-SaultStMarie-Montreal')">
+           id="Bk-1-SaultStMarie-Montreal"
+           class="route" (click)="mapClicked($event, 'tp-1-SaultStMarie-Montreal')">
           <svg:g
              id="Black Path-1-1"
              transform="matrix(0.09240676,0.7334266,-1.1209947,0.134444,1794.7921,-5.63851)"
@@ -8943,7 +8943,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Montreal-Boston"
-           class="route" (click)="mapClicked('tp-2-Montreal-Boston')">
+           class="route" (click)="mapClicked($event, 'tp-2-Montreal-Boston')">
           <svg:g
              id="GrayPath-78"
              transform="matrix(0.59827101,-0.58209583,0.74090327,0.77729973,1357.6913,72.798397)"
@@ -8972,7 +8972,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-1-Montreal-Boston')"
+          class="route" (click)="mapClicked($event, 'tp-1-Montreal-Boston')"
            id="Gy-2-Montreal-Boston"
            class="route secondroute">
           <svg:g
@@ -9004,7 +9004,7 @@
         </svg:g>
         <svg:g
            id="Be-1-Montreal-NewYork"
-           class="route" (click)="mapClicked('tp-1-Montreal-NewYork')">
+           class="route" (click)="mapClicked($event, 'tp-1-Montreal-NewYork')">
           <svg:g
              id="BluePath-2"
              transform="matrix(0.72930598,-0.12370466,0.16813978,1.1789477,1439.0532,-77.766038)"
@@ -9047,7 +9047,7 @@
         </svg:g>
         <svg:g
            id="W-1-Pittsburgh-NewYork"
-           class="route" (click)="mapClicked('tp-2-Pittsburgh-NewYork')">
+           class="route" (click)="mapClicked($event, 'tp-2-Pittsburgh-NewYork')">
           <svg:g
              id="WhiteBlock-02"
              transform="matrix(0.28671251,0.68192864,-1.1239633,0.43674766,1783.7402,283.2515)">
@@ -9089,7 +9089,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-Pittsburgh-NewYork"
-           class="route" (click)="mapClicked('tp-1-Pittsburgh-NewYork')">
+           class="route" (click)="mapClicked($event, 'tp-1-Pittsburgh-NewYork')">
           <svg:g
              id="GreenBlock-1"
              transform="matrix(0.28671251,0.68192864,-1.1239633,0.43674766,1799.9087,220.51667)">
@@ -9117,7 +9117,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Pittsburgh-Toronto"
-           class="route" (click)="mapClicked('tp-1-Pittsburgh-Toronto')">
+           class="route" (click)="mapClicked($event, 'tp-1-Pittsburgh-Toronto')">
           <svg:g
              id="GrayPath-53"
              transform="matrix(0.73582053,0.06950826,-0.06712891,0.77249732,1348.9713,227.36648)"
@@ -9148,7 +9148,7 @@
         <svg:g
            transform="translate(1.3876166,0.34690414)"
            id="Gy-1-Toronto-Montreal"
-           class="route" (click)="mapClicked('tp-1-Toronto-Montreal')">
+           class="route" (click)="mapClicked($event, 'tp-1-Toronto-Montreal')">
           <svg:g
              id="GrayPath-53-3-6"
              transform="matrix(0.66620903,0.32079358,-0.45112278,0.9058758,1473.9327,5.987537)"
@@ -9191,7 +9191,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-SaultStMarie-Toronto"
-           class="route" (click)="mapClicked('tp-1-SaultStMarie-Toronto')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaultStMarie-Toronto')">
           <svg:g
              id="GrayPath-53-3-9"
              transform="matrix(0.08050539,-0.7354592,1.247355,0.17582804,1073.3008,374.45692)"
@@ -9222,7 +9222,7 @@
         <svg:g
            transform="translate(-0.46253886,4.6253886)"
            id="Y-1-ElPaso-OklahomaCity"
-           class="route" (click)="mapClicked('tp-1-ElPaso-OklahomaCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-ElPaso-OklahomaCity')">
           <svg:g
              id="YellowPath-50"
              transform="matrix(0.34278203,0.65491111,-0.75642399,0.39591412,846.40798,729.6847)"
@@ -9291,7 +9291,7 @@
         </svg:g>
         <svg:g
            id="Be-1-SantaFe-OklahomaCity"
-           class="route" (click)="mapClicked('tp-1-SantaFe-OklahomaCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-SantaFe-OklahomaCity')">
           <svg:g
              id="BluePath-46"
              transform="matrix(-0.00187486,0.73979729,-1.2315433,-0.03905717,1012.083,659.20732)"
@@ -9334,7 +9334,7 @@
         </svg:g>
         <svg:g
            id="R-1-Denver-OklahomaCity"
-           class="route" (click)="mapClicked('tp-1-Denver-OklahomaCity')">
+           class="route" (click)="mapClicked($event, 'tp-1-Denver-OklahomaCity')">
           <svg:g
              id="RedPath-0"
              transform="matrix(0.64827651,-0.30589427,0.42460737,0.92165704,506.29944,495.64769)"
@@ -9390,7 +9390,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-ElPaso-Houston"
-           class="route" (click)="mapClicked('tp-1-ElPaso-Houston')">
+           class="route" (click)="mapClicked($event, 'tp-1-ElPaso-Houston')">
           <svg:g
              id="GreenBlock-6"
              transform="matrix(0.53005535,-0.51560485,0.71324894,0.75621072,459.88191,883.35046)">
@@ -9466,7 +9466,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Houston-NewOrleans"
-           class="route" (click)="mapClicked('tp-1-Houston-NewOrleans')">
+           class="route" (click)="mapClicked($event, 'tp-1-Houston-NewOrleans')">
           <svg:g
              id="GrayPath-03"
              transform="matrix(0.0568375,0.73762618,-1.0694066,0.05643982,1353.7554,868.74926)"
@@ -9496,7 +9496,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Dallas-LittleRock"
-           class="route" (click)="mapClicked('tp-1-Dallas-LittleRock')">
+           class="route" (click)="mapClicked($event, 'tp-1-Dallas-LittleRock')">
           <svg:g
              id="GrayPath-3"
              transform="matrix(0.57348975,0.46696454,-0.70927594,0.83685408,1103.2163,596.76922)"
@@ -9526,7 +9526,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-OklahomaCity-LittleRock"
-           class="route" (click)="mapClicked('tp-1-OklahomaCity-LittleRock')">
+           class="route" (click)="mapClicked($event, 'tp-1-OklahomaCity-LittleRock')">
           <svg:g
              id="GrayPath-58"
              transform="matrix(0.10021514,-0.77453939,1.0083161,0.12537742,790.00427,851.61783)"
@@ -9556,7 +9556,7 @@
         </svg:g>
         <svg:g
            id="R-1-Duluth-Chicago"
-           class="route" (click)="mapClicked('tp-1-Duluth-Chicago')">
+           class="route" (click)="mapClicked($event, 'tp-1-Duluth-Chicago')">
           <svg:g
              id="RedPath-3"
              transform="matrix(0.62802999,-0.39040753,0.54127508,0.90354665,841.53509,263.1358)"
@@ -9599,7 +9599,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-SaintLouis-Chicago"
-           class="route" (click)="mapClicked('tp-1-SaintLouis-Chicago')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaintLouis-Chicago')">
           <svg:g
              id="GreenBlock-16"
              transform="matrix(0.70537476,0.22103063,-0.25529094,0.81470963,1131.3568,394.22232)">
@@ -9627,7 +9627,7 @@
         </svg:g>
         <svg:g
            id="W-1-SaintLouis-Chicago"
-           class="route" (click)="mapClicked('tp-2-SaintLouis-Chicago')">
+           class="route" (click)="mapClicked($event, 'tp-2-SaintLouis-Chicago')">
           <svg:g
              id="WhiteBlock-3"
              transform="matrix(0.70537476,0.22103063,-0.25529094,0.81470963,1215.6421,451.43522)">
@@ -9669,7 +9669,7 @@
         </svg:g>
         <svg:g
            id="Be-1-KansasCity-Chicago"
-           class="route" (click)="mapClicked('tp-1-KansasCity-Chicago')">
+           class="route" (click)="mapClicked($event, 'tp-1-KansasCity-Chicago')">
           <svg:g
              id="BluePath-0"
              transform="matrix(0.35261956,0.64966725,-0.75036731,0.40727649,1150.9017,372.16469)"
@@ -9725,7 +9725,7 @@
         </svg:g>
         <svg:g
            id="Be-1-KansasCity-SaintLouis"
-           class="route" (click)="mapClicked('tp-1-KansasCity-SaintLouis')">
+           class="route" (click)="mapClicked($event, 'tp-1-KansasCity-SaintLouis')">
           <svg:g
              id="BluePath-71"
              transform="matrix(-0.32126652,0.66611189,-1.0365409,-0.5260081,1349.7488,634.0693)"
@@ -9755,7 +9755,7 @@
         </svg:g>
         <svg:g
            id="P-1-KansasCity-SaintLouis"
-           class="route" (click)="mapClicked('tp-2-KansasCity-SaintLouis')">
+           class="route" (click)="mapClicked($event, 'tp-2-KansasCity-SaintLouis')">
           <svg:g
              id="Pink Path-6"
              transform="matrix(-0.32126652,0.66611189,-1.0365409,-0.5260081,1339.9361,655.84919)"
@@ -9785,7 +9785,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-LittleRock-SaintLouis"
-           class="route" (click)="mapClicked('tp-1-LittleRock-SaintLouis')">
+           class="route" (click)="mapClicked($event, 'tp-1-LittleRock-SaintLouis')">
           <svg:g
              id="GrayPath-8-8-0-9"
              transform="matrix(0.64004626,0.5237653,-0.42705529,0.49871483,1130.1114,544.18307)"
@@ -9815,7 +9815,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-SaintLouis-Nashville"
-           class="route" (click)="mapClicked('tp-1-SaintLouis-Nashville')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaintLouis-Nashville')">
           <svg:g
              id="GrayPath-58-2"
              transform="matrix(0.09166068,-0.70842401,0.92224532,0.11467509,983.20028,759.88059)"
@@ -9845,7 +9845,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Nashville-Atlanta"
-           class="route" (click)="mapClicked('tp-1-Nashville-Atlanta')">
+           class="route" (click)="mapClicked($event, 'tp-1-Nashville-Atlanta')">
           <svg:g
              id="GrayPath-8-8-0-9-5-3"
              transform="matrix(0.67263869,-0.56747516,0.42255782,0.63637716,1158.2842,660.6711)"
@@ -9862,7 +9862,7 @@
         </svg:g>
         <svg:g
            id="W-1-LittleRock-Nashville"
-           class="route" (click)="mapClicked('tp-1-LittleRock-Nashville')">
+           class="route" (click)="mapClicked($event, 'tp-1-LittleRock-Nashville')">
           <svg:g
              id="WhiteBlock-025"
              transform="matrix(0.02491214,0.73900093,-1.0117787,0.02065307,1360.0451,733.93349)">
@@ -9923,7 +9923,7 @@
         </svg:g>
         <svg:g
            id="Gn-1-LittleRock-NewOrleans"
-           class="route" (click)="mapClicked('tp-1-LittleRock-NewOrleans')">
+           class="route" (click)="mapClicked($event, 'tp-1-LittleRock-NewOrleans')">
           <svg:g
              id="GreenBlock-3"
              transform="matrix(0.62080768,-0.40173212,0.54804469,0.87519681,901.63966,667.89874)">
@@ -9963,7 +9963,7 @@
         </svg:g>
         <svg:g
            id="Y-1-NewOrleans-Atlanta"
-           class="route" (click)="mapClicked('tp-1-NewOrleans-Atlanta')">
+           class="route" (click)="mapClicked($event, 'tp-1-NewOrleans-Atlanta')">
           <svg:g
              id="YellowPath-0"
              transform="matrix(0.73154497,0.12256928,-0.12250678,0.97640149,1151.5708,673.08295)"
@@ -10019,7 +10019,7 @@
         </svg:g>
         <svg:g
            id="O-1-NewOrleans-Atlanta"
-           class="route" (click)="mapClicked('tp-2-NewOrleans-Atlanta')">
+           class="route" (click)="mapClicked($event, 'tp-2-NewOrleans-Atlanta')">
           <svg:g
              id="OrangePath-6"
              transform="matrix(0.73154497,0.10606624,-0.12250678,0.84493629,1172.4827,713.54647)"
@@ -10076,7 +10076,7 @@
         <svg:g
            transform="translate(-5.8871585,-0.49059654)"
            id="R-1-NewOrleans-Miami"
-           class="route" (click)="mapClicked('tp-1-NewOrleans-Miami')">
+           class="route" (click)="mapClicked($event, 'tp-1-NewOrleans-Miami')">
           <svg:g
              id="RedPath-4"
              transform="matrix(0.24336612,0.6985501,-1.137865,0.36278973,1522.1632,777.33473)"
@@ -10145,7 +10145,7 @@
         </svg:g>
         <svg:g
            id="Be-1-Atlanta-Miami"
-           class="route" (click)="mapClicked('tp-1-Atlanta-Miami')">
+           class="route" (click)="mapClicked($event, 'tp-1-Atlanta-Miami')">
           <svg:g
              id="BluePath-3"
              transform="matrix(0.59966038,-0.43250101,0.55982052,0.79277337,1196.0672,682.23002)"
@@ -10214,7 +10214,7 @@
         </svg:g>
         <svg:g
            id="P-1-Charleston-Miami"
-           class="route" (click)="mapClicked('tp-1-Charleston-Miami')">
+           class="route" (click)="mapClicked($event, 'tp-1-Charleston-Miami')">
           <svg:g
              id="Pink Path-8"
              transform="matrix(0.72810667,0.31961572,-0.46869262,0.94589266,1536.0166,528.54083)"
@@ -10270,7 +10270,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Atlanta-Charleston"
-           class="route" (click)="mapClicked('tp-1-Atlanta-Charleston')">
+           class="route" (click)="mapClicked($event, 'tp-1-Atlanta-Charleston')">
           <svg:g
              id="GrayPath-2"
              transform="matrix(0.2179601,0.71230321,-0.9229299,0.22440837,1638.3257,594.21672)"
@@ -10300,7 +10300,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Atlanta-Raleigh"
-           class="route" (click)="mapClicked('tp-1-Atlanta-Raleigh')">
+           class="route" (click)="mapClicked($event, 'tp-1-Atlanta-Raleigh')">
           <svg:g
              id="GrayPath-96"
              transform="matrix(0.53342091,0.4206686,-0.49091949,0.60976956,1444.5487,504.29882)"
@@ -10329,7 +10329,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-Atlanta-Raleigh')"
+          class="route" (click)="mapClicked($event, 'tp-2-Atlanta-Raleigh')"
            id="Gy-2-Atlanta-Raleigh"
            class="route secondroute">
           <svg:g
@@ -10361,7 +10361,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-Nashville-Raleigh"
-           class="route" (click)="mapClicked('tp-1-Nashville-Raleigh')">
+           class="route" (click)="mapClicked($event, 'tp-1-Nashville-Raleigh')">
           <svg:g
              id="Black Path-5"
              transform="matrix(0.64647863,0.35843195,-0.41398981,0.74668446,1360.4387,426.36001)"
@@ -10405,7 +10405,7 @@
         <svg:g
            transform="translate(-4.0661442e-5,1.6685233e-6)"
            id="Gn-1-SaintLouis-Pittsburgh"
-           class="route" (click)="mapClicked('tp-1-SaintLouis-Pittsburgh')">
+           class="route" (click)="mapClicked($event, 'tp-1-SaintLouis-Pittsburgh')">
           <svg:g
              id="GreenBlock-16-9"
              transform="matrix(0.44196849,0.59251324,-0.68435429,0.51047472,1320.7158,438.33668)">
@@ -10469,7 +10469,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Raleigh-Charleston"
-           class="route" (click)="mapClicked('tp-1-Raleigh-Charleston')">
+           class="route" (click)="mapClicked($event, 'tp-1-Raleigh-Charleston')">
           <svg:g
              id="GrayPath-72"
              transform="matrix(0.57601088,-0.4632705,0.5350786,0.66529402,1293.4549,583.53932)"
@@ -10499,7 +10499,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Raleigh-WashingtonDC"
-           class="route" (click)="mapClicked('tp-1-Raleigh-WashingtonDC')">
+           class="route" (click)="mapClicked($event, 'tp-1-Raleigh-WashingtonDC')">
           <svg:g
              id="GrayPath-72-1"
              transform="matrix(0.37054955,0.63961202,-0.82450589,0.47869536,1709.6143,366.47459)"
@@ -10559,7 +10559,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Pittsburgh-Raleigh"
-           class="route" (click)="mapClicked('tp-1-Pittsburgh-Raleigh')">
+           class="route" (click)="mapClicked($event, 'tp-1-Pittsburgh-Raleigh')">
           <svg:g
              id="GrayPath-72-1-8"
              transform="matrix(0.70563555,-0.22020214,0.28486131,0.90984242,1282.5373,332.40634)"
@@ -10589,7 +10589,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Pittsburgh-WashingtonDC"
-           class="route" (click)="mapClicked('tp-1-Pittsburgh-WashingtonDC')">
+           class="route" (click)="mapClicked($event, 'tp-1-Pittsburgh-WashingtonDC')">
           <svg:g
              id="GrayPath-72-1-6"
              transform="matrix(-0.24451137,0.69765908,-0.98796677,-0.35168122,1833.8668,508.8626)"
@@ -10619,7 +10619,7 @@
         </svg:g>
         <svg:g
            id="O-1-WashingtonDC-NewYork"
-           class="route" (click)="mapClicked('tp-1-WashingtonDC-NewYork')">
+           class="route" (click)="mapClicked($event, 'tp-1-WashingtonDC-NewYork')">
           <svg:g
              id="OrangePath-4"
              transform="matrix(0.73713982,0.05556524,-0.06844047,0.87880948,1521.1659,289.75266)"
@@ -10649,7 +10649,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-WashingtonDC-NewYork"
-           class="route" (click)="mapClicked('tp-2-WashingtonDC-NewYork')">
+           class="route" (click)="mapClicked($event, 'tp-2-WashingtonDC-NewYork')">
           <svg:g
              id="Black Path-32"
              transform="matrix(0.73713982,0.05556524,-0.06844047,0.87880948,1543.5443,292.68623)"
@@ -10679,7 +10679,7 @@
         </svg:g>
         <svg:g
            id="Y-1-NewYork-Boston"
-           class="route" (click)="mapClicked('tp-1-NewYork-Boston')">
+           class="route" (click)="mapClicked($event, 'tp-1-NewYork-Boston')">
           <svg:g
              id="YellowPath-8"
              transform="matrix(0.61982006,0.40338896,-0.60446533,0.89260861,1704.6713,78.170757)"
@@ -10709,7 +10709,7 @@
         </svg:g>
         <svg:g
            id="R-1-NewYork-Boston"
-           class="route" (click)="mapClicked('tp-2-NewYork-Boston')">
+           class="route" (click)="mapClicked($event, 'tp-2-NewYork-Boston')">
           <svg:g
              id="RedPath-38"
              transform="matrix(0.61982006,0.40338896,-0.60446533,0.89260861,1722.8898,89.814819)"
@@ -10739,7 +10739,7 @@
         </svg:g>
         <svg:g
            id="P-1-Duluth-Toronto"
-           class="route" (click)="mapClicked('tp-1-Duluth-Toronto')">
+           class="route" (click)="mapClicked($event, 'tp-1-Duluth-Toronto')">
           <svg:g
              id="Pink Path-3"
              transform="matrix(0.10347326,0.73214876,-0.98830026,0.12685554,1310.9325,238.5241)"
@@ -10821,7 +10821,7 @@
         </svg:g>
         <svg:g
            id="W-1-Chicago-Toronto"
-           class="route" (click)="mapClicked('tp-1-Chicago-Toronto')">
+           class="route" (click)="mapClicked($event, 'tp-1-Chicago-Toronto')">
           <svg:g
              id="WhiteBlock-57"
              transform="matrix(0.658807,0.33575792,-0.47542562,0.90173449,1305.1944,273.17386)">
@@ -10901,7 +10901,7 @@
         </svg:g>
         <svg:g
            id="O-1-Helena-Duluth"
-           class="route" (click)="mapClicked('tp-1-Helena-Duluth')">
+           class="route" (click)="mapClicked($event, 'tp-1-Helena-Duluth')">
           <svg:g
              id="OrangePath-46"
              transform="matrix(-4.147438e-4,0.73948767,-1.0744103,-0.01701745,881.72038,268.99144)"
@@ -10983,7 +10983,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-Winnipeg-Duluth"
-           class="route" (click)="mapClicked('tp-1-Winnipeg-Duluth')">
+           class="route" (click)="mapClicked($event, 'tp-1-Winnipeg-Duluth')">
           <svg:g
              id="Black Path-4"
              transform="matrix(0.42434974,-0.60612647,1.0299626,0.77270008,475.16705,105.35767)"
@@ -11039,7 +11039,7 @@
         </svg:g>
         <svg:g
            id="W-1-Calgary-Winnipeg"
-           class="route" (click)="mapClicked('tp-1-Calgary-Winnipeg')">
+           class="route" (click)="mapClicked($event, 'tp-1-Calgary-Winnipeg')">
           <svg:g
              id="WhiteBlock-4"
              transform="matrix(0.30370469,0.67382275,-0.71004592,0.32595528,600.76881,-13.627426)">
@@ -11157,7 +11157,7 @@
         </svg:g>
         <svg:g
            id="R-1-Helena-Omaha"
-           class="route" (click)="mapClicked('tp-1-Helena-Omaha')">
+           class="route" (click)="mapClicked($event, 'tp-1-Helena-Omaha')">
           <svg:g
              id="RedPath-8"
              transform="matrix(0.17600842,-0.71648747,0.97754517,0.24791021,376.67044,447.10173)"
@@ -11226,7 +11226,7 @@
         </svg:g>
         <svg:g
            id="R-1-ElPaso-Dallas"
-           class="route" (click)="mapClicked('tp-1-ElPaso-Dallas')">
+           class="route" (click)="mapClicked($event, 'tp-1-ElPaso-Dallas')">
           <svg:g
              id="RedPath-5"
              transform="matrix(0.15797122,0.72233575,-0.98307285,0.20201527,954.76857,798.33961)"
@@ -11282,7 +11282,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Phoenix-ElPaso"
-           class="route" (click)="mapClicked('tp-1-Phoenix-ElPaso')">
+           class="route" (click)="mapClicked($event, 'tp-1-Phoenix-ElPaso')">
           <svg:g
              id="GrayPath-7-7-1-7"
              transform="matrix(-0.32798349,0.67688312,-0.78543731,-0.37706829,758.30979,864.30554)"
@@ -11325,7 +11325,7 @@
         </svg:g>
         <svg:g
            id="O-1-Chicago-Pittsburgh"
-           class="route" (click)="mapClicked('tp-1-Chicago-Pittsburgh')">
+           class="route" (click)="mapClicked($event, 'tp-1-Chicago-Pittsburgh')">
           <svg:g
              id="OrangePath-9"
              transform="matrix(-0.22947925,-0.7027494,0.86494308,-0.27782301,1091.1809,673.71396)"
@@ -11368,7 +11368,7 @@
         </svg:g>
         <svg:g
            id="Bk-1-Chicago-Pittsburgh"
-           class="route" (click)="mapClicked('tp-2-Chicago-Pittsburgh')">
+           class="route" (click)="mapClicked($event, 'tp-2-Chicago-Pittsburgh')">
           <svg:g
              id="Black Path-2"
              transform="matrix(-0.22947925,-0.7027494,0.86494308,-0.27782301,1096.7199,695.21934)"
@@ -11410,7 +11410,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-           class="route" (click)="mapClicked('tp-1-SantaFe-ElPaso')"
+           class="route" (click)="mapClicked($event, 'tp-1-SantaFe-ElPaso')"
            id="Gy-1-SantaFe-ElPaso">
           <svg:g
              id="GrayPath"
@@ -11440,7 +11440,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked('tp-2-Portland-Seattle')"
+          class="route" (click)="mapClicked($event, 'tp-2-Portland-Seattle')"
           id="Gy-2-Portland-Seattle">
           <svg:g
              id="GrayPath-27-8"
@@ -11457,7 +11457,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-           class="route" (click)="mapClicked('tp-1-Portland-Seattle')"
+           class="route" (click)="mapClicked($event, 'tp-1-Portland-Seattle')"
            id="Gy-1-Portland-Seattle">
           <svg:g
              id="GrayPath-27"
@@ -11474,7 +11474,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-           class="route" (click)="mapClicked('tp-1-Seattle-Calgary')"
+           class="route" (click)="mapClicked($event, 'tp-1-Seattle-Calgary')"
            id="Gy-1-Seattle-Calgary">
           <svg:g
              id="GrayPath-27-7"

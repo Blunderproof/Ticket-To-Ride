@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserInfo } from '../services/user_info.service';
 import { ServerProxy } from '../services/server_proxy.service';
 import { TrainCardComponent } from '../train-card/train-card.component';
 import { TrainCard } from '../classes/train-card';
 import { DestinationCard } from '../classes/destination-card';
+import { GameComponent } from '../game/game.component';
 
 @Component({
   selector: 'app-bank',
@@ -11,9 +12,8 @@ import { DestinationCard } from '../classes/destination-card';
   styleUrls: ['./bank.component.scss']
 })
 export class BankComponent implements OnInit {
-
+  @Output() showDestCardSelector = new EventEmitter();
   constructor(public _userInfo: UserInfo, private communicator: ServerProxy) { }
-
 
   ngOnInit() {}
 
@@ -23,7 +23,8 @@ export class BankComponent implements OnInit {
     }, 1500);
   }
 
-  chooseDestinationCard(destinationCard: DestinationCard) {
-    this.communicator.chooseDestinationCard(destinationCard);
+  drawDestinationCards() {
+    this.showDestCardSelector.emit(true);
+    //this.communicator.chooseDestinationCard(destinationCard);
   }
 }

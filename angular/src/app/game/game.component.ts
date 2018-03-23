@@ -14,6 +14,7 @@ import { GameHistory } from '../services/game-history.service';
 export class GameComponent implements OnInit {
   historyOpen = true;
   gameStart = false;
+  drawDest = false;
 
 
   intentoryOverlayApplied = true;
@@ -36,6 +37,10 @@ export class GameComponent implements OnInit {
 
   printUserInfo() {
     console.log(this._userInfo);
+  }
+
+  drawDestinationCards() {
+    this.drawDest = true;
   }
 
   simulateChanges() {
