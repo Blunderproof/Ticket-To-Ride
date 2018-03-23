@@ -17,12 +17,14 @@ export interface IUser {
   unmetDestinationCards: IDestinationCardModel[];
   score: number;
   tokenCount: number;
+  turnState: TurnState;
   color: PlayerColor;
 
   publicPoints(): Promise<any>;
   privatePoints(): Promise<any>;
   routePoints(): Promise<any>;
   longestRoute(): Promise<any>;
+  getTurnStateObject(): TurnStateObject;
   destinationCardPoints(): Promise<any>;
 }
 
