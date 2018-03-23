@@ -11,7 +11,7 @@ import { ServerProxy } from '../services/server_proxy.service';
 export class GameFinalDisplayComponent implements OnInit {
 
   display = false;
-  //message = null;
+  message = null;
 
   constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
