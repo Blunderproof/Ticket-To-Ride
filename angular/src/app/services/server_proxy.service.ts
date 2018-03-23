@@ -86,10 +86,11 @@ export class ServerProxy {
 
   claimRoute(data: any) {
     return this.communicator.send('claimRoute', {
-      color: data.routeColor,
+      color: data.color,
       routeNumber: data.routeNumber,
-      city1: data.routeCity1,
-      city2: data.routeCity2,
+      city1: data.city1,
+      city2: data.city2,
+      colorToUse: data.colorToUse
     });
   }
 

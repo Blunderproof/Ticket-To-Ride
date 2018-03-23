@@ -11,6 +11,7 @@ import { RouteColor } from '../classes/constants';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  errorMessages = [];
   overlayApplied = true;
   trainPathStates = {};
   routeColorEnum = RouteColor;
@@ -20,6 +21,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {}
 
   mapClicked(event, correspondingTrainPath) {
+    this.errorMessages = [];
     const routeInfo = event.path[2].id.split('-');
     const routeColor = this.routeColorEnum[routeInfo[0]];
     const routeNumber = routeInfo[1];
@@ -27,14 +29,20 @@ export class MapComponent implements OnInit {
     const routeCity2 = routeInfo[3];
 
     const data = {
-      routeCity1,
-      routeCity2,
-      routeColor,
-      routeNumber,
+      city1: routeCity1,
+      city2: routeCity2,
+      color: routeColor,
+      routeNumber: routeNumber,
+      colorToUse: 'yellow' // TODO: Provide a way for the user to choose a color
     };
 
-    this.communicator.claimRoute(data);
+    console.log(data);
 
-    this.trainPathStates[correspondingTrainPath] = this._userInfo.user.color;
+    this.communicator.claimRoute(data)
+      .then((x: any) => {
+        if (!x.success) {
+          this.errorMessages.push(x.message);
+        }
+      });
   }
 }
