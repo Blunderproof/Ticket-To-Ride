@@ -1,6 +1,6 @@
-import Command from '../modules/commands/command';
-import CommandHandler from './commandHandler';
-import CommandResults from '../modules/commands/commandResults';
+import Command from '../modules/commands/Command';
+import CommandHandler from './CommandHandler';
+import CommandResults from '../modules/commands/CommandResults';
 import ServerFacade from './ServerFacade';
 import { FacadeCommand, MessageType } from '../constants';
 import SocketFacade from './SocketFacade';
