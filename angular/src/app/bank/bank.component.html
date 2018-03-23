@@ -7,22 +7,26 @@
       <app-train-card (click)="chooseTrainCard(i)" [trainCard]="trainCard"></app-train-card>
     </div>
     <div (click)="chooseTrainCard(5)" class="card-slot traincard-deck">
-        <div class="card"  [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
-          <img class="side" src="../../assets/images/traincards/vertical/cardback.jpg"/>
-          <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
-        </div>
-        <div id="trainCardCount">
-            {{_userInfo.game.trainCardDeck.length - 5}} left
-        </div>
+      <div class="card"  [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
+        <img class="side" src="../../assets/images/traincards/vertical/cardback.jpg"/>
+        <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
       </div>
+      <div id="trainCardCount">
+          {{_userInfo.game.trainCardDeck.length - 5}} left
+      </div>
+    </div>
+    <div id="trainCardCount">
+        {{_userInfo.game.trainCardDeck.length}} left
+    </div>
+    </div>
     <div (click)="drawDestinationCards()" class="card-slot destcard-deck">
-        <div class="card"   [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
-          <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
-          <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
-        </div>
-        <div id="destCardCount">
-            {{_userInfo.game.destinationCardDeck.length}} left
-        </div>
+      <div class="card"   [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn()">
+        <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
+        <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
+      </div>
+      <div id="destCardCount">
+          {{_userInfo.game.destinationCardDeck.length}} left
+      </div>
     </div>
   </div>
 
