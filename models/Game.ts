@@ -5,7 +5,7 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor } from '../constants';
+import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor, TrainColor, TurnState } from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
@@ -41,8 +41,20 @@ export var GameSchema: Schema = new Schema({
 GameSchema.methods.initGame = async function() {
   let unclaimedRoutes: IRouteModel[] = [];
   let filter = {};
+
   if (this.userList.length == 2) {
-    filter = { routeNumber: 1 };
+    filter = [{ routeNumber: 1, color: TrainColor.Gray }];
+    filter = {
+      $or: [
+        {
+          color: TrainColor.Gray,
+          routeNumber: 1,
+        },
+        {
+          color: { $ne: TrainColor.Gray },
+        },
+      ],
+    };
   }
   await Route.find(filter).then(routes => {
     if (routes) {
@@ -109,6 +121,7 @@ GameSchema.methods.shuffleDealCards = async function(
       player.score = 0;
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
+      player.turnState = TurnState.BeginningOfTurn;
 
       for (let cardIndex = 0; cardIndex < TRAIN_CARD_HAND_SIZE; cardIndex++) {
         player.trainCardHand.push(shuffledTrainCardDeck[0]._id);

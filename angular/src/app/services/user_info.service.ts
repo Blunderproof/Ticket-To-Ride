@@ -11,6 +11,7 @@ export class UserInfo {
     user = new User();
     errorMessages = [];
     userState = UserState.LoggedOut;
+    trainPathStates = {};
 
     constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
         this.getGame();
@@ -22,6 +23,7 @@ export class UserInfo {
             .then((x: any) => {
                 if (x.success) {
                     this.game = x.result;
+                    this.updateRoutes();
                     if (this.game) {
                         this.socket.joinRoom(this.game._id);
                         this._serverProxy.getGameHistory();
@@ -30,6 +32,7 @@ export class UserInfo {
                             console.log('Game State Updated');
                             console.log(data);
                             this.game = data;
+                            this.updateRoutes();
                         });
                     }
                 } else {
@@ -78,5 +81,15 @@ export class UserInfo {
             }
         }
         return false;
+    }
+
+    updateRoutes() {
+        if (this.game) {
+            this.game.userList.forEach(user => {
+                user.claimedRouteList.forEach(route => {
+                    this.trainPathStates[`tp-${route.routeNumber}-${route.city1}-${route.city2}`] = user.color;
+                });
+            });
+        }
     }
 }

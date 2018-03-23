@@ -73,6 +73,27 @@ export default class SocketFacade {
     return Game.findById(data.id)
       .populate('host')
       .populate('userList')
+      .populate({
+        path: 'userList',
+        populate: {
+          path: 'trainCardHand',
+          model: 'TrainCard',
+        },
+      })
+      .populate({
+        path: 'userList',
+        populate: {
+          path: 'destinationCardHand',
+          model: 'DestinationCard',
+        }
+      })
+      .populate({
+        path: 'userList',
+        populate: {
+          path: 'claimedRouteList',
+          model: 'Route'
+        }
+      })
       .populate('unclaimedRoutes')
       .populate('trainCardDeck')
       .populate('trainCardDiscardPile')

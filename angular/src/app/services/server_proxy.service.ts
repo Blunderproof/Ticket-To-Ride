@@ -16,7 +16,7 @@ export class ServerProxy {
   }
 
   startGame() {
-      return this.communicator.send('startGame', {});
+    return this.communicator.send('startGame', {});
   }
 
   leaveGame() {
@@ -54,7 +54,7 @@ export class ServerProxy {
 
   sendMessage(message: string) {
     return this.communicator.send('sendMessage', {
-      message: message
+      message: message,
     });
   }
 
@@ -76,7 +76,7 @@ export class ServerProxy {
 
   initialSelectDestinationCard(data: string[]) {
     return this.communicator.send('initialSelectDestinationCard', {
-      discardCards: data
+      discardCards: data,
     });
   }
 
@@ -85,11 +85,19 @@ export class ServerProxy {
   }
 
   claimRoute(data: any) {
-    return this.communicator.send('claimRoute', {});
+    return this.communicator.send('claimRoute', {
+      color: data.color,
+      routeNumber: data.routeNumber,
+      city1: data.city1,
+      city2: data.city2,
+      colorToUse: data.colorToUse
+    });
   }
 
   chooseTrainCard(data: any) {
-    return this.communicator.send('chooseTrainCard', {});
+    return this.communicator.send('chooseTrainCard', {
+      cardIndex: data,
+    });
   }
 
   getUserGameStatus() {

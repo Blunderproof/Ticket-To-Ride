@@ -1,8 +1,19 @@
-.chat-window{
+.game-chat-window{
   grid-area: chat;
   min-height: 350px;
   max-height: inherit;
   height: inherit;
+  position: relative;
+  background-color: #FFF;
+  color: #444;
+  border-radius: 5px;
+  font-size: 100%;
+}
+
+.lobby-chat-window{
+  grid-area: chat;
+  min-height: 350px;
+  height: 100%;
   position: relative;
   background-color: #FFF;
   color: #444;
@@ -22,10 +33,18 @@
   background-color: grey;
 }
 
-.chat-history{
+.game-chat-history{
   overflow-y: auto;
   min-height: 240px;
   max-height: 240px;
+  vertical-align:bottom;
+
+}
+
+.lobby-chat-history{
+  overflow-y: auto;
+  min-height: 390px;
+  max-height: 390px;
   vertical-align:bottom;
 
 }

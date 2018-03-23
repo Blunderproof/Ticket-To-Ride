@@ -27,6 +27,18 @@ export enum RGBAColor {
     yellow = 'rgba(255, 255, 60, .8)'
 }
 
+export enum RouteColor {
+    Gy = 'gray',
+    P = 'pink',
+    O = 'orange',
+    Be = 'blue',
+    Gn = 'green',
+    W = 'white',
+    R = 'red',
+    Bk = 'black',
+    Y = 'yellow'
+}
+
 export enum MessageType {
     Chat = 'chat',
     History = 'history'

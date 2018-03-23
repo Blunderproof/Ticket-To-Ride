@@ -2,8 +2,10 @@ import * as mongoose from 'mongoose';
 import { Route, IRouteModel } from './Route';
 import { TrainCard, ITrainCardModel } from './TrainCard';
 import { DestinationCard, IDestinationCardModel } from './DestinationCard';
-import { PlayerColor } from '../constants';
+import { PlayerColor, TurnState } from '../constants';
 import { Schema } from 'mongoose';
+import TurnStateObject from './user-states/TurnStateObject';
+import TurnStateObjectLoader from './user-states/TurnStateObjectLoader';
 
 export interface IUser {
   username: string;
@@ -11,17 +13,33 @@ export interface IUser {
   claimedRouteList: IRouteModel[];
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
+<<<<<<< HEAD
   metDestinationCards: IDestinationCardModel[];
   unmetDestinationCards: IDestinationCardModel[];
+=======
+
+>>>>>>> 9fbfb0f279ef2c8803f41d52a4e63e2230f957e6
   score: number;
   tokenCount: number;
   color: PlayerColor;
 
+<<<<<<< HEAD
   publicPoints(): Promise<any>;
   privatePoints(): Promise<any>;
   routePoints(): Promise<any>;
   longestRoute(): Promise<any>;
   destinationCardPoints(): Promise<any>;
+=======
+  publicPoints: Promise<any>;
+  privatePoints: Promise<any>;
+  routePoints: Promise<any>;
+  longestRoutePoints: Promise<any>;
+  destinationCardNegativePoints: Promise<any>;
+  destinationCardPositivePoints: Promise<any>;
+
+  turnState: TurnState;
+  getTurnStateObject(): TurnStateObject;
+>>>>>>> 9fbfb0f279ef2c8803f41d52a4e63e2230f957e6
 }
 
 export interface IUserModel extends IUser, mongoose.Document {}
@@ -33,15 +51,22 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema(
     claimedRouteList: [{ type: Schema.Types.ObjectId, ref: 'Route' }],
     trainCardHand: [{ type: Schema.Types.ObjectId, ref: 'TrainCard' }],
     destinationCardHand: [{ type: Schema.Types.ObjectId, ref: 'DestinationCard' }],
+
     score: Number,
     tokenCount: Number,
     color: String,
+
+    turnState: String,
   },
   {
     toObject: { virtuals: true },
     toJSON: { virtuals: true },
   }
 );
+
+UserSchema.methods.getTurnStateObject = function() {
+  return TurnStateObjectLoader.instanceOf().createStateObject(this);
+};
 
 UserSchema.methods.publicPoints = function() {
   return this.routePoints();
