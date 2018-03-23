@@ -7942,7 +7942,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-Omaha-KansasCity')"
            id="Gy-2-Omaha-KansasCity"
-           class="route secondroute, 'tp-2-Omaha-KansasCity'">
+           class="route secondroute">
           <svg:g
              id="GrayPath-8-8"
              transform="matrix(0.69539468,-0.25066773,0.28952187,0.80318263,809.98844,385.93449)"
@@ -8339,19 +8339,21 @@
           </svg:g>
         </svg:g>
         <svg:g
-           style="fill:#a8a8a8;fill-opacity:1"
-           transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,786.76206,795.2662)"
-           class="route" (click)="mapClicked($event, 'tp-2-Dallas-Houston')"
-           id="Gy-2-Dallas-Houston"
-           class="route secondroute">
-          <svg:path
-             id="rect9848-6-5-05-5-0"
-             style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
-             d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
-          <svg:path
-             id="rect10124-4-0-2-2-1"
-             style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient5107);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-2-8-0)"
-             d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+          class="route secondroute" (click)="mapClicked('tp-2-Dallas-Houston')"
+          id="Gy-2-Dallas-Houston">
+          <svg:g
+            id="GrayPath-Whatever"
+            transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,786.76206,795.2662)"
+            style="fill:#a8a8a8;fill-opacity:1">
+            <svg:path
+               id="rect9848-6-5-05-5-0"
+               style="opacity:1;fill:#a8a8a8;fill-opacity:1;stroke:#563d23;stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.98782965;paint-order:normal"
+               d="m 134.6543,212.92188 v 57.05664 h 23.39258 v -57.05664 z" />
+            <svg:path
+               id="rect10124-4-0-2-2-1"
+               style="opacity:0.75899999;fill:#a8a8a8;fill-opacity:1;stroke:url(#linearGradient5107);stroke-width:1.55499995;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal;filter:url(#filter10598-2-2-2-8-0)"
+               d="m 137.07812,215.63086 v 51.92187 h 18.4004 v -51.92187 z" />
+          </svg:g>
         </svg:g>
         <svg:g
            id="W-1-Phoenix-Denver"
@@ -10527,7 +10529,7 @@
         </svg:g>
         <svg:g
            id="Gy-2-Raleigh-WashingtonDC"
-           class="route" (click)="mapClicked($event, 'tp-2-Raleigh-WashingtonDC')">
+           class="route secondroute" (click)="mapClicked('tp-2-Raleigh-WashingtonDC')">
           <svg:g
              id="GrayPath-72-1-1"
              transform="matrix(0.37054955,0.63961202,-0.82450589,0.47869536,1719.5589,383.89696)"

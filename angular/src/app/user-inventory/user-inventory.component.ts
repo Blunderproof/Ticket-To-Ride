@@ -9,6 +9,10 @@ export class UserInventoryComponent implements OnInit {
 
   constructor() { }
 
+  displayDestCardViewer(){
+    console.log("HEY YOU")
+  }
+
   ngOnInit() {
   }
 

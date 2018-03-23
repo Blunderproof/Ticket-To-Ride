@@ -10,6 +10,9 @@
     <div *ngIf="drawDest">
       <app-dest-card-selector></app-dest-card-selector>
     </div>
+    <div *ngIf="false">
+      <app-dest-card-viewer></app-dest-card-viewer>
+    </div>
 
     <div class="box opponent-sidebar">
       <div *ngIf="_userInfo.game">
@@ -31,7 +34,7 @@
         <app-user-inventory></app-user-inventory>
       </div>
       <div class="chat">
-        <app-chat class="chat-window"></app-chat>
+        <app-chat [inLobby]=false class="chat-window"></app-chat>
       </div>
     </div>
 

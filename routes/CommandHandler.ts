@@ -1,6 +1,6 @@
-import Command from "../modules/commands/command";
-import CommandResults from "../modules/commands/commandResults";
-import IServer from "../interfaces/IServer";
+import Command from '../modules/commands/Command';
+import CommandResults from '../modules/commands/CommandResults';
+import IServer from '../interfaces/IServer';
 
 export default class CommandHandler {
   facade: IServer;

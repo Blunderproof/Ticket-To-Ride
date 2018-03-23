@@ -1,33 +1,30 @@
 .bank-navbar{ //Used to allow the cards to float upward
   z-index: 500;
-  overflow: hidden;
-  width: -webkit-calc(100% - 400px);
-  width:    -moz-calc(100% - 400px);
-  width:         calc(100% - 400px);
-  height: 250px;
+  width: 100%;
+  display: block;
+  height: 200px;
   background-color: rgba(0, 0, 0, 0);
   position: fixed;
   bottom: 0;
-  position:fixed;
   pointer-events: none;
 
 }
 
-.bottom-bar-tracks{
-  position: relative;
-}
+// .bottom-bar-tracks{
+//   position: relative;
+// }
 
 .bank-items{
-  top: 80px;
+  top: 75px;
   position: relative;
+  width: 50%;
+  margin: 0 auto;
   display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(7, 1fr);
     grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 traincard-deck destcard-deck";
     justify-items: center;
-    width: 100%;
     height: inherit;
-  padding-left: 100px;
 }
 
 .card-back{
@@ -45,7 +42,7 @@
 }
 
 .card-slot{
-  background-color: rgba(150, 150, 150, 1);
+  //background-color: rgba(150, 150, 150, 1);
   width: 100px;
   height: inherit;
   border-radius: 3px;
