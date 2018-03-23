@@ -359,9 +359,10 @@ export default class GameFacade {
         }
         // force unwrap route
         route = route!;
-
-        let routeIndex = game.unclaimedRoutes.indexOf(route._id);
-        if (routeIndex < 0) {
+        const id = route._id;
+        
+        let unclaimedRoute = game.unclaimedRoutes.indexOf(id);
+        if (unclaimedRoute < 0) {
           return {
             success: false,
             errorInfo: 'That route has already been claimed.',

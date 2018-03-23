@@ -38,59 +38,86 @@ export default class UserFacade {
     // console.log(username);
     // console.log(hashedPassword);
 
-    return User.findOne({ username, hashedPassword }).then(async user => {
-      if (user) {
-        let game = await Game.findOne({
-          $or: [
-            {
-              host: user._id,
-              gameState: GameState.InProgress,
+    return User.findOne({ username, hashedPassword })
+      .populate('trainCardHand')
+      .populate('destinationCardHand')
+      .populate('claimedRouteList')
+      .then(async user => {
+        if (user) {
+          let game = await Game.findOne({
+            $or: [
+              {
+                host: user._id,
+                gameState: GameState.InProgress,
+              },
+              {
+                userList: user._id,
+                gameState: GameState.InProgress,
+              },
+              {
+                host: user._id,
+                gameState: GameState.Open,
+              },
+              {
+                userList: user._id,
+                gameState: GameState.Open,
+              },
+            ],
+          })
+          .populate('userList')
+          .populate({
+            path: 'userList',
+            populate: {
+              path: 'trainCardHand',
+              model: 'TrainCard',
             },
-            {
-              userList: user._id,
-              gameState: GameState.InProgress,
-            },
-            {
-              host: user._id,
-              gameState: GameState.Open,
-            },
-            {
-              userList: user._id,
-              gameState: GameState.Open,
-            },
-          ],
-        }).then(async game => {
-          return game;
-        });
+          })
+          .populate({
+            path: 'userList',
+            populate: {
+              path: 'destinationCardHand',
+              model: 'DestinationCard',
+            }
+          })
+          .populate({
+            path: 'userList',
+            populate: {
+              path: 'claimedRouteList',
+              model: 'Route'
+            }
+          })
+          .then(async game => {
+            return game;
+          });
 
-        let userCookie =
-          game == null
-            ? { lgid: user._id }
-            : {
-                lgid: user._id,
-                gmid: game._id,
-              };
+          let userCookie =
+            game == null
+              ? { lgid: user._id }
+              : {
+                  lgid: user._id,
+                  gmid: game._id,
+                };
 
-        let gameState = game == null ? null : game.gameState;
+          let gameState = game == null ? null : game.gameState;
 
-        return {
-          success: true,
-          data: {
-            user,
-            gameState,
-          },
-          userCookie,
-        };
-      } else {
-        // doc may be null if no document matched
-        return {
-          success: false,
-          data: {},
-          errorInfo:
-            "The username and password entered don't match any users in our database.",
-        };
-      }
-    });
+          return {
+            success: true,
+            data: {
+              user,
+              gameState,
+            },
+            userCookie,
+          };
+        } else {
+          // doc may be null if no document matched
+          return {
+            success: false,
+            data: {},
+            errorInfo:
+              "The username and password entered don't match any users in our database.",
+          };
+        }
+      });
   }
 
   logout(data: any): Promise<any> {
@@ -172,6 +199,27 @@ export default class UserFacade {
       })
         .populate('host')
         .populate('userList')
+        .populate({
+          path: 'userList',
+          populate: {
+            path: 'trainCardHand',
+            model: 'TrainCard',
+          },
+        })
+        .populate({
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          }
+        })
+        .populate({
+          path: 'userList',
+          populate: {
+            path: 'claimedRouteList',
+            model: 'Route'
+          }
+        })
         .populate('unclaimedRoutes')
         // TODO just top 6
         .populate('trainCardDeck')
