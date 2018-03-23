@@ -5,7 +5,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const mongoose = require('mongoose');
 const Game = require('../dist/models/Game').Game;
 const User = require('../dist/models/User').User;
-const Messages = require('../dist/models/Messages').Messages;
+const Message = require('../dist/models/Message').Message;
 const TrainCard = require('../dist/models/TrainCard').TrainCard;
 const DestinationCard = require('../dist/models/DestinationCard').DestinationCard;
 const Route = require('../dist/models/Route').Route;
@@ -20,7 +20,7 @@ var path = require('path');
 
 var promiseG = Game.remove({});
 var promiseU = User.remove({});
-var promiseM = Messages.remove({});
+var promiseM = Message.remove({});
 
 var promiseTC = TrainCard.remove({}).then(() => {
   // instantiate train cards for the game
