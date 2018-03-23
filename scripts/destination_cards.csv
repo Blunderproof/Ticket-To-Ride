@@ -1,5 +1,5 @@
 city1,city2,pointValue
-LosAngeles,NewYorkCity,21
+LosAngeles,NewYork,21
 Duluth,Houston,8
 SaultSteMarie,Nashville,8
 NewYork,Atlanta,6
@@ -8,7 +8,7 @@ Vancouver,Montréal,20
 Duluth,ElPaso,10
 Toronto,Miami,10
 Portland,Phoenix,11
-Dallas,NewYorkCity,11
+Dallas,NewYork,11
 Calgary,SaltLakeCity,7
 Calgary,Phoenix,13
 LosAngeles,Miami,20

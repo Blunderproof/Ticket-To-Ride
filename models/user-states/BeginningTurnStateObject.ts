@@ -109,12 +109,15 @@ export default class BeginningTurnStateObject implements TurnStateObject {
       return cardIDsToDiscard.indexOf(card._id.toString()) < 0;
     });
 
-    // TODO test this
     game.trainCardDiscardPile = game.trainCardDiscardPile.concat(cardsToDiscard);
 
     // remove the route from the unclaimed routes
     let routeIndex = game.unclaimedRoutes.indexOf(route._id);
     game.unclaimedRoutes.splice(routeIndex, 1);
+    if (game.userList.length == 2) {
+      // TODO check db for a second route with the same city1 and city2 but opposite routeNumber
+      // if it exists, remove it from game.unclaimedRoutes to prevent them from claiming it
+    }
 
     if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
       // TODO shuffle and insert
