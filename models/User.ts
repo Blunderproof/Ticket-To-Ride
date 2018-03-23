@@ -13,33 +13,17 @@ export interface IUser {
   claimedRouteList: IRouteModel[];
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
-<<<<<<< HEAD
   metDestinationCards: IDestinationCardModel[];
   unmetDestinationCards: IDestinationCardModel[];
-=======
-
->>>>>>> 9fbfb0f279ef2c8803f41d52a4e63e2230f957e6
   score: number;
   tokenCount: number;
   color: PlayerColor;
 
-<<<<<<< HEAD
   publicPoints(): Promise<any>;
   privatePoints(): Promise<any>;
   routePoints(): Promise<any>;
   longestRoute(): Promise<any>;
   destinationCardPoints(): Promise<any>;
-=======
-  publicPoints: Promise<any>;
-  privatePoints: Promise<any>;
-  routePoints: Promise<any>;
-  longestRoutePoints: Promise<any>;
-  destinationCardNegativePoints: Promise<any>;
-  destinationCardPositivePoints: Promise<any>;
-
-  turnState: TurnState;
-  getTurnStateObject(): TurnStateObject;
->>>>>>> 9fbfb0f279ef2c8803f41d52a4e63e2230f957e6
 }
 
 export interface IUserModel extends IUser, mongoose.Document {}
