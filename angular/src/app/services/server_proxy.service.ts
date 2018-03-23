@@ -81,7 +81,9 @@ export class ServerProxy {
   }
 
   chooseDestinationCard(data: any) {
-    return this.communicator.send('chooseDestinationCard', {});
+    return this.communicator.send('chooseDestinationCard', {
+      keepCards: data,
+    });
   }
 
   claimRoute(data: any) {
