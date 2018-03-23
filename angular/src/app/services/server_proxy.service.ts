@@ -80,6 +80,10 @@ export class ServerProxy {
     });
   }
 
+  setChooseDestinationCardState() {
+    return this.communicator.send('setChooseDestinationCardState', {});
+  }
+
   chooseDestinationCard(data: any) {
     return this.communicator.send('chooseDestinationCard', {
       keepCards: data,
