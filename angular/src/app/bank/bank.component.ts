@@ -18,6 +18,7 @@ export class BankComponent implements OnInit {
   ngOnInit() {}
 
   chooseTrainCard(trainCard: number) {
+    console.log(`Choosing card ${trainCard}`);
     window.setTimeout(() => {
       this.communicator.chooseTrainCard(trainCard);
     }, 1500);
@@ -25,6 +26,7 @@ export class BankComponent implements OnInit {
 
   drawDestinationCards() {
     this.showDestCardSelector.emit(true);
+    this.communicator.setChooseDestinationCardState();
     //this.communicator.chooseDestinationCard(destinationCard);
   }
 }

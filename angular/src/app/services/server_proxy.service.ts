@@ -100,7 +100,7 @@ export class ServerProxy {
     });
   }
 
-  chooseTrainCard(data: any) {
+  chooseTrainCard(data: number) {
     return this.communicator.send('chooseTrainCard', {
       cardIndex: data,
     });

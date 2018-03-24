@@ -1,5 +1,5 @@
 .backdrop{
-  background-color:rgba(0,0,0,0.6);
+  background-color:rgba(0,0,0,0.3);
   position:fixed;
   top:0;
   left:0;
@@ -8,25 +8,42 @@
   z-index: 1000;
 }
 
-.modal{
+
+.sidenav {
+  position: fixed;
+  top: 50%;
+  padding: 10px;
+  padding-bottom: 20px;
+  transform: translateY(-50%);
   z-index: 1050;
   display: flex;
+  left: 10px;
+  background-color: #FFF;
+  border-radius: 5px;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.centered{
+  text-align:center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
-.modal-dialog {
-  max-width: 800px;
-  min-height: 800px;
-  margin: 10px auto;
-}
-
-.modal-body{
-  max-width: 1000px;
-  min-height: 500px;
-  margin: 10px auto;
-}
-
-.modal{
-  overflow-y: scroll;
-  text-align: center;
+.btn{
+  width:100%;
 }

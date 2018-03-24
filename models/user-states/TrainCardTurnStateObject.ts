@@ -46,4 +46,10 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
     this.error = "You can't claim a route after choosing a train card!";
     return null;
   }
+
+  setChooseDestinationCardState() {
+    // can't set choose destination card state if you've taken a train card
+    this.error = "You can't set choose destination card state if you've taken a train card!";
+    return null;
+  }
 }

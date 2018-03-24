@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { UserInfo } from '../services/user_info.service';
 
 @Component({
   selector: 'app-user-inventory',
@@ -7,13 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInventoryComponent implements OnInit {
 
-  constructor() { }
+  private destCardViewerSource = new BehaviorSubject<boolean>(false);
+  displayDestCardViewer = this.destCardViewerSource.asObservable();
 
-  displayDestCardViewer(){
-    console.log("HEY YOU")
-  }
+  constructor(public _userInfo: UserInfo) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

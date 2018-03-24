@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserInfo } from '../services/user_info.service';
+
 
 @Component({
   selector: 'app-dest-card-viewer',
@@ -6,10 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dest-card-viewer.component.scss']
 })
 export class DestCardViewerComponent implements OnInit {
+  constructor(public _userInfo: UserInfo) {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

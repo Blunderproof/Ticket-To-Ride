@@ -15,6 +15,7 @@ export class GameComponent implements OnInit {
   historyOpen = true;
   gameStart = false;
   drawDest = false;
+  viewPlayerCards = true;
 
 
   intentoryOverlayApplied = true;

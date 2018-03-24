@@ -1,3 +1,14 @@
-<p>
-  dest-card-viewer works!
-</p>
+<div class="backdrop"></div>
+
+<div class="sidenav" tabindex="-1" role="dialog">
+  <h4 class="title"> User Destination Cards</h4>
+  <div class="row centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber < 0">
+    <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [card]="card" [clickable]=false></app-destination-card>
+  </div>
+  <div class="row centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0">
+    <app-destination-card *ngFor="let card of _userInfo.game.destinationCardDeck | slice:0:3" [card]="card" [clickable]=false></app-destination-card>
+  </div>
+  <div>
+    <button type="button" class="row centered btn btn-success" (click)="_userInfo.viewDestinationCards = false">Close</button>
+  </div>
+</div>

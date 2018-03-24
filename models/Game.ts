@@ -140,7 +140,7 @@ GameSchema.methods.shuffleDealCards = async function(
       };
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
-      player.turnState = TurnState.BeginningOfTurn;
+      player.turnState = TurnState.ChoosingDestinationCards;
 
       for (let cardIndex = 0; cardIndex < TRAIN_CARD_HAND_SIZE; cardIndex++) {
         player.trainCardHand.push(shuffledTrainCardDeck[0]._id);
