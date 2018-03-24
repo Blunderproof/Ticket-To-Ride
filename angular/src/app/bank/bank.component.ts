@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { UserInfo } from '../services/user_info.service';
 import { ServerProxy } from '../services/server_proxy.service';
 import { TrainCardComponent } from '../train-card/train-card.component';
@@ -12,20 +12,22 @@ import { GameComponent } from '../game/game.component';
   styleUrls: ['./bank.component.scss']
 })
 export class BankComponent implements OnInit {
-  @Output() showDestCardSelector = new EventEmitter();
   constructor(public _userInfo: UserInfo, private communicator: ServerProxy) { }
 
   ngOnInit() {}
 
   chooseTrainCard(trainCard: number) {
+    console.log(`Choosing card ${trainCard}`);
     window.setTimeout(() => {
       this.communicator.chooseTrainCard(trainCard);
     }, 1500);
   }
 
   drawDestinationCards() {
-    this.showDestCardSelector.emit(true);
-    this.communicator.setChooseDestinationCardState();
-    //this.communicator.chooseDestinationCard(destinationCard);
+    this.communicator.setChooseDestinationCardState().then((x: any) => {
+      if (x.success) {
+        this._userInfo.getUser();
+      }
+    });
   }
 }

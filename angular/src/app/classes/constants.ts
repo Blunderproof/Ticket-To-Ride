@@ -49,3 +49,9 @@ export enum UserState {
     LoggedIn,
     InGame,
 }
+
+export enum TurnState {
+    BeginningOfTurn = 'BeginningOfTurn',
+    OneTrainCardChosen = 'OneTrainCardChosen',
+    ChoosingDestinationCards = 'ChoosingDestinationCards',
+}

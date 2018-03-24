@@ -28,9 +28,9 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
 
     game.turnNumber++;
 
-    if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
-      // TODO implement the reshuffle algorithm
+    if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
       // TODO refactor our game's init stuff
+      game.reshuffleTrainCards();
     }
     return this.user;
   }
@@ -44,6 +44,12 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
   claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
     // can't claim route after choosing one train card
     this.error = "You can't claim a route after choosing a train card!";
+    return null;
+  }
+
+  setChooseDestinationCardState() {
+    // can't set choose destination card state if you've taken a train card
+    this.error = "You can't set choose destination card state if you've taken a train card!";
     return null;
   }
 }

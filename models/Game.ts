@@ -5,7 +5,16 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor, TrainColor, TurnState } from '../constants';
+import {
+  TRAIN_CARD_HAND_SIZE,
+  DESTINATION_CARD_HAND_SIZE,
+  GameState,
+  INITIAL_TOKEN_COUNT,
+  PLAYER_COLOR_MAP,
+  PlayerColor,
+  TrainColor,
+  TurnState,
+} from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
@@ -22,6 +31,9 @@ export interface IGameModel extends mongoose.Document {
   initGame(): Promise<any>;
   shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
+  updateLongestRoute(): Promise<any>;
+  reshuffleDestinationCards(): void;
+  reshuffleTrainCards(): void;
 }
 
 export var GameSchema: Schema = new Schema({
@@ -118,7 +130,17 @@ GameSchema.methods.shuffleDealCards = async function(
       player.claimedRouteList = [];
       player.trainCardHand = [];
       player.destinationCardHand = [];
-      player.score = 0;
+      player.points = {
+        public: 0,
+        private: 0,
+        total: 0,
+        detailed: {
+          routes: 0,
+          longestRoute: 0,
+          positiveDestinationCards: 0,
+          negativeDestinationCards: 0,
+        },
+      };
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
       player.turnState = TurnState.ChoosingDestinationCards;
@@ -157,6 +179,33 @@ GameSchema.methods.shuffleDealCards = async function(
 
 GameSchema.methods.getCurrentUserIndex = function() {
   return this.turnNumber % this.userList.length;
+};
+
+GameSchema.methods.updateLongestRoute = async function() {
+  await this.populate('userList').execPopulate();
+
+  let lengths = [];
+  for (let i = 0; i < this.userList.length; i++) {
+    this.userList[i].points.detailed.longestRoute = 0;
+    lengths.push(this.userList[i].longestRoute);
+  }
+  let maxRoute = Math.max(...lengths);
+
+  for (let i = 0; i < this.userList.length; i++) {
+    if (this.userList[i].longestRoute == maxRoute) this.userList[i].points.detailed.longestRoute = 10;
+    await this.userList[i].save();
+  }
+};
+GameSchema.methods.reshuffleDestinationCards = function() {
+  let shuffledDestinationCards = shuffle(this.destinationCardDiscardPile);
+  this.destinationCardDeck = shuffledDestinationCards;
+  this.destinationCardDiscardPile = [];
+};
+
+GameSchema.methods.reshuffleTrainCards = function() {
+  let shuffledTrainCards = shuffle(this.trainCardDiscardPile);
+  this.trainCardDeck = this.trainCardDeck.concat(shuffledTrainCards);
+  this.trainCardDiscardPile = [];
 };
 
 export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>('Game', GameSchema);

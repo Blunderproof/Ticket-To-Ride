@@ -1,7 +1,7 @@
 import { Route } from './route';
 import { TrainCard } from './train-card';
 import { DestinationCard } from './destination-card';
-import { PlayerColor } from './constants';
+import { PlayerColor, TurnState } from './constants';
 
 export class User {
   _id: string;
@@ -13,6 +13,7 @@ export class User {
   tokenCount: number;
   color: PlayerColor;
   trainCardCount: any;
+  turnState: TurnState;
 
   constructor(data?: Object) {
     Object.keys(data || {}).forEach(key => (this[key] = data[key]));

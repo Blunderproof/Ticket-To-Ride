@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../services/user_info.service';
 import { ServerProxy } from '../services/server_proxy.service';
+import { RGBAColor } from '../classes/constants';
 
 @Component({
   selector: 'app-game-final-display',
@@ -10,7 +11,8 @@ import { ServerProxy } from '../services/server_proxy.service';
 
 export class GameFinalDisplayComponent implements OnInit {
 
-  display = false;
+  rgbaColorEnum = RGBAColor;
+  display = true;
   message = null;
 
   constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}

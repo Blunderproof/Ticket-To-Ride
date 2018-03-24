@@ -117,7 +117,7 @@ export default class GameFacade {
       return {
         success: false,
         data: {},
-        errorInfo: "That game is already over!",
+        errorInfo: 'That game is already over!',
       };
     }
     // force unwrap game
@@ -179,6 +179,8 @@ export default class GameFacade {
       await unwrappedGame.save();
       user.turnState = TurnState.BeginningOfTurn;
 
+      await user.updatePoints();
+
       return user.save().then(savedUser => {
         return {
           success: true,
@@ -195,82 +197,6 @@ export default class GameFacade {
       });
     });
   }
-
-  // async selectDestinationCard(data: any): Promise<any> {
-  //   let loginCheck: any = null;
-  //   if ((loginCheck = this.validateUserAuth(data)) != null) {
-  //     return loginCheck;
-  //   }
-
-  //   let game = await Game.findOne({ _id: data.reqGameID });
-
-  //   if (!game) {
-  //     return {
-  //       success: false,
-  //       data: {}
-  //     }
-  //   }
-  //   // force unwrap game
-  //   let unwrappedGame = game!;
-
-  //   return User.findOne({ user: data.reqUserID }).then(async user => {
-  //     if (!user) {
-  //       return {
-  //         success: false,
-  //         data: {},
-  //         errorInfo: "That user doesn't exist.",
-  //       };
-  //     }
-
-  //     let top3 = game.destinationCardDeck.slice(0,3);
-
-  //     let discard = top3.filter(function(cardID) {
-  //       return data.keepCards.indexOf(cardID.toString()) < 0;
-  //     });
-  //     let keep = top3.filter(function(cardID) {
-  //       return data.keepCards.indexOf(cardID.toString()) >= 0;
-  //     });
-
-  //     // unpopulated so we're just comparing ids
-  //     for (let index = 0; index < keep.length; index++) {
-  //       const element = keep[index];
-  //       user.destinationCardHand.push(element);
-  //     }
-
-  //     // add the game
-  //     game.destinationCardDeck = game.destinationCardDeck.filter(function(
-  //       cardID
-  //     ) {
-  //       return discard.indexOf(cardID.toString()) < 0;
-  //     });
-
-  // for (let index = 0; index < discard.length; index++) {
-  //   const element = discard[index];
-  //   unwrappedGame.destinationCardDiscardPile.push(element);
-  // }
-
-  //     // remove the cards from the deck
-  //     game.destinationCardDeck.splice(0, 3);
-  //     await game.save();
-
-  //     return user.save().then(savedUser => {
-  //       return {
-  //         success: true,
-  //         data: {},
-  //         emit: [
-  //           {
-  //             command: 'updateGameState',
-  //             data: { id: data.reqGameID },
-  //             room: data.reqGameID,
-  //             gameHistory: `selected ${
-  //                savedUser.destinationCardHand.length
-  //             } destination cards.`,
-  //           },
-  //         ],
-  //       };
-  //     });
-  //   });
-  // }
 
   claimRoute(data: any): Promise<any> {
     let loginCheck: any = null;
@@ -392,28 +318,11 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
-        // currentUser.destinationCardCheck()
-
-        // let graphs = currentUser.generateRouteGraph();
-        // findLongestRoute(graphs);
-
-        // for destcard in currentUser.unmetdestinationcard:
-        // 	is destcard met(graphs);
-
-        // construct set of graphs from routes. detect which ones only have 1 edge. start length process from each leaf node.
-        // do this for all users, find longest route
-        // run the game graph algorithm
-        //  if user is longest route, then add that to publicScore & totalScore
-
-        // to speed this up, we might want to move to "unmetDestinationCardHand" and "metDestinationCardHand"
-        // iterate over all (unmet) destination cards
-        //    with same graph set structure, run a visitor thing on each one and see if both are ever found in one set
-        //    if so, change total score and move unmet destination cards to met
-        //    if not, do nothing
-
+        await currentUser.getLongestRoute();
         await currentUser.save();
-
-        game.turnNumber++;
+        await game.updateLongestRoute();
+        await currentUser.updatePoints();
+        await currentUser.save();
 
         if (game.lastRound > 0) {
           game.lastRound -= 1;
@@ -428,8 +337,11 @@ export default class GameFacade {
         }
 
         return game.save().then(savedGame => {
+          route = route!;
           return {
             success: true,
+            data: {},
+            gameHistory: `selected the ${route.color} route from ${route.city1} to ${route.city2}.`,
             emit: [
               {
                 command: 'updateGameState',
@@ -456,7 +368,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -466,14 +378,29 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel = turnCheck.currentUser;
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
 
-        currentUser.turnState = TurnState.ChoosingDestinationCards;
+        let currentUserState = currentUser.getTurnStateObject();
+        if ((currentUser = currentUserState.setChooseDestinationCardState()) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+
         await currentUser.save();
 
         return game.save().then(savedGame => {
           return {
             success: true,
+            data: {},
+            gameHistory: `began selecting destination cards.`,
             emit: [
               {
                 command: 'updateGameState',
@@ -520,7 +447,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -535,8 +462,8 @@ export default class GameFacade {
         currentUser = currentUser!;
 
         // check if the keep cards specified are in the game destination card deck
-        let keep = game.destinationCardDeck.filter(function(cardID) {
-          return data.keepCards.indexOf(cardID.toString()) >= 0;
+        let keep = game.destinationCardDeck.filter(function(card) {
+          return data.keepCards.indexOf(card._id.toString()) >= 0;
         });
 
         if (keep.length != data.keepCards.length) {
@@ -560,8 +487,6 @@ export default class GameFacade {
 
         await currentUser.save();
 
-        game.turnNumber++;
-
         if (game.lastRound > 0) {
           game.lastRound -= 1;
           if (game.lastRound == 0) {
@@ -573,6 +498,8 @@ export default class GameFacade {
         return game.save().then(savedGame => {
           return {
             success: true,
+            data: {},
+            gameHistory: `selected ${keep.length} destination card${keep.length >= 2 ? 's' : ''}.`,
             emit: [
               {
                 command: 'updateGameState',
@@ -591,7 +518,7 @@ export default class GameFacade {
       return loginCheck;
     }
 
-    if (!data.cardIndex) {
+    if (data.cardIndex == undefined) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({
           success: false,
@@ -619,7 +546,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -660,11 +587,13 @@ export default class GameFacade {
             // end the game
             game.gameState = GameState.Ended;
           }
-        } 
+        }
 
         return game.save().then(savedGame => {
           return {
             success: true,
+            data: {},
+            gameHistory: `drew a train card.`,
             emit: [
               {
                 command: 'updateGameState',

@@ -1,7 +1,7 @@
 import TurnStateObject from './TurnStateObject';
 import { IUserModel } from '../User';
 import { IRouteModel } from '../Route';
-import { TrainColor } from '../../constants';
+import { TrainColor, TurnState } from '../../constants';
 import { IGameModel } from '../Game';
 
 export default class DestinationCardTurnStateObject implements TurnStateObject {
@@ -21,12 +21,12 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
   chooseDestinationCard(keepCards: Array<string>, game: IGameModel) {
     let top3 = game.destinationCardDeck.slice(0, 3);
 
-    let discard = top3.filter(function(cardID) {
-      return keepCards.indexOf(cardID.toString()) < 0;
+    let discard = top3.filter(function(card) {
+      return keepCards.indexOf(card._id.toString()) < 0;
     });
 
-    let keep = top3.filter(function(cardID) {
-      return keepCards.indexOf(cardID.toString()) >= 0;
+    let keep = top3.filter(function(card) {
+      return keepCards.indexOf(card._id.toString()) >= 0;
     });
 
     this.user.destinationCardHand = this.user.destinationCardHand.concat(keep);
@@ -34,15 +34,23 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
     game.destinationCardDeck = game.destinationCardDeck.splice(3);
 
     if (game.destinationCardDeck.length == 0 && game.destinationCardDiscardPile.length > 0) {
-      // TODO reshuffle and save
+      game.reshuffleDestinationCards();
     }
+
+    this.user.turnState = TurnState.BeginningOfTurn;
+    game.turnNumber += 1;
 
     return this.user;
   }
 
   claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
-    // can't claim route after choosing one train card
+    // can't claim route after viewing destination cards
     this.error = "You can't claim routes after viewing destination cards!";
+    return null;
+  }
+
+  setChooseDestinationCardState() {
+    this.error = "You can't set choose destination card state if you're already in it!";
     return null;
   }
 }
