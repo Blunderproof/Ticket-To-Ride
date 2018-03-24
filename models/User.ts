@@ -13,20 +13,19 @@ export interface IUser {
   claimedRouteList: IRouteModel[];
   trainCardHand: ITrainCardModel[];
   destinationCardHand: IDestinationCardModel[];
-
+  metDestinationCards: IDestinationCardModel[];
+  unmetDestinationCards: IDestinationCardModel[];
   score: number;
   tokenCount: number;
+  turnState: TurnState;
   color: PlayerColor;
 
-  publicPoints: Promise<any>;
-  privatePoints: Promise<any>;
-  routePoints: Promise<any>;
-  longestRoutePoints: Promise<any>;
-  destinationCardNegativePoints: Promise<any>;
-  destinationCardPositivePoints: Promise<any>;
-
-  turnState: TurnState;
+  publicPoints(): Promise<any>;
+  privatePoints(): Promise<any>;
+  routePoints(): Promise<any>;
+  longestRoute(): Promise<any>;
   getTurnStateObject(): TurnStateObject;
+  destinationCardPoints(): Promise<any>;
 }
 
 export interface IUserModel extends IUser, mongoose.Document {}
@@ -56,16 +55,13 @@ UserSchema.methods.getTurnStateObject = function() {
 };
 
 UserSchema.methods.publicPoints = function() {
-  return Promise.all([this.routePoints(), this.longestRoutePoints()]).then(resolved => {
-    //sum all results
-    return resolved.reduce((a, b) => a + b, 0);
-  });
+  return this.routePoints();
 };
 
 UserSchema.methods.privatePoints = function() {
-  return Promise.all([this.destinationCardNegativePoints(), this.destinationCardPositivePoints()]).then(resolved => {
+  return this.destinationCardPoints().then((resolved: any) => {
     //sum all results
-    return resolved.reduce((a, b) => a + b, 0);
+    return resolved.positive - resolved.negative;
   });
 };
 
@@ -82,9 +78,67 @@ UserSchema.methods.routePoints = async function() {
 
 UserSchema.methods.longestRoutePoints = function() {};
 
-UserSchema.methods.destinationCardNegativePoints = function() {};
+UserSchema.methods.destinationCardPoints = async function() {
+  if (!this.destinationCardHand) return 0;
 
-UserSchema.methods.destinationCardPositivePoints = function() {};
+  let points = {
+    positive: 0,
+    negative: 0,
+  };
+
+  for (let i = 0; i < this.destinationCardHand.length; i++) {
+    if (this.unmetDestinationCards.indexOf(this.destinationCardHand[i]) == -1 && this.metDestinationCards.indexOf(this.destinationCardHand[i]) == -1) {
+      this.unmetDestinationCards.push(this.destinationCardHand[i]);
+    }
+  }
+
+  let unmetCards = await this.populate('unmetDestinationCards').execPopulate();
+  let routes = await this.populate('claimedRouteList').execPopulate();
+  for (let i = 0; i < unmetCards.length; i++) {
+    if (DestinationCardFulfilled(routes, unmetCards[i])) {
+      this.metDestinationCards.push(unmetCards[i]._id);
+    } else {
+      points.negative += unmetCards[i].points;
+    }
+  }
+
+  let metCards = await this.populate('metDestinationCards').execPopulate();
+
+  for (let i = 0; i < metCards.length; i++) {
+    points.positive += metCards[i].points;
+  }
+
+  return points;
+};
+
+UserSchema.methods.longestRoute = async function() {
+  let routes = await this.populate('claimedRouteList').execPopulate();
+  let lengthes: number[] = [];
+
+  for (let i = 0; i < routes.length; i++) {
+    lengthes.push(LongestRoute(routes, routes[i].city1));
+    lengthes.push(LongestRoute(routes, routes[i].city2));
+  }
+  return lengthes.reduce((a, b) => Math.max(a, b), 0);
+};
+
+var LongestRoute = (routes: IRouteModel[], city: string) => {
+  let visited: string[] = [];
+
+  var traverse = (curCity: string): any => {
+    let lengthes: number[] = [];
+    for (var i = 0; i < routes.length; i++) {
+      if (routes[i].city1 == curCity || (routes[i].city2 == curCity && visited.indexOf(routes[i]._id) === -1)) {
+        visited.push(routes[i]._id);
+        let newCity = routes[i].city1 == curCity ? routes[i].city2 : routes[i].city1;
+        lengthes.push(traverse(newCity) + 1);
+      }
+    }
+    return lengthes.reduce((a, b) => Math.max(a, b), 0);
+  };
+
+  return traverse(city);
+};
 
 var DestinationCardFulfilled = (routes: IRouteModel[], destinationCard: IDestinationCardModel) => {
   let visited: string[] = [];
@@ -100,6 +154,8 @@ var DestinationCardFulfilled = (routes: IRouteModel[], destinationCard: IDestina
     }
     return false;
   };
+
+  return traverse(destinationCard.city1, destinationCard.city2);
 };
 
 UserSchema.virtual('trainCardCount').get(function(this: IUserModel) {

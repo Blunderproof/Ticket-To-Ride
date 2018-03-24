@@ -12,6 +12,7 @@ export class UserInfo {
     errorMessages = [];
     userState = UserState.LoggedOut;
     trainPathStates = {};
+    viewDestinationCards = false;
 
     constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
         this.getGame();
@@ -85,6 +86,9 @@ export class UserInfo {
 
     updateRoutes() {
         if (this.game) {
+            if (this.game.turnNumber < 0) {
+                this.trainPathStates = {};
+            }
             this.game.userList.forEach(user => {
                 user.claimedRouteList.forEach(route => {
                     this.trainPathStates[`tp-${route.routeNumber}-${route.city1}-${route.city2}`] = user.color;

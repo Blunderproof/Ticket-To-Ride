@@ -302,7 +302,8 @@ export default class GameLobbyFacade {
     }).then(async game => {
       if (game) {
         // doc may be null if no document matched
-        if (game.userList.length <= 1 || game.userList.length > 5) {
+        // TODO change this back to 2
+        if (game.userList.length < 1 || game.userList.length > 5) {
           return {
             success: false,
             data: {},
