@@ -196,6 +196,7 @@ GameSchema.methods.updateLongestRoute = async function() {
     if (this.userList[i].longestRoute == maxRoute) this.userList[i].points.detailed.longestRoute = 10;
     await this.userList[i].save();
   }
+};
 GameSchema.methods.reshuffleDestinationCards = function() {
   let shuffledDestinationCards = shuffle(this.destinationCardDiscardPile);
   this.destinationCardDeck = shuffledDestinationCards;
