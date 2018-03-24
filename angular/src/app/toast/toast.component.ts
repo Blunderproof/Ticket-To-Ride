@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameHistory } from '../services/game-history.service';
 import {ToastyService, ToastyConfig, ToastOptions, ToastData} from 'ng2-toasty';
 import { SocketCommunicator} from '../services/socket_communicator.service';
+import { Message } from '../classes/message';
 
 @Component({
   selector: 'app-toast',
@@ -11,9 +12,10 @@ import { SocketCommunicator} from '../services/socket_communicator.service';
 export class ToastComponent implements OnInit {
 
   historyList = [];
+  itemsToToast = [];
 
   constructor(public _gameHistory: GameHistory,
-    private toastyService:ToastyService,
+    private toastyService: ToastyService,
     private toastyConfig: ToastyConfig,
     private socketCommunicator: SocketCommunicator) {
       // Assign the selected theme name to the `theme` property of the instance of ToastyConfig.
@@ -22,19 +24,24 @@ export class ToastComponent implements OnInit {
       this.toastyConfig.position = "bottom-left";
   }
 
-  ngOnInit(){
-    this.socketCommunicator.updateGameHistory(data => {
-      this.historyList = data;
+  ngOnInit() {
+    this.socketCommunicator.updateGameHistory((data: Array<Message>) => {
+      if (data.length > this.historyList.length) {
+        const length = this.historyList.length - 1;
+        this.historyList = data;
+        this.itemsToToast = data.slice(length);
+      } else {
+        this.historyList = data;
+      }
       this.addToast();
     });
   }
 
   addToast() {
-    let currToastyService = this.toastyService;
+    const currToastyService = this.toastyService;
     // Just add default Toast with title only
-    //console.log(this.historyList);
-    this.historyList.forEach(function(historyItem){
-        var toast:ToastOptions = {
+    this.itemsToToast.forEach(function(historyItem) {
+        const toast: ToastOptions = {
             title: historyItem.user.username,
             msg: historyItem.message,
             showClose: true,
