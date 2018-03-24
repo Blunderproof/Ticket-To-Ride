@@ -11,6 +11,8 @@ export class TrainCardListComponent implements OnInit {
   trainCounts: any[];
   info: UserInfo;
 
+  trainCardFocused = true;
+
   constructor(public _userInfo: UserInfo) {
     this.cardOrder = ['pink', 'black', 'white', 'green', 'blue', 'red', 'yellow', 'orange', 'rainbow'];
    }
