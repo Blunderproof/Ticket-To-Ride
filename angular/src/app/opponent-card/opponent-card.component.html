@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="opponent-dest-cards card-container">
+  <div class="opponent-dest-cards card-container" (click)="destCardClicked()">
     <img class="card" src="../../assets/images/destcards/dest-card-back.jpg" />
     <div class="counter">
       {{ _userInfo.game.userList[index].destinationCardHand.length }}

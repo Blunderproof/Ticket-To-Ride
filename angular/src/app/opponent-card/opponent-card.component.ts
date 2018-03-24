@@ -19,8 +19,10 @@ export class OpponentCardComponent implements OnInit {
     console.log('Created Opponent Card');
   }
 
-  setColor() {
-
+  destCardClicked() {
+    if (this._userInfo.game.userList[this.index]._id == this._userInfo.user._id) {
+      this._userInfo.viewDestinationCards = !this._userInfo.viewDestinationCards;
+    }
   }
 
 }
