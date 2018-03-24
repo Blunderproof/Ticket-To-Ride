@@ -10,14 +10,14 @@
 
 .card-col{
   overflow-y: auto;
-  max-height: 500px;
+  max-height: 550px;
   overflow-x: hidden;
 }
 
 .sidenav {
   position: fixed;
   top: 50%;
-  padding: 10px;
+  padding: 15px;
   padding-bottom: 20px;
   transform: translateY(-50%);
   z-index: 1050;
@@ -51,5 +51,6 @@
 
 
 .btn{
+  padding-top:5px;
   width:100%;
 }
