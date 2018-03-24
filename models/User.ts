@@ -97,7 +97,7 @@ UserSchema.methods.getPublicPoints = function() {
 
 UserSchema.methods.getPrivatePoints = function() {
   return this.destinationCardPoints().then((resolved: any) => {
-    this.points.private = resolved.positive - resolved.negative;
+    this.points.private = resolved.positive;
     return this.points.private;
   });
 };
