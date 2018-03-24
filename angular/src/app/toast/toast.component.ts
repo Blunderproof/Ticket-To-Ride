@@ -25,7 +25,7 @@ export class ToastComponent implements OnInit {
   ngOnInit(){
     this.socketCommunicator.updateGameHistory(data => {
       this.historyList = data;
-      addToast();
+      this.addToast();
     });
   }
 
