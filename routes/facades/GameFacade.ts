@@ -117,7 +117,7 @@ export default class GameFacade {
       return {
         success: false,
         data: {},
-        errorInfo: "That game doesn't exist.",
+        errorInfo: "That game is already over!",
       };
     }
     // force unwrap game
@@ -177,6 +177,7 @@ export default class GameFacade {
       }
 
       await unwrappedGame.save();
+      user.turnState = TurnState.BeginningOfTurn;
 
       return user.save().then(savedUser => {
         return {
@@ -455,7 +456,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game doesn't exist.",
+            errorInfo: "That game is already over!",
           };
         }
         // force unwrap game
@@ -519,7 +520,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game doesn't exist.",
+            errorInfo: "That game is already over!",
           };
         }
         // force unwrap game
@@ -618,7 +619,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game doesn't exist.",
+            errorInfo: "That game is already over!",
           };
         }
         // force unwrap game
