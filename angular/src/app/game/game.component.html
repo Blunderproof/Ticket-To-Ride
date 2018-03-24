@@ -1,16 +1,13 @@
-<app-bank (showDestCardSelector)="drawDestinationCards()"></app-bank>
-<app-dest-card-selector *ngIf="_userInfo.game && _userInfo.game.playersReady.indexOf(_userInfo.user._id) < 0;"></app-dest-card-selector>
+<app-bank></app-bank>
+<app-dest-card-selector *ngIf="_userInfo.user != null && _userInfo.user.turnState == turnStateEnum.ChoosingDestinationCards"></app-dest-card-selector>
 <app-dest-card-viewer *ngIf="_userInfo.viewDestinationCards"></app-dest-card-viewer>
-<app-game-final-display *ngIf="_userInfo.game.gameState == 3"></app-game-final-display>
+<app-game-final-display *ngIf="_userInfo.game != null && _userInfo.game.gameState == 3"></app-game-final-display>
 
 
 
 <div class="borders">
 
   <div class="game-container">
-    <div *ngIf="drawDest">
-      <app-dest-card-selector></app-dest-card-selector>
-    </div>
 
     <div class="box opponent-sidebar">
       <div *ngIf="_userInfo.game">
@@ -22,11 +19,8 @@
       </div>
     </div>
 
-    <!-- <div class=""> -->
-      <!-- <button type="button" class="btn btn-success" (click)="simulateChanges()">Simulate Changes</button> -->
-      <app-map></app-map>
-    <!-- </div> -->
-
+    <app-map></app-map>
+    
     <div class="box player-sidebar">
       <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()">
         <app-user-inventory></app-user-inventory>

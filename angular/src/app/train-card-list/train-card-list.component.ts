@@ -20,4 +20,8 @@ export class TrainCardListComponent implements OnInit {
   ngOnInit() {
   }
 
+  count() {
+    return this._userInfo.game.userList.find(x => x._id == this._userInfo.user._id).tokenCount;
+  }
+
 }
