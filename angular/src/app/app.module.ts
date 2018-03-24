@@ -41,6 +41,7 @@ import { DestinationCardComponent } from './destination-card/destination-card.co
 import { DestCardComponent } from './dest-card/dest-card.component';
 import { GameFinalDisplayComponent } from './game-final-display/game-final-display.component';
 import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.com
     DestinationCardComponent,
     DestCardComponent,
     GameFinalDisplayComponent,
-    DestCardViewerComponent
+    DestCardViewerComponent,
+    ToastComponent
   ],
   imports: [
     AngularSvgIconModule,
