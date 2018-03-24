@@ -64,31 +64,31 @@ export default class UserFacade {
               },
             ],
           })
-          .populate('userList')
-          .populate({
-            path: 'userList',
-            populate: {
-              path: 'trainCardHand',
-              model: 'TrainCard',
-            },
-          })
-          .populate({
-            path: 'userList',
-            populate: {
-              path: 'destinationCardHand',
-              model: 'DestinationCard',
-            }
-          })
-          .populate({
-            path: 'userList',
-            populate: {
-              path: 'claimedRouteList',
-              model: 'Route'
-            }
-          })
-          .then(async game => {
-            return game;
-          });
+            .populate('userList')
+            .populate({
+              path: 'userList',
+              populate: {
+                path: 'trainCardHand',
+                model: 'TrainCard',
+              },
+            })
+            .populate({
+              path: 'userList',
+              populate: {
+                path: 'destinationCardHand',
+                model: 'DestinationCard',
+              },
+            })
+            .populate({
+              path: 'userList',
+              populate: {
+                path: 'claimedRouteList',
+                model: 'Route',
+              },
+            })
+            .then(async game => {
+              return game;
+            });
 
           let userCookie =
             game == null
@@ -113,8 +113,7 @@ export default class UserFacade {
           return {
             success: false,
             data: {},
-            errorInfo:
-              "The username and password entered don't match any users in our database.",
+            errorInfo: "The username and password entered don't match any users in our database.",
           };
         }
       });
@@ -137,8 +136,7 @@ export default class UserFacade {
         resolve({
           success: false,
           data: {},
-          errorInfo:
-            "Request is missing parameters 'username', 'password', or 'confirmPassword'.",
+          errorInfo: "Request is missing parameters 'username', 'password', or 'confirmPassword'.",
         });
       });
       return promise;
@@ -191,9 +189,19 @@ export default class UserFacade {
         $or: [
           {
             host: data.reqUserID,
+            gameState: GameState.Open,
           },
           {
             userList: data.reqUserID,
+            gameState: GameState.Open,
+          },
+          {
+            host: data.reqUserID,
+            gameState: GameState.InProgress,
+          },
+          {
+            userList: data.reqUserID,
+            gameState: GameState.InProgress,
           },
         ],
       })
@@ -211,14 +219,14 @@ export default class UserFacade {
           populate: {
             path: 'destinationCardHand',
             model: 'DestinationCard',
-          }
+          },
         })
         .populate({
           path: 'userList',
           populate: {
             path: 'claimedRouteList',
-            model: 'Route'
-          }
+            model: 'Route',
+          },
         })
         .populate('unclaimedRoutes')
         // TODO just top 6
