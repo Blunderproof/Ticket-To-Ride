@@ -318,28 +318,10 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
+        await currentUser.getLongestRoute();
+        await currentUser.save();
         await game.updateLongestRoute();
         await currentUser.updatePoints();
-
-        // currentUser.destinationCardCheck()
-
-        // let graphs = currentUser.generateRouteGraph();
-        // findLongestRoute(graphs);
-
-        // for destcard in currentUser.unmetdestinationcard:
-        // 	is destcard met(graphs);
-
-        // construct set of graphs from routes. detect which ones only have 1 edge. start length process from each leaf node.
-        // do this for all users, find longest route
-        // run the game graph algorithm
-        //  if user is longest route, then add that to publicScore & totalScore
-
-        // to speed this up, we might want to move to "unmetDestinationCardHand" and "metDestinationCardHand"
-        // iterate over all (unmet) destination cards
-        //    with same graph set structure, run a visitor thing on each one and see if both are ever found in one set
-        //    if so, change total score and move unmet destination cards to met
-        //    if not, do nothing
-
         await currentUser.save();
 
         if (game.lastRound > 0) {

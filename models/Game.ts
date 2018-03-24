@@ -184,12 +184,11 @@ GameSchema.methods.getCurrentUserIndex = function() {
 GameSchema.methods.updateLongestRoute = async function() {
   await this.populate('userList').execPopulate();
 
-  let lengthReq = [];
+  let lengths = [];
   for (let i = 0; i < this.userList.length; i++) {
     this.userList[i].points.detailed.longestRoute = 0;
-    lengthReq.push(this.userList[i].getLongestRoute());
+    lengths.push(this.userList[i].longestRoute);
   }
-  let lengths = await Promise.all(lengthReq);
   let maxRoute = Math.max(...lengths);
 
   for (let i = 0; i < this.userList.length; i++) {
