@@ -392,6 +392,11 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
+        await currentUser.updatePoints();
+        await currentUser.getLongestRoute();
+
+        console.log(currentUser, 'CURRENTUSER');
+
         // currentUser.destinationCardCheck()
 
         // let graphs = currentUser.generateRouteGraph();

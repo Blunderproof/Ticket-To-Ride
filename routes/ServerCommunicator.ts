@@ -52,7 +52,6 @@ export default class ServerCommunicator {
   };
 
   public handleSocketCommand = (data: any, connection: any) => {
-    // TODO implement and test
     const facadeCommand: FacadeCommand | undefined = this.commandMap.get(data.methodName);
 
     if (!facadeCommand) {
@@ -214,8 +213,6 @@ export default class ServerCommunicator {
         .status(404);
       return false;
     }
-
-    // TODO do other checks
 
     return true;
   }
