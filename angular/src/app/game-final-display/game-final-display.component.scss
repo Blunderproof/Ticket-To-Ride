@@ -9,39 +9,38 @@
 }
 
 .final-display-window{
+  position: fixed;
+  top: 50%;
+  left: 25%;
+  padding: 20px;
+  transform: translateY(-50%);
+  z-index: 1050;
+  background-color: #FFF;
+  border-radius: 5px;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  display: grid;
   width: 800px;
   margin: 0 auto;
   z-index: 5000;
-}
-
-.modal{
-  min-width: 1000px !important;
-  display: flex;
-  z-index: 1050;
-  overflow-y: scroll;
-  text-align: center;
-}
-
-.modal-content{
-    min-width: 1000px !important;
-}
-
-.modal-dialog {
-  // max-width: 800px;
-  // min-height: 800px;
-  margin: 10px auto;
-}
-
-.modal-body{
-  margin: 10px auto;
   display: grid;
-  grid-template-columns: [f-col1-start] 1fr [f-col2-start] 600px [f-col2-end];
-  grid-template-rows: [f-row1-start] 1fr [f-row2-start] 1fr [f-row2-end];
-  grid-gap: 5px;
+  grid-gap: 10px;
   grid-template-areas:
-        "scores graph"
-        "scores chat";
+      "title"
+      "table"
+      "chat"
+      "button";
 }
+
+.title{
+  grid-area: title;
+}
+
+.table{
+  grid-area: table;
+}
+
 .box {
     background-color: #444;
     color: #fff;
@@ -55,28 +54,14 @@
     color: #444;
 }
 
-
-.opponent-sidebar {
-  grid-column: f-col1-start / f-col2-start;
-  grid-row: f-row1-start / f-row2-end;
-  min-width: 340px;
-  max-width: 340px;
-  max-height: 700px;
-  float:left;
-  /*NEW INTERNAL GRID*/
-  display: grid;
-    grid-gap: 15px;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-}
-
-.graph{
-  grid-area: graph;
-  grid-column: f-col2-start;
-  grid-row: f-row1-start;
+.btn-success{
+  float:right;
 }
 
 .chat{
-  grid-area: chat;
-  grid-column: f-col2-start;
-  grid-row: f-row2-start;
+  grid-areas: chat;
+}
+
+.button{
+  grid-area: button;
 }
