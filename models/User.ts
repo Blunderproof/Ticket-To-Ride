@@ -90,14 +90,14 @@ UserSchema.methods.updatePoints = function() {
 
 UserSchema.methods.getPublicPoints = function() {
   return this.routePoints().then((resolve: any) => {
-    this.points.public = resolve + this.points.detailed.longestRoute;
+    this.points.public = resolve;
     return resolve;
   });
 };
 
 UserSchema.methods.getPrivatePoints = function() {
   return this.destinationCardPoints().then((resolved: any) => {
-    this.points.private = resolved.positive;
+    this.points.private = resolved.positive - resolved.negative;
     return this.points.private;
   });
 };
