@@ -22,7 +22,7 @@
   display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-areas: "traincard-1 traincard-2 traincard-3 traincard-4 traincard-5 traincard-deck destcard-deck";
+    grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
     justify-items: center;
     height: inherit;
 }
@@ -107,6 +107,10 @@
 
 
 
+.traincard-0{
+  grid-area: traincard-0;
+}
+
 .traincard-1{
   grid-area: traincard-1;
 }
@@ -121,10 +125,6 @@
 
 .traincard-4{
   grid-area: traincard-4;
-}
-
-.traincard-5{
-  grid-area: traincard-5;
 }
 
 .traincard-deck{
