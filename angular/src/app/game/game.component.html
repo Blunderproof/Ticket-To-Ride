@@ -22,7 +22,12 @@
       </div>
     </div>
 
-    <app-map></app-map>
+    <app-map>
+      <div class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+      </div>
+    </app-map>
 
     <div class="box player-sidebar">
       <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()">
