@@ -2,7 +2,7 @@
 <app-dest-card-selector *ngIf="_userInfo.user != null && _userInfo.user.turnState == turnStateEnum.ChoosingDestinationCards"></app-dest-card-selector>
 <app-dest-card-viewer *ngIf="_userInfo.viewDestinationCards"></app-dest-card-viewer>
 <app-game-final-display *ngIf="_userInfo.game != null && _userInfo.game.gameState == 3"></app-game-final-display>
-
+<app-select-gray-color-modal *ngIf="_userInfo.displayColorSelection"></app-select-gray-color-modal>
 
 
 <div class="borders">
@@ -20,7 +20,7 @@
     </div>
 
     <app-map></app-map>
-    
+
     <div class="box player-sidebar">
       <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()">
         <app-user-inventory></app-user-inventory>
