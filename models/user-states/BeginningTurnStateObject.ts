@@ -28,9 +28,9 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     this.user.trainCardHand.push(trainCardToTake);
     game.trainCardDeck.splice(cardIndex, 1);
 
-    if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
-      // TODO implement the reshuffle algorithm
+    if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
       // TODO refactor our game's init stuff
+      game.reshuffleTrainCards();
     }
     return this.user;
   }
@@ -119,9 +119,11 @@ export default class BeginningTurnStateObject implements TurnStateObject {
       // if it exists, remove it from game.unclaimedRoutes to prevent them from claiming it
     }
 
-    if (game.trainCardDeck.length == 0 && game.trainCardDiscardPile.length > 0) {
-      // TODO shuffle and insert
+    if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
+      game.reshuffleTrainCards();
     }
+
+    game.turnNumber++;
 
     // no need to change state because user is already in BeginningTurnState
     return this.user;
