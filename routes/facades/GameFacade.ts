@@ -392,6 +392,7 @@ export default class GameFacade {
         currentUser = currentUser!;
 
         await currentUser.updatePoints();
+        await currentUser.getLongestRoute();
 
         console.log(currentUser, 'CURRENTUSER');
 
@@ -663,7 +664,7 @@ export default class GameFacade {
             // end the game
             game.gameState = GameState.Ended;
           }
-        } 
+        }
 
         return game.save().then(savedGame => {
           return {

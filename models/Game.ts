@@ -127,8 +127,17 @@ GameSchema.methods.shuffleDealCards = async function(
       player.claimedRouteList = [];
       player.trainCardHand = [];
       player.destinationCardHand = [];
-      player.publicPoints = 0;
-      player.privatePoints = 0;
+      player.points = {
+        public: 0,
+        private: 0,
+        total: 0,
+        detailed: {
+          routes: 0,
+          longestRoute: 0,
+          positiveDestinationCards: 0,
+          negativeDestinationCards: 0,
+        },
+      };
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
       player.turnState = TurnState.BeginningOfTurn;

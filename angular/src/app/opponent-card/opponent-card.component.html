@@ -3,9 +3,8 @@
   <div class="opponent-icon-container">
     <div class="opponent-icon-inner-container">
       <img class="opponent-icon" src="../../assets/images/playericons/{{ _userInfo.game.userList[index].color }}.png" />
-      <div class="opponent-score">
-        {{ _userInfo.game.userList[index].publicPoints }}
-      </div>
+      <div *ngIf="_userInfo.game.userList[index]._id != _userInfo.user._id" class="opponent-score">{{ _userInfo.game.userList[index].points.public }}</div>
+      <div *ngIf="_userInfo.game.userList[index]._id == _userInfo.user._id" class="opponent-score">{{ _userInfo.game.userList[index].points.total }}</div>
     </div>
   </div>
 
