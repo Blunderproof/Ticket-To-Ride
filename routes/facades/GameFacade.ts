@@ -315,7 +315,7 @@ export default class GameFacade {
       return promise;
     }
 
-    return Game.findById(data.reqGameID)
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
       .populate('userList')
       .populate({
         path: 'userList',
@@ -329,7 +329,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game doesn't exist.",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -452,7 +452,7 @@ export default class GameFacade {
     }
 
     // logged in
-    return Game.findById(data.reqGameID)
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
       .populate('userList')
       .then(async game => {
         if (!game) {
@@ -515,7 +515,7 @@ export default class GameFacade {
       return promise;
     }
 
-    return Game.findById(data.reqGameID)
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
       .populate('userList')
       .populate('destinationCardDeck')
       .then(async game => {
@@ -614,7 +614,7 @@ export default class GameFacade {
       return promise;
     }
 
-    return Game.findById(data.reqGameID)
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
       .populate('trainCardDeck')
       .populate('userList')
       .then(async game => {
@@ -656,6 +656,14 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
         await currentUser.save();
+
+        if (game.lastRound > 0) {
+          game.lastRound -= 1;
+          if (game.lastRound == 0) {
+            // end the game
+            game.gameState = GameState.Ended;
+          }
+        } 
 
         return game.save().then(savedGame => {
           return {
