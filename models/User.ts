@@ -90,7 +90,7 @@ UserSchema.methods.updatePoints = function() {
 
 UserSchema.methods.getPublicPoints = function() {
   return this.routePoints().then((resolve: any) => {
-    this.points.public = resolve;
+    this.points.public = resolve + this.points.details.longestRoute;
     return resolve;
   });
 };
@@ -113,8 +113,6 @@ UserSchema.methods.routePoints = async function() {
   this.points.detailed.routes = points;
   return points;
 };
-
-UserSchema.methods.longestRoutePoints = function() {};
 
 UserSchema.methods.destinationCardPoints = async function() {
   let points = {

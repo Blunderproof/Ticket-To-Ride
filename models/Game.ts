@@ -31,6 +31,7 @@ export interface IGameModel extends mongoose.Document {
   initGame(): Promise<any>;
   shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
+  updateLongestRoute(): Promise<any>;
 }
 
 export var GameSchema: Schema = new Schema({
@@ -176,6 +177,23 @@ GameSchema.methods.shuffleDealCards = async function(
 
 GameSchema.methods.getCurrentUserIndex = function() {
   return this.turnNumber % this.userList.length;
+};
+
+GameSchema.methods.updateLongestRoute = async function() {
+  await this.populate('userList').execPopulate();
+
+  let lengthReq = [];
+  for (let i = 0; i < this.userList.length; i++) {
+    this.userList[i].points.detailed.longestRoute = 0;
+    lengthReq.push(this.userList[i].getLongestRoute());
+  }
+  let lengths = await Promise.all(lengthReq);
+  let maxRoute = Math.max(...lengths);
+
+  for (let i = 0; i < this.userList.length; i++) {
+    if (this.userList[i].longestRoute == maxRoute) this.userList[i].points.detailed.longestRoute = 10;
+    await this.userList[i].save();
+  }
 };
 
 export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>('Game', GameSchema);

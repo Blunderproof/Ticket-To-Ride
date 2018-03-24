@@ -179,6 +179,8 @@ export default class GameFacade {
       await unwrappedGame.save();
       user.turnState = TurnState.BeginningOfTurn;
 
+      await user.updatePoints();
+
       return user.save().then(savedUser => {
         return {
           success: true,
@@ -392,10 +394,8 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
+        await game.updateLongestRoute();
         await currentUser.updatePoints();
-        await currentUser.getLongestRoute();
-
-        console.log(currentUser, 'CURRENTUSER');
 
         // currentUser.destinationCardCheck()
 
