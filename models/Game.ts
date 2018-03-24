@@ -5,7 +5,16 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor, TrainColor, TurnState } from '../constants';
+import {
+  TRAIN_CARD_HAND_SIZE,
+  DESTINATION_CARD_HAND_SIZE,
+  GameState,
+  INITIAL_TOKEN_COUNT,
+  PLAYER_COLOR_MAP,
+  PlayerColor,
+  TrainColor,
+  TurnState,
+} from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
@@ -118,7 +127,8 @@ GameSchema.methods.shuffleDealCards = async function(
       player.claimedRouteList = [];
       player.trainCardHand = [];
       player.destinationCardHand = [];
-      player.score = 0;
+      player.publicPoints = 0;
+      player.privatePoints = 0;
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
       player.turnState = TurnState.BeginningOfTurn;

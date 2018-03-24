@@ -19,13 +19,16 @@ export interface IUser {
   tokenCount: number;
   turnState: TurnState;
   color: PlayerColor;
+  publicPoints: number;
+  privatePoints: number;
 
-  publicPoints(): Promise<any>;
-  privatePoints(): Promise<any>;
+  getPublicPoints(): Promise<any>;
+  getPrivatePoints(): Promise<any>;
   routePoints(): Promise<any>;
   longestRoute(): Promise<any>;
   getTurnStateObject(): TurnStateObject;
   destinationCardPoints(): Promise<any>;
+  updatePoints(): Promise<any>;
 }
 
 export interface IUserModel extends IUser, mongoose.Document {}
@@ -41,6 +44,8 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema(
     score: Number,
     tokenCount: Number,
     color: String,
+    publicPoints: Number,
+    privatePoints: Number,
 
     turnState: String,
   },
@@ -54,14 +59,19 @@ UserSchema.methods.getTurnStateObject = function() {
   return TurnStateObjectLoader.instanceOf().createStateObject(this);
 };
 
-UserSchema.methods.publicPoints = function() {
-  return this.routePoints();
+UserSchema.methods.updatePoints = function() {
+  return Promise.all([this.getPublicPoints(), this.getPrivatePoints()]);
 };
 
-UserSchema.methods.privatePoints = function() {
+UserSchema.methods.getPublicPoints = function() {
+  return this.routePoints().then((resolve: any) => {
+    this.publicPoints = resolve;
+  });
+};
+
+UserSchema.methods.getPrivatePoints = function() {
   return this.destinationCardPoints().then((resolved: any) => {
-    //sum all results
-    return resolved.positive - resolved.negative;
+    this.privatePoints = resolved.positive - resolved.negative;
   });
 };
 
@@ -73,6 +83,7 @@ UserSchema.methods.routePoints = async function() {
   for (let i = 0; i < this.claimedRouteList.length; i++) {
     points += this.claimedRouteList[i].pointValue;
   }
+  console.log('ROUTEPOINTS', points);
   return points;
 };
 
@@ -85,6 +96,9 @@ UserSchema.methods.destinationCardPoints = async function() {
     positive: 0,
     negative: 0,
   };
+
+  if (!this.unmetDestinationCards) this.unmetDestinationCards = [];
+  if (!this.metDestinationCards) this.metDestinationCards = [];
 
   for (let i = 0; i < this.destinationCardHand.length; i++) {
     if (this.unmetDestinationCards.indexOf(this.destinationCardHand[i]) == -1 && this.metDestinationCards.indexOf(this.destinationCardHand[i]) == -1) {
@@ -107,6 +121,8 @@ UserSchema.methods.destinationCardPoints = async function() {
   for (let i = 0; i < metCards.length; i++) {
     points.positive += metCards[i].points;
   }
+
+  console.log('DESTPOINTS', points);
 
   return points;
 };

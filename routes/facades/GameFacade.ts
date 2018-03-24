@@ -360,7 +360,7 @@ export default class GameFacade {
         // force unwrap route
         route = route!;
         const id = route._id;
-        
+
         let unclaimedRoute = game.unclaimedRoutes.indexOf(id);
         if (unclaimedRoute < 0) {
           return {
@@ -390,6 +390,10 @@ export default class GameFacade {
 
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
+
+        await currentUser.updatePoints();
+
+        console.log(currentUser, 'CURRENTUSER');
 
         // currentUser.destinationCardCheck()
 
