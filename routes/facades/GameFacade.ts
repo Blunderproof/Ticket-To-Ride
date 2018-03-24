@@ -117,7 +117,7 @@ export default class GameFacade {
       return {
         success: false,
         data: {},
-        errorInfo: "That game is already over!",
+        errorInfo: 'That game is already over!',
       };
     }
     // force unwrap game
@@ -456,7 +456,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -466,9 +466,22 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel = turnCheck.currentUser;
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
 
-        currentUser.turnState = TurnState.ChoosingDestinationCards;
+        let currentUserState = currentUser.getTurnStateObject();
+        if ((currentUser = currentUserState.setChooseDestinationCardState()) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+
         await currentUser.save();
 
         return game.save().then(savedGame => {
@@ -520,7 +533,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -535,8 +548,8 @@ export default class GameFacade {
         currentUser = currentUser!;
 
         // check if the keep cards specified are in the game destination card deck
-        let keep = game.destinationCardDeck.filter(function(cardID) {
-          return data.keepCards.indexOf(cardID.toString()) >= 0;
+        let keep = game.destinationCardDeck.filter(function(card) {
+          return data.keepCards.indexOf(card._id.toString()) >= 0;
         });
 
         if (keep.length != data.keepCards.length) {
@@ -619,7 +632,7 @@ export default class GameFacade {
           return {
             success: false,
             data: {},
-            errorInfo: "That game is already over!",
+            errorInfo: 'That game is already over!',
           };
         }
         // force unwrap game
@@ -660,7 +673,7 @@ export default class GameFacade {
             // end the game
             game.gameState = GameState.Ended;
           }
-        } 
+        }
 
         return game.save().then(savedGame => {
           return {

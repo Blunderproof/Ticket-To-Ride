@@ -9,4 +9,5 @@ export default interface TurnStateObject {
   drawTrainCard(cardIndex: number, game: IGameModel): IUserModel | null;
   chooseDestinationCard(keepCards: Array<string>, game: IGameModel): IUserModel | null;
   claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel): IUserModel | null;
+  setChooseDestinationCardState(): IUserModel | null;
 };
