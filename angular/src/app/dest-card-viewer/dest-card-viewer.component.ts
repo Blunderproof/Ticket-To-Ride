@@ -8,19 +8,8 @@ import { UserInfo } from '../services/user_info.service';
   styleUrls: ['./dest-card-viewer.component.scss']
 })
 export class DestCardViewerComponent implements OnInit {
-  display = true;
-
   constructor(public _userInfo: UserInfo) {}
 
-  ngOnInit() {
-  }
-
-  openDestCardViewer() {
-    this.display = true;
-  }
-
-  closeDestCardViewer(){
-    this.display = false;
-  }
+  ngOnInit() {}
 
 }

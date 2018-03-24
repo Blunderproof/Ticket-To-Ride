@@ -126,4 +126,9 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     // no need to change state because user is already in BeginningTurnState
     return this.user;
   }
+
+  setChooseDestinationCardState() {
+    this.user.turnState = TurnState.ChoosingDestinationCards;
+    return this.user;
+  }
 }

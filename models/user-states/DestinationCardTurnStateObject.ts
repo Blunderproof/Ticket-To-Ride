@@ -1,7 +1,7 @@
 import TurnStateObject from './TurnStateObject';
 import { IUserModel } from '../User';
 import { IRouteModel } from '../Route';
-import { TrainColor } from '../../constants';
+import { TrainColor, TurnState } from '../../constants';
 import { IGameModel } from '../Game';
 
 export default class DestinationCardTurnStateObject implements TurnStateObject {
@@ -37,12 +37,20 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
       // TODO reshuffle and save
     }
 
+    this.user.turnState = TurnState.BeginningOfTurn;
+    game.turnNumber += 1;
+
     return this.user;
   }
 
   claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
-    // can't claim route after choosing one train card
+    // can't claim route after viewing destination cards
     this.error = "You can't claim routes after viewing destination cards!";
+    return null;
+  }
+
+  setChooseDestinationCardState() {
+    this.error = "You can't set choose destination card state if you're already in it!";
     return null;
   }
 }

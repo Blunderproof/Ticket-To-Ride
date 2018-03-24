@@ -8,6 +8,12 @@
   z-index: 1000;
 }
 
+.card-col{
+  overflow-y: auto;
+  max-height: 500px;
+  overflow-x: hidden;
+}
+
 .sidenav {
   position: fixed;
   top: 50%;
@@ -16,8 +22,8 @@
   transform: translateY(-50%);
   z-index: 1050;
   display: flex;
-  left: 10;
-  overflow-y: scroll;
+  left: 10px;
+  overflow-y: hidden;
   background-color: #FFF;
   border-radius: 5px;
   overflow-x: hidden;
