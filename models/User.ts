@@ -83,7 +83,7 @@ UserSchema.methods.getTurnStateObject = function() {
 
 UserSchema.methods.updatePoints = function() {
   return Promise.all([this.getPublicPoints(), this.getPrivatePoints()]).then(resolved => {
-    this.points.total = resolved[0] + resolved[1];
+    this.points.total = resolved[0] + resolved[1] + this.points.detailed.negativeDestinationCards;
     return this.points.total;
   });
 };

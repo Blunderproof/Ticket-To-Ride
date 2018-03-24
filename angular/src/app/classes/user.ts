@@ -9,20 +9,19 @@ export class User {
   claimedRouteList: Route[];
   trainCardHand: TrainCard[];
   destinationCardHand: DestinationCard[];
+  unmetDestinationCards: string[];
+  metDestinationCards: string[];
   score: number;
   tokenCount: number;
   color: PlayerColor;
   trainCardCount: any;
+  points: any;
 
   constructor(data?: Object) {
     Object.keys(data || {}).forEach(key => (this[key] = data[key]));
 
-    this.claimedRouteList = (this.claimedRouteList || []).map(
-      x => new Route(x)
-    );
+    this.claimedRouteList = (this.claimedRouteList || []).map(x => new Route(x));
     this.trainCardHand = (this.trainCardHand || []).map(x => new TrainCard(x));
-    this.destinationCardHand = (this.destinationCardHand || []).map(
-      x => new DestinationCard(x)
-    );
+    this.destinationCardHand = (this.destinationCardHand || []).map(x => new DestinationCard(x));
   }
 }

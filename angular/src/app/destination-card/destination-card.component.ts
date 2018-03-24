@@ -4,16 +4,17 @@ import { DestinationCard } from '../classes/destination-card';
 @Component({
   selector: 'app-destination-card',
   templateUrl: './destination-card.component.html',
-  styleUrls: ['./destination-card.component.scss']
+  styleUrls: ['./destination-card.component.scss'],
 })
 export class DestinationCardComponent implements OnInit {
   @Input() card: DestinationCard;
   @Input() clickable: boolean;
+  @Input() complete?: boolean;
 
   constructor() {}
 
-  cardClick(){
-    if(this.clickable){
+  cardClick() {
+    if (this.clickable) {
       this.card.selected = !this.card.selected;
     }
   }
@@ -21,5 +22,4 @@ export class DestinationCardComponent implements OnInit {
   ngOnInit() {
     this.card.selected = false;
   }
-
 }
