@@ -1,4 +1,4 @@
-.history-window{
+.history-window {
   padding: 10px;
   z-index: 10000 !important;
   grid-area: history;
@@ -15,22 +15,21 @@
   border-radius: 5px;
   outline: none;
   border-color: #9ecaed;
-  box-shadow: 0 0 80px #FFF;
+  box-shadow: 0 0 80px #fff;
 }
 
-.backdrop{
-  background-color:rgba(0,0,0,0.3);
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
   transition: background-color 2s ease-in-out;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   //z-index: 1049;
 }
 
-
-.arrow{
+.arrow {
   z-index: 2001;
   position: fixed;
   right: 150px;
@@ -42,35 +41,46 @@
   border-color: transparent transparent #555 transparent;
 }
 
-.history-header{
+.history-header {
   padding: 5px;
   background-color: grey;
 }
 
-.history-textbox{
-  background-color: #FFF;
+.history-textbox {
+  background-color: #fff;
   overflow-y: auto;
+
   min-height: 250px !important;
   max-height: 250px !important;
   min-width: 350px !important;
   max-width: 350px !important;
 }
 
-.history-input{
+.history-textbox::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+.history-textbox::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.history-input {
   grid-column: history-row3-start / history-row3-end;
   bottom: 0px;
 }
 
-.input-user-msg{
+.input-user-msg {
   position: absolute;
   bottom: 10px;
   height: 40px;
-    width: 90%;
+  width: 90%;
   margin: 25px;
 }
 
-.input-group-btn{
+.input-group-btn {
   position: absolute;
   bottom: 10px;
-
 }

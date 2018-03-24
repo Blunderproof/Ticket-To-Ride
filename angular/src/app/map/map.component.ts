@@ -4,6 +4,7 @@ import { UserInfo } from '../services/user_info.service';
 import { ServerProxy } from '../services/server_proxy.service';
 import { User } from '../classes/user';
 import { RouteColor } from '../classes/constants';
+import { Route } from '../classes/route';
 
 @Component({
   selector: 'app-map',
@@ -15,6 +16,8 @@ export class MapComponent implements OnInit {
   overlayApplied = true;
   trainPathStates = {};
   routeColorEnum = RouteColor;
+  displayColorSelection = false;
+  routeSelected: Route = null;
 
   constructor(public _gameHistory: GameHistory, public _userInfo: UserInfo, private communicator: ServerProxy) {}
 
@@ -33,16 +36,20 @@ export class MapComponent implements OnInit {
       city2: routeCity2,
       color: routeColor,
       routeNumber: routeNumber,
-      colorToUse: 'yellow' // TODO: Provide a way for the user to choose a color
     };
+
+    if (routeColor == RouteColor.Gy) {
+      this._userInfo.displayColorSelection = true;
+      this._userInfo.routeSelected = new Route(data);
+      return;
+    }
 
     console.log(data);
 
-    this.communicator.claimRoute(data)
-      .then((x: any) => {
-        if (!x.success) {
-          this.errorMessages.push(x.message);
-        }
-      });
+    this.communicator.claimRoute(data).then((x: any) => {
+      if (!x.success) {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
 }
