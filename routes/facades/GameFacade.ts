@@ -604,7 +604,7 @@ export default class GameFacade {
       return loginCheck;
     }
 
-    if (!data.cardIndex) {
+    if (data.cardIndex == undefined) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({
           success: false,
