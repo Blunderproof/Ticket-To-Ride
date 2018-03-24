@@ -392,6 +392,11 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
+        await currentUser.updatePoints();
+        await currentUser.getLongestRoute();
+
+        console.log(currentUser, 'CURRENTUSER');
+
         // currentUser.destinationCardCheck()
 
         // let graphs = currentUser.generateRouteGraph();
@@ -604,7 +609,7 @@ export default class GameFacade {
       return loginCheck;
     }
 
-    if (!data.cardIndex) {
+    if (data.cardIndex == undefined) {
       const promise = new Promise((resolve: any, reject: any) => {
         resolve({
           success: false,
