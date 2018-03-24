@@ -42,6 +42,7 @@ import { DestCardComponent } from './dest-card/dest-card.component';
 import { GameFinalDisplayComponent } from './game-final-display/game-final-display.component';
 import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.component';
 import { ToastComponent } from './toast/toast.component';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { ToastComponent } from './toast/toast.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastyModule.forRoot()
   ],
   providers: [
     ServerProxy,

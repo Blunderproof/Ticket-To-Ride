@@ -3,7 +3,9 @@
 <app-dest-card-viewer *ngIf="_userInfo.viewDestinationCards"></app-dest-card-viewer>
 <app-game-final-display *ngIf="_userInfo.game.gameState == 3"></app-game-final-display>
 
-
+<div class="toasts">
+  <app-toast></app-toast>
+</div>
 
 <div class="borders">
 
@@ -21,6 +23,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- <div class=""> -->
       <!-- <button type="button" class="btn btn-success" (click)="simulateChanges()">Simulate Changes</button> -->
