@@ -16,6 +16,13 @@ export default class GameFacade {
     return this.instance;
   }
 
+  depopulate(arr: any[]) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i] = arr[i]._id;
+    }
+    return arr;
+  }
+
   validateUserAuth(data: any) {
     console.log(data);
     if (!data.reqUserID) {
@@ -270,6 +277,8 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
+        await currentUser.populate('claimedRouteList').execPopulate();
+
         let route = await Route.findOne({
           color: data.color,
           routeNumber: data.routeNumber,
@@ -296,6 +305,16 @@ export default class GameFacade {
           };
         }
 
+        for (let i = 0; i < currentUser.claimedRouteList.length; i++) {
+          if (route.city1 == currentUser.claimedRouteList[i].city1 && route.city2 == currentUser.claimedRouteList[i].city2) {
+            return {
+              success: false,
+              data: {},
+              errorInfo: "You can't claim both routes on a double route.",
+            };
+          }
+        }
+
         let cardColor: TrainColor = route.color == TrainColor.Gray ? data.colorToUse : route.color;
         if (!cardColor) {
           return {
@@ -313,6 +332,15 @@ export default class GameFacade {
             data: {},
             errorInfo: currentUserState.error,
           };
+        }
+
+        if (game.userList.length <= 3) {
+          await game.populate('unclaimedRoutes').execPopulate();
+          let unclaimedRoutes = game.unclaimedRoutes.filter(e => {
+            route = route!;
+            return e.city1 != route.city1 || e.city2 != route.city2;
+          });
+          game.unclaimedRoutes = this.depopulate(unclaimedRoutes);
         }
 
         // it won't be null at this point, we just checked

@@ -129,7 +129,7 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     // remove the route from the unclaimed routes
     let routeIndex = game.unclaimedRoutes.indexOf(route._id);
     game.unclaimedRoutes.splice(routeIndex, 1);
-    if (game.userList.length == 2) {
+    if (game.userList.length <= 3) {
       // TODO check db for a second route with the same city1 and city2 but opposite routeNumber
       // if it exists, remove it from game.unclaimedRoutes to prevent them from claiming it
     }

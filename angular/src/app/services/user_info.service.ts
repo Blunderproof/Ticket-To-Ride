@@ -14,13 +14,16 @@ export class UserInfo {
   userState = UserState.LoggedOut;
   trainPathStates = {};
   viewDestinationCards = false;
-
   displayColorSelection = false;
   routeSelected: Route = null;
 
   constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
     this.getGame();
     this.getUser();
+    this.socket.updateGameState(state => {
+      this.game = state;
+      this.getUser();
+    });
   }
 
   getGame() {
