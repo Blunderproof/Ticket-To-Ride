@@ -25,6 +25,7 @@ export class BankComponent implements OnInit {
 
   drawDestinationCards() {
     this.showDestCardSelector.emit(true);
+    this.communicator.setChooseDestinationCardState();
     //this.communicator.chooseDestinationCard(destinationCard);
   }
 }
