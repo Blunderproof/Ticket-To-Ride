@@ -34,18 +34,12 @@
   text-align: center;
 }
 
-.color-square {
-  width: 50px;
-  height: 50px;
-  box-sizing: border-box;
-  margin: 10px;
-
-  border: 1px solid black;
-  display: inline-block;
+.clickable {
   cursor: pointer;
+  display: inline-block;
 }
 
-.color-square:hover {
+.clickable:hover {
   opacity: 0.65;
 }
 
