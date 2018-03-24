@@ -123,6 +123,8 @@ export default class BeginningTurnStateObject implements TurnStateObject {
       game.reshuffleTrainCards();
     }
 
+    game.turnNumber++;
+
     // no need to change state because user is already in BeginningTurnState
     return this.user;
   }
