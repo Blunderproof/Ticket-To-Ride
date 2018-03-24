@@ -48,7 +48,12 @@ export class DestCardSelectorComponent implements OnInit {
       this.display = false;
 
       // TODO: Use promise (.then) and display the server error instead of the one we have hard-coded in the else
-      this._serverProxy.chooseDestinationCard(selected);
+      this._serverProxy.chooseDestinationCard(selected).then((x: any) => {
+        if (x.success) {
+          this._userInfo.getUser();
+          this._userInfo.getGame();
+        }
+      });
     } else {
       this.message = 'Make sure you choose at least 1 destination card to keep.';
     }
