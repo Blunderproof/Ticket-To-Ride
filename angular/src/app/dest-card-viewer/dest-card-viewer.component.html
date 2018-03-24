@@ -3,10 +3,12 @@
 <div class="sidenav" tabindex="-1" role="dialog">
   <div class="title">
     <h4 class="title"> User Destination Cards</h4>
-    <div style="float:right">Uncompleted Routes: -{{_userInfo.user.points.detailed.negativeDestinationCards}} <br> Completed Routes: +{{_userInfo.user.points.detailed.negativeDestinationCards}}</div>
+    <div style="float:right">Uncompleted Routes: -{{_userInfo.user.points.detailed.negativeDestinationCards}}
+      <br> Completed Routes: +{{_userInfo.user.points.detailed.positiveDestinationCards}}</div>
   </div>
   <div class="card-col centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0">
-    <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [card]="card" [clickable]=false></app-destination-card>
+    <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [complete]="_userInfo.user.metDestinationCards.indexOf(card._id) >= 0"
+      [card]="card" [clickable]=false></app-destination-card>
   </div>
   <div>
     <button type="button" class="row centered btn btn-success" (click)="_userInfo.viewDestinationCards = false">Close</button>

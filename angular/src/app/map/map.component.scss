@@ -53,11 +53,11 @@ EX: tp-1-Denver-KansasCity
 }
 
 .route > g > path {
-  fill-opacity: 0.55 !important;
+  fill-opacity: 1 !important;
 }
 
 .route:hover > g > path {
-  fill-opacity: 1 !important;
+  fill-opacity: 0.6 !important;
 }
 
 .noselect {

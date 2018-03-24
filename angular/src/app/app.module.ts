@@ -42,6 +42,7 @@ import { DestCardComponent } from './dest-card/dest-card.component';
 import { GameFinalDisplayComponent } from './game-final-display/game-final-display.component';
 import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.component';
 import { ToastComponent } from './toast/toast.component';
+import { SelectGrayColorModal } from './select-gray-color-modal/select-gray-color-modal.component';
 import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
@@ -73,7 +74,8 @@ import {ToastyModule} from 'ng2-toasty';
     DestCardComponent,
     GameFinalDisplayComponent,
     DestCardViewerComponent,
-    ToastComponent
+    ToastComponent,
+    SelectGrayColorModal,
   ],
   imports: [
     AngularSvgIconModule,
@@ -94,4 +96,4 @@ import {ToastyModule} from 'ng2-toasty';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -32,6 +32,21 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
       // TODO refactor our game's init stuff
       game.reshuffleTrainCards();
     }
+
+    // check rainbow cards
+    let top5 = game.trainCardDeck.slice(0, 5);
+
+    let rainbowCount = top5.filter(card => {
+      return card.color == TrainColor.Rainbow;
+    }).length;
+
+    // cut off the 5 front ones
+    if (rainbowCount >= 3) {
+      console.log('rainboxCount is too high!!');
+      game.trainCardDeck = game.trainCardDeck.slice(5);
+      game.trainCardDiscardPile = game.trainCardDiscardPile.concat(top5);
+    }
+
     return this.user;
   }
 

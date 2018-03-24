@@ -32,6 +32,21 @@ export default class BeginningTurnStateObject implements TurnStateObject {
       // TODO refactor our game's init stuff
       game.reshuffleTrainCards();
     }
+
+    // check rainbow cards
+    let top5 = game.trainCardDeck.slice(0, 5);
+
+    let rainbowCount = top5.filter(card => {
+      return card.color == TrainColor.Rainbow;
+    }).length;
+
+    // cut off the 5 front ones
+    if (rainbowCount >= 3) {
+      console.log('rainboxCount is too high!!');
+      game.trainCardDeck = game.trainCardDeck.slice(5);
+      game.trainCardDiscardPile = game.trainCardDiscardPile.concat(top5);
+    }
+
     return this.user;
   }
 
@@ -114,7 +129,7 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     // remove the route from the unclaimed routes
     let routeIndex = game.unclaimedRoutes.indexOf(route._id);
     game.unclaimedRoutes.splice(routeIndex, 1);
-    if (game.userList.length == 2) {
+    if (game.userList.length <= 3) {
       // TODO check db for a second route with the same city1 and city2 but opposite routeNumber
       // if it exists, remove it from game.unclaimedRoutes to prevent them from claiming it
     }

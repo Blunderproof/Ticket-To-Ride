@@ -5,10 +5,11 @@
 
 /* LOADING SPINNER*/
 .spinner {
-  margin: 100px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 40px;
   height: 40px;
-  position: relative;
 }
 
 .cube1, .cube2 {

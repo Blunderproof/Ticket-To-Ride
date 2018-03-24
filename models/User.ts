@@ -83,21 +83,21 @@ UserSchema.methods.getTurnStateObject = function() {
 
 UserSchema.methods.updatePoints = function() {
   return Promise.all([this.getPublicPoints(), this.getPrivatePoints()]).then(resolved => {
-    this.points.total = resolved[0] + resolved[1];
+    this.points.total = resolved[0] + resolved[1] + this.points.detailed.negativeDestinationCards;
     return this.points.total;
   });
 };
 
 UserSchema.methods.getPublicPoints = function() {
   return this.routePoints().then((resolve: any) => {
-    this.points.public = resolve + this.points.details.longestRoute;
+    this.points.public = resolve;
     return resolve;
   });
 };
 
 UserSchema.methods.getPrivatePoints = function() {
   return this.destinationCardPoints().then((resolved: any) => {
-    this.points.private = resolved.positive;
+    this.points.private = resolved.positive - resolved.negative;
     return this.points.private;
   });
 };
