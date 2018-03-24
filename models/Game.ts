@@ -5,7 +5,16 @@ import { Route, IRouteModel } from './Route';
 import { ITrainCardModel, TrainCard } from './TrainCard';
 import { IDestinationCardModel, DestinationCard } from './DestinationCard';
 import { shuffle } from '../helpers';
-import { TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, GameState, INITIAL_TOKEN_COUNT, PLAYER_COLOR_MAP, PlayerColor, TrainColor, TurnState } from '../constants';
+import {
+  TRAIN_CARD_HAND_SIZE,
+  DESTINATION_CARD_HAND_SIZE,
+  GameState,
+  INITIAL_TOKEN_COUNT,
+  PLAYER_COLOR_MAP,
+  PlayerColor,
+  TrainColor,
+  TurnState,
+} from '../constants';
 
 export interface IGameModel extends mongoose.Document {
   host: IUserModel;
@@ -22,6 +31,8 @@ export interface IGameModel extends mongoose.Document {
   initGame(): Promise<any>;
   shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
+  reshuffleDestinationCards(): void;
+  reshuffleTrainCards(): void;
 }
 
 export var GameSchema: Schema = new Schema({
@@ -157,6 +168,18 @@ GameSchema.methods.shuffleDealCards = async function(
 
 GameSchema.methods.getCurrentUserIndex = function() {
   return this.turnNumber % this.userList.length;
+};
+
+GameSchema.methods.reshuffleDestinationCards = function() {
+  let shuffledDestinationCards = shuffle(this.destinationCardDiscardPile);
+  this.destinationCardDeck = shuffledDestinationCards;
+  this.destinationCardDiscardPile = [];
+};
+
+GameSchema.methods.reshuffleTrainCards = function() {
+  let shuffledTrainCards = shuffle(this.trainCardDiscardPile);
+  this.trainCardDeck = this.trainCardDeck.concat(shuffledTrainCards);
+  this.trainCardDiscardPile = [];
 };
 
 export const Game: mongoose.Model<IGameModel> = mongoose.model<IGameModel>('Game', GameSchema);

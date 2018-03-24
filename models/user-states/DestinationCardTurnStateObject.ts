@@ -21,12 +21,12 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
   chooseDestinationCard(keepCards: Array<string>, game: IGameModel) {
     let top3 = game.destinationCardDeck.slice(0, 3);
 
-    let discard = top3.filter(function(cardID) {
-      return keepCards.indexOf(cardID.toString()) < 0;
+    let discard = top3.filter(function(card) {
+      return keepCards.indexOf(card._id.toString()) < 0;
     });
 
-    let keep = top3.filter(function(cardID) {
-      return keepCards.indexOf(cardID.toString()) >= 0;
+    let keep = top3.filter(function(card) {
+      return keepCards.indexOf(card._id.toString()) >= 0;
     });
 
     this.user.destinationCardHand = this.user.destinationCardHand.concat(keep);
@@ -34,7 +34,7 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
     game.destinationCardDeck = game.destinationCardDeck.splice(3);
 
     if (game.destinationCardDeck.length == 0 && game.destinationCardDiscardPile.length > 0) {
-      // TODO reshuffle and save
+      game.reshuffleDestinationCards();
     }
 
     this.user.turnState = TurnState.BeginningOfTurn;
