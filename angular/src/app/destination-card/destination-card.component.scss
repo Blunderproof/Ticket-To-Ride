@@ -3,8 +3,11 @@
     width: 300px;
     height: auto;
     opacity: .6;
-    cursor: pointer;
   }
+
+.cursor{
+  cursor: pointer;
+}
 
 .card-selected{
     transition: transform 1s;

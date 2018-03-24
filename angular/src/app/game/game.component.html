@@ -1,6 +1,7 @@
 <app-bank (showDestCardSelector)="drawDestinationCards()"></app-bank>
 <app-dest-card-selector *ngIf="_userInfo.game && _userInfo.game.playersReady.indexOf(_userInfo.user._id) < 0;"></app-dest-card-selector>
-<app-game-final-display *ngIf="gameOver"></app-game-final-display>
+<!-- <app-dest-card-viewer></app-dest-card-viewer> -->
+<!-- <app-game-final-display *ngIf="gameOver"></app-game-final-display> -->
 
 
 

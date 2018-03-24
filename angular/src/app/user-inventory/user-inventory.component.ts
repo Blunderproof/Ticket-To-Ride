@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-user-inventory',
@@ -7,13 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserInventoryComponent implements OnInit {
 
+  private destCardViewerSource = new BehaviorSubject<boolean>(false);
+  displayDestCardViewer = this.destCardViewerSource.asObservable();
+
   constructor() { }
 
-  displayDestCardViewer(){
-    console.log("HEY YOU")
+  openDestCardViewer(){
   }
 
   ngOnInit() {
+
   }
 
 }
