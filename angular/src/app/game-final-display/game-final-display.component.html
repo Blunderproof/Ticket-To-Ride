@@ -1,11 +1,44 @@
 <div class="backdrop" [hidden]="!display"></div>
 
-<!-- <div class="final-display-window">
-  Hey
-</div> -->
+<div class="final-display-window" [hidden]="!display">
+  <div>
+    <h4 class="title">Final Display</h4>
+  </div>
+  <table class="table">
+    <caption>List of users</caption>
+    <thead>
+      <tr>
+        <th scope="col">Players</th>
+        <th scope="col">Points from Routes</th>
+        <th scope="col">Completed Contracts</th>
+        <th scope="col">Incompleted Contracts</th>
+        <th scope="col">Longest Route</th>
+        <th scope="col">TOTAL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="player-info" *ngFor="let player of _userInfo.game.endGameData">
+        <tr>
+          <!-- <th scope="row">{{player.username}}</th>
+          <td>+{{player.routePoints}}</td>
+          <td>+{{player.completedContracts}}</td>
+          <td>-{{player.incompletedContracts}}</td>
+          <td>+{{player.longestRouteBonus}}</td>
+          <td>{{player.totalScore}}</td> -->
+        </tr>
+      </div>
+    </tbody>
+  </table>
+  <div class="box chat">
+    <app-chat [inLobby]=false></app-chat>
+  </div>
+  <div class="button">
+    <button type="button" class="btn btn-success" >Return</button>
+  </div>
+</div>
 
 
-<div class="modal" tabindex="-1" role="dialog" [hidden]="!display">
+<!-- <div class="modal" tabindex="-1" role="dialog" [hidden]="!display">
   <div class="modal-dialog" style="height:80%;" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -41,7 +74,6 @@
           </ul>
 
 
-          <!-- <img style="max-width: 500px;"src = "../../assets/graph.png"/> -->
           <table class="table">
             <caption>List of users</caption>
             <thead>
@@ -86,4 +118,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
