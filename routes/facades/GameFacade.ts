@@ -199,6 +199,11 @@ export default class GameFacade {
               data: { id: data.reqGameID },
               room: data.reqGameID,
             },
+            {
+              command: 'updateGameHistory',
+              room: data.reqGameID,
+              data: { id: data.reqGameID },
+            },
           ],
         };
       });
@@ -376,6 +381,11 @@ export default class GameFacade {
                 data: { id: savedGame._id },
                 room: savedGame._id,
               },
+              {
+                command: 'updateGameHistory',
+                room: savedGame._id,
+                data: { id: savedGame._id },
+              },
             ],
           };
         });
@@ -434,6 +444,11 @@ export default class GameFacade {
                 command: 'updateGameState',
                 data: { id: savedGame._id },
                 room: savedGame._id,
+              },
+              {
+                command: 'updateGameHistory',
+                room: savedGame._id,
+                data: { id: savedGame._id },
               },
             ],
           };
@@ -534,6 +549,11 @@ export default class GameFacade {
                 data: { id: savedGame._id },
                 room: savedGame._id,
               },
+              {
+                command: 'updateGameHistory',
+                room: savedGame._id,
+                data: { id: savedGame._id },
+              },
             ],
           };
         });
@@ -627,6 +647,11 @@ export default class GameFacade {
                 command: 'updateGameState',
                 data: { id: savedGame._id },
                 room: savedGame._id,
+              },
+              {
+                command: 'updateGameHistory',
+                room: savedGame._id,
+                data: { id: savedGame._id },
               },
             ],
           };
