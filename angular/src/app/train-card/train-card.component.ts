@@ -24,6 +24,21 @@ export class TrainCardComponent implements OnInit {
     }, 1000);
   }
 
+  trainCardValid(trainCardColor: string){
+    let userInfo = this._userInfo;
+    if(userInfo.isCurrentTurn()){
+      if(trainCardColor === "rainbow"){
+        if(userInfo.user.turnState != "OneTrainCardChosen"){
+          return true;
+        }
+      }
+      else{
+        return true;
+      }
+    }
+    return false;
+  }
+
   isClicked() {
     return this.clicked;
   }

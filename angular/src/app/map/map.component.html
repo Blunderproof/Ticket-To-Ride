@@ -1,5 +1,5 @@
 <div class = "box game-board">
-  <div class="map-container" [class.map-overlay]="!_userInfo.isCurrentTurn()">
+  <div class="map-container" [ngClass]="{'map-overlay': !canClaimRoute()}">
     <svg:svg
        xmlns:xhtml="http://www.w3.org/1999/xhtml"
        xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"

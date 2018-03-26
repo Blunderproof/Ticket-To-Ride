@@ -52,4 +52,14 @@ export class MapComponent implements OnInit {
       }
     });
   }
+
+  canClaimRoute(){
+    let userInfo = this._userInfo;
+    if(userInfo.isCurrentTurn()){
+      if(userInfo.user.turnState != "OneTrainCardChosen"){
+        return true;
+      }
+    }
+    return false;
+  }
 }
