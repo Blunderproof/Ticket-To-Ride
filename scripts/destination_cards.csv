@@ -1,7 +1,7 @@
 city1,city2,pointValue
 LosAngeles,NewYork,21
 Duluth,Houston,8
-SaultSteMarie,Nashville,8
+SaultStMarie,Nashville,8
 NewYork,Atlanta,6
 Portland,Nashville,17
 Vancouver,Montreal,20
@@ -27,5 +27,5 @@ Denver,ElPaso,4
 Helena,LosAngeles,8
 Winnipeg,Houston,12
 Montreal,NewOrleans,13
-SaultSteMarie,OklahomaCity,9
+SaultStMarie,OklahomaCity,9
 Seattle,LosAngeles,9
