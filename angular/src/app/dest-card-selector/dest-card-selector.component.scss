@@ -47,3 +47,8 @@
 .btn{
   width:100%;
 }
+
+:disabled, :disabled:hover {
+  background-color: rgb(100,100,100)!important;
+  cursor: default!important;
+}
