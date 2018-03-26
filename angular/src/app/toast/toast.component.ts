@@ -18,16 +18,16 @@ export class ToastComponent implements OnInit {
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig,
     private socket: SocketCommunicator) {
-      // Assign the selected theme name to the `theme` property of the instance of ToastyConfig.
-      // Possible values: default, bootstrap, material
-      this.toastyConfig.theme = 'bootstrap';
-      this.toastyConfig.position = "bottom-left";
+    // Assign the selected theme name to the `theme` property of the instance of ToastyConfig.
+    // Possible values: default, bootstrap, material
+    this.toastyConfig.theme = 'bootstrap';
+    this.toastyConfig.position = "bottom-left";
   }
 
   ngOnInit() {
     this.sockets();
   }
-  sockets(){
+  sockets() {
     this.socket.updateGameHistory((data: Array<Message>) => {
       if (data.length > this.historyList.length) {
         const newItemCount = data.length - this.historyList.length;
@@ -42,23 +42,23 @@ export class ToastComponent implements OnInit {
 
   addToast() {
     const currToastyService = this.toastyService;
-    if(this.itemsToToast != null){
+    if (this.itemsToToast != null) {
       this.itemsToToast.forEach(function(historyItem) {
-          const toast: ToastOptions = {
-              title: historyItem.user.username,
-              msg: historyItem.message,
-              showClose: true,
-              timeout: 3500,
-              theme: 'bootstrap',
-              // onAdd: (toast:ToastData) => {
-              //     console.log('Toast ' + toast.id + ' has been added!');
-              // },
-              // onRemove: function(toast:ToastData) {
-              //     console.log('Toast ' + toast.id + ' has been removed!');
-              // }
-          };
-          currToastyService.success(toast);
-        });
+        const toast: ToastOptions = {
+            title: historyItem.user.username,
+            msg: historyItem.message,
+            showClose: true,
+            timeout: 3500,
+            theme: 'bootstrap',
+            // onAdd: (toast:ToastData) => {
+            //     console.log('Toast ' + toast.id + ' has been added!');
+            // },
+            // onRemove: function(toast:ToastData) {
+            //     console.log('Toast ' + toast.id + ' has been removed!');
+            // }
+        };
+        currToastyService.success(toast);
+      });
     }
   }
 }
