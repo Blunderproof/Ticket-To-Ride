@@ -48,7 +48,7 @@ export class ToastComponent implements OnInit {
             title: historyItem.user.username,
             msg: historyItem.message,
             showClose: true,
-            timeout: 3500,
+            timeout: 5000,
             theme: 'bootstrap',
             // onAdd: (toast:ToastData) => {
             //     console.log('Toast ' + toast.id + ' has been added!');
