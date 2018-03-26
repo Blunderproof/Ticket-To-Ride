@@ -135,7 +135,7 @@ export default class ServerCommunicator {
 
     this.commandHandler
       .execute(command)
-      .then((responseData: any) => {
+      .then(async (responseData: any) => {
         // .then ensures this runs once all promises are fulfilled.
         const commandResults = new CommandResults(responseData);
 
@@ -163,7 +163,7 @@ export default class ServerCommunicator {
               type: MessageType.History,
             });
             console.log('history added', history);
-            history.save();
+            await history.save();
           }
 
           // emit stuff
