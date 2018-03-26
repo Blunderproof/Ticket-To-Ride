@@ -83,21 +83,21 @@ UserSchema.methods.getTurnStateObject = function() {
 
 UserSchema.methods.updatePoints = function() {
   return Promise.all([this.getPublicPoints(), this.getPrivatePoints()]).then(resolved => {
-    this.points.total = resolved[0] + resolved[1] + this.points.detailed.negativeDestinationCards;
+    this.points.total = resolved[0] + resolved[1] - this.points.detailed.negativeDestinationCards;
     return this.points.total;
   });
 };
 
 UserSchema.methods.getPublicPoints = function() {
   return this.routePoints().then((resolve: any) => {
-    this.points.public = resolve;
-    return resolve;
+    this.points.public = resolve + this.points.detailed.longestRoute;
+    return this.points.public;
   });
 };
 
 UserSchema.methods.getPrivatePoints = function() {
   return this.destinationCardPoints().then((resolved: any) => {
-    this.points.private = resolved.positive - resolved.negative;
+    this.points.private = resolved.positive;
     return this.points.private;
   });
 };
@@ -196,7 +196,6 @@ var LongestRoute = (routes: IRouteModel[], city: string) => {
 };
 
 var DestinationCardFulfilled = (routes: IRouteModel[], destinationCard: IDestinationCardModel) => {
-  console.log(routes, destinationCard);
   let visited: string[] = [];
 
   var traverse = (curCity: string, findCity: string): any => {
