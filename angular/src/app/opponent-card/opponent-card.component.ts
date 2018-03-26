@@ -15,12 +15,12 @@ export class OpponentCardComponent implements OnInit {
 
   constructor(public _userInfo: UserInfo) { }
 
-  ngOnInit() {
-    console.log('Created Opponent Card');
-  }
+  ngOnInit() {}
 
-  setColor() {
-
+  destCardClicked() {
+    if (this._userInfo.game.userList[this.index]._id == this._userInfo.user._id) {
+      this._userInfo.viewDestinationCards = !this._userInfo.viewDestinationCards;
+    }
   }
 
 }

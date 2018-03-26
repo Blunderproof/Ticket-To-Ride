@@ -130,6 +130,8 @@ GameSchema.methods.shuffleDealCards = async function(
       player.claimedRouteList = [];
       player.trainCardHand = [];
       player.destinationCardHand = [];
+      player.unmetDestinationCards = [];
+      player.metDestinationCards = [];
       player.points = {
         public: 0,
         private: 0,
@@ -141,8 +143,10 @@ GameSchema.methods.shuffleDealCards = async function(
           negativeDestinationCards: 0,
         },
       };
+
       player.tokenCount = INITIAL_TOKEN_COUNT;
       player.color = color;
+      player.longestRoute = 0;
       player.turnState = TurnState.ChoosingDestinationCards;
 
       for (let cardIndex = 0; cardIndex < TRAIN_CARD_HAND_SIZE; cardIndex++) {

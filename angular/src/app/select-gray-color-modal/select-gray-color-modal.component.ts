@@ -10,8 +10,11 @@ import { RouteColor, TrainColor } from '../classes/constants';
 })
 export class SelectGrayColorModal implements OnInit {
   errorMessages = [];
+  cardOrder: string[];
 
-  constructor(public _userInfo: UserInfo, private communicator: ServerProxy) {}
+  constructor(public _userInfo: UserInfo, private communicator: ServerProxy) {
+    this.cardOrder = ['pink', 'black', 'white', 'green', 'blue', 'red', 'yellow', 'orange', 'rainbow'];
+  }
 
   ngOnInit() {}
 
@@ -21,7 +24,7 @@ export class SelectGrayColorModal implements OnInit {
       city2: this._userInfo.routeSelected.city2,
       color: this._userInfo.routeSelected.color,
       routeNumber: this._userInfo.routeSelected.routeNumber,
-      colorToUse: TrainColor[color],
+      colorToUse: color,
     };
 
     console.log(data);
@@ -34,5 +37,10 @@ export class SelectGrayColorModal implements OnInit {
         this._userInfo.routeSelected = null;
       }
     });
+  }
+
+  cancelColorClicked() {
+    this._userInfo.displayColorSelection = false;
+    this._userInfo.routeSelected = null;
   }
 }

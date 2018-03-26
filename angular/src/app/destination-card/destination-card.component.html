@@ -1,4 +1,4 @@
 <div class="col">
-  <img (click)="cardClick()" class="destcard" [class.overlay]='clickable' [class.cursor]='clickable' src="../../assets/images/destcards/{{card.city1}}-{{card.city2}}.jpg"
+  <img (click)="cardClick()" class="destcard" [class.overlay]='clickable' [class.cursor]='clickable' [class.card-viewed]="!clickable" src="../../assets/images/destcards/{{card.city1}}-{{card.city2}}.jpg"
     [class.card-selected]="card.selected" [class.card-done]="complete" />
 </div>

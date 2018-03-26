@@ -30,4 +30,16 @@ export class BankComponent implements OnInit {
       }
     });
   }
+
+  destCardDeckValid(){
+    let userInfo = this._userInfo;
+    if(userInfo.isCurrentTurn()){
+      if(userInfo.user.turnState != "OneTrainCardChosen"){
+        if(userInfo.game.destinationCardDeck.length != 0){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }

@@ -4,6 +4,9 @@
 <app-game-final-display *ngIf="_userInfo.game != null && _userInfo.game.gameState == 3"></app-game-final-display>
 <app-select-gray-color-modal *ngIf="_userInfo.displayColorSelection"></app-select-gray-color-modal>
 
+<div class="toasts">
+  <app-toast></app-toast>
+</div>
 
 <div class="borders">
 
@@ -19,7 +22,12 @@
       </div>
     </div>
 
-    <app-map></app-map>
+    <app-map>
+      <div class="spinner">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+      </div>
+    </app-map>
 
     <div class="box player-sidebar">
       <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()">

@@ -13,11 +13,13 @@ import { SocketCommunicator } from '../services/socket_communicator.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  @Input() inLobby:boolean;
+  @Input() inLobby: boolean;
 
   messageList = [];
   errorMessages = [];
   messageToSend = this._fb.control('', Validators.required);
+  playSound = false;
+
   constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator) { }
 
   ngOnInit() {
@@ -37,6 +39,10 @@ export class ChatComponent implements OnInit {
   }
   sockets() {
     this.socket.updateChatHistory(data => {
+      if (this.messageList.length > 0 && data.length > this.messageList.length) {
+        this.playSound = true;
+        setTimeout(x => this.playSound = false, 500);
+      }
       this.messageList = data;
     });
   }

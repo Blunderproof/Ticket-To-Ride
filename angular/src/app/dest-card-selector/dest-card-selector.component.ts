@@ -10,30 +10,31 @@ import { ServerProxy } from '../services/server_proxy.service';
 export class DestCardSelectorComponent implements OnInit {
   display = true;
   message = null;
+  errorMessages = [];
+  notSelected = [];
+  selected = [];
+  cards = [];
 
   constructor(public _userInfo: UserInfo, private _serverProxy: ServerProxy) {}
 
-  chooseInitialDestinationCard() {
-    const notSelected = [];
-    const cards = this._userInfo.user.destinationCardHand;
-    for (let i = 0; i < cards.length; i++) {
-      if (!cards[i].selected) {
-        notSelected.push(cards[i]._id);
-      }
-    }
+  ngOnInit() {
+    console.log(`notSelected.length: ${this.notSelected.length}`);
+    console.log(`selected.length: ${this.selected.length}`);
+    this.updateSelectedCards();
+  }
 
-    if (notSelected.length <= 1) {
-      this.display = false;
-      // TODO: Use promise (.then) and display the server error instead of the one we have hard-coded in the else
-      this._serverProxy.initialSelectDestinationCard(notSelected).then((x: any) => {
-        if (x.success) {
-          this._userInfo.getUser();
-          this._userInfo.getGame();
-        }
-      });
-    } else {
-      this.message = 'Make sure you choose 2 or 3 destination cards to keep.';
-    }
+  chooseInitialDestinationCard() {
+    this.updateSelectedCards();
+
+    this._serverProxy.initialSelectDestinationCard(this.notSelected).then((x: any) => {
+      if (x.success) {
+        this._userInfo.getUser();
+        this._userInfo.getGame();
+        this.display = false;
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
 
   openModal() {
@@ -41,30 +42,37 @@ export class DestCardSelectorComponent implements OnInit {
   }
 
   chooseDestinationCard() {
-    const selected = [];
-    const cards = this._userInfo.game.destinationCardDeck.slice(0, 3);
-    for (let i = 0; i < cards.length; i++) {
-      if (cards[i].selected) {
-        selected.push(cards[i]._id);
+    this.updateSelectedCards();
+
+    this._serverProxy.chooseDestinationCard(this.selected).then((x: any) => {
+      if (x.success) {
+        this._userInfo.getUser();
+        this._userInfo.getGame();
+        this.display = false;
+      } else {
+        this.errorMessages.push(x.message);
       }
-    }
-
-    if (selected.length > 0) {
-      this.display = false;
-
-      // TODO: Use promise (.then) and display the server error instead of the one we have hard-coded in the else
-      this._serverProxy.chooseDestinationCard(selected).then((x: any) => {
-        if (x.success) {
-          this._userInfo.getUser();
-          this._userInfo.getGame();
-        }
-      });
-    } else {
-      this.message = 'Make sure you choose at least 1 destination card to keep.';
-    }
+    });
   }
 
-  ngOnInit() {
-    console.log(this._userInfo);
+  updateSelectedCards() {
+    console.log("Selected/NotSelected Updated");
+    if (this._userInfo.game && this._userInfo.game.turnNumber < 0) {
+      this.notSelected = [];
+      this.cards = this._userInfo.user.destinationCardHand;
+      for (let i = 0; i < this.cards.length; i++) {
+        if (!this.cards[i].selected) {
+          this.notSelected.push(this.cards[i]._id);
+        }
+      }
+    } else if (this._userInfo.game && this._userInfo.game.turnNumber >= 0) {
+      this.selected = [];
+      this.cards = this._userInfo.game.destinationCardDeck.slice(0, 3);
+      for (let i = 0; i < this.cards.length; i++) {
+        if (this.cards[i].selected) {
+          this.selected.push(this.cards[i]._id);
+        }
+      }
+    }
   }
 }

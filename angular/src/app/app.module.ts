@@ -43,6 +43,7 @@ import { GameFinalDisplayComponent } from './game-final-display/game-final-displ
 import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.component';
 import { ToastComponent } from './toast/toast.component';
 import { SelectGrayColorModal } from './select-gray-color-modal/select-gray-color-modal.component';
+import {ToastyModule} from 'ng2-toasty';
 
 @NgModule({
   declarations: [
@@ -76,8 +77,23 @@ import { SelectGrayColorModal } from './select-gray-color-modal/select-gray-colo
     ToastComponent,
     SelectGrayColorModal,
   ],
-  imports: [AngularSvgIconModule, BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule],
-  providers: [ServerProxy, CustomValidatorsService, SocketCommunicator, ClientCommunicator, UserInfo, AuthGuardService, GameHistory],
-  bootstrap: [AppComponent],
+  imports: [
+    AngularSvgIconModule,
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastyModule.forRoot()
+  ],
+  providers: [
+    ServerProxy,
+    CustomValidatorsService,
+    SocketCommunicator,
+    ClientCommunicator,
+    UserInfo,
+    AuthGuardService,
+    GameHistory
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

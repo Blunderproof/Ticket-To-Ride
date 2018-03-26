@@ -23,6 +23,12 @@
   grid-template-columns: [g-col1-start] 340px [g-col2-start] 1fr [g-col3-start] 325px [g-col3-end];
 }
 
+.toasts{
+  position:absolute;
+  top: 700px;
+  left: 50px;
+}
+
 .active-user{
   outline: none;
   border-color: #9ecaed;

@@ -1,8 +1,9 @@
 <div class="navbar">
   <span>Ticket to Ride</span>
   <span *ngIf="_userInfo.userState != userStateEnum.LoggedOut && _userInfo.game != null && _userInfo.game.turnNumber != null">
-    <span *ngIf="_userInfo.game.turnNumber < 0">Initial Set Up</span>
-    <span *ngIf="_userInfo.game.turnNumber >= 0">Turn #{{ _userInfo.game.turnNumber + 1 }}</span>
+    <span *ngIf="_userInfo.game != null && _userInfo.game.turnNumber < 0">Initial Set Up</span>
+    <span *ngIf="_userInfo.game != null && _userInfo.game.turnNumber >= 0 && _userInfo.game.lastRound < 0">Turn #{{ _userInfo.game.turnNumber + 1 }}</span>
+    <span *ngIf="_userInfo.game != null && _userInfo.game.lastRound >= 0" style="color:red;"> FINAL TURNS </span>
   </span>
   <div [hidden]="!_gameHistory.historyOpen">
     <app-game-history></app-game-history>

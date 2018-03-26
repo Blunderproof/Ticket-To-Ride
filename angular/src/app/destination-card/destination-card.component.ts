@@ -9,7 +9,9 @@ import { DestinationCard } from '../classes/destination-card';
 export class DestinationCardComponent implements OnInit {
   @Input() card: DestinationCard;
   @Input() clickable: boolean;
-  @Input() complete?: boolean;
+  @Input() complete: boolean;
+
+  completeRoute = true;
 
   constructor() {}
 

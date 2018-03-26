@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.card-viewed{
+  opacity: 1 !important;
+  cursor: default;
+}
+
 .card-selected {
   transition: transform 1s;
   transform: translate(10px, -10px);

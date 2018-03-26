@@ -25,7 +25,7 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     this.user.turnState = nextState;
 
     // add card to user's hand, then remove it from game
-    this.user.trainCardHand.push(trainCardToTake);
+    this.user.trainCardHand.push(trainCardToTake._id);
     game.trainCardDeck.splice(cardIndex, 1);
 
     if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
@@ -66,18 +66,14 @@ export default class BeginningTurnStateObject implements TurnStateObject {
       return card.color == TrainColor.Rainbow;
     });
 
-    console.log('cardColor', cardColor);
-    console.log('length of userCardsOfColor', userCardsOfColor.length);
-    console.log('length of userRainbowCards', userRainbowCards.length);
-    console.log('length of route', route.length);
-
     let usingRainbows: boolean = false;
     let difference: number = 0;
+
     if (userCardsOfColor.length < route.length) {
       difference = route.length - userCardsOfColor.length;
       // if we have enough rainbows to make up the difference
       console.log('difference:', difference);
-      if (userRainbowCards.length >= difference) {
+      if (cardColor != TrainColor.Rainbow && userRainbowCards.length >= difference) {
         // use the rainbows
         usingRainbows = true;
       } else {

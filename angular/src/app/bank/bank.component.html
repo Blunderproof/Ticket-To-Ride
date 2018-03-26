@@ -19,7 +19,7 @@
       </div>
     </div>
     <div (click)="drawDestinationCards()" class="card-slot destcard-deck">
-      <div class="card"   [class.valid-card] = "_userInfo.isCurrentTurn()" [class.invalid-card] = "!_userInfo.isCurrentTurn() || (_userInfo.game.destinationCardDeck.length == 0)">
+      <div class="card"  [ngClass]="{'valid-card': destCardDeckValid(), 'invalid-card': !destCardDeckValid()}">
         <img class="side" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
         <img class="side back" src="../../assets/images/destcards/dest-card-back-vertical.jpg"/>
       </div>
