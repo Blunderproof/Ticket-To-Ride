@@ -76,7 +76,6 @@ import { ToastyModule } from 'ng2-toasty';
     DestCardViewerComponent,
     ToastComponent,
     SelectGrayColorModal,
-    DestCardComponent
   ],
   imports: [
     AngularSvgIconModule,
