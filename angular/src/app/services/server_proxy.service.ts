@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ClientCommunicator } from './client_communicator.service';
+import { SocketCommunicator } from './socket_communicator.service';
 
 @Injectable()
 export class ServerProxy {
-  constructor(private communicator: ClientCommunicator) {}
+  constructor(private communicator: ClientCommunicator, private _socket: SocketCommunicator) {}
 
   createGame() {
     return this.communicator.send('createGame', {});
   }
 
   joinGame(gameID: string) {
+    this._socket.joinRoom(gameID);
     return this.communicator.send('joinGame', {
       gameID: gameID,
     });
@@ -20,6 +22,7 @@ export class ServerProxy {
   }
 
   leaveGame() {
+    this._socket.joinRoom();
     return this.communicator.send('leaveGame', {});
   }
 
@@ -96,7 +99,7 @@ export class ServerProxy {
       routeNumber: data.routeNumber,
       city1: data.city1,
       city2: data.city2,
-      colorToUse: data.colorToUse
+      colorToUse: data.colorToUse,
     });
   }
 

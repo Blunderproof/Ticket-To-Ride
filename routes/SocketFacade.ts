@@ -31,21 +31,15 @@ export default class SocketFacade {
   }
 
   execute(emitRequest: any, socketConnection: any) {
-    console.log(emitRequest);
-    const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(
-      emitRequest.command
-    );
+    const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(emitRequest.command);
 
     if (!socketCommand) {
-      console.log(
-        `Yikes, '${emitRequest.command}' is not a valid socket command.`
-      );
+      console.log(`Yikes, '${emitRequest.command}' is not a valid socket command.`);
       return;
     }
 
     let sureSocketCommand: SocketCommand = socketCommand!;
     sureSocketCommand(emitRequest.data).then(emitData => {
-      console.log(emitRequest.command,emitRequest.to,emitData);
       if (emitRequest.to) {
         socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
       } else {
@@ -85,14 +79,14 @@ export default class SocketFacade {
         populate: {
           path: 'destinationCardHand',
           model: 'DestinationCard',
-        }
+        },
       })
       .populate({
         path: 'userList',
         populate: {
           path: 'claimedRouteList',
-          model: 'Route'
-        }
+          model: 'Route',
+        },
       })
       .populate('unclaimedRoutes')
       .populate('trainCardDeck')
