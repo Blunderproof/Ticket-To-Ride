@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ChatMsgComponent } from '../chat-msg/chat-msg.component';
 import { Message } from '../classes/message';
 import { User } from '../classes/user';
@@ -15,12 +15,19 @@ import { SocketCommunicator } from '../services/socket_communicator.service';
 export class ChatComponent implements OnInit {
   @Input() inLobby: boolean;
 
+  message: string = 'loading :(';
+
   messageList = [];
   errorMessages = [];
   messageToSend = this._fb.control('', Validators.required);
   playSound = false;
 
-  constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator) { }
+  constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator, private cdr: ChangeDetectorRef) { }
+
+  ngAfterViewInit() {
+    this.message = 'all done loading :)'
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     this.sockets();
