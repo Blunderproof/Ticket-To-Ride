@@ -1,6 +1,6 @@
-<div [class]="class" class="trainCardFocused">
+<div *ngIf="!this.displayNonzero || count() != 0" [class]="class" class="trainCardFocused">
   <span>
-    <img class="card" [src]="image"/>
+    <img class="card" [src]="image" />
     <div class="counter">
       {{count()}}
     </div>

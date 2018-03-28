@@ -7,13 +7,12 @@ import { SocketCommunicator } from '../services/socket_communicator.service';
 @Component({
   selector: 'app-gamelobby',
   templateUrl: './gamelobby.component.html',
-  styleUrls: ['./gamelobby.component.scss']
+  styleUrls: ['./gamelobby.component.scss'],
 })
 export class GameLobbyComponent implements OnInit {
   errorMessages = [];
 
-  constructor(public _userInfo: UserInfo, private communicator: ServerProxy, private _router: Router,
-     private _socket: SocketCommunicator) { }
+  constructor(public _userInfo: UserInfo, private communicator: ServerProxy, private _router: Router, private _socket: SocketCommunicator) {}
 
   ngOnInit() {
     this.sockets();
@@ -22,42 +21,40 @@ export class GameLobbyComponent implements OnInit {
 
   startGame() {
     this.errorMessages = [];
-    this.communicator.startGame()
-      .then((x: any) => {
-        if (x.success) {
-          this.errorMessages = [];
-        } else {
-          this.errorMessages.push(x.message);
-        }
-      });
+    this.communicator.startGame().then((x: any) => {
+      if (x.success) {
+        this.errorMessages = [];
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
 
   leaveGame() {
     this.errorMessages = [];
-    this.communicator.leaveGame()
-      .then((x: any) => {
-        if (x.success) {
-          this.errorMessages = [];
-        } else {
-          this.errorMessages.push(x.message);
-        }
-      });
+    this.communicator.leaveGame(this._userInfo.game._id).then((x: any) => {
+      if (x.success) {
+        this.errorMessages = [];
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
 
   deleteGame() {
     this.errorMessages = [];
-    this.communicator.deleteGame()
-      .then((x: any) => {
-        if (x.success) {
-          this.errorMessages = [];
-        } else {
-          this.errorMessages.push(x.message);
-        }
-      });
+    Promise.all([this.communicator.deleteGame(), this._socket.leaveRoom(this._userInfo.game._id)]).then((x: any) => {
+      if (x.success) {
+        this.errorMessages = [];
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
 
   sockets() {
     this._socket.startGame(x => {
+      console.log('start emit', x);
       this._router.navigate(['/game']);
     });
   }

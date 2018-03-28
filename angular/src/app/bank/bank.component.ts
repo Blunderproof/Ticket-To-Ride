@@ -9,20 +9,30 @@ import { GameComponent } from '../game/game.component';
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
-  styleUrls: ['./bank.component.scss']
+  styleUrls: ['./bank.component.scss'],
 })
 export class BankComponent implements OnInit {
-  constructor(public _userInfo: UserInfo, private communicator: ServerProxy) { }
+  constructor(public _userInfo: UserInfo, private communicator: ServerProxy) {}
 
   ngOnInit() {}
 
   chooseTrainCard(trainCard: number) {
     console.log(`Choosing card ${trainCard}`);
-    this.communicator.chooseTrainCard(trainCard);
+    let trainCardColor = this._userInfo.game.trainCardDeck[trainCard].color;
+    let successMessage = `You drew a ${trainCardColor} card!`;
+    if (trainCardColor == 'rainbow' && trainCard == 5) {
+      successMessage += ' Lucky!!';
+    }
 
-    // window.setTimeout(() => {
-    //   this.communicator.chooseTrainCard(trainCard);
-    // }, 1500);
+    window.setTimeout(() => {
+      this.communicator.chooseTrainCard(trainCard).then((x: any) => {
+        if (!x.success) {
+          this._userInfo.addErrorMessage(x.message);
+        } else {
+          this._userInfo.addSuccessMessage(successMessage);
+        }
+      });
+    }, 250);
   }
 
   drawDestinationCards() {
@@ -33,11 +43,11 @@ export class BankComponent implements OnInit {
     });
   }
 
-  destCardDeckValid(){
+  destCardDeckValid() {
     let userInfo = this._userInfo;
-    if(userInfo.isCurrentTurn()){
-      if(userInfo.user.turnState != "OneTrainCardChosen"){
-        if(userInfo.game.destinationCardDeck.length != 0){
+    if (userInfo.isCurrentTurn()) {
+      if (userInfo.user.turnState != 'OneTrainCardChosen') {
+        if (userInfo.game.destinationCardDeck.length != 0) {
           return true;
         }
       }

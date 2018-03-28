@@ -10,7 +10,7 @@ import { SocketCommunicator } from '../services/socket_communicator.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
   @Input() inLobby: boolean;
@@ -22,10 +22,10 @@ export class ChatComponent implements OnInit {
   messageToSend = this._fb.control('', Validators.required);
   playSound = false;
 
-  constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator, private cdr: ChangeDetectorRef) { }
+  constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    this.message = 'all done loading :)'
+    this.message = 'all done loading :)';
     this.cdr.detectChanges();
   }
 
@@ -35,20 +35,20 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     this.errorMessages = [];
-    this._serverProxy.sendMessage(this.messageToSend.value)
-      .then((x: any) => {
-        if (x.success) {
-          this.messageToSend.reset();
-        } else {
-          this.errorMessages.push(x.message);
-        }
-      });
+    this._serverProxy.sendMessage(this.messageToSend.value).then((x: any) => {
+      if (x.success) {
+        this.messageToSend.reset();
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
   }
   sockets() {
     this.socket.updateChatHistory(data => {
+      console.log('emit chat', data);
       if (this.messageList.length > 0 && data.length > this.messageList.length) {
         this.playSound = true;
-        setTimeout(x => this.playSound = false, 500);
+        setTimeout(x => (this.playSound = false), 500);
       }
       this.messageList = data;
     });
