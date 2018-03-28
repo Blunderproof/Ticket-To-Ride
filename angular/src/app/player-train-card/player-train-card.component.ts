@@ -4,12 +4,13 @@ import { UserInfo } from '../services/user_info.service';
 @Component({
   selector: 'app-player-train-card',
   templateUrl: './player-train-card.component.html',
-  styleUrls: ['./player-train-card.component.scss']
+  styleUrls: ['./player-train-card.component.scss'],
 })
 export class PlayerTrainCardComponent implements OnInit {
-@Input() color: string;
-image: string;
-class: string;
+  @Input() color: string;
+  @Input() displayNonzero: boolean;
+  image: string;
+  class: string;
 
   constructor(private _userInfo: UserInfo) {}
 

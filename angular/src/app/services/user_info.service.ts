@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Game } from '../classes/game';
 import { User } from '../classes/user';
 import { ServerProxy } from './server_proxy.service';
@@ -16,6 +16,8 @@ export class UserInfo {
   viewDestinationCards = false;
   displayColorSelection = false;
   routeSelected: Route = null;
+
+  @Output() newMessage: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private _serverProxy: ServerProxy, private socket: SocketCommunicator) {
     this.getGame();
@@ -101,5 +103,15 @@ export class UserInfo {
         });
       });
     }
+  }
+
+  addErrorMessage(message) {
+    this.errorMessages.push(message);
+    this.newMessage.emit(true);
+  }
+
+  addSuccessMessage(message) {
+    this.errorMessages.push(message);
+    this.newMessage.emit(false);
   }
 }

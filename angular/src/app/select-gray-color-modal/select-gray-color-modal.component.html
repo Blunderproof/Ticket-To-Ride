@@ -3,21 +3,22 @@
 <div class="select-color-modal">
   <h3>Choose a color to use for the gray route from {{ _userInfo.routeSelected.city1 }} to {{ _userInfo.routeSelected.city2 }}:
   </h3>
-  <!--<div class="color-row">
-    <div (click)="colorClicked('Red')" class="color-square" id="Red">{{ _userInfo.user.trainCardCount['red'] }}</div>
-    <div (click)="colorClicked('Green')" class="color-square" id="Green">{{ _userInfo.user.trainCardCount['green'] }}</div>
-    <div (click)="colorClicked('Blue')" class="color-square" id="Blue">{{ _userInfo.user.trainCardCount['blue'] }}</div>
-    <div (click)="colorClicked('Black')" class="color-square" id="Black">{{ _userInfo.user.trainCardCount['black'] }}</div>
+  <!--<div class=" color-row ">
+    <div (click)="colorClicked( 'Red') " class="color-square " id="Red ">{{ _userInfo.user.trainCardCount['red'] }}</div>
+    <div (click)="colorClicked( 'Green') " class="color-square " id="Green ">{{ _userInfo.user.trainCardCount['green'] }}</div>
+    <div (click)="colorClicked( 'Blue') " class="color-square " id="Blue ">{{ _userInfo.user.trainCardCount['blue'] }}</div>
+    <div (click)="colorClicked( 'Black') " class="color-square " id="Black ">{{ _userInfo.user.trainCardCount['black'] }}</div>
   </div>
-  <div class="color-row">
-    <div (click)="colorClicked('Yellow')" class="color-square" id="Yellow">{{ _userInfo.user.trainCardCount['yellow'] }}</div>
-    <div (click)="colorClicked('Pink')" class="color-square" id="Pink">{{ _userInfo.user.trainCardCount['pink'] }}</div>
-    <div (click)="colorClicked('Orange')" class="color-square" id="Orange">{{ _userInfo.user.trainCardCount['orange'] }}</div>
-    <div (click)="colorClicked('White')" class="color-square" id="White">{{ _userInfo.user.trainCardCount['white'] }}</div>
+  <div class="color-row ">
+    <div (click)="colorClicked( 'Yellow') " class="color-square " id="Yellow ">{{ _userInfo.user.trainCardCount['yellow'] }}</div>
+    <div (click)="colorClicked( 'Pink') " class="color-square " id="Pink ">{{ _userInfo.user.trainCardCount['pink'] }}</div>
+    <div (click)="colorClicked( 'Orange') " class="color-square " id="Orange ">{{ _userInfo.user.trainCardCount['orange'] }}</div>
+    <div (click)="colorClicked( 'White') " class="color-square " id="White ">{{ _userInfo.user.trainCardCount['white'] }}</div>
   </div>-->
-  <div class="card-list">
-    <app-player-train-card *ngFor="let color of cardOrder" [color]="color" (click)="colorClicked(color)" class="clickable"></app-player-train-card>
+  <div class="card-list ">
+    <app-player-train-card *ngFor="let color of cardOrder " [displayNonzero]="true" [color]="color " (click)="colorClicked(color) "
+      class="clickable "></app-player-train-card>
   </div>
 
-  <div (click)="cancelColorClicked()" class="btn btn-success">Cancel Claim Route</div>
+  <div (click)="cancelColorClicked() " class="btn btn-danger ">Cancel Claim Route</div>
 </div>

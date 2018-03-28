@@ -48,15 +48,15 @@ export class MapComponent implements OnInit {
 
     this.communicator.claimRoute(data).then((x: any) => {
       if (!x.success) {
-        this.errorMessages.push(x.message);
+        this._userInfo.addErrorMessage(x.message);
       }
     });
   }
 
-  canClaimRoute(){
+  canClaimRoute() {
     let userInfo = this._userInfo;
-    if(userInfo.isCurrentTurn()){
-      if(userInfo.user.turnState != "OneTrainCardChosen"){
+    if (userInfo.isCurrentTurn()) {
+      if (userInfo.user.turnState != 'OneTrainCardChosen') {
         return true;
       }
     }

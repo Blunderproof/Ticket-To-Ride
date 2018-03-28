@@ -3,6 +3,7 @@ import { IUserModel } from '../User';
 import { IRouteModel } from '../Route';
 import { TrainColor, TurnState } from '../../constants';
 import { IGameModel } from '../Game';
+import { ITrainCardModel } from '../TrainCard';
 
 export default class BeginningTurnStateObject implements TurnStateObject {
   user: IUserModel;
@@ -26,7 +27,14 @@ export default class BeginningTurnStateObject implements TurnStateObject {
 
     // add card to user's hand, then remove it from game
     this.user.trainCardHand.push(trainCardToTake._id);
-    game.trainCardDeck.splice(cardIndex, 1);
+    let indexToReplace = cardIndex == 5 ? 6 : 5;
+    let cardToReplace = game.trainCardDeck.splice(indexToReplace, 1);
+
+    if (cardToReplace.length > 0) {
+      game.trainCardDeck.splice(cardIndex, 1, cardToReplace[0]);
+    } else {
+      game.trainCardDeck.splice(cardIndex, 1);
+    }
 
     if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
       // TODO refactor our game's init stuff
