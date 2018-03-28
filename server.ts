@@ -89,15 +89,13 @@ export class Server {
     // this.communicator.setupSockets(this.io);
     this.io.on('connection', (socket: any) => {
       socket.on('command', (data: any) => {
-        console.log(this.io.sockets.adapter.sids[socket.id], 'ROOMZ');
         this.communicator.handleSocketCommand(data, socket);
       });
       socket.on('join', (data: any) => {
-        var rooms = this.io.sockets.adapter.sids[socket.id];
-        for (var room in rooms) {
-          socket.leave(room);
-        }
         if (data.room) socket.join(data.room);
+      });
+      socket.on('leave', (data: any) => {
+        if (data.room) socket.leave(data.room);
       });
     });
   }

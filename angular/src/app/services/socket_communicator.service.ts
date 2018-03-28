@@ -24,6 +24,12 @@ export class SocketCommunicator {
     });
   }
 
+  leaveRoom(gameID?: string) {
+    return this.socket.emit('leave', {
+      room: gameID,
+    });
+  }
+
   updateChatHistory(callback: any) {
     return this.socket.on('updateChatHistory', callback);
   }

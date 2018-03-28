@@ -21,8 +21,8 @@ export class ServerProxy {
     return this.communicator.send('startGame', {});
   }
 
-  leaveGame() {
-    this._socket.joinRoom();
+  leaveGame(gameID: string) {
+    this._socket.leaveRoom(gameID);
     return this.communicator.send('leaveGame', {});
   }
 
