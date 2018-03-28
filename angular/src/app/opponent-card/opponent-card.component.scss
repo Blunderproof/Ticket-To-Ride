@@ -120,22 +120,42 @@
 }
 
 .active-user{
-  @extend .throb;
-  outline: none;
-  border-color: #9ecaed;
-  border-radius: 3px;
-  box-shadow: 0 0 10px #FFF;
+  box-shadow: 0px 0px 50px rgba(255,255,255, 0.6);
+  //animation: pulse 2s infinite;
 }
 
-.throb {
-  animation-name: throb;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  animation-direction: alternate;
-}
+// @keyframes pulse {
+//   0% {
+//     -moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+//     box-shadow: 0 0 0 0 rgba(255,255,255, 0.4);
+//   }
+//   70% {
+//       -moz-box-shadow: 0 0 0 10px rgba(255,255,255, 0);
+//       box-shadow: 0 0 0 10px rgba(255,255,255, 0);
+//   }
+//   100% {
+//       -moz-box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+//       box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+//   }
+// }
 
-@keyframes throb {
-  from { box-shadow: 0 0 10px #FFF }
-  to { box-shadow: 0 0 80px #FFF }
-}
+// .active-user{
+//   @extend .throb;
+//   outline: none;
+//   border-color: #9ecaed;
+//   border-radius: 3px;
+//   box-shadow: 0 0 10px #FFF;
+// }
+//
+// .throb {
+//   animation-name: throb;
+//   animation-duration: 3s;
+//   animation-iteration-count: infinite;
+//   animation-timing-function: linear;
+//   animation-direction: alternate;
+// }
+//
+// @keyframes throb {
+//   from { box-shadow: 0 0 10px #FFF }
+//   to { box-shadow: 0 0 80px #FFF }
+// }

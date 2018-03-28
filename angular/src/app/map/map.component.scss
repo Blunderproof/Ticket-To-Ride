@@ -70,6 +70,26 @@ EX: tp-1-Denver-KansasCity
                                   supported by Chrome and Opera */
 }
 
+.dest-city{
+  animation-timing-function: ease-in-out;
+  animation: dest-city-pulse 5s infinite;
+}
+
+@keyframes dest-city-pulse {
+  0% {
+    stroke-width: 5;
+    stroke: blue;
+  }
+  50% {
+    stroke-width: 1;
+    stroke: red;
+  }
+  100% {
+    stroke-width: 5;
+    stroke: blue;
+  }
+}
+
 .secondroute {
   display: none;
 }

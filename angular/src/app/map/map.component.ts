@@ -19,9 +19,23 @@ export class MapComponent implements OnInit {
   displayColorSelection = false;
   routeSelected: Route = null;
 
+  playerCities =[];
+
   constructor(public _gameHistory: GameHistory, public _userInfo: UserInfo, private communicator: ServerProxy) {}
 
-  ngOnInit() {}
+
+  ngOnInit() {
+    let playerCities = [];
+    let userInfo = this._userInfo;
+    userInfo.user.destinationCardHand.forEach(function (card){
+      playerCities.push(card.city1);
+      playerCities.push(card.city2);
+      //console.log(card);
+    });
+    console.log(playerCities);
+    this.playerCities = playerCities;
+    console.log(this.playerCities);
+  }
 
   mapClicked(event, correspondingTrainPath) {
     this.errorMessages = [];
@@ -51,6 +65,10 @@ export class MapComponent implements OnInit {
         this.errorMessages.push(x.message);
       }
     });
+  }
+
+  cityHightlighted(cityName: string){
+
   }
 
   canClaimRoute(){

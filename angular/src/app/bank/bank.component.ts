@@ -18,9 +18,11 @@ export class BankComponent implements OnInit {
 
   chooseTrainCard(trainCard: number) {
     console.log(`Choosing card ${trainCard}`);
-    window.setTimeout(() => {
-      this.communicator.chooseTrainCard(trainCard);
-    }, 1500);
+    this.communicator.chooseTrainCard(trainCard);
+
+    // window.setTimeout(() => {
+    //   this.communicator.chooseTrainCard(trainCard);
+    // }, 1500);
   }
 
   drawDestinationCards() {
