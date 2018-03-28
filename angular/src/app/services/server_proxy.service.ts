@@ -112,4 +112,8 @@ export class ServerProxy {
   getUserGameStatus() {
     return this.communicator.send('getUserGameStatus', {});
   }
+
+  endGame() {
+    return this.communicator.send('endGame', {});
+  }
 }

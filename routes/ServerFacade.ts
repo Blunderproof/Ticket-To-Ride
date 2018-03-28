@@ -179,4 +179,12 @@ export default class ServerFacade implements IServer {
   chooseTrainCard(data: any): Promise<any> {
     return GameFacade.instanceOf().chooseTrainCard(data);
   }
+
+  /*
+  input:
+    {{ none }}
+  */
+  endGame(data: any): Promise<any> {
+    return GameFacade.instanceOf().endGame(data);
+  }
 }

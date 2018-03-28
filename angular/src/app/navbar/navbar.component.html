@@ -1,9 +1,12 @@
 <div class="navbar">
   <span>Ticket to Ride</span>
   <span *ngIf="_userInfo.userState != userStateEnum.LoggedOut && _userInfo.game != null && _userInfo.game.turnNumber != null">
-    <span *ngIf="_userInfo.game != null && _userInfo.game.turnNumber < 0">Initial Set Up</span>
     <span *ngIf="_userInfo.game != null && _userInfo.game.turnNumber >= 0 && _userInfo.game.lastRound < 0">Turn #{{ _userInfo.game.turnNumber + 1 }}</span>
     <span *ngIf="_userInfo.game != null && _userInfo.game.lastRound >= 0" style="color:red;"> FINAL TURNS </span>
+
+    <div *ngIf="_userInfo.game != null && _userInfo.game.turnNumber < 0" class="initial-setup-modal">
+      <h3>Initial Set Up – Waiting for all players to choose initial destination cards</h3>
+    </div>
   </span>
   <div [hidden]="!_gameHistory.historyOpen">
     <app-game-history></app-game-history>
@@ -11,5 +14,6 @@
   <div *ngIf="_userInfo.userState != userStateEnum.LoggedOut">
     <button class="logout btn btn-warning" (click)="logout()">Logout</button>
     <button *ngIf="(_userInfo.game != null)" class="game-history btn btn-info" (click)="_gameHistory.toggleHistoryOpen()">Game History</button>
+    <button *ngIf="(_userInfo.game != null && _userInfo.game.gameState == 2)" class="game-history btn btn-danger" (click)="endGame()">End Game</button>
   </div>
 </div>
