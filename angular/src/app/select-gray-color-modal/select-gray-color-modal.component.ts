@@ -31,7 +31,7 @@ export class SelectGrayColorModal implements OnInit {
 
     this.communicator.claimRoute(data).then((x: any) => {
       if (!x.success) {
-        this.errorMessages.push(x.message);
+        this._userInfo.addErrorMessage(x.message);
       } else {
         this._userInfo.displayColorSelection = false;
         this._userInfo.routeSelected = null;

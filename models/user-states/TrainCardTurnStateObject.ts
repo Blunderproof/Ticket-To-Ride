@@ -24,7 +24,15 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
 
     // add card to user's hand, then remove it from game's deck
     this.user.trainCardHand.push(trainCardToTake);
-    game.trainCardDeck.splice(cardIndex, 1);
+
+    let indexToReplace = cardIndex == 5 ? 6 : 5;
+    let cardToReplace = game.trainCardDeck.splice(indexToReplace, 1);
+
+    if (cardToReplace.length > 0) {
+      game.trainCardDeck.splice(cardIndex, 1, cardToReplace[0]);
+    } else {
+      game.trainCardDeck.splice(cardIndex, 1);
+    }
 
     game.turnNumber++;
 
