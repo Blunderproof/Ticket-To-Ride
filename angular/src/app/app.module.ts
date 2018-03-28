@@ -43,7 +43,7 @@ import { GameFinalDisplayComponent } from './game-final-display/game-final-displ
 import { DestCardViewerComponent } from './dest-card-viewer/dest-card-viewer.component';
 import { ToastComponent } from './toast/toast.component';
 import { SelectGrayColorModal } from './select-gray-color-modal/select-gray-color-modal.component';
-import {ToastyModule} from 'ng2-toasty';
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   declarations: [
