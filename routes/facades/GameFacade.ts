@@ -392,6 +392,48 @@ export default class GameFacade {
       });
   }
 
+  endGame(data: any): Promise<any> {
+    let loginCheck: any = null;
+    if ((loginCheck = this.validateUserAuth(data)) != null) {
+      return loginCheck;
+    }
+
+    // logged in
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
+      .then(async game => {
+        if (!game) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: 'That game is already over!',
+          };
+        }
+        // force unwrap game
+        game = game!;
+        game.gameState = GameState.Ended;
+
+        return game.save().then(savedGame => {
+          return {
+            success: true,
+            data: {},
+            gameHistory: `Game OVER.`,
+            emit: [
+              {
+                command: 'updateGameState',
+                data: { id: savedGame._id },
+                to: savedGame._id,
+              },
+              {
+                command: 'updateGameHistory',
+                to: savedGame._id,
+                data: { id: savedGame._id },
+              },
+            ],
+          };
+        });
+      });
+  }
+
   setChooseDestinationCardState(data: any): Promise<any> {
     let loginCheck: any = null;
     if ((loginCheck = this.validateUserAuth(data)) != null) {

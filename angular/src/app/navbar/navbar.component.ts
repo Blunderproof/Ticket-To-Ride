@@ -8,15 +8,15 @@ import { UserState } from '../classes/constants';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   errorMessages = [];
   userStateEnum = UserState;
 
-  constructor(public _userInfo: UserInfo, public _gameHistory: GameHistory, private _serverProxy: ServerProxy, private _router: Router) { }
+  constructor(public _userInfo: UserInfo, public _gameHistory: GameHistory, private _serverProxy: ServerProxy, private _router: Router) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   endTurn(){
     console.log("END IT");
@@ -24,14 +24,17 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.errorMessages = [];
-    this._serverProxy.logout()
-        .then((x: any) => {
-          if (x.success) {
-            this._userInfo.getUserGameStatus();
-            this._router.navigate(['/login']);
-          } else {
-            this.errorMessages.push(x.message);
-          }
-        });
+    this._serverProxy.logout().then((x: any) => {
+      if (x.success) {
+        this._userInfo.getUserGameStatus();
+        this._router.navigate(['/login']);
+      } else {
+        this.errorMessages.push(x.message);
+      }
+    });
+  }
+
+  endGame() {
+    this._serverProxy.endGame();
   }
 }

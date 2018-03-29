@@ -88,6 +88,10 @@ export class ToastComponent implements OnInit {
           //     console.log('Toast ' + toast.id + ' has been removed!');
           // }
         };
+        // TODO don't display if it's your own but then we need to make sure dest cards and claiming routes posts green ones
+        // if (historyItem.user.username != this._userInfo.user.username) {
+        // currToastyService.info(toast);
+        // }
         currToastyService.info(toast);
       });
     }

@@ -45,6 +45,7 @@ export default class ServerCommunicator {
     this.commandMap.set('setChooseDestinationCardState', facade.setChooseDestinationCardState);
     this.commandMap.set('claimRoute', facade.claimRoute);
     this.commandMap.set('chooseTrainCard', facade.chooseTrainCard);
+    this.commandMap.set('endGame', facade.endGame);
     // this.commandMap.set(
     //   'selectDestinationCard',
     //   facade.selectDestinationCard
