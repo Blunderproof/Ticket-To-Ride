@@ -64,10 +64,10 @@
 .invalid-card{
   opacity: 0.5;
   transition: transform 1s;
-  -webkit-animation: slide-down 1s; /* Safari 4.0 - 8.0 */
-  animation: slide-down 1s;
-  animation-fill-mode: forwards;
-  animation-delay: .25s;
+  // -webkit-animation: slide-down 1s; /* Safari 4.0 - 8.0 */
+  // animation: slide-down 1s;
+  // animation-fill-mode: forwards;
+  // animation-delay: .25s;
   pointer-events: none !important;
 }
 @keyframes slide-down {
@@ -82,7 +82,7 @@
   box-shadow: 0 0 80px #FFF;
   border-radius: 3px;
   transition: transform 1s;
-  transform: translate(10px, -40px);
+  transform: translate(0px, -40px);
   cursor:pointer;
 }
 

@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() { }
 
+  endTurn(){
+    console.log("END IT");
+  }
+
   logout() {
     this.errorMessages = [];
     this._serverProxy.logout()
