@@ -90,7 +90,6 @@ UserSchema.methods.updatePoints = function() {
 
 UserSchema.methods.getPublicPoints = function() {
   return this.routePoints().then((resolve: any) => {
-    console.log(this.username, this.points.detailed.longestRoute, resolve, 'LR POINTS');
     this.points.public = resolve + this.points.detailed.longestRoute;
     return this.points.public;
   });
