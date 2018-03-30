@@ -41,7 +41,6 @@ export class ToastComponent implements OnInit {
         this.historyList = data;
         this.itemsToToast = data.reverse().slice(this.historyList.length - newItemCount, this.historyList.length);
         this.addToast();
-      } else {
         this.historyList = data;
       }
     });
@@ -75,6 +74,9 @@ export class ToastComponent implements OnInit {
     const currToastyService = this.toastyService;
     if (this.itemsToToast != null) {
       this.itemsToToast.forEach(function(historyItem) {
+        if (historyItem.user._id == this._userInfo.user._id) {
+          return;
+        }
         const toast: ToastOptions = {
           title: historyItem.user.username,
           msg: historyItem.message,

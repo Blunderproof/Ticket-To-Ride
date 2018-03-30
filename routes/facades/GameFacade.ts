@@ -353,9 +353,7 @@ export default class GameFacade {
 
         await currentUser.getLongestRoute();
         await currentUser.save();
-        console.time('a');
         await game.updateLongestRoute();
-        console.timeEnd('a');
         // currentUser = await User.findById(currentUser._id);
         // currentUser = currentUser!;
         // await currentUser.updatePoints();
@@ -582,6 +580,8 @@ export default class GameFacade {
             game.gameState = GameState.Ended;
           }
         }
+
+        await game.updateLongestRoute();
 
         return game.save().then(savedGame => {
           return {
