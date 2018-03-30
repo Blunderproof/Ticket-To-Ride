@@ -85,6 +85,7 @@ white,Pittsburgh,NewYork,2,1
 green,Pittsburgh,NewYork,2,2
 gray,Pittsburgh,Raleigh,2,1
 gray,Pittsburgh,WashingtonDC,2,1
+gray,Pittsburgh,Toronto,2,1
 #
 blue,Portland,SaltLakeCity,6,1
 gray,Portland,Seattle,1,1
@@ -123,7 +124,6 @@ gray,Seattle,Vancouver,1,1
 gray,Seattle,Vancouver,1,2
 #
 gray,Toronto,Montreal,3,1
-gray,Toronto,Pittsburgh,2,1
 #
 gray,Vancouver,Calgary,3,1
 #
