@@ -24,6 +24,9 @@ export class AuthGuardService implements CanActivate {
                         return false;
                     case UserState.LoggedIn:
                         console.log('loggedIn');
+                        if (route.routeConfig.path == "game") {
+                            this._router.navigate(['/lobby']);
+                        }
                         return true;
                     case UserState.InGame:
                         console.log('InGame');
