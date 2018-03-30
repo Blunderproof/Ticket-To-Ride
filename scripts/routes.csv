@@ -81,8 +81,8 @@ white,Phoenix,Denver,5,1
 gray,Phoenix,SantaFe,3,1
 gray,Phoenix,ElPaso,3,1
 #
-white,Pittsburgh,NewYork,2,1
-green,Pittsburgh,NewYork,2,2
+white,Pittsburgh,NewYork,2,2
+green,Pittsburgh,NewYork,2,1
 gray,Pittsburgh,Raleigh,2,1
 gray,Pittsburgh,WashingtonDC,2,1
 gray,Pittsburgh,Toronto,2,1
@@ -128,7 +128,7 @@ gray,Toronto,Montreal,3,1
 gray,Vancouver,Calgary,3,1
 #
 orange,WashingtonDC,NewYork,2,1
-black,WashingtonDC,NewYork,2,1
+black,WashingtonDC,NewYork,2,2
 #
 gray,Winnipeg,SaultStMarie,6,1
 black,Winnipeg,Duluth,4,1
