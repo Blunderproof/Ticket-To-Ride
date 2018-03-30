@@ -1,7 +1,7 @@
 import CommandResults from '../../modules/commands/CommandResults';
 import { Message } from '../../models/Message';
 import { MessageType, TrainColor, GameState, TurnState } from '../../constants';
-import { User, IUserModel, IUser } from '../../models/User';
+import { User, IUserModel, IUser, UserSchema } from '../../models/User';
 import { Game, IGameModel } from '../../models/Game';
 import { Route } from '../../models/Route';
 
@@ -353,9 +353,13 @@ export default class GameFacade {
 
         await currentUser.getLongestRoute();
         await currentUser.save();
+        console.time('a');
         await game.updateLongestRoute();
-        await currentUser.updatePoints();
-        await currentUser.save();
+        console.timeEnd('a');
+        // currentUser = await User.findById(currentUser._id);
+        // currentUser = currentUser!;
+        // await currentUser.updatePoints();
+        // await currentUser.save();
 
         if (game.lastRound > 0) {
           game.lastRound -= 1;
@@ -399,39 +403,38 @@ export default class GameFacade {
     }
 
     // logged in
-    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress })
-      .then(async game => {
-        if (!game) {
-          return {
-            success: false,
-            data: {},
-            errorInfo: 'That game is already over!',
-          };
-        }
-        // force unwrap game
-        game = game!;
-        game.gameState = GameState.Ended;
+    return Game.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }).then(async game => {
+      if (!game) {
+        return {
+          success: false,
+          data: {},
+          errorInfo: 'That game is already over!',
+        };
+      }
+      // force unwrap game
+      game = game!;
+      game.gameState = GameState.Ended;
 
-        return game.save().then(savedGame => {
-          return {
-            success: true,
-            data: {},
-            gameHistory: `Game OVER.`,
-            emit: [
-              {
-                command: 'updateGameState',
-                data: { id: savedGame._id },
-                to: savedGame._id,
-              },
-              {
-                command: 'updateGameHistory',
-                to: savedGame._id,
-                data: { id: savedGame._id },
-              },
-            ],
-          };
-        });
+      return game.save().then(savedGame => {
+        return {
+          success: true,
+          data: {},
+          gameHistory: `Game OVER.`,
+          emit: [
+            {
+              command: 'updateGameState',
+              data: { id: savedGame._id },
+              to: savedGame._id,
+            },
+            {
+              command: 'updateGameHistory',
+              to: savedGame._id,
+              data: { id: savedGame._id },
+            },
+          ],
+        };
       });
+    });
   }
 
   setChooseDestinationCardState(data: any): Promise<any> {

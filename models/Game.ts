@@ -194,12 +194,19 @@ GameSchema.methods.updateLongestRoute = async function() {
     lengths.push(this.userList[i].longestRoute);
   }
   let maxRoute = Math.max(...lengths);
+  console.log(maxRoute, lengths, 'MAXROUTE');
 
   for (let i = 0; i < this.userList.length; i++) {
     if (this.userList[i].longestRoute == maxRoute) this.userList[i].points.detailed.longestRoute = 10;
+    console.log(this.userList[i].username, this.userList[i].longestRoute, this.userList[i].points.detailed.longestRoute, 'just saved');
+  }
+
+  for (let i = 0; i < this.userList.length; i++) {
+    this.userList[i].updatePoints();
     await this.userList[i].save();
   }
 };
+
 GameSchema.methods.reshuffleDestinationCards = function() {
   let shuffledDestinationCards = shuffle(this.destinationCardDiscardPile);
   this.destinationCardDeck = shuffledDestinationCards;
