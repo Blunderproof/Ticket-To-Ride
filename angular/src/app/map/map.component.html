@@ -7942,7 +7942,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-Omaha-KansasCity')"
            id="Gy-2-Omaha-KansasCity"
-           class="route secondroute">
+           class="route" [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-8-8"
              transform="matrix(0.69539468,-0.25066773,0.28952187,0.80318263,809.98844,385.93449)"
@@ -8171,7 +8171,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-Omaha-Duluth')"
            id="Gy-2-Omaha-Duluth"
-           class="route secondroute">
+           class="route" [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-8-3-3"
              transform="matrix(0.60936103,0.41843424,-0.48329262,0.70381354,1010.5113,236.01699)"
@@ -8232,7 +8232,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-OklahomaCity-KansasCity')"
            id="Gy-2-OklahomaCity-KansasCity"
-           class="route secondroute">
+          [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-8-3-3-8"
              transform="matrix(0.70205425,0.27470902,-0.30812593,0.8349899,925.90596,470.93678)"
@@ -8293,7 +8293,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-OklahomaCity-Dallas')"
            id="Gy-2-OklahomaCity-Dallas"
-           class="route secondroute">
+           [class.secondroute]="!(_userInfo.game.userList.length > 3)">>
           <svg:g
              id="GrayPath-8-8-8"
              transform="matrix(0.70743415,-0.20607569,0.24747054,0.80120919,793.88443,645.8808)"
@@ -8339,8 +8339,9 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route secondroute" (click)="mapClicked($event, 'tp-2-Dallas-Houston')"
-          id="Gy-2-Dallas-Houston">
+          class="route" (click)="mapClicked($event, 'tp-2-Dallas-Houston')"
+          id="Gy-2-Dallas-Houston"
+          [class.secondroute]="!(_userInfo.game.userList.length > 3)">>
           <svg:g
             id="GrayPath-Whatever"
             transform="matrix(0.74889327,-0.47144977,0.5183753,0.90860879,786.76206,795.2662)"
@@ -8474,7 +8475,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-Seattle-Vancouver')"
            id="Gy-2-Seattle-Vancouver"
-           class="route secondroute">
+           [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="g3236"
              transform="matrix(0.70489391,0.22317404,-0.30781308,0.93577729,168.57558,-65.653486)"
@@ -8943,7 +8944,7 @@
         </svg:g>
         <svg:g
            id="Gy-1-Montreal-Boston"
-           class="route" (click)="mapClicked($event, 'tp-2-Montreal-Boston')">
+           class="route" (click)="mapClicked($event, 'tp-1-Montreal-Boston')">
           <svg:g
              id="GrayPath-78"
              transform="matrix(0.59827101,-0.58209583,0.74090327,0.77729973,1357.6913,72.798397)"
@@ -8972,9 +8973,9 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked($event, 'tp-1-Montreal-Boston')"
+          class="route" (click)="mapClicked($event, 'tp-2-Montreal-Boston')"
            id="Gy-2-Montreal-Boston"
-           class="route secondroute">
+           [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-78-9"
              transform="matrix(0.59827101,-0.58209583,0.74090327,0.77729973,1374.1573,53.658991)"
@@ -10331,7 +10332,7 @@
         <svg:g
           class="route" (click)="mapClicked($event, 'tp-2-Atlanta-Raleigh')"
            id="Gy-2-Atlanta-Raleigh"
-           class="route secondroute">
+           [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-96-8"
              transform="matrix(0.53342091,0.4206686,-0.49091949,0.60976956,1461.238,517.85652)"
@@ -11440,7 +11441,7 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route" (click)="mapClicked($event, 'tp-2-Portland-Seattle')"
+          class="route secondroute" (click)="mapClicked($event, 'tp-2-Portland-Seattle')"
           id="Gy-2-Portland-Seattle">
           <svg:g
              id="GrayPath-27-8"
@@ -17071,8 +17072,8 @@
           </svg:g>
         </svg:g>
         <svg:g
-           id="tp-1-Montreal-Boston"
-           class="trainPath" [ngStyle]="{ 'fill': (_userInfo.trainPathStates['tp-1-Montreal-Boston'] || '#CCC'), 'display': (_userInfo.trainPathStates['tp-1-Montreal-Boston'] ? 'block' : 'none')}">
+           id="tp-2-Montreal-Boston"
+           class="trainPath" [ngStyle]="{ 'fill': (_userInfo.trainPathStates['tp-2-Montreal-Boston'] || '#CCC'), 'display': (_userInfo.trainPathStates['tp-2-Montreal-Boston'] ? 'block' : 'none')}">
           <svg:g
              transform="matrix(-2.4105772,2.6333077,-3.5627996,-3.2665312,1674.4989,159.29084)"
              id="car-4-56">
@@ -17213,8 +17214,8 @@
           </svg:g>
         </svg:g>
         <svg:g
-           id="tp-2-Montreal-Boston"
-           class="trainPath" [ngStyle]="{ 'fill': (_userInfo.trainPathStates['tp-2-Montreal-Boston'] || '#CCC'), 'display': (_userInfo.trainPathStates['tp-2-Montreal-Boston'] ? 'block' : 'none')}">
+           id="tp-1-Montreal-Boston"
+           class="trainPath" [ngStyle]="{ 'fill': (_userInfo.trainPathStates['tp-1-Montreal-Boston'] || '#CCC'), 'display': (_userInfo.trainPathStates['tp-1-Montreal-Boston'] ? 'block' : 'none')}">
           <svg:g
              transform="matrix(-2.4105772,2.6333077,-3.5627997,-3.2665311,1658.2341,177.84169)"
              id="car-4-56-29">

@@ -40,8 +40,11 @@ export class MapComponent implements OnInit {
   mapClicked(event, correspondingTrainPath) {
     this.errorMessages = [];
     const routeInfo = event.path[2].id.split('-');
+    console.log(routeInfo);
+    const trainPathInfo = correspondingTrainPath.split('-');
+    console.log(trainPathInfo);
     const routeColor = this.routeColorEnum[routeInfo[0]];
-    const routeNumber = routeInfo[1];
+    const routeNumber = trainPathInfo[1];
     const routeCity1 = routeInfo[2];
     const routeCity2 = routeInfo[3];
 
@@ -51,6 +54,8 @@ export class MapComponent implements OnInit {
       color: routeColor,
       routeNumber: routeNumber,
     };
+
+    console.log(data);
 
     if (routeColor == RouteColor.Gy) {
       this._userInfo.displayColorSelection = true;
