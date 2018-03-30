@@ -31,7 +31,7 @@ export interface IGameModel extends mongoose.Document {
   initGame(): Promise<any>;
   shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
-  updateLongestRoute(): Promise<any>;
+  updatePoints(): Promise<any>;
   reshuffleDestinationCards(): void;
   reshuffleTrainCards(): void;
 }
@@ -185,7 +185,7 @@ GameSchema.methods.getCurrentUserIndex = function() {
   return this.turnNumber % this.userList.length;
 };
 
-GameSchema.methods.updateLongestRoute = async function() {
+GameSchema.methods.updatePoints = async function() {
   await this.populate('userList').execPopulate();
 
   let lengths = [];
