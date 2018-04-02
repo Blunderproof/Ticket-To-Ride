@@ -1,8 +1,8 @@
 import CommandResults from '../../modules/commands/CommandResults';
-import { Message } from '../../models/Message';
 import { MessageType, TrainColor, GameState, TurnState } from '../../constants';
 import { User, IUserModel, IUser, UserSchema } from '../../models/User';
 import { Game, IGameModel } from '../../models/Game';
+import { Message } from '../../models/Message';
 import { Route } from '../../models/Route';
 
 export default class GameFacade {
