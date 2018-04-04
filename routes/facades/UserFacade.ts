@@ -3,15 +3,25 @@ import { Message } from '../../models/Message';
 import { Game } from '../../models/Game';
 import CommandResults from '../../modules/commands/CommandResults';
 import { HASHING_SECRET, GameState, MessageType } from '../../constants';
+import { MongoUserDAO } from '../../daos/mongo/MongoUserDAO';
+import IUserDAO from '../../daos/IUserDAO';
+import { IGameDAO } from '../../daos/IGameDAO';
+import { MongoGameDAO } from '../../daos/mongo/MongoGameDAO';
 const crypto = require('crypto');
 
 export default class UserFacade {
-  private constructor() {}
+  userDAO: IUserDAO;
+  gameDAO: IGameDAO;
 
-  private static instance = new UserFacade();
+  private constructor(userDAO: IUserDAO, gameDAO: IGameDAO) {
+    this.userDAO = userDAO;
+    this.gameDAO = gameDAO;
+  }
+
+  private static instance: UserFacade;
   static instanceOf() {
     if (!this.instance) {
-      this.instance = new UserFacade();
+      this.instance = new UserFacade(new MongoUserDAO(), new MongoGameDAO());
     }
     return this.instance;
   }
@@ -38,85 +48,86 @@ export default class UserFacade {
     // console.log(username);
     // console.log(hashedPassword);
 
-    return User.findOne({ username, hashedPassword })
-      .populate('trainCardHand')
-      .populate('destinationCardHand')
-      .populate('claimedRouteList')
-      .then(async user => {
-        if (user) {
-          let game = await Game.findOne({
-            $or: [
-              {
-                host: user._id,
-                gameState: GameState.InProgress,
-              },
-              {
-                userList: user._id,
-                gameState: GameState.InProgress,
-              },
-              {
-                host: user._id,
-                gameState: GameState.Open,
-              },
-              {
-                userList: user._id,
-                gameState: GameState.Open,
-              },
-            ],
-          })
-            .populate('userList')
-            .populate({
-              path: 'userList',
-              populate: {
-                path: 'trainCardHand',
-                model: 'TrainCard',
-              },
-            })
-            .populate({
-              path: 'userList',
-              populate: {
-                path: 'destinationCardHand',
-                model: 'DestinationCard',
-              },
-            })
-            .populate({
-              path: 'userList',
-              populate: {
-                path: 'claimedRouteList',
-                model: 'Route',
-              },
-            })
-            .then(async game => {
-              return game;
-            });
-
-          let userCookie =
-            game == null
-              ? { lgid: user._id }
-              : {
-                  lgid: user._id,
-                  gmid: game._id,
-                };
-
-          let gameState = game == null ? null : game.gameState;
-
-          return {
-            success: true,
-            data: {
-              user,
-              gameState,
+    return this.userDAO.findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(async user => {
+      if (user) {
+        let game = await this.gameDAO
+          .findOne(
+            {
+              $or: [
+                {
+                  host: user._id,
+                  gameState: GameState.InProgress,
+                },
+                {
+                  userList: user._id,
+                  gameState: GameState.InProgress,
+                },
+                {
+                  host: user._id,
+                  gameState: GameState.Open,
+                },
+                {
+                  userList: user._id,
+                  gameState: GameState.Open,
+                },
+              ],
             },
-            userCookie,
-          };
-        } else {
-          // doc may be null if no document matched
-          return {
-            success: false,
-            data: {},
-            errorInfo: "The username and password entered don't match any users in our database.",
-          };
-        }
-      });
+            [
+              'userList',
+              {
+                path: 'userList',
+                populate: {
+                  path: 'trainCardHand',
+                  model: 'TrainCard',
+                },
+              },
+              {
+                path: 'userList',
+                populate: {
+                  path: 'destinationCardHand',
+                  model: 'DestinationCard',
+                },
+              },
+              {
+                path: 'userList',
+                populate: {
+                  path: 'claimedRouteList',
+                  model: 'Route',
+                },
+              },
+            ]
+          )
+          .then(async game => {
+            return game;
+          });
+
+        let userCookie =
+          game == null
+            ? { lgid: user._id }
+            : {
+                lgid: user._id,
+                gmid: game._id,
+              };
+
+        let gameState = game == null ? null : game.gameState;
+
+        return {
+          success: true,
+          data: {
+            user,
+            gameState,
+          },
+          userCookie,
+        };
+      } else {
+        // doc may be null if no document matched
+        return {
+          success: false,
+          data: {},
+          errorInfo: "The username and password entered don't match any users in our database.",
+        };
+      }
+    });
   }
 
   logout(data: any): Promise<any> {
@@ -159,7 +170,7 @@ export default class UserFacade {
       .update(data.password)
       .digest('hex');
 
-    return User.findOne({ username }).then(user => {
+    return this.userDAO.findOne({ username }, []).then(async user => {
       if (user) {
         // doc may be null if no document matched
         return {
@@ -168,10 +179,10 @@ export default class UserFacade {
           errorInfo: 'That username is already taken! Try another username.',
         };
       } else {
-        var newUser = new User({ username, hashedPassword });
+        var newUserData = { username, hashedPassword };
 
         // Save the new model instance, passing a callback
-        newUser.save();
+        let newUser = await this.userDAO.create(newUserData);
         return {
           success: true,
           data: {
@@ -184,75 +195,73 @@ export default class UserFacade {
   }
 
   getGame(data: any): Promise<any> {
-    return (
-      Game.findOne({
-        $or: [
+    return this.gameDAO
+      .findOne(
+        {
+          $or: [
+            {
+              host: data.reqUserID,
+              gameState: GameState.Open,
+            },
+            {
+              userList: data.reqUserID,
+              gameState: GameState.Open,
+            },
+            {
+              host: data.reqUserID,
+              gameState: GameState.InProgress,
+            },
+            {
+              userList: data.reqUserID,
+              gameState: GameState.InProgress,
+            },
+          ],
+        },
+        [
+          'host',
+          'userList',
           {
-            host: data.reqUserID,
-            gameState: GameState.Open,
+            path: 'userList',
+            populate: {
+              path: 'trainCardHand',
+              model: 'TrainCard',
+            },
           },
           {
-            userList: data.reqUserID,
-            gameState: GameState.Open,
+            path: 'userList',
+            populate: {
+              path: 'destinationCardHand',
+              model: 'DestinationCard',
+            },
           },
           {
-            host: data.reqUserID,
-            gameState: GameState.InProgress,
+            path: 'userList',
+            populate: {
+              path: 'claimedRouteList',
+              model: 'Route',
+            },
           },
-          {
-            userList: data.reqUserID,
-            gameState: GameState.InProgress,
-          },
-        ],
-      })
-        .populate('host')
-        .populate('userList')
-        .populate({
-          path: 'userList',
-          populate: {
-            path: 'trainCardHand',
-            model: 'TrainCard',
-          },
-        })
-        .populate({
-          path: 'userList',
-          populate: {
-            path: 'destinationCardHand',
-            model: 'DestinationCard',
-          },
-        })
-        .populate({
-          path: 'userList',
-          populate: {
-            path: 'claimedRouteList',
-            model: 'Route',
-          },
-        })
-        .populate('unclaimedRoutes')
-        // TODO just top 6
-        .populate('trainCardDeck')
-        // TODO just top 3
-        .populate('destinationCardDeck')
-        .then(data => {
-          return {
-            success: true,
-            data: data,
-          };
-        })
-    );
-  }
-
-  getUser(data: any): Promise<any> {
-    return User.findById(data.reqUserID)
-      .populate('trainCardHand')
-      .populate('destinationCardHand')
-      .populate('claimedRouteList')
+          'unclaimedRoutes',
+          'trainCardDeck',
+          'destinationCardDeck',
+        ]
+      )
       .then(data => {
         return {
           success: true,
           data: data,
         };
       });
+  }
+
+  getUser(data: any): Promise<any> {
+    console.log('getUser called');
+    return this.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(data => {
+      return {
+        success: true,
+        data: data,
+      };
+    });
   }
 
   getChatHistory(data: any): Promise<any> {

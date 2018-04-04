@@ -3,6 +3,7 @@ import CommandResults from '../modules/commands/CommandResults';
 import UserFacade from './facades/UserFacade';
 import GameLobbyFacade from './facades/GameLobbyFacade';
 import GameFacade from './facades/GameFacade';
+import { MongoGameDAO } from '../daos/mongo/MongoGameDAO';
 
 export default class ServerFacade implements IServer {
   private constructor() {}

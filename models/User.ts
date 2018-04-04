@@ -33,6 +33,7 @@ export interface IUser {
   };
   longestRoute: number;
 
+  getObject(): any;
   getPublicPoints(): Promise<any>;
   getPrivatePoints(): Promise<any>;
   routePoints(): Promise<any>;
@@ -76,6 +77,25 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema(
     toJSON: { virtuals: true },
   }
 );
+
+UserSchema.methods.getObject = function() {
+  let data = {
+    username: this.username,
+    hashedPassword: this.hashedPassword,
+    claimedRouteList: this.claimedRouteList,
+    trainCardHand: this.trainCardHand,
+    destinationCardHand: this.destinationCardHand,
+    metDestinationCards: this.metDestinationCards,
+    unmetDestinationCards: this.unmetDestinationCards,
+    score: this.score,
+    tokenCount: this.tokenCount,
+    turnState: this.turnState,
+    color: this.color,
+    points: this.points,
+    longestRoute: this.longestRoute,
+  };
+  return data;
+};
 
 UserSchema.methods.getTurnStateObject = function() {
   return TurnStateObjectLoader.instanceOf().createStateObject(this);
