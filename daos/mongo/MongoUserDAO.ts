@@ -1,15 +1,6 @@
 import { IUserModel, User } from '../../models/User';
 import IUserDAO from '../IUserDAO';
 
-<<<<<<< HEAD
-export class MongoUserDAO {
-  // find(data: any): Promise<IUserModel[]> {
-  //   return new Promise();
-  // }
-  // remove(data: any): Promise<null> {
-  //   return new Promise();
-  // }
-=======
 export class MongoUserDAO implements IUserDAO {
   findOne(data: any, populates: any[]): Promise<IUserModel | null> {
     let query = User.findOne(data);
@@ -30,5 +21,4 @@ export class MongoUserDAO implements IUserDAO {
 
     return user;
   }
->>>>>>> 9b2e5048961360f5d5bbc9693655252df083bbf6
 }

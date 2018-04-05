@@ -1,15 +1,6 @@
 import { IMessageModel, Message } from '../../models/Message';
 import IMessageDAO from '../IMessageDAO';
 
-<<<<<<< HEAD
-export class MongoMessageDAO {
-  // findOne(data: any): Promise<IMessageModel | null> {
-  //   // return new Promise();
-  // }
-  // remove(data: any): Promise<null> {
-  //   // return new Promise();
-  // }
-=======
 export class MongoMessageDAO implements IMessageDAO {
   find(data: any, populates: any[]): Promise<IMessageModel[]> {
     let query = Message.find(data);
@@ -31,5 +22,4 @@ export class MongoMessageDAO implements IMessageDAO {
 
     return message;
   }
->>>>>>> 9b2e5048961360f5d5bbc9693655252df083bbf6
 }
