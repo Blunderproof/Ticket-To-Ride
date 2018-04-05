@@ -7,7 +7,7 @@ export class MongoGameDAO {
   find(data: any): Promise<IGameModel[]> {
     return Game.find(data).exec();
   }
-  remove(data: any): Promise<null> {
+  remove(data: any): Promise<void> {
     return Game.remove(data).exec();
   }
 
