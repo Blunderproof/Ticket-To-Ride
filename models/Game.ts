@@ -17,6 +17,7 @@ import {
 } from '../constants';
 
 export interface IGameModel extends mongoose.Document {
+  _id: string;
   host: IUserModel;
   userList: IUserModel[];
   gameState: GameState;
@@ -28,6 +29,7 @@ export interface IGameModel extends mongoose.Document {
   turnNumber: number;
   lastRound: number;
   playersReady: IUserModel[];
+  getObject(): any;
   initGame(): Promise<any>;
   shuffleDealCards(unclaimedRoutes: IRouteModel[], trainCardDeck: ITrainCardModel[], destinationCardDeck: IDestinationCardModel[]): Promise<any>;
   getCurrentUserIndex(): number;
@@ -49,6 +51,23 @@ export var GameSchema: Schema = new Schema({
   lastRound: Number,
   playersReady: [{ type: Schema.Types.ObjectId, required: true, ref: 'User' }],
 });
+
+GameSchema.methods.getObject = function() {
+  let data = {
+    host: this.host,
+    userList: this.userList,
+    gameState: this.gameState,
+    unclaimedRoutes: this.unclaimedRoutes,
+    trainCardDeck: this.trainCardDeck,
+    trainCardDiscardPile: this.trainCardDiscardPile,
+    destinationCardDeck: this.destinationCardDeck,
+    destinationCardDiscardPile: this.destinationCardDiscardPile,
+    turnNumber: this.turnNumber,
+    lastRound: this.lastRound,
+    playersReady: this.playersReady,
+  };
+  return data;
+};
 
 GameSchema.methods.initGame = async function() {
   let unclaimedRoutes: IRouteModel[] = [];
