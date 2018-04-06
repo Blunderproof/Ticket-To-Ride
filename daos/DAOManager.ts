@@ -7,7 +7,9 @@ class DAOSingleton {
     this._dao = undefined;
   }
   set dao(val: any) {
-    this._dao = val;
+    if (val) {
+      this._dao = val;
+    }
   }
   get dao() {
     return this._dao;
