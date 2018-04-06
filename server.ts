@@ -14,6 +14,7 @@ import * as colors from 'colors/safe';
 
 import ServerCommunicator from './routes/ServerCommunicator';
 import { EXPRESS_SECRET, MAX_COOKIE_AGE } from './constants';
+import { DAOManager } from './daos/DAOSingleton';
 
 export class Server {
   app: any;
@@ -80,29 +81,33 @@ export class Server {
   }
 
   init_db() {
-    const acceptableDBs = ['mongodb', 'dynamodb'];
-    let selectedDB = acceptableDBs[0];
-    if (process.argv[2] && acceptableDBs.indexOf(process.argv[2]) >= 0) {
-      selectedDB = process.argv[2];
+    let path;
+    if ((path = process.argv[2])) {
+      DAOManager.dao = require(path);
     }
-    if (selectedDB == 'mongodb') {
-      mongoose.connect('mongodb://localhost/' + this.db_name);
-      this.db = mongoose.connection;
-      this.db.on('error', console.error.bind(console, 'connection error:'));
-      this.db.once('open', () => {
-        this.msg('MongoDB Connected');
-      });
-    } else if (selectedDB == 'dynamodb') {
-      let serviceConfigOptions: ServiceConfigurationOptions = {
-        region: 'us-west-2',
-        endpoint: 'http://localhost:8000',
-      };
-      this.db = new AWS.DynamoDB(serviceConfigOptions);
-      this.db.createTable({
-        TableName: this.db_name,
-      });
-      this.msg('DynamoDB Connected');
-    }
+    // const acceptableDBs = ['mongodb', 'dynamodb'];
+    // let selectedDB = acceptableDBs[0];
+    // if (process.argv[2] && acceptableDBs.indexOf(process.argv[2]) >= 0) {
+    //   selectedDB = process.argv[2];
+    // }
+    // if (selectedDB == 'mongodb') {
+    //   mongoose.connect('mongodb://localhost/' + this.db_name);
+    //   this.db = mongoose.connection;
+    //   this.db.on('error', console.error.bind(console, 'connection error:'));
+    //   this.db.once('open', () => {
+    //     this.msg('MongoDB Connected');
+    //   });
+    // } else if (selectedDB == 'dynamodb') {
+    //   let serviceConfigOptions: ServiceConfigurationOptions = {
+    //     region: 'us-west-2',
+    //     endpoint: 'http://localhost:8000',
+    //   };
+    //   this.db = new AWS.DynamoDB(serviceConfigOptions);
+    //   this.db.createTable({
+    //     TableName: this.db_name,
+    //   });
+    //   this.msg('DynamoDB Connected');
+    // }
   }
 
   sockets() {

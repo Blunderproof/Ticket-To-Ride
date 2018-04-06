@@ -19,12 +19,15 @@ export class DynamoGameDAO implements IGameDAO {
   remove(data: any): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  save(data: any): Promise<void> {
+  save(game: IGameModel): Promise<IGameModel> {
     return new Promise((yes, no) => {
       this.dbClient.put({
         TableName: 'something',
-        Item: data,
+        Item: game,
       });
     });
+  }
+  create(data: any): Promise<IGameModel> {
+    throw new Error('Method not implemented.');
   }
 }
