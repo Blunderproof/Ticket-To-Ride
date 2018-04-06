@@ -14,7 +14,7 @@ import * as colors from 'colors/safe';
 
 import ServerCommunicator from './routes/ServerCommunicator';
 import { EXPRESS_SECRET, MAX_COOKIE_AGE } from './constants';
-import { DAOManager } from './daos/DAOSingleton';
+import { DAOManager } from './daos/DAOManager';
 
 export class Server {
   app: any;
