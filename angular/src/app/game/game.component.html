@@ -1,4 +1,3 @@
-<app-bank></app-bank>
 <app-dest-card-selector *ngIf="_userInfo.user != null && _userInfo.user.turnState == turnStateEnum.ChoosingDestinationCards"></app-dest-card-selector>
 <app-dest-card-viewer *ngIf="_userInfo.viewDestinationCards"></app-dest-card-viewer>
 <app-game-final-display *ngIf="_userInfo.game != null && _userInfo.game.gameState == 3"></app-game-final-display>
@@ -8,33 +7,49 @@
   <app-toast></app-toast>
 </div>
 
+<app-bank></app-bank>
+
 <div class="borders">
 
-  <div class="game-container">
 
-    <div class="box opponent-sidebar">
-      <div *ngIf="_userInfo.game">
-        <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
-          <div style="margin-top: 20px;">
-            <app-opponent-card [index]="i"></app-opponent-card>
+  <div [ngClass]="{'game-container-left-visible': !leftCollapsed, 'game-container-right-visible': leftCollapsed}">
+
+    <div class="left-slide-btn" (click)="leftCollapsedToggle()">
+      <div class="left-arrow"></div>
+    </div>
+
+    <div class="left-sidebar">
+      <div class="box opponent-sidebar">
+        <div *ngIf="_userInfo.game">
+          <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
+            <div style="margin-top: 20px;">
+              <app-opponent-card [index]="i"></app-opponent-card>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <app-map>
-      <div class="spinner">
+
+      <!-- <div class="spinner">
         <div class="cube1"></div>
         <div class="cube2"></div>
-      </div>
+      </div> -->
     </app-map>
 
-    <div class="box player-sidebar">
-      <!-- <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()"> -->
-        <app-user-inventory></app-user-inventory>
-      <!-- </div> -->
-      <div class="chat">
-        <app-chat [inLobby]=false class="chat-window"></app-chat>
+    <div class="right-slide-btn" (click)="leftCollapsedToggle()">
+      <div class="right-arrow"></div>
+    </div>
+
+    <div class="right-sidebar">
+      <div class="box player-sidebar">
+        <!-- <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()"> -->
+          <app-user-inventory></app-user-inventory>
+        <!-- </div> -->
+        <div class="chat">
+          <app-chat [inLobby]=false class="chat-window"></app-chat>
+        </div>
       </div>
     </div>
 

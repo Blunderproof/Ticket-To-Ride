@@ -73,7 +73,7 @@ export class ToastComponent implements OnInit {
   addToast() {
     const currToastyService = this.toastyService;
     if (this.itemsToToast != null) {
-      this.itemsToToast.forEach(function(historyItem) {
+      this.itemsToToast.forEach((historyItem) => {
         if (historyItem.user._id == this._userInfo.user._id) {
           return;
         }

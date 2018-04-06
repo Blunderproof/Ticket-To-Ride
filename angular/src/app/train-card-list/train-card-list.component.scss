@@ -1,53 +1,109 @@
-.card-list{
-  display: grid;
-  grid-template-rows: repeat(5, 1fr);
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3px;
-  grid-template-areas:
-        "pink-cards black-cards"
-        "white-cards green-cards"
-        "red-cards blue-cards"
-        "yellow-cards orange-cards"
-        "rainbow-cards train-tokens";
+//FULLSIZE CONFIG
+@media screen and (min-width: 1200px){
+  .card-list{
+    width: 200px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3px;
+    grid-template-areas:
+          "pink-cards black-cards"
+          "white-cards green-cards"
+          "red-cards blue-cards"
+          "yellow-cards orange-cards"
+          "rainbow-cards train-tokens";
+  }
+
+  .card-container{
+    position: relative;
+    background-color: gray;
+    border-radius: 3px;
+    margin: 5px;
+    min-height: 60px;
+    min-width: 120px;
+    max-width: 120px;
+    max-height: 60px;
+  }
+
+  .counter{
+      float:right;
+      position: absolute;
+      top:25%;
+      right:10px;
+      font-size: 15pt;
+  }
+
+
+
+  .train-token-counter{
+    float: right;
+  }
+
+  .train-tokens{
+    grid-area: train-tokens;
+  }
+
+  .token{
+    min-height: 50px;
+    max-height: 50px;
+    width: auto;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
 }
 
+//MOBILE CONFIG
+@media screen and (max-width: 1200px){
+  .card-list{
+    width: 200px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3px;
+    grid-template-areas:
+          "pink-cards black-cards"
+          "white-cards green-cards"
+          "red-cards blue-cards"
+          "yellow-cards orange-cards"
+          "rainbow-cards train-tokens";
+  }
+
+  .card-container{
+    position: relative;
+    background-color: gray;
+    border-radius: 3px;
+    margin: 5px;
+    min-height: 60px;
+    min-width: 120px;
+    max-width: 120px;
+    max-height: 60px;
+  }
+
+  .counter{
+      float:right;
+      position: absolute;
+      top:25%;
+      right:10px;
+      font-size: 15pt;
+  }
 
 
-.card-container{
-  position: relative;
-  background-color: gray;
-  border-radius: 3px;
-  margin: 5px;
-  min-height: 60px;
-  min-width: 120px;
-  max-width: 120px;
-  max-height: 60px;
-}
 
-.counter{
-    float:right;
-    position: absolute;
-    top:25%;
-    right:10px;
-    font-size: 15pt;
-}
+  .train-token-counter{
+    float: right;
+  }
 
+  .train-tokens{
+    grid-area: train-tokens;
+  }
 
-
-.train-token-counter{
-  float: right;
-}
-
-.train-tokens{
-  grid-area: train-tokens;
-}
-
-.token{
-  min-height: 50px;
-  max-height: 50px;
-  width: auto;
-  padding-left: 10px;
-  padding-top: 5px;
+  .token{
+    min-height: 50px;
+    max-height: 50px;
+    width: auto;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
 }
 
 .pink-cards{

@@ -10,22 +10,40 @@
 
 }
 
+@media screen and (min-width: 1200px){
+  .bank-items{
+    top: 75px;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
+      justify-items: center;
+      height: inherit;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .bank-items{
+    top: 75px;
+    position: relative;
+    margin: 0 auto;
+    display: grid;
+      grid-gap: 10px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
+      justify-items: center;
+      height: inherit;
+  }
+}
+
 // .bottom-bar-tracks{
 //   position: relative;
 // }
 
-.bank-items{
-  top: 75px;
-  position: relative;
-  width: 50%;
-  margin: 0 auto;
-  display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
-    justify-items: center;
-    height: inherit;
-}
+
 
 .card-back{
   background: blue;
