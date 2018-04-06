@@ -11441,8 +11441,9 @@
           </svg:g>
         </svg:g>
         <svg:g
-          class="route secondroute" (click)="mapClicked($event, 'tp-2-Portland-Seattle')"
-          id="Gy-2-Portland-Seattle">
+          class="route" (click)="mapClicked($event, 'tp-2-Portland-Seattle')"
+          id="Gy-2-Portland-Seattle"
+          [class.secondroute]="!(_userInfo.game.userList.length > 3)">
           <svg:g
              id="GrayPath-27-8"
              transform="matrix(0.72330357,0.15244689,-0.17607654,0.83541744,108.78091,71.195604)"

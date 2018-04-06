@@ -1,11 +1,11 @@
 <div class="borders">
   <div class="lobby-container">
-    <app-errors [messages]="errorMessages"></app-errors>
+    <!-- <app-errors [messages]="errorMessages"></app-errors> -->
 
     <div class="box joined-game">
       <div class="game-header" *ngIf="_userInfo.game != null">
-        <span> Current Game </span>
-        <div>{{_userInfo.game.host.username}}'s Game</div>
+        Current Game:
+        {{_userInfo.game.host.username}}'s Game
       </div>
 
       <app-userlist *ngIf="_userInfo.game != null" [userList]="_userInfo.game.userList"></app-userlist>

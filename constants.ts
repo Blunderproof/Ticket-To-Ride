@@ -36,7 +36,7 @@ export const PLAYER_COLOR_MAP = [PlayerColor.Red, PlayerColor.Green, PlayerColor
 
 export const TRAIN_CARD_HAND_SIZE = 4;
 export const DESTINATION_CARD_HAND_SIZE = 3;
-export const INITIAL_TOKEN_COUNT = 45;
+export const INITIAL_TOKEN_COUNT = 10;
 
 export enum MessageType {
   Chat = 'chat',
