@@ -1,5 +1,5 @@
 import { Game, IGameModel, GameSchema } from '../../models/Game';
-import { IGameDAO } from '../IGameDAO';
+import IGameDAO from '../IGameDAO';
 
 export class MongoGameDAO implements IGameDAO {
   constructor() {}

@@ -3,6 +3,7 @@ import { Game } from '../models/Game';
 import { GameState, MessageType } from '../constants';
 import { SocketCommand } from '../constants';
 import { emit } from 'cluster';
+import { DAOManager } from '../daos/DAOManager';
 
 export default class SocketFacade {
   socketCommandMap: Map<string, SocketCommand>;
@@ -49,12 +50,9 @@ export default class SocketFacade {
   }
 
   private getOpenGameList = (data: any): Promise<any> => {
-    return Game.find({ gameState: GameState.Open })
-      .populate('host')
-      .populate('userList')
-      .then(games => {
-        return games;
-      });
+    return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then(games => {
+      return games;
+    });
   };
 
   private startGame = (data: any): Promise<any> => {
@@ -64,57 +62,51 @@ export default class SocketFacade {
   };
 
   private updateGameState = (data: any): Promise<any> => {
-    return Game.findById(data.id)
-      .populate('host')
-      .populate('userList')
-      .populate({
-        path: 'userList',
-        populate: {
-          path: 'trainCardHand',
-          model: 'TrainCard',
+    return DAOManager.dao.gameDAO
+      .findOne({ _id: data.id }, [
+        'host',
+        'userList',
+        {
+          path: 'userList',
+          populate: {
+            path: 'trainCardHand',
+            model: 'TrainCard',
+          },
         },
-      })
-      .populate({
-        path: 'userList',
-        populate: {
-          path: 'destinationCardHand',
-          model: 'DestinationCard',
+        {
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          },
         },
-      })
-      .populate({
-        path: 'userList',
-        populate: {
-          path: 'claimedRouteList',
-          model: 'Route',
+        {
+          path: 'userList',
+          populate: {
+            path: 'claimedRouteList',
+            model: 'Route',
+          },
         },
-      })
-      .populate('unclaimedRoutes')
-      .populate('trainCardDeck')
-      .populate('trainCardDiscardPile')
-      .populate('destinationCardDeck')
-      .populate('destinationCardDiscardPile')
+        'unclaimedRoutes',
+        'trainCardDeck',
+        'trainCardDiscardPile',
+        'destinationCardDeck',
+        'destinationCardDiscardPile',
+      ])
       .then(game => {
         return game;
       });
   };
 
   private updateChatHistory = (data: any): Promise<any> => {
-    return Message.find({ game: data.id, type: MessageType.Chat })
-      .populate('user')
-      .populate('game')
-      .sort('timestamp')
-      .then(chatMessages => {
-        return chatMessages;
-      });
+    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp').then(chatMessages => {
+      return chatMessages;
+    });
   };
 
   private updateGameHistory = (data: any): Promise<any> => {
-    return Message.find({ game: data.id, type: MessageType.History })
-      .populate('user')
-      .populate('game')
-      .sort('-timestamp')
-      .then(gameHistoryMessages => {
-        return gameHistoryMessages;
-      });
+    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp').then(gameHistoryMessages => {
+      return gameHistoryMessages;
+    });
   };
 }

@@ -5,6 +5,7 @@ import ServerFacade from './ServerFacade';
 import { FacadeCommand, MessageType } from '../constants';
 import SocketFacade from './SocketFacade';
 import { Message } from '../models/Message';
+import { DAOManager } from '../daos/DAOManager';
 
 export default class ServerCommunicator {
   commandHandler: CommandHandler;
@@ -156,15 +157,13 @@ export default class ServerCommunicator {
 
           //add gamehistory
           if (commandResults.shouldAddHistory()) {
-            let history = new Message({
+            await DAOManager.dao.messageDAO.create({
               message: commandResults.shouldAddHistory(),
               // when you join, the reqGameID is null so use the session one we just set
               game: reqGameID || req.session.gmid,
               user: reqUserID,
               type: MessageType.History,
             });
-            console.log('history added', history);
-            await history.save();
           }
 
           // emit stuff

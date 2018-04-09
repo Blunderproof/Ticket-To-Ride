@@ -2,12 +2,13 @@ import { IMessageModel, Message } from '../../models/Message';
 import IMessageDAO from '../IMessageDAO';
 
 export class MongoMessageDAO implements IMessageDAO {
-  find(data: any, populates: any[]): Promise<IMessageModel[]> {
+  find(data: any, populates: any[], sort: string): Promise<IMessageModel[]> {
     let query = Message.find(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
       query.populate(fieldName);
     }
+    query.sort(sort);
     return query.exec();
   }
 

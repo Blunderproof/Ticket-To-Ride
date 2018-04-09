@@ -54,3 +54,5 @@ export enum UserState {
   LoggedIn,
   InGame,
 }
+
+export const DB_NAME = 'tickettoride';

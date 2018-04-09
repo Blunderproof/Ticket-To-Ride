@@ -1,5 +1,5 @@
 import { Game, IGameModel, GameSchema } from '../../models/Game';
-import { IGameDAO } from '../IGameDAO';
+import IGameDAO from '../IGameDAO';
 import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 

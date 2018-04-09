@@ -3,25 +3,16 @@ import { Message } from '../../models/Message';
 import { Game } from '../../models/Game';
 import CommandResults from '../../modules/commands/CommandResults';
 import { HASHING_SECRET, GameState, MessageType } from '../../constants';
-import { MongoUserDAO } from '../../daos/mongo/MongoUserDAO';
-import IUserDAO from '../../daos/IUserDAO';
-import { IGameDAO } from '../../daos/IGameDAO';
-import { MongoGameDAO } from '../../daos/mongo/MongoGameDAO';
+import { DAOManager } from '../../daos/DAOManager';
 const crypto = require('crypto');
 
 export default class UserFacade {
-  userDAO: IUserDAO;
-  gameDAO: IGameDAO;
-
-  private constructor(userDAO: IUserDAO, gameDAO: IGameDAO) {
-    this.userDAO = userDAO;
-    this.gameDAO = gameDAO;
-  }
+  private constructor() {}
 
   private static instance: UserFacade;
   static instanceOf() {
     if (!this.instance) {
-      this.instance = new UserFacade(new MongoUserDAO(), new MongoGameDAO());
+      this.instance = new UserFacade();
     }
     return this.instance;
   }
@@ -48,9 +39,9 @@ export default class UserFacade {
     // console.log(username);
     // console.log(hashedPassword);
 
-    return this.userDAO.findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(async user => {
+    return DAOManager.dao.userDAO.findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(async user => {
       if (user) {
-        let game = await this.gameDAO
+        let game = await DAOManager.dao.gameDAO
           .findOne(
             {
               $or: [
@@ -170,7 +161,7 @@ export default class UserFacade {
       .update(data.password)
       .digest('hex');
 
-    return this.userDAO.findOne({ username }, []).then(async user => {
+    return DAOManager.dao.userDAO.findOne({ username }, []).then(async user => {
       if (user) {
         // doc may be null if no document matched
         return {
@@ -182,7 +173,7 @@ export default class UserFacade {
         var newUserData = { username, hashedPassword };
 
         // Save the new model instance, passing a callback
-        let newUser = await this.userDAO.create(newUserData);
+        let newUser = await DAOManager.dao.userDAO.create(newUserData);
         return {
           success: true,
           data: {
@@ -195,7 +186,7 @@ export default class UserFacade {
   }
 
   getGame(data: any): Promise<any> {
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           $or: [
@@ -256,7 +247,7 @@ export default class UserFacade {
 
   getUser(data: any): Promise<any> {
     console.log('getUser called');
-    return this.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(data => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(data => {
       return {
         success: true,
         data: data,
