@@ -9,6 +9,12 @@ import IDAO from '../IDAO';
 import * as AWS from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
 import { DB_NAME } from '../../constants';
+import { DynamoDestinationCardDAO } from './DynamoDestinationCardDAO';
+import { DynamoGameDAO } from './DynamoGameDAO';
+import { DynamoMessageDAO } from './DynamoMessageDAO';
+import { DynamoRouteDAO } from './DynamoRouteDAO';
+import { DynamoTrainCardDAO } from './DynamoTrainCardDAO';
+import { DynamoUserDAO } from './DynamoUserDAO';
 
 export class DynamoDAO implements IDAO {
   destinationCardDAO: IDestinationCardDAO;
@@ -20,7 +26,15 @@ export class DynamoDAO implements IDAO {
 
   db: any;
 
-  constructor() {}
+  constructor() {
+    this.destinationCardDAO = new DynamoDestinationCardDAO();
+    this.gameDAO = new DynamoGameDAO();
+    this.messageDAO = new DynamoMessageDAO();
+    this.routeDAO = new DynamoRouteDAO();
+    this.trainCardDAO = new DynamoTrainCardDAO();
+    this.userDAO = new DynamoUserDAO();
+    this.initialize();
+  }
 
   initialize(): void {
     let serviceConfigOptions: ServiceConfigurationOptions = {
