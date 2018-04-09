@@ -19,7 +19,11 @@ export class ChatComponent implements OnInit {
 
   messageList = [];
   errorMessages = [];
-  messageToSend = this._fb.control('', Validators.required);
+  controls = {
+    messageToSend: this._fb.control('', Validators.required)
+  }
+  form = createFormGroup(this.controls);
+
   playSound = false;
 
   constructor(private _serverProxy: ServerProxy, private _fb: FormBuilder, private socket: SocketCommunicator, private cdr: ChangeDetectorRef) {}
@@ -35,9 +39,9 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     this.errorMessages = [];
-    this._serverProxy.sendMessage(this.messageToSend.value).then((x: any) => {
+    this._serverProxy.sendMessage(this.controls.messageToSend.value).then((x: any) => {
       if (x.success) {
-        this.messageToSend.reset();
+        this.controls.messageToSend.reset();
       } else {
         if (x.message) {
           this.errorMessages.push(x.message);
