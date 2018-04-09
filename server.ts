@@ -85,7 +85,7 @@ export class Server {
     if (process.argv.length >= 3) {
       path = process.argv[2];
     } else {
-      path = './dist/daos/mongo/MongoDAO';
+      path = './daos/mongo/MongoDAO';
     }
 
     if (path) {

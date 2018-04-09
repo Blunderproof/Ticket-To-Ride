@@ -110,10 +110,13 @@ export default class GameLobbyFacade {
     const { reqUserID } = data;
 
     return DAOManager.dao.gameDAO
-      .findOne({
-        host: reqUserID,
-        gameState: GameState.Open,
-      })
+      .findOne(
+        {
+          host: reqUserID,
+          gameState: GameState.Open,
+        },
+        []
+      )
       .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched

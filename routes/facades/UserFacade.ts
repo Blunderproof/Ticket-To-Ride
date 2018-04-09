@@ -1,6 +1,6 @@
-import { User } from '../../models/User';
+import { User, IUserModel } from '../../models/User';
 import { Message } from '../../models/Message';
-import { Game } from '../../models/Game';
+import { Game, IGameModel } from '../../models/Game';
 import CommandResults from '../../modules/commands/CommandResults';
 import { HASHING_SECRET, GameState, MessageType } from '../../constants';
 import { DAOManager } from '../../daos/DAOManager';
@@ -39,86 +39,88 @@ export default class UserFacade {
     // console.log(username);
     // console.log(hashedPassword);
 
-    return DAOManager.dao.userDAO.findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(async user => {
-      if (user) {
-        let game = await DAOManager.dao.gameDAO
-          .findOne(
-            {
-              $or: [
+    return DAOManager.dao.userDAO
+      .findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList'])
+      .then(async (user: IUserModel) => {
+        if (user) {
+          let game = await DAOManager.dao.gameDAO
+            .findOne(
+              {
+                $or: [
+                  {
+                    host: user._id,
+                    gameState: GameState.InProgress,
+                  },
+                  {
+                    userList: user._id,
+                    gameState: GameState.InProgress,
+                  },
+                  {
+                    host: user._id,
+                    gameState: GameState.Open,
+                  },
+                  {
+                    userList: user._id,
+                    gameState: GameState.Open,
+                  },
+                ],
+              },
+              [
+                'userList',
                 {
-                  host: user._id,
-                  gameState: GameState.InProgress,
+                  path: 'userList',
+                  populate: {
+                    path: 'trainCardHand',
+                    model: 'TrainCard',
+                  },
                 },
                 {
-                  userList: user._id,
-                  gameState: GameState.InProgress,
+                  path: 'userList',
+                  populate: {
+                    path: 'destinationCardHand',
+                    model: 'DestinationCard',
+                  },
                 },
                 {
-                  host: user._id,
-                  gameState: GameState.Open,
+                  path: 'userList',
+                  populate: {
+                    path: 'claimedRouteList',
+                    model: 'Route',
+                  },
                 },
-                {
-                  userList: user._id,
-                  gameState: GameState.Open,
-                },
-              ],
+              ]
+            )
+            .then(async (game: IGameModel) => {
+              return game;
+            });
+
+          let userCookie =
+            game == null
+              ? { lgid: user._id }
+              : {
+                  lgid: user._id,
+                  gmid: game._id,
+                };
+
+          let gameState = game == null ? null : game.gameState;
+
+          return {
+            success: true,
+            data: {
+              user,
+              gameState,
             },
-            [
-              'userList',
-              {
-                path: 'userList',
-                populate: {
-                  path: 'trainCardHand',
-                  model: 'TrainCard',
-                },
-              },
-              {
-                path: 'userList',
-                populate: {
-                  path: 'destinationCardHand',
-                  model: 'DestinationCard',
-                },
-              },
-              {
-                path: 'userList',
-                populate: {
-                  path: 'claimedRouteList',
-                  model: 'Route',
-                },
-              },
-            ]
-          )
-          .then(async game => {
-            return game;
-          });
-
-        let userCookie =
-          game == null
-            ? { lgid: user._id }
-            : {
-                lgid: user._id,
-                gmid: game._id,
-              };
-
-        let gameState = game == null ? null : game.gameState;
-
-        return {
-          success: true,
-          data: {
-            user,
-            gameState,
-          },
-          userCookie,
-        };
-      } else {
-        // doc may be null if no document matched
-        return {
-          success: false,
-          data: {},
-          errorInfo: "The username and password entered don't match any users in our database.",
-        };
-      }
-    });
+            userCookie,
+          };
+        } else {
+          // doc may be null if no document matched
+          return {
+            success: false,
+            data: {},
+            errorInfo: "The username and password entered don't match any users in our database.",
+          };
+        }
+      });
   }
 
   logout(data: any): Promise<any> {
@@ -161,7 +163,7 @@ export default class UserFacade {
       .update(data.password)
       .digest('hex');
 
-    return DAOManager.dao.userDAO.findOne({ username }, []).then(async user => {
+    return DAOManager.dao.userDAO.findOne({ username }, []).then(async (user: IUserModel) => {
       if (user) {
         // doc may be null if no document matched
         return {
@@ -237,20 +239,20 @@ export default class UserFacade {
           'destinationCardDeck',
         ]
       )
-      .then(data => {
+      .then((game: IGameModel) => {
         return {
           success: true,
-          data: data,
+          data: game,
         };
       });
   }
 
   getUser(data: any): Promise<any> {
     console.log('getUser called');
-    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(data => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then((user: IUserModel) => {
       return {
         success: true,
-        data: data,
+        data: user,
       };
     });
   }

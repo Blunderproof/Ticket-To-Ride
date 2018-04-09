@@ -2,8 +2,8 @@ import CommandResults from '../../modules/commands/CommandResults';
 import { MessageType, TrainColor, GameState, TurnState } from '../../constants';
 import { User, IUserModel, IUser, UserSchema } from '../../models/User';
 import { Game, IGameModel } from '../../models/Game';
-import { Message } from '../../models/Message';
-import { Route } from '../../models/Route';
+import { Message, IMessageModel } from '../../models/Message';
+import { Route, IRouteModel } from '../../models/Route';
 import { DAOManager } from '../../daos/DAOManager';
 
 export default class GameFacade {
@@ -78,7 +78,7 @@ export default class GameFacade {
         game: data.reqGameID,
         type: MessageType.Chat,
       })
-      .then(message => {
+      .then((message: IMessageModel) => {
         return {
           success: true,
           data: {},
@@ -146,7 +146,7 @@ export default class GameFacade {
       };
     }
 
-    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }).then(async user => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, []).then(async (user: IUserModel) => {
       if (!user) {
         return {
           success: false,
@@ -190,7 +190,7 @@ export default class GameFacade {
 
       await user.updatePoints();
 
-      return DAOManager.dao.userDAO.save(user).then(savedUser => {
+      return DAOManager.dao.userDAO.save(user).then((savedUser: IUserModel) => {
         return {
           success: true,
           data: {},
@@ -267,7 +267,7 @@ export default class GameFacade {
           },
         },
       ])
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (!game) {
           return {
             success: false,
@@ -288,12 +288,15 @@ export default class GameFacade {
 
         await currentUser.populate('claimedRouteList').execPopulate();
 
-        let route = await DAOManager.dao.routeDAO.findOne({
-          color: data.color,
-          routeNumber: data.routeNumber,
-          city1: data.city1,
-          city2: data.city2,
-        });
+        let route = await DAOManager.dao.routeDAO.findOne(
+          {
+            color: data.color,
+            routeNumber: data.routeNumber,
+            city1: data.city1,
+            city2: data.city2,
+          },
+          []
+        );
 
         if (!route) {
           return {
@@ -345,7 +348,7 @@ export default class GameFacade {
 
         if (game.userList.length <= 3) {
           await game.populate('unclaimedRoutes').execPopulate();
-          let unclaimedRoutes = game.unclaimedRoutes.filter(e => {
+          let unclaimedRoutes = game.unclaimedRoutes.filter((e: IRouteModel) => {
             route = route!;
             return e.city1 != route.city1 || e.city2 != route.city2;
           });
@@ -371,7 +374,7 @@ export default class GameFacade {
           game.lastRound = game.userList.length;
         }
 
-        return DAOManager.dao.gameDAO.save(game).then(savedGame => {
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
           route = route!;
           return {
             success: true,
@@ -401,7 +404,7 @@ export default class GameFacade {
     }
 
     // logged in
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, []).then(async game => {
+    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, []).then(async (game: IGameModel) => {
       if (!game) {
         return {
           success: false,
@@ -413,7 +416,7 @@ export default class GameFacade {
       game = game!;
       game.gameState = GameState.Ended;
 
-      return DAOManager.dao.gameDAO.save(game).then(savedGame => {
+      return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
         return {
           success: true,
           data: {},
@@ -442,7 +445,7 @@ export default class GameFacade {
     }
 
     // logged in
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList']).then(async game => {
+    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList']).then(async (game: IGameModel) => {
       if (!game) {
         return {
           success: false,
@@ -475,7 +478,7 @@ export default class GameFacade {
 
       await DAOManager.dao.userDAO.save(currentUser);
 
-      return DAOManager.dao.gameDAO.save(game).then(savedGame => {
+      return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
         return {
           success: true,
           data: {},
@@ -523,81 +526,83 @@ export default class GameFacade {
       return promise;
     }
 
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList', 'destinationCardDeck']).then(async game => {
-      if (!game) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: 'That game is already over!',
-        };
-      }
-      // force unwrap game
-      game = game!;
-
-      let turnCheck: any = null;
-      if (!(turnCheck = this.validateUserTurn(game, data)).success) {
-        return turnCheck;
-      }
-      let currentUser: IUserModel | null = turnCheck.currentUser;
-      // it won't be null at this point, we just checked
-      currentUser = currentUser!;
-
-      // check if the keep cards specified are in the game destination card deck
-      let keep = game.destinationCardDeck.filter(function(card) {
-        return data.keepCards.indexOf(card._id.toString()) >= 0;
-      });
-
-      if (keep.length != data.keepCards.length) {
-        return {
-          success: false,
-          errorInfo: `One of the specified keep cards is not in the game's destination card deck.`,
-        };
-      }
-
-      let currentUserState = currentUser.getTurnStateObject();
-      if ((currentUser = currentUserState.chooseDestinationCard(data.keepCards, game)) == null) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: currentUserState.error,
-        };
-      }
-
-      // it won't be null at this point, we just checked
-      currentUser = currentUser!;
-
-      await DAOManager.dao.userDAO.save(currentUser);
-
-      if (game.lastRound > 0) {
-        game.lastRound -= 1;
-        if (game.lastRound == 0) {
-          // end the game
-          game.gameState = GameState.Ended;
+    return DAOManager.dao.gameDAO
+      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList', 'destinationCardDeck'])
+      .then(async (game: IGameModel) => {
+        if (!game) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: 'That game is already over!',
+          };
         }
-      }
+        // force unwrap game
+        game = game!;
 
-      await game.updatePoints();
+        let turnCheck: any = null;
+        if (!(turnCheck = this.validateUserTurn(game, data)).success) {
+          return turnCheck;
+        }
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
 
-      return DAOManager.dao.gameDAO.save(game).then(savedGame => {
-        return {
-          success: true,
-          data: {},
-          gameHistory: `selected ${keep.length} destination card${keep.length >= 2 ? 's' : ''}.`,
-          emit: [
-            {
-              command: 'updateGameState',
-              data: { id: savedGame._id },
-              to: savedGame._id,
-            },
-            {
-              command: 'updateGameHistory',
-              to: savedGame._id,
-              data: { id: savedGame._id },
-            },
-          ],
-        };
+        // check if the keep cards specified are in the game destination card deck
+        let keep = game.destinationCardDeck.filter(function(card) {
+          return data.keepCards.indexOf(card._id.toString()) >= 0;
+        });
+
+        if (keep.length != data.keepCards.length) {
+          return {
+            success: false,
+            errorInfo: `One of the specified keep cards is not in the game's destination card deck.`,
+          };
+        }
+
+        let currentUserState = currentUser.getTurnStateObject();
+        if ((currentUser = currentUserState.chooseDestinationCard(data.keepCards, game)) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+
+        await DAOManager.dao.userDAO.save(currentUser);
+
+        if (game.lastRound > 0) {
+          game.lastRound -= 1;
+          if (game.lastRound == 0) {
+            // end the game
+            game.gameState = GameState.Ended;
+          }
+        }
+
+        await game.updatePoints();
+
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+          return {
+            success: true,
+            data: {},
+            gameHistory: `selected ${keep.length} destination card${keep.length >= 2 ? 's' : ''}.`,
+            emit: [
+              {
+                command: 'updateGameState',
+                data: { id: savedGame._id },
+                to: savedGame._id,
+              },
+              {
+                command: 'updateGameHistory',
+                to: savedGame._id,
+                data: { id: savedGame._id },
+              },
+            ],
+          };
+        });
       });
-    });
   }
 
   chooseTrainCard(data: any): Promise<any> {
@@ -626,75 +631,77 @@ export default class GameFacade {
       return promise;
     }
 
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['trainCardDeck', 'userList']).then(async game => {
-      if (!game) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: 'That game is already over!',
-        };
-      }
-      // force unwrap game
-      game = game!;
-
-      let turnCheck: any = null;
-      if (!(turnCheck = this.validateUserTurn(game, data)).success) {
-        return turnCheck;
-      }
-      let currentUser: IUserModel | null = turnCheck.currentUser;
-      // it won't be null at this point, we just checked
-      currentUser = currentUser!;
-
-      if (data.cardIndex >= game.trainCardDeck.length) {
-        return {
-          success: false,
-          errorInfo: "That cardIndex is outside the bounds of the game's train card deck.",
-        };
-      }
-
-      let currentUserState = currentUser.getTurnStateObject();
-
-      if ((currentUser = currentUserState.drawTrainCard(data.cardIndex, game)) == null) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: currentUserState.error,
-        };
-      }
-
-      // it won't be null at this point, we just checked
-      currentUser = currentUser!;
-      await DAOManager.dao.userDAO.save(currentUser);
-
-      if (game.lastRound > 0) {
-        game.lastRound -= 1;
-        if (game.lastRound == 0) {
-          // end the game
-          game.gameState = GameState.Ended;
+    return DAOManager.dao.gameDAO
+      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['trainCardDeck', 'userList'])
+      .then(async (game: IGameModel) => {
+        if (!game) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: 'That game is already over!',
+          };
         }
-      }
+        // force unwrap game
+        game = game!;
 
-      await game.updatePoints();
+        let turnCheck: any = null;
+        if (!(turnCheck = this.validateUserTurn(game, data)).success) {
+          return turnCheck;
+        }
+        let currentUser: IUserModel | null = turnCheck.currentUser;
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
 
-      return DAOManager.dao.gameDAO.save(game).then(savedGame => {
-        return {
-          success: true,
-          data: {},
-          gameHistory: `drew a train card.`,
-          emit: [
-            {
-              command: 'updateGameState',
-              data: { id: savedGame._id },
-              to: savedGame._id,
-            },
-            {
-              command: 'updateGameHistory',
-              to: savedGame._id,
-              data: { id: savedGame._id },
-            },
-          ],
-        };
+        if (data.cardIndex >= game.trainCardDeck.length) {
+          return {
+            success: false,
+            errorInfo: "That cardIndex is outside the bounds of the game's train card deck.",
+          };
+        }
+
+        let currentUserState = currentUser.getTurnStateObject();
+
+        if ((currentUser = currentUserState.drawTrainCard(data.cardIndex, game)) == null) {
+          return {
+            success: false,
+            data: {},
+            errorInfo: currentUserState.error,
+          };
+        }
+
+        // it won't be null at this point, we just checked
+        currentUser = currentUser!;
+        await DAOManager.dao.userDAO.save(currentUser);
+
+        if (game.lastRound > 0) {
+          game.lastRound -= 1;
+          if (game.lastRound == 0) {
+            // end the game
+            game.gameState = GameState.Ended;
+          }
+        }
+
+        await game.updatePoints();
+
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+          return {
+            success: true,
+            data: {},
+            gameHistory: `drew a train card.`,
+            emit: [
+              {
+                command: 'updateGameState',
+                data: { id: savedGame._id },
+                to: savedGame._id,
+              },
+              {
+                command: 'updateGameHistory',
+                to: savedGame._id,
+                data: { id: savedGame._id },
+              },
+            ],
+          };
+        });
       });
-    });
   }
 }

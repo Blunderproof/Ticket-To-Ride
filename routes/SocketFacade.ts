@@ -1,5 +1,5 @@
-import { Message } from '../models/Message';
-import { Game } from '../models/Game';
+import { Message, IMessageModel } from '../models/Message';
+import { Game, IGameModel } from '../models/Game';
 import { GameState, MessageType } from '../constants';
 import { SocketCommand } from '../constants';
 import { emit } from 'cluster';
@@ -50,7 +50,7 @@ export default class SocketFacade {
   }
 
   private getOpenGameList = (data: any): Promise<any> => {
-    return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then(games => {
+    return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then((games: IGameModel[]) => {
       return games;
     });
   };
@@ -93,20 +93,22 @@ export default class SocketFacade {
         'destinationCardDeck',
         'destinationCardDiscardPile',
       ])
-      .then(game => {
+      .then((game: IGameModel) => {
         return game;
       });
   };
 
   private updateChatHistory = (data: any): Promise<any> => {
-    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp').then(chatMessages => {
+    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp').then((chatMessages: IMessageModel[]) => {
       return chatMessages;
     });
   };
 
   private updateGameHistory = (data: any): Promise<any> => {
-    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp').then(gameHistoryMessages => {
-      return gameHistoryMessages;
-    });
+    return DAOManager.dao.messageDAO
+      .find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp')
+      .then((gameHistoryMessages: IMessageModel[]) => {
+        return gameHistoryMessages;
+      });
   };
 }

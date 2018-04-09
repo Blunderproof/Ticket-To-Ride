@@ -88,7 +88,7 @@ GameSchema.methods.initGame = async function() {
       ],
     };
   }
-  await DAOManager.dao.routeDAO.find(filter, []).then(routes => {
+  await DAOManager.dao.routeDAO.find(filter, []).then((routes: IRouteModel[]) => {
     if (routes) {
       for (let index = 0; index < routes.length; index++) {
         unclaimedRoutes.push(routes[index]);
@@ -99,7 +99,7 @@ GameSchema.methods.initGame = async function() {
   });
 
   let trainCardDeck: ITrainCardModel[] = [];
-  await DAOManager.dao.trainCardDAO.find({}, []).then(trainCards => {
+  await DAOManager.dao.trainCardDAO.find({}, []).then((trainCards: ITrainCardModel[]) => {
     if (trainCards) {
       for (let index = 0; index < trainCards.length; index++) {
         trainCardDeck.push(trainCards[index]);
@@ -110,7 +110,7 @@ GameSchema.methods.initGame = async function() {
   });
 
   let destinationCardDeck: IDestinationCardModel[] = [];
-  await DAOManager.dao.destinationCardDAO.find({}, []).then(destinationCards => {
+  await DAOManager.dao.destinationCardDAO.find({}, []).then((destinationCards: IDestinationCardModel[]) => {
     if (destinationCards) {
       for (let index = 0; index < destinationCards.length; index++) {
         destinationCardDeck.push(destinationCards[index]);
@@ -142,7 +142,7 @@ GameSchema.methods.shuffleDealCards = async function(
 
     let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
-    await DAOManager.dao.userDAO.findOne({ _id: userID }, []).then(async player => {
+    await DAOManager.dao.userDAO.findOne({ _id: userID }, []).then(async (player: IUserModel) => {
       if (!player) {
         return null;
       }
