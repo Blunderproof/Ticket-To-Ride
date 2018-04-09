@@ -23,7 +23,9 @@ export class GameTileComponent implements OnInit {
     this.communicator.joinGame(this.game._id)
       .then((x: any) => {
         if (!x.success) {
-          this.errorMessages.push(x.message);
+          if (x.message) {
+            this.errorMessages.push(x.message);
+          }
         }
       });
   }

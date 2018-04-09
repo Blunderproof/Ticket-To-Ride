@@ -25,7 +25,9 @@ export class GameLobbyComponent implements OnInit {
       if (x.success) {
         this.errorMessages = [];
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }
@@ -36,7 +38,9 @@ export class GameLobbyComponent implements OnInit {
       if (x.success) {
         this.errorMessages = [];
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }
@@ -47,7 +51,9 @@ export class GameLobbyComponent implements OnInit {
       if (x.success) {
         this.errorMessages = [];
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }

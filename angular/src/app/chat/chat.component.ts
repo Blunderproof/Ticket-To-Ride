@@ -39,7 +39,9 @@ export class ChatComponent implements OnInit {
       if (x.success) {
         this.messageToSend.reset();
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }

@@ -32,7 +32,9 @@ export class DestCardSelectorComponent implements OnInit {
         this._userInfo.getGame();
         this.display = false;
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }
@@ -50,7 +52,9 @@ export class DestCardSelectorComponent implements OnInit {
         this._userInfo.getGame();
         this.display = false;
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }
