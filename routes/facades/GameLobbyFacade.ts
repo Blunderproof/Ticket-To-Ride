@@ -1,4 +1,4 @@
-import { Game } from '../../models/Game';
+import { Game, IGameModel } from '../../models/Game';
 import IGameDAO from '../../daos/IGameDAO';
 import { GameState, UserState } from '../../constants';
 import CommandResults from '../../modules/commands/CommandResults';
@@ -62,7 +62,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           return {
@@ -79,7 +79,7 @@ export default class GameLobbyFacade {
 
           // Save the new model instance, passing a callback
 
-          return DAOManager.dao.gameDAO.create(newGameData).then(game => {
+          return DAOManager.dao.gameDAO.create(newGameData).then((game: IGameModel) => {
             return {
               success: true,
               data: {
@@ -114,7 +114,7 @@ export default class GameLobbyFacade {
         host: reqUserID,
         gameState: GameState.Open,
       })
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           return await game.remove().then(() => {
@@ -183,7 +183,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(game => {
+      .then((game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game._id == gameID) {
@@ -216,7 +216,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game.userList.length >= 5) {
@@ -227,7 +227,7 @@ export default class GameLobbyFacade {
             };
           } else {
             game.userList.push(reqUserID);
-            return await DAOManager.dao.gameDAO.save(game).then(savedGame => {
+            return await DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
               console.log('savedGame', savedGame);
               return {
                 success: true,
@@ -270,7 +270,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game.host == reqUserID) {
@@ -283,7 +283,7 @@ export default class GameLobbyFacade {
           const index = game.userList.indexOf(reqUserID);
           game.userList.splice(index, 1);
 
-          return await DAOManager.dao.gameDAO.save(game).then(game => {
+          return await DAOManager.dao.gameDAO.save(game).then((game: IGameModel) => {
             return {
               success: true,
               data: { message: 'Game left.' },
@@ -326,7 +326,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           // TODO change this back to 2
@@ -338,7 +338,7 @@ export default class GameLobbyFacade {
             };
           } else {
             // game.gameState = GameState.InProgress;
-            return await game.initGame().then(game => {
+            return await game.initGame().then((game: IGameModel) => {
               return {
                 success: true,
                 data: { message: 'Game started!' },
@@ -416,7 +416,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // user IS in a game in progress
           return {

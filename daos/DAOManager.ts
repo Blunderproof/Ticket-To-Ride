@@ -1,4 +1,4 @@
-import { IDAO } from './IDAO';
+import IDAO from './IDAO';
 
 class DAOSingleton {
   private _dao?: IDAO;
