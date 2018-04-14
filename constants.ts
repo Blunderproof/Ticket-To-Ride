@@ -56,3 +56,5 @@ export enum UserState {
 }
 
 export const DB_NAME = 'tickettoride';
+export const USER_TABLE_NAME = 'user';
+export const GAME_TABLE_NAME = 'game';

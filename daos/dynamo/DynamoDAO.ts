@@ -8,7 +8,7 @@ import IDAO from '../IDAO';
 
 import * as AWS from 'aws-sdk';
 import { ServiceConfigurationOptions } from 'aws-sdk/lib/service';
-import { DB_NAME } from '../../constants';
+import { DB_NAME, GAME_TABLE_NAME, USER_TABLE_NAME } from '../../constants';
 import { DynamoDestinationCardDAO } from './DynamoDestinationCardDAO';
 import { DynamoGameDAO } from './DynamoGameDAO';
 import { DynamoMessageDAO } from './DynamoMessageDAO';
@@ -43,7 +43,10 @@ export class DynamoDAO implements IDAO {
     };
     this.db = new AWS.DynamoDB(serviceConfigOptions);
     this.db.createTable({
-      TableName: DB_NAME,
+      TableName: GAME_TABLE_NAME,
+    });
+    this.db.createTable({
+      TableName: USER_TABLE_NAME,
     });
   }
 }
