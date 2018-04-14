@@ -45,7 +45,9 @@ export class UserInfo {
           });
         }
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }
@@ -55,7 +57,9 @@ export class UserInfo {
       if (x.success) {
         this.user = new User(x.result) || new User();
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }

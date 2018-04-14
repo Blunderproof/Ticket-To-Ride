@@ -58,7 +58,9 @@ export class LoginComponent implements OnInit {
           if (x.success) {
             this._router.navigate(['/lobby']);
           } else {
-            this.errorMessages.push(x.message);
+            if (x.message) {
+              this.errorMessages.push(x.message);
+            }
           }
         });
     } else {
@@ -68,7 +70,9 @@ export class LoginComponent implements OnInit {
             this.userinfo.user = new User(x.result.user);
             this._router.navigate(['/lobby']);
           } else {
-            this.errorMessages.push(x.message);
+            if (x.message) {
+              this.errorMessages.push(x.message);
+            }
           }
         });
     }
