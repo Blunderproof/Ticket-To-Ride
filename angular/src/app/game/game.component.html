@@ -7,10 +7,15 @@
   <app-toast></app-toast>
 </div>
 
-<app-bank></app-bank>
+<app-bank [leftCollapsed]="leftCollapsed"></app-bank>
 
 <div class="borders">
 
+
+  <div *ngIf="_userInfo.game != null && _userInfo.game.lastRound >= 0 && finalTurnModalToOpen" class="final-turn-modal">
+    <h3>You have one turn left.</h3>
+    <button (click)="toggleFinalTurnModal()" class="btn btn-outline-secondary" type="submit">Okay</button>
+  </div>
 
   <div [ngClass]="{'game-container-left-visible': !leftCollapsed, 'game-container-right-visible': leftCollapsed}">
 
@@ -30,13 +35,7 @@
       </div>
     </div>
 
-    <app-map>
-
-      <!-- <div class="spinner">
-        <div class="cube1"></div>
-        <div class="cube2"></div>
-      </div> -->
-    </app-map>
+    <app-map></app-map>
 
     <div class="right-slide-btn" (click)="leftCollapsedToggle()">
       <div class="right-arrow"></div>

@@ -14,23 +14,14 @@
   left: 25%;
   padding: 20px;
   transform: translateY(-50%);
-  z-index: 1050;
+  z-index: 1100;
   background-color: #fff;
   border-radius: 5px;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
   display: grid;
-  width: 800px;
+  width: 50%;
   margin: 0 auto;
-  z-index: 5000;
-  display: grid;
-  grid-gap: 10px;
-  // grid-template-areas:
-  //   'title'
-  //   'table'
-  //   'chat'
-  //   'button';
   text-align: center;
 }
 

@@ -2,8 +2,8 @@
 @media screen and (min-width: 1200px){
   .borders{
     margin-top: 60px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 14pt;
     overflow: visible;
   }
@@ -45,6 +45,7 @@
   }
 
   .toasts{
+    user-select: none;
     position:absolute;
     top: 700px;
     left: 50px;
@@ -92,7 +93,7 @@
   .player-sidebar {
     float:right;
     grid-column: 1fr;
-    min-width: 280px;
+    width: 280px;
     max-width: 280px;
   }
 
@@ -115,12 +116,12 @@
 
 }
 
-//MOBILE CONFIGS
+//MEDIUM-SMALL CONFIGS
 @media screen and (max-width: 1200px){
   .borders{
     margin-top: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-size: 14pt;
     overflow: visible;
   }
@@ -144,7 +145,7 @@
     -o-user-select: none;
     z-index: 1;
     display: grid;
-    grid-template-columns: [g-col1-start] 1fr [g-col2-start] 280px[g-col2-end];
+    grid-template-columns: [g-col1-start] 1fr [g-col2-start] 240px[g-col2-end];
   }
 
   .toasts{
@@ -195,8 +196,8 @@
   .player-sidebar {
     float:right;
     grid-column: 1fr;
-    min-width: 280px;
-    max-width: 280px;
+    min-width: 240px;
+    max-width: 240px;
   }
 
   .player-inventory {
@@ -301,6 +302,38 @@
       display: none;
   }
 
+}
+.final-turn-backdrop{
+    background-color:rgba(0,0,0,0.3);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 1400;
+    pointer-events: none;
+}
+
+.final-turn-modal {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  padding: 20px;
+  transform: translateY(-50%);
+  z-index: 1500;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow-x: hidden;
+  transition: 0.5s;
+  display: grid;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: all !important;
+}
+
+.final-turn-modal h3 {
+  color: black;
 }
 
 // .inventory-overlay{

@@ -1,5 +1,9 @@
 <div class="backdrop" [hidden]="!display"></div>
 
+<div *ngIf="_userInfo.game != null && _userInfo.game.turnNumber < 0" class="initial-setup-modal">
+  <h3>Initial Set Up – Waiting for all players to choose initial destination cards</h3>
+</div>
+
 <div class="sidenav" tabindex="-1" role="dialog" [hidden]="!display">
 
   <h4 class="title" *ngIf="_userInfo.game && _userInfo.game.turnNumber < 0">Select 2-3 Dest Cards</h4>
