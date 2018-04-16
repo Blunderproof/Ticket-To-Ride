@@ -1,9 +1,9 @@
-import { Game, IGameModel } from '../models/Game';
+import { GameModel } from '../models/GameModel';
 
 export default interface IGameDAO {
-  findOne(data: any, populates: any[]): Promise<IGameModel | null>;
-  find(data: any, populates: any[]): Promise<IGameModel[]>;
+  findOne(data: any, populates: any[]): Promise<GameModel | null>;
+  find(data: any, populates: any[]): Promise<GameModel[]>;
   remove(data: any): Promise<void>;
-  create(data: any): Promise<IGameModel>;
-  save(game: IGameModel): Promise<IGameModel>;
-};
+  create(data: any): Promise<GameModel>;
+  save(game: GameModel): Promise<GameModel>;
+}

@@ -123,7 +123,7 @@ export default class GameFacade {
       return promise;
     }
 
-    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, []);
+    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, ['userList']);
 
     if (!game) {
       return {
@@ -262,8 +262,16 @@ export default class GameFacade {
     return DAOManager.dao.gameDAO
       .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, [
         'userList',
+        'unclaimedRoutes',
         {
           path: 'userList',
+          populate: {
+            path: 'trainCardHand',
+            model: 'TrainCard',
+          },
+        },
+        {
+          path: 'claimedRouteList',
           populate: {
             path: 'trainCardHand',
             model: 'TrainCard',
@@ -288,8 +296,6 @@ export default class GameFacade {
         let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
-
-        await currentUser.populate('claimedRouteList').execPopulate();
 
         let route = await DAOManager.dao.routeDAO.findOne(
           {
@@ -350,12 +356,10 @@ export default class GameFacade {
         }
 
         if (game.userList.length <= 3) {
-          await game.populate('unclaimedRoutes').execPopulate();
           let unclaimedRoutes = game.unclaimedRoutes.filter((e: RouteModel) => {
             route = route!;
             return e.city1 != route.city1 || e.city2 != route.city2;
           });
-          game.unclaimedRoutes = this.depopulate(unclaimedRoutes);
         }
 
         // it won't be null at this point, we just checked

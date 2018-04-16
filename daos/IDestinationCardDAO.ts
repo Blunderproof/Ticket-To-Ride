@@ -1,5 +1,5 @@
-import { DestinationCard, IDestinationCardModel } from '../models/DestinationCard';
+import { DestinationCardModel } from '../models/DestinationCardModel';
 
 export default interface IDestinationCardDAO {
-  find(data: any, populates: any[]): Promise<IDestinationCardModel[]>;
-};
+  find(data: any, populates: any[]): Promise<DestinationCardModel[]>;
+}
