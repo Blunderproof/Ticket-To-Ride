@@ -301,10 +301,10 @@ export default class GameFacade {
           },
         },
         {
-          path: 'claimedRouteList',
+          path: 'userList',
           populate: {
-            path: 'trainCardHand',
-            model: 'TrainCard',
+            path: 'claimedRouteList',
+            model: 'Route',
           },
         },
       ])
