@@ -1,5 +1,14 @@
 import { IGameModel } from './Game';
-import { GameState, PLAYER_COLOR_MAP, INITIAL_TOKEN_COUNT, TurnState, TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, TrainColor, PlayerColor } from '../constants';
+import {
+  GameState,
+  PLAYER_COLOR_MAP,
+  INITIAL_TOKEN_COUNT,
+  TurnState,
+  TRAIN_CARD_HAND_SIZE,
+  DESTINATION_CARD_HAND_SIZE,
+  TrainColor,
+  PlayerColor,
+} from '../constants';
 import { DAOManager } from '../daos/DAOManager';
 import { UserModel } from './UserModel';
 import { RouteModel } from './RouteModel';
@@ -147,12 +156,12 @@ export class GameModel {
         player.turnState = TurnState.ChoosingDestinationCards;
 
         for (let cardIndex = 0; cardIndex < TRAIN_CARD_HAND_SIZE; cardIndex++) {
-          player.trainCardHand.push(shuffledTrainCardDeck[0]._id);
+          player.trainCardHand.push(shuffledTrainCardDeck[0]);
           shuffledTrainCardDeck.splice(0, 1);
         }
 
         for (let cardIndex = 0; cardIndex < DESTINATION_CARD_HAND_SIZE; cardIndex++) {
-          player.destinationCardHand.push(shuffledDestinationCardDeck[0]._id);
+          player.destinationCardHand.push(shuffledDestinationCardDeck[0]);
           shuffledDestinationCardDeck.splice(0, 1);
         }
 
@@ -161,13 +170,13 @@ export class GameModel {
     }
 
     for (let index = 0; index < shuffledTrainCardDeck.length; index++) {
-      that.trainCardDeck.push(shuffledTrainCardDeck[index]._id);
+      that.trainCardDeck.push(shuffledTrainCardDeck[index]);
     }
     for (let index = 0; index < shuffledDestinationCardDeck.length; index++) {
-      that.destinationCardDeck.push(shuffledDestinationCardDeck[index]._id);
+      that.destinationCardDeck.push(shuffledDestinationCardDeck[index]);
     }
     for (let index = 0; index < unclaimedRoutes.length; index++) {
-      that.unclaimedRoutes.push(unclaimedRoutes[index]._id);
+      that.unclaimedRoutes.push(unclaimedRoutes[index]);
     }
 
     that.turnNumber = -1;
@@ -179,16 +188,14 @@ export class GameModel {
   }
 
   getCurrentUserIndex(): number {
-    return this.turnNumber % this.userList.length;
+    return this.turnNumber! % this.userList.length;
   }
 
   async updatePoints(): Promise<any> {
-    await this.populate('userList').execPopulate();
-
     let lengths = [];
     for (let i = 0; i < this.userList.length; i++) {
       this.userList[i].points.detailed.longestRoute = 0;
-      lengths.push(this.userList[i].longestRoute);
+      lengths.push(this.userList[i].longestRoute!);
     }
     let maxRoute = Math.max(...lengths);
 

@@ -1,19 +1,80 @@
-.borders{
-  margin: 60px;
-  font-size: 14pt;
-  overflow: visible;
+@media screen and (min-width: 800px){
+  @media screen and (min-width: 1200px){
+    .borders{
+      margin-top: 60px !important;
+      margin-left: 60px !important;
+      margin-right: 60px !important;
+      font-size: 14pt;
+      overflow: visible;
+    }
+  }
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 100%;
+  }
+
+  .borders{
+    margin-top: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14pt;
+    overflow: visible;
+  }
+
+  .lobby-container{
+    overflow-x: hidden;
+    display: grid;
+     grid-gap: 10px;
+     grid-template-columns: 60% 40%;
+     grid-template-areas:
+            "joined-game lobby-sidebar";
+     background-color: #fff;
+     color: #444;
+  }
 }
 
-.lobby-container{
-  overflow-x: hidden;
-  display: grid;
-   grid-gap: 10px;
-   grid-template-columns: 60% 40%;
-   grid-template-areas:
-          "joined-game lobby-sidebar";
-   background-color: #fff;
-   color: #444;
+@media screen and (max-width: 800px) and (min-width: 0px){
+  .borders{
+    margin-top: 60px;
+    margin-left: 0px;
+    margin-right: 0px;
+    font-size: 14pt;
+    overflow: visible;
+  }
+
+  .lobby-container{
+    overflow-x: hidden;
+    display: grid;
+     grid-gap: 10px;
+     grid-template-rows: 50% 50% !important;
+     grid-template-areas:
+            "joined-game"
+            "lobby-sidebar";
+     background-color: #fff;
+     color: #444;
+  }
+
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 100%;
+  }
 }
+
+
+
+
+
+.box .box {
+  background-color: #fff;
+  color: #444;
+}
+
 
 
 .joined-game{
@@ -23,9 +84,9 @@
       grid-template-columns: 40% 60%;
       grid-template-rows: 20% 60% 20%;
       grid-template-areas:
-            "game-header ...."
+            "game-header game-header"
             "user-list chat"
-            "......... start-leave-button";
+            "start-leave-button start-leave-button";
 }
 
 app-userlist{
@@ -33,24 +94,21 @@ app-userlist{
 }
 
 app-chat{
+  padding-right: 10px;
   grid-area: chat;
 }
 
 .game-header{
+  grid-column: 1/2;
   grid-area: game-header;
 }
 
 
 .start-leave-button{
+  grid-column: 1/2;
   grid-area: start-leave-button;
 }
 
-.lobby-sidebar{
-  grid-area: lobby-sidebar;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-rows: 80% 20%;
-}
 
 .chat-window {
   max-height: none;

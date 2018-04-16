@@ -1,24 +1,36 @@
 .lobby-sidebar {
   grid-area: lobby-sidebar;
   position: relative;
+  height: 100%;
 }
 
 .game-tile-list {
+  min-height: 50vh;
   border-radius: 5px;
-  min-height: 500px;
+  height: 100%;
   grid-column: 1/2;
   overflow-y: auto;
-  max-height: 500px;
   color: #333;
   background-color: #dae4f2;
 }
 
-.box {
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  font-size: 100%;
+@media screen and (min-width: 600px){
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 100%;
+  }
+}
+@media screen and (max-width: 600px){
+  .box {
+    background-color: #444;
+    color: #fff;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 100%;
+  }
 }
 
 .box .box {

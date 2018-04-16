@@ -55,7 +55,7 @@ export class UserModel {
       rainbow: 0,
     };
     for (let i = 0; i < this.trainCardHand.length; i++) {
-      (counts as any)[this.trainCardHand[i].color]++;
+      (counts as any)[this.trainCardHand[i].color!]++;
     }
     return counts;
   }
@@ -107,13 +107,13 @@ export class UserModel {
 
   async getLongestRoute(): Promise<any> {
     let LongestRoute = (routes: RouteModel[], city: string | undefined) => {
-      let visited: string[] = [];
+      let visited: RouteModel[] = [];
 
       var traverse = (curCity: string | undefined): any => {
         let lengths: number[] = [];
         for (var i = 0; i < routes.length; i++) {
-          if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]._id) === -1) {
-            visited.push(routes[i]._id);
+          if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]) === -1) {
+            visited.push(routes[i]);
             let newCity = routes[i].city1 == curCity ? routes[i].city2 : routes[i].city1;
             lengths.push(traverse(newCity) + routes[i].length);
           }
@@ -138,7 +138,7 @@ export class UserModel {
   }
 
   getTurnStateObject(): TurnStateObject {
-    return TurnStateObjectLoader.instanceOf().createStateObject(this);
+    return TurnStateObjectLoader.instanceOf().createStateObject(this)!;
   }
 
   async destinationCardPoints(): Promise<any> {
@@ -150,12 +150,12 @@ export class UserModel {
     };
 
     let DestinationCardFulfilled = (routes: RouteModel[], destinationCard: DestinationCardModel) => {
-      let visited: string[] = [];
+      let visited: RouteModel[] = [];
 
       var traverse = (curCity: string | undefined, findCity: string | undefined): any => {
         for (var i = 0; i < routes.length; i++) {
-          if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]._id) === -1) {
-            visited.push(routes[i]._id);
+          if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]) === -1) {
+            visited.push(routes[i]);
             let newCity = routes[i].city1 == curCity ? routes[i].city2 : routes[i].city1;
 
             if (newCity === findCity || traverse(newCity, findCity)) return true;
@@ -188,17 +188,17 @@ export class UserModel {
     await this.populate('claimedRouteList').execPopulate();
     for (let i = 0; i < this.unmetDestinationCards.length; i++) {
       if (DestinationCardFulfilled(this.claimedRouteList, this.unmetDestinationCards[i])) {
-        this.metDestinationCards.push(this.unmetDestinationCards[i]._id);
+        this.metDestinationCards.push(this.unmetDestinationCards[i]);
         remove.push(this.unmetDestinationCards[i]._id);
       } else {
-        points.negative += this.unmetDestinationCards[i].pointValue;
+        points.negative += this.unmetDestinationCards[i].pointValue!;
       }
     }
 
     await this.populate('metDestinationCards').execPopulate();
 
     for (let i = 0; i < this.metDestinationCards.length; i++) {
-      points.positive += this.metDestinationCards[i].pointValue;
+      points.positive += this.metDestinationCards[i].pointValue!;
     }
 
     //depopulate met & unmet destination cards

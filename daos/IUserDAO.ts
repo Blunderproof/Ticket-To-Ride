@@ -1,8 +1,8 @@
-import { User, IUserModel } from '../models/User';
+import { UserModel } from '../models/UserModel';
 
 export default interface IUserDAO {
-  findOne(data: any, populates: any[]): Promise<IUserModel | null>;
+  findOne(data: any, populates: any[]): Promise<UserModel | null>;
   remove(data: any): Promise<void>;
-  create(data: any): Promise<IUserModel>;
-  save(user: IUserModel): Promise<IUserModel>;
-};
+  create(data: any): Promise<UserModel>;
+  save(user: UserModel): Promise<UserModel>;
+}

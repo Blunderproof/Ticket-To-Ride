@@ -23,11 +23,11 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
     let top3 = game.destinationCardDeck.slice(0, 3);
 
     let discard = top3.filter(function(card: DestinationCardModel) {
-      return keepCards.indexOf(card._id.toString()) < 0;
+      return keepCards.indexOf(card.toString()) < 0;
     });
 
     let keep = top3.filter(function(card: DestinationCardModel) {
-      return keepCards.indexOf(card._id.toString()) >= 0;
+      return keepCards.indexOf(card.toString()) >= 0;
     });
 
     this.user.destinationCardHand = this.user.destinationCardHand.concat(keep);
@@ -39,7 +39,7 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
     }
 
     this.user.turnState = TurnState.BeginningOfTurn;
-    game.turnNumber += 1;
+    game.turnNumber! += 1;
 
     return this.user;
   }

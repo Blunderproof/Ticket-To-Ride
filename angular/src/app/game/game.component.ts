@@ -17,6 +17,9 @@ export class GameComponent implements OnInit {
   drawDest = false;
   viewPlayerCards = true;
 
+  finalTurnModalToOpen = true;
+  leftCollapsed = true;
+
 
   intentoryOverlayApplied = true;
 
@@ -35,6 +38,14 @@ export class GameComponent implements OnInit {
     this._userInfo.getUser();
     this._userInfo.getGame();
     this.printUserInfo();
+  }
+
+  toggleFinalTurnModal(){
+    this.finalTurnModalToOpen = !this.finalTurnModalToOpen;
+  }
+
+  leftCollapsedToggle(){
+    this.leftCollapsed = !this.leftCollapsed;
   }
 
   printUserInfo() {

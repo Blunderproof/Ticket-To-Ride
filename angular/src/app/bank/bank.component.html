@@ -1,4 +1,4 @@
-<div class="bank-navbar">
+<div [ngClass]="{'bank-navbar-left-visible': !leftCollapsed, 'bank-navbar-right-visible': leftCollapsed}">
 
   <div *ngIf="_userInfo.game != null" class="bank-items">
     <!-- 5 Face Up Cards -->

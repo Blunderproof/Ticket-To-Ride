@@ -34,7 +34,7 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
       game.trainCardDeck.splice(cardIndex, 1);
     }
 
-    game.turnNumber++;
+    game.turnNumber!++;
 
     if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
       // TODO refactor our game's init stuff

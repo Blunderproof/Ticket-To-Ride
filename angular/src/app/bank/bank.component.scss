@@ -1,53 +1,136 @@
-.bank-navbar{ //Used to allow the cards to float upward
-  z-index: 500;
-  width: 100%;
-  display: block;
-  height: 200px;
-  background-color: rgba(0, 0, 0, 0);
-  position: fixed;
-  bottom: 0;
-  pointer-events: none;
+@media screen and (min-width: 1200px) {
 
-}
+  .bank-navbar-left-visible{ //Used to allow the cards to float upward
+    z-index: 500;
+    width: 100%;
+    display: block;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    bottom: 0;
+    pointer-events: none;
+  }
 
-// .bottom-bar-tracks{
-//   position: relative;
-// }
+  .bank-navbar-right-visible{ //Used to allow the cards to float upward
+    z-index: 500;
+    width: 100%;
+    display: block;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    bottom: 0;
+    pointer-events: none;
+  }
 
-.bank-items{
-  top: 75px;
-  position: relative;
-  width: 50%;
-  margin: 0 auto;
-  display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
-    justify-items: center;
+  .bank-items{
+    top: 75px;
+    position: relative;
+    width: 50%;
+    margin: 0px 0px 0px calc(20vw + 50px);
+    display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
+      justify-items: center;
+      height: inherit;
+  }
+  .card-slot{
+    background-color: #888;
+    margin-left: calc((100vw / 12 ) - 110px );
+    width: 100px;
     height: inherit;
+    border-radius: 3px;
+  }
 }
 
-.card-back{
-  background: blue;
-  transform: rotateY( 180deg );
+// SMALLER screen
+@media screen and (max-width: 1200px){
+
+  .bank-navbar-left-visible{ //Used to allow the cards to float upward
+    z-index: 500;
+    width: 100%;
+    display: block;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    bottom: 0;
+    pointer-events: none;
+  }
+  .bank-navbar-right-visible{ //Used to allow the cards to float upward
+    z-index: 500;
+    width: calc(100%-300px);
+    display: block;
+    height: 200px;
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    bottom: 0;
+    pointer-events: none;
+  }
+  .bank-items{
+    top: 75px;
+    left: 45px;
+    position: relative;
+    margin: 0 auto;
+    display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
+      justify-items: center;
+      height: inherit;
+  }
+  .card-slot{
+    background-color: #888;
+    margin-left: calc((100vw / 10 ) - 110px );
+    width: 100px;
+    height: inherit;
+    border-radius: 3px;
+  }
 }
 
-.bottom-bar{
-  overflow: hidden;
-  height: 80px;
-  bottom: 0px;
-  background-color: rgba(80, 80, 80, 1);
-  text-align: center;
-  position:fixed;
+
+
+
+// SCREEN SIZE INDEPENDENT CLASSES
+.traincard-0{
+  grid-area: traincard-0;
 }
 
-.card-slot{
-  background-color: #888;
-  //background-color: rgba(150, 150, 150, 1);
+.traincard-1{
+  grid-area: traincard-1;
+}
+
+.traincard-2{
+  grid-area: traincard-2;
+}
+
+.traincard-3{
+  grid-area: traincard-3;
+}
+
+.traincard-4{
+  grid-area: traincard-4;
+}
+
+.traincard-deck{
+  grid-area: traincard-deck;
   width: 100px;
-  height: inherit;
-  border-radius: 3px;
+  height: auto;
 }
+
+.destcard-deck{
+  grid-area: destcard-deck;
+}
+#destCardCount{
+  font-weight: bold!important;
+  padding-top: 104px;
+  text-align: center;
+}
+
+#trainCardCount{
+  font-weight: bold!important;
+  padding-top: 104px;
+  text-align: center;
+}
+
+
 
 .card{
   pointer-events: auto;
@@ -106,46 +189,16 @@
   transform: rotateY(180deg);
 }
 
-
-
-.traincard-0{
-  grid-area: traincard-0;
+.card-back{
+  background: blue;
+  transform: rotateY( 180deg );
 }
 
-.traincard-1{
-  grid-area: traincard-1;
-}
-
-.traincard-2{
-  grid-area: traincard-2;
-}
-
-.traincard-3{
-  grid-area: traincard-3;
-}
-
-.traincard-4{
-  grid-area: traincard-4;
-}
-
-.traincard-deck{
-  grid-area: traincard-deck;
-  width: 100px;
-  height: auto;
-}
-
-.destcard-deck{
-  grid-area: destcard-deck;
-}
-
-#destCardCount{
-  font-weight: bold!important;
-  padding-top: 104px;
+.bottom-bar{
+  overflow: hidden;
+  height: 80px;
+  bottom: 0px;
+  background-color: rgba(80, 80, 80, 1);
   text-align: center;
-}
-
-#trainCardCount{
-  font-weight: bold!important;
-  padding-top: 104px;
-  text-align: center;
+  position:fixed;
 }

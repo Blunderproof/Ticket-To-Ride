@@ -123,7 +123,7 @@ export default class GameFacade {
       return promise;
     }
 
-    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, []);
+    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, ['userList']);
 
     if (!game) {
       return {
@@ -262,8 +262,16 @@ export default class GameFacade {
     return DAOManager.dao.gameDAO
       .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, [
         'userList',
+        'unclaimedRoutes',
         {
           path: 'userList',
+          populate: {
+            path: 'trainCardHand',
+            model: 'TrainCard',
+          },
+        },
+        {
+          path: 'claimedRouteList',
           populate: {
             path: 'trainCardHand',
             model: 'TrainCard',
@@ -288,8 +296,6 @@ export default class GameFacade {
         let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
-
-        await currentUser.populate('claimedRouteList').execPopulate();
 
         let route = await DAOManager.dao.routeDAO.findOne(
           {
@@ -350,12 +356,10 @@ export default class GameFacade {
         }
 
         if (game.userList.length <= 3) {
-          await game.populate('unclaimedRoutes').execPopulate();
           let unclaimedRoutes = game.unclaimedRoutes.filter((e: RouteModel) => {
             route = route!;
             return e.city1 != route.city1 || e.city2 != route.city2;
           });
-          game.unclaimedRoutes = this.depopulate(unclaimedRoutes);
         }
 
         // it won't be null at this point, we just checked
@@ -365,13 +369,13 @@ export default class GameFacade {
         await DAOManager.dao.userDAO.save(currentUser);
         await game.updatePoints();
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
           }
-        } else if (currentUser.tokenCount <= 2) {
+        } else if (currentUser.tokenCount! <= 2) {
           // initiate end game thing; we have else if because
           // we don't need to check if you have less than 2 if you're already in the final phase
           game.lastRound = game.userList.length;
@@ -552,7 +556,7 @@ export default class GameFacade {
 
         // check if the keep cards specified are in the game destination card deck
         let keep = game.destinationCardDeck.filter(function(card) {
-          return data.keepCards.indexOf(card._id.toString()) >= 0;
+          return data.keepCards.indexOf(card.toString()) >= 0;
         });
 
         if (keep.length != data.keepCards.length) {
@@ -576,8 +580,8 @@ export default class GameFacade {
 
         await DAOManager.dao.userDAO.save(currentUser);
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
@@ -676,8 +680,8 @@ export default class GameFacade {
         currentUser = currentUser!;
         await DAOManager.dao.userDAO.save(currentUser);
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
