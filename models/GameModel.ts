@@ -188,14 +188,14 @@ export class GameModel {
   }
 
   getCurrentUserIndex(): number {
-    return this.turnNumber % this.userList.length;
+    return this.turnNumber! % this.userList.length;
   }
 
   async updatePoints(): Promise<any> {
     let lengths = [];
     for (let i = 0; i < this.userList.length; i++) {
       this.userList[i].points.detailed.longestRoute = 0;
-      lengths.push(this.userList[i].longestRoute);
+      lengths.push(this.userList[i].longestRoute!);
     }
     let maxRoute = Math.max(...lengths);
 
