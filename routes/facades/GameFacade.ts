@@ -369,13 +369,13 @@ export default class GameFacade {
         await DAOManager.dao.userDAO.save(currentUser);
         await game.updatePoints();
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
           }
-        } else if (currentUser.tokenCount <= 2) {
+        } else if (currentUser.tokenCount! <= 2) {
           // initiate end game thing; we have else if because
           // we don't need to check if you have less than 2 if you're already in the final phase
           game.lastRound = game.userList.length;
@@ -556,7 +556,7 @@ export default class GameFacade {
 
         // check if the keep cards specified are in the game destination card deck
         let keep = game.destinationCardDeck.filter(function(card) {
-          return data.keepCards.indexOf(card._id.toString()) >= 0;
+          return data.keepCards.indexOf(card.toString()) >= 0;
         });
 
         if (keep.length != data.keepCards.length) {
@@ -580,8 +580,8 @@ export default class GameFacade {
 
         await DAOManager.dao.userDAO.save(currentUser);
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
@@ -680,8 +680,8 @@ export default class GameFacade {
         currentUser = currentUser!;
         await DAOManager.dao.userDAO.save(currentUser);
 
-        if (game.lastRound > 0) {
-          game.lastRound -= 1;
+        if (game.lastRound! > 0) {
+          game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
