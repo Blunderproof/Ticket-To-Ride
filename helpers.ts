@@ -1,3 +1,6 @@
+import * as fs from 'fs';
+import * as Papa from 'papaparse';
+
 export function shuffle(array: any[]) {
   var currentIndex = array.length,
     temporaryValue,
@@ -16,4 +19,31 @@ export function shuffle(array: any[]) {
   }
 
   return array;
+}
+
+export function getTrainCards() {
+  let contents = fs.readFileSync(__dirname + './scripts/train_cards.csv', 'utf8');
+
+  return Papa.parse(contents, {
+    header: true,
+    comments: '#',
+  }).data;
+}
+
+export function getDestinationCards() {
+  let contents = fs.readFileSync(__dirname + './scripts/destination_cards.csv', 'utf8');
+
+  return Papa.parse(contents, {
+    header: true,
+    comments: '#',
+  }).data;
+}
+
+export function getRoutes() {
+  let contents = fs.readFileSync(__dirname + './scripts/routes.csv', 'utf8');
+
+  return Papa.parse(contents, {
+    header: true,
+    comments: '#',
+  }).data;
 }
