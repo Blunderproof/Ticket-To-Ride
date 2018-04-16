@@ -27,7 +27,9 @@ export class GameListComponent implements OnInit {
     this.communicator.createGame()
       .then((x: any) => {
         if (!x.success) {
-          this.errorMessages.push(x.message);
+          if (x.message) {
+            this.errorMessages.push(x.message);
+          }
         }
       });
   }

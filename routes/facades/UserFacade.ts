@@ -1,27 +1,18 @@
-import { User } from '../../models/User';
+import { User, IUserModel } from '../../models/User';
 import { Message } from '../../models/Message';
-import { Game } from '../../models/Game';
+import { Game, IGameModel } from '../../models/Game';
 import CommandResults from '../../modules/commands/CommandResults';
 import { HASHING_SECRET, GameState, MessageType } from '../../constants';
-import { MongoUserDAO } from '../../daos/mongo/MongoUserDAO';
-import IUserDAO from '../../daos/IUserDAO';
-import { IGameDAO } from '../../daos/IGameDAO';
-import { MongoGameDAO } from '../../daos/mongo/MongoGameDAO';
+import { DAOManager } from '../../daos/DAOManager';
 const crypto = require('crypto');
 
 export default class UserFacade {
-  userDAO: IUserDAO;
-  gameDAO: IGameDAO;
-
-  private constructor(userDAO: IUserDAO, gameDAO: IGameDAO) {
-    this.userDAO = userDAO;
-    this.gameDAO = gameDAO;
-  }
+  private constructor() {}
 
   private static instance: UserFacade;
   static instanceOf() {
     if (!this.instance) {
-      this.instance = new UserFacade(new MongoUserDAO(), new MongoGameDAO());
+      this.instance = new UserFacade();
     }
     return this.instance;
   }
@@ -48,86 +39,88 @@ export default class UserFacade {
     // console.log(username);
     // console.log(hashedPassword);
 
-    return this.userDAO.findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(async user => {
-      if (user) {
-        let game = await this.gameDAO
-          .findOne(
-            {
-              $or: [
+    return DAOManager.dao.userDAO
+      .findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList'])
+      .then(async (user: IUserModel) => {
+        if (user) {
+          let game = await DAOManager.dao.gameDAO
+            .findOne(
+              {
+                $or: [
+                  {
+                    host: user._id,
+                    gameState: GameState.InProgress,
+                  },
+                  {
+                    userList: user._id,
+                    gameState: GameState.InProgress,
+                  },
+                  {
+                    host: user._id,
+                    gameState: GameState.Open,
+                  },
+                  {
+                    userList: user._id,
+                    gameState: GameState.Open,
+                  },
+                ],
+              },
+              [
+                'userList',
                 {
-                  host: user._id,
-                  gameState: GameState.InProgress,
+                  path: 'userList',
+                  populate: {
+                    path: 'trainCardHand',
+                    model: 'TrainCard',
+                  },
                 },
                 {
-                  userList: user._id,
-                  gameState: GameState.InProgress,
+                  path: 'userList',
+                  populate: {
+                    path: 'destinationCardHand',
+                    model: 'DestinationCard',
+                  },
                 },
                 {
-                  host: user._id,
-                  gameState: GameState.Open,
+                  path: 'userList',
+                  populate: {
+                    path: 'claimedRouteList',
+                    model: 'Route',
+                  },
                 },
-                {
-                  userList: user._id,
-                  gameState: GameState.Open,
-                },
-              ],
+              ]
+            )
+            .then(async (game: IGameModel) => {
+              return game;
+            });
+
+          let userCookie =
+            game == null
+              ? { lgid: user._id }
+              : {
+                  lgid: user._id,
+                  gmid: game._id,
+                };
+
+          let gameState = game == null ? null : game.gameState;
+
+          return {
+            success: true,
+            data: {
+              user,
+              gameState,
             },
-            [
-              'userList',
-              {
-                path: 'userList',
-                populate: {
-                  path: 'trainCardHand',
-                  model: 'TrainCard',
-                },
-              },
-              {
-                path: 'userList',
-                populate: {
-                  path: 'destinationCardHand',
-                  model: 'DestinationCard',
-                },
-              },
-              {
-                path: 'userList',
-                populate: {
-                  path: 'claimedRouteList',
-                  model: 'Route',
-                },
-              },
-            ]
-          )
-          .then(async game => {
-            return game;
-          });
-
-        let userCookie =
-          game == null
-            ? { lgid: user._id }
-            : {
-                lgid: user._id,
-                gmid: game._id,
-              };
-
-        let gameState = game == null ? null : game.gameState;
-
-        return {
-          success: true,
-          data: {
-            user,
-            gameState,
-          },
-          userCookie,
-        };
-      } else {
-        // doc may be null if no document matched
-        return {
-          success: false,
-          data: {},
-          errorInfo: "The username and password entered don't match any users in our database.",
-        };
-      }
-    });
+            userCookie,
+          };
+        } else {
+          // doc may be null if no document matched
+          return {
+            success: false,
+            data: {},
+            errorInfo: "The username and password entered don't match any users in our database.",
+          };
+        }
+      });
   }
 
   logout(data: any): Promise<any> {
@@ -170,7 +163,7 @@ export default class UserFacade {
       .update(data.password)
       .digest('hex');
 
-    return this.userDAO.findOne({ username }, []).then(async user => {
+    return DAOManager.dao.userDAO.findOne({ username }, []).then(async (user: IUserModel) => {
       if (user) {
         // doc may be null if no document matched
         return {
@@ -182,7 +175,7 @@ export default class UserFacade {
         var newUserData = { username, hashedPassword };
 
         // Save the new model instance, passing a callback
-        let newUser = await this.userDAO.create(newUserData);
+        let newUser = await DAOManager.dao.userDAO.create(newUserData);
         return {
           success: true,
           data: {
@@ -195,7 +188,7 @@ export default class UserFacade {
   }
 
   getGame(data: any): Promise<any> {
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           $or: [
@@ -246,20 +239,20 @@ export default class UserFacade {
           'destinationCardDeck',
         ]
       )
-      .then(data => {
+      .then((game: IGameModel) => {
         return {
           success: true,
-          data: data,
+          data: game,
         };
       });
   }
 
   getUser(data: any): Promise<any> {
     console.log('getUser called');
-    return this.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then(data => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then((user: IUserModel) => {
       return {
         success: true,
-        data: data,
+        data: user,
       };
     });
   }

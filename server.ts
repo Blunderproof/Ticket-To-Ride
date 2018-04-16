@@ -82,7 +82,13 @@ export class Server {
 
   init_db() {
     let path;
-    if ((path = process.argv[2])) {
+    if (process.argv.length >= 3) {
+      path = process.argv[2];
+    } else {
+      path = './daos/mongo/MongoDAO';
+    }
+
+    if (path) {
       DAOManager.dao = require(path).DAO;
     }
     // const acceptableDBs = ['mongodb', 'dynamodb'];

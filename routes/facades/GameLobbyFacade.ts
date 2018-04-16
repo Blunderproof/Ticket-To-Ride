@@ -1,20 +1,16 @@
-import { Game } from '../../models/Game';
-import { IGameDAO } from '../../daos/IGameDAO';
+import { Game, IGameModel } from '../../models/Game';
+import IGameDAO from '../../daos/IGameDAO';
 import { GameState, UserState } from '../../constants';
 import CommandResults from '../../modules/commands/CommandResults';
-import { MongoGameDAO } from '../../daos/mongo/MongoGameDAO';
+import { DAOManager } from '../../daos/DAOManager';
 
 export default class GameLobbyFacade {
-  gameDAO: IGameDAO;
-
-  private constructor(gameDAO: IGameDAO) {
-    this.gameDAO = gameDAO;
-  }
+  private constructor() {}
 
   private static instance: GameLobbyFacade;
   static instanceOf() {
     if (!this.instance) {
-      this.instance = new GameLobbyFacade(new MongoGameDAO());
+      this.instance = new GameLobbyFacade();
     }
     return this.instance;
   }
@@ -42,7 +38,7 @@ export default class GameLobbyFacade {
     }
 
     const { reqUserID } = data;
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           $or: [
@@ -66,7 +62,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           return {
@@ -83,7 +79,7 @@ export default class GameLobbyFacade {
 
           // Save the new model instance, passing a callback
 
-          return this.gameDAO.create(newGameData).then(game => {
+          return DAOManager.dao.gameDAO.create(newGameData).then((game: IGameModel) => {
             return {
               success: true,
               data: {
@@ -113,31 +109,36 @@ export default class GameLobbyFacade {
 
     const { reqUserID } = data;
 
-    return Game.findOne({
-      host: reqUserID,
-      gameState: GameState.Open,
-    }).then(async game => {
-      if (game) {
-        // doc may be null if no document matched
-        return await game.remove().then(() => {
+    return DAOManager.dao.gameDAO
+      .findOne(
+        {
+          host: reqUserID,
+          gameState: GameState.Open,
+        },
+        []
+      )
+      .then(async (game: IGameModel) => {
+        if (game) {
+          // doc may be null if no document matched
+          return await game.remove().then(() => {
+            return {
+              success: true,
+              data: {
+                message: 'Game deleted.',
+              },
+              emit: [{ command: 'gameList' }],
+              userCookie: { gmid: '' },
+            };
+          });
+        } else {
+          // Save the new model instance, passing a callback
           return {
-            success: true,
-            data: {
-              message: 'Game deleted.',
-            },
-            emit: [{ command: 'gameList' }],
-            userCookie: { gmid: '' },
+            success: false,
+            data: {},
+            errorInfo: 'User does not have an open game.',
           };
-        });
-      } else {
-        // Save the new model instance, passing a callback
-        return {
-          success: false,
-          data: {},
-          errorInfo: 'User does not have an open game.',
-        };
-      }
-    });
+        }
+      });
   }
 
   async joinGame(data: any): Promise<any> {
@@ -160,8 +161,8 @@ export default class GameLobbyFacade {
     const { gameID, reqUserID } = data;
 
     // query DB for game with the user in its user list already. Await it, only respond if nothing
-    console.log('this.gameDAO', this.gameDAO);
-    const results: any = await this.gameDAO
+    console.log('DAOManager.dao.gameDAO', DAOManager.dao.gameDAO);
+    const results: any = await DAOManager.dao.gameDAO
       .findOne(
         {
           $or: [
@@ -185,7 +186,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(game => {
+      .then((game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game._id == gameID) {
@@ -211,14 +212,14 @@ export default class GameLobbyFacade {
       return results;
     }
 
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           _id: gameID,
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game.userList.length >= 5) {
@@ -229,7 +230,7 @@ export default class GameLobbyFacade {
             };
           } else {
             game.userList.push(reqUserID);
-            return await this.gameDAO.save(game).then(savedGame => {
+            return await DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
               console.log('savedGame', savedGame);
               return {
                 success: true,
@@ -265,14 +266,14 @@ export default class GameLobbyFacade {
     }
 
     const { reqUserID } = data;
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           userList: reqUserID,
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           if (game.host == reqUserID) {
@@ -285,7 +286,7 @@ export default class GameLobbyFacade {
           const index = game.userList.indexOf(reqUserID);
           game.userList.splice(index, 1);
 
-          return await this.gameDAO.save(game).then(game => {
+          return await DAOManager.dao.gameDAO.save(game).then((game: IGameModel) => {
             return {
               success: true,
               data: { message: 'Game left.' },
@@ -320,7 +321,7 @@ export default class GameLobbyFacade {
 
     const { reqUserID } = data;
 
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           host: reqUserID,
@@ -328,7 +329,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // doc may be null if no document matched
           // TODO change this back to 2
@@ -340,7 +341,7 @@ export default class GameLobbyFacade {
             };
           } else {
             // game.gameState = GameState.InProgress;
-            return await game.initGame().then(game => {
+            return await game.initGame().then((game: IGameModel) => {
               return {
                 success: true,
                 data: { message: 'Game started!' },
@@ -402,7 +403,7 @@ export default class GameLobbyFacade {
 
     const { reqUserID } = data;
 
-    return this.gameDAO
+    return DAOManager.dao.gameDAO
       .findOne(
         {
           $or: [
@@ -418,7 +419,7 @@ export default class GameLobbyFacade {
         },
         []
       )
-      .then(async game => {
+      .then(async (game: IGameModel) => {
         if (game) {
           // user IS in a game in progress
           return {

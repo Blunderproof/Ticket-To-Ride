@@ -8,13 +8,13 @@
       </li>
     </ul>
   </div>
-  <form [formGroup]="messageToSend">
+  <form [formGroup]="form">
     <div class="chat-input">
       <div class="input-group mb-3 input-user-msg">
-        <input [formControl]="messageToSend" type="text" class="form-control" placeholder="User Message" aria-label="User Message"
+        <input type="text" class="form-control" placeholder="User Message" [formControl]="controls.messageToSend" aria-label="User Message"
           aria-describedby="basic-addon2" />
         <div class="input-group-append">
-          <button (click)="sendMessage()" class="btn btn-outline-secondary chat-send" type="submit">Send</button>
+          <button (click)="sendMessage()" class="btn btn-outline-secondary chat-send" type="submit" [disabled]="!form.valid">Send</button>
         </div>
       </div>
     </div>

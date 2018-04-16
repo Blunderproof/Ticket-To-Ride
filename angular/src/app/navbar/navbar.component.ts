@@ -29,7 +29,9 @@ export class NavbarComponent implements OnInit {
         this._userInfo.getUserGameStatus();
         this._router.navigate(['/login']);
       } else {
-        this.errorMessages.push(x.message);
+        if (x.message) {
+          this.errorMessages.push(x.message);
+        }
       }
     });
   }

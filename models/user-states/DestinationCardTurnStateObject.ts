@@ -1,31 +1,32 @@
 import TurnStateObject from './TurnStateObject';
-import { IUserModel } from '../User';
-import { IRouteModel } from '../Route';
 import { TrainColor, TurnState } from '../../constants';
-import { IGameModel } from '../Game';
+import { UserModel } from '../UserModel';
+import { GameModel } from '../GameModel';
+import { DestinationCardModel } from '../DestinationCardModel';
+import { RouteModel } from '../RouteModel';
 
 export default class DestinationCardTurnStateObject implements TurnStateObject {
-  user: IUserModel;
+  user: UserModel;
   error: string = '';
 
-  constructor(user: IUserModel) {
+  constructor(user: UserModel) {
     this.user = user;
   }
 
-  drawTrainCard(cardIndex: number, game: IGameModel) {
+  drawTrainCard(cardIndex: number, game: GameModel) {
     // can't choose train cards after choosing to select destination cards
     this.error = "You can't choose train cards after viewing destination cards!";
     return null;
   }
 
-  chooseDestinationCard(keepCards: Array<string>, game: IGameModel) {
+  chooseDestinationCard(keepCards: Array<string>, game: GameModel) {
     let top3 = game.destinationCardDeck.slice(0, 3);
 
-    let discard = top3.filter(function(card) {
+    let discard = top3.filter(function(card: DestinationCardModel) {
       return keepCards.indexOf(card._id.toString()) < 0;
     });
 
-    let keep = top3.filter(function(card) {
+    let keep = top3.filter(function(card: DestinationCardModel) {
       return keepCards.indexOf(card._id.toString()) >= 0;
     });
 
@@ -43,7 +44,7 @@ export default class DestinationCardTurnStateObject implements TurnStateObject {
     return this.user;
   }
 
-  claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
+  claimRoute(route: RouteModel, cardColor: TrainColor, game: GameModel) {
     // can't claim route after viewing destination cards
     this.error = "You can't claim routes after viewing destination cards!";
     return null;

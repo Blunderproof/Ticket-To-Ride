@@ -1,13 +1,13 @@
-import { IUserModel } from '../User';
-import { IRouteModel } from '../Route';
 import { TrainColor } from '../../constants';
-import { IGameModel } from '../Game';
+import { UserModel } from '../UserModel';
+import { GameModel } from '../GameModel';
+import { RouteModel } from '../RouteModel';
 
 export default interface TurnStateObject {
-  user: IUserModel;
+  user: UserModel;
   error: string;
-  drawTrainCard(cardIndex: number, game: IGameModel): IUserModel | null;
-  chooseDestinationCard(keepCards: Array<string>, game: IGameModel): IUserModel | null;
-  claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel): IUserModel | null;
-  setChooseDestinationCardState(): IUserModel | null;
+  drawTrainCard(cardIndex: number, game: GameModel): UserModel | null;
+  chooseDestinationCard(keepCards: Array<string>, game: GameModel): UserModel | null;
+  claimRoute(route: RouteModel, cardColor: TrainColor, game: GameModel): UserModel | null;
+  setChooseDestinationCardState(): UserModel | null;
 };

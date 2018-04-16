@@ -15,6 +15,7 @@ import {
   TrainColor,
   TurnState,
 } from '../constants';
+import { DAOManager } from '../daos/DAOManager';
 
 export interface IGameModel extends mongoose.Document {
   _id: string;
@@ -87,7 +88,7 @@ GameSchema.methods.initGame = async function() {
       ],
     };
   }
-  await Route.find(filter).then(routes => {
+  await DAOManager.dao.routeDAO.find(filter, []).then((routes: IRouteModel[]) => {
     if (routes) {
       for (let index = 0; index < routes.length; index++) {
         unclaimedRoutes.push(routes[index]);
@@ -98,7 +99,7 @@ GameSchema.methods.initGame = async function() {
   });
 
   let trainCardDeck: ITrainCardModel[] = [];
-  await TrainCard.find({}).then(trainCards => {
+  await DAOManager.dao.trainCardDAO.find({}, []).then((trainCards: ITrainCardModel[]) => {
     if (trainCards) {
       for (let index = 0; index < trainCards.length; index++) {
         trainCardDeck.push(trainCards[index]);
@@ -109,7 +110,7 @@ GameSchema.methods.initGame = async function() {
   });
 
   let destinationCardDeck: IDestinationCardModel[] = [];
-  await DestinationCard.find({}).then(destinationCards => {
+  await DAOManager.dao.destinationCardDAO.find({}, []).then((destinationCards: IDestinationCardModel[]) => {
     if (destinationCards) {
       for (let index = 0; index < destinationCards.length; index++) {
         destinationCardDeck.push(destinationCards[index]);
@@ -141,7 +142,7 @@ GameSchema.methods.shuffleDealCards = async function(
 
     let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
-    await User.findOne({ _id: userID }).then(async player => {
+    await DAOManager.dao.userDAO.findOne({ _id: userID }, []).then(async (player: IUserModel) => {
       if (!player) {
         return null;
       }
@@ -178,7 +179,7 @@ GameSchema.methods.shuffleDealCards = async function(
         shuffledDestinationCardDeck.splice(0, 1);
       }
 
-      return player.save();
+      return DAOManager.dao.userDAO.save(player);
     });
   }
 
@@ -197,7 +198,7 @@ GameSchema.methods.shuffleDealCards = async function(
   that.playersReady = [];
   that.gameState = GameState.InProgress;
 
-  return that.save();
+  return DAOManager.dao.gameDAO.save(that);
 };
 
 GameSchema.methods.getCurrentUserIndex = function() {
@@ -205,8 +206,6 @@ GameSchema.methods.getCurrentUserIndex = function() {
 };
 
 GameSchema.methods.updatePoints = async function() {
-  await this.populate('userList').execPopulate();
-
   let lengths = [];
   for (let i = 0; i < this.userList.length; i++) {
     this.userList[i].points.detailed.longestRoute = 0;
@@ -220,7 +219,7 @@ GameSchema.methods.updatePoints = async function() {
 
   for (let i = 0; i < this.userList.length; i++) {
     await this.userList[i].updatePoints();
-    await this.userList[i].save();
+    await DAOManager.dao.userDAO.save(this.userList[i]);
   }
 };
 

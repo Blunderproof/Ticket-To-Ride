@@ -1,18 +1,18 @@
 import TurnStateObject from './TurnStateObject';
-import { IUserModel } from '../User';
-import { IRouteModel } from '../Route';
 import { TrainColor, TurnState } from '../../constants';
-import { IGameModel } from '../Game';
+import { GameModel } from '../GameModel';
+import { UserModel } from '../UserModel';
+import { RouteModel } from '../RouteModel';
 
 export default class TrainCardTurnStateObject implements TurnStateObject {
-  user: IUserModel;
+  user: UserModel;
   error: string = '';
 
-  constructor(user: IUserModel) {
+  constructor(user: UserModel) {
     this.user = user;
   }
 
-  drawTrainCard(cardIndex: number, game: IGameModel) {
+  drawTrainCard(cardIndex: number, game: GameModel) {
     let trainCardToTake = game.trainCardDeck[cardIndex];
     this.user.turnState = TurnState.BeginningOfTurn;
 
@@ -64,7 +64,7 @@ export default class TrainCardTurnStateObject implements TurnStateObject {
     return null;
   }
 
-  claimRoute(route: IRouteModel, cardColor: TrainColor, game: IGameModel) {
+  claimRoute(route: RouteModel, cardColor: TrainColor, game: GameModel) {
     // can't claim route after choosing one train card
     this.error = "You can't claim a route after choosing a train card!";
     return null;
