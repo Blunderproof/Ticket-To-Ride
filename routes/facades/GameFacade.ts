@@ -1,9 +1,12 @@
 import CommandResults from '../../modules/commands/CommandResults';
 import { MessageType, TrainColor, GameState, TurnState } from '../../constants';
-import { User, IUserModel, IUser, UserSchema } from '../../models/User';
-import { Game, IGameModel } from '../../models/Game';
+import { User } from '../../models/User';
+import { UserModel } from '../../models/UserModel';
+import { Game } from '../../models/Game';
+import { GameModel } from '../../models/GameModel';
 import { Message, IMessageModel } from '../../models/Message';
-import { Route, IRouteModel } from '../../models/Route';
+import { Route } from '../../models/Route';
+import { RouteModel } from '../../models/RouteModel';
 import { DAOManager } from '../../daos/DAOManager';
 
 export default class GameFacade {
@@ -49,8 +52,8 @@ export default class GameFacade {
     }
   }
 
-  validateUserTurn(game: IGameModel, data: any) {
-    const currentUser: IUserModel = game.userList[game.getCurrentUserIndex()];
+  validateUserTurn(game: GameModel, data: any) {
+    const currentUser: UserModel = game.userList[game.getCurrentUserIndex()];
     if (data.reqUserID != currentUser._id) {
       return {
         success: false,
@@ -146,7 +149,7 @@ export default class GameFacade {
       };
     }
 
-    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, []).then(async (user: IUserModel) => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, []).then(async (user: UserModel) => {
       if (!user) {
         return {
           success: false,
@@ -190,7 +193,7 @@ export default class GameFacade {
 
       await user.updatePoints();
 
-      return DAOManager.dao.userDAO.save(user).then((savedUser: IUserModel) => {
+      return DAOManager.dao.userDAO.save(user).then((savedUser: UserModel) => {
         return {
           success: true,
           data: {},
@@ -267,7 +270,7 @@ export default class GameFacade {
           },
         },
       ])
-      .then(async (game: IGameModel) => {
+      .then(async (game: GameModel) => {
         if (!game) {
           return {
             success: false,
@@ -282,7 +285,7 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel | null = turnCheck.currentUser;
+        let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
@@ -348,7 +351,7 @@ export default class GameFacade {
 
         if (game.userList.length <= 3) {
           await game.populate('unclaimedRoutes').execPopulate();
-          let unclaimedRoutes = game.unclaimedRoutes.filter((e: IRouteModel) => {
+          let unclaimedRoutes = game.unclaimedRoutes.filter((e: RouteModel) => {
             route = route!;
             return e.city1 != route.city1 || e.city2 != route.city2;
           });
@@ -374,7 +377,7 @@ export default class GameFacade {
           game.lastRound = game.userList.length;
         }
 
-        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
           route = route!;
           return {
             success: true,
@@ -404,7 +407,7 @@ export default class GameFacade {
     }
 
     // logged in
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, []).then(async (game: IGameModel) => {
+    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, []).then(async (game: GameModel) => {
       if (!game) {
         return {
           success: false,
@@ -416,7 +419,7 @@ export default class GameFacade {
       game = game!;
       game.gameState = GameState.Ended;
 
-      return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+      return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
         return {
           success: true,
           data: {},
@@ -445,7 +448,7 @@ export default class GameFacade {
     }
 
     // logged in
-    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList']).then(async (game: IGameModel) => {
+    return DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList']).then(async (game: GameModel) => {
       if (!game) {
         return {
           success: false,
@@ -460,7 +463,7 @@ export default class GameFacade {
       if (!(turnCheck = this.validateUserTurn(game, data)).success) {
         return turnCheck;
       }
-      let currentUser: IUserModel | null = turnCheck.currentUser;
+      let currentUser: UserModel | null = turnCheck.currentUser;
       // it won't be null at this point, we just checked
       currentUser = currentUser!;
 
@@ -478,7 +481,7 @@ export default class GameFacade {
 
       await DAOManager.dao.userDAO.save(currentUser);
 
-      return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+      return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
         return {
           success: true,
           data: {},
@@ -528,7 +531,7 @@ export default class GameFacade {
 
     return DAOManager.dao.gameDAO
       .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList', 'destinationCardDeck'])
-      .then(async (game: IGameModel) => {
+      .then(async (game: GameModel) => {
         if (!game) {
           return {
             success: false,
@@ -543,7 +546,7 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel | null = turnCheck.currentUser;
+        let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
@@ -583,7 +586,7 @@ export default class GameFacade {
 
         await game.updatePoints();
 
-        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
           return {
             success: true,
             data: {},
@@ -633,7 +636,7 @@ export default class GameFacade {
 
     return DAOManager.dao.gameDAO
       .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['trainCardDeck', 'userList'])
-      .then(async (game: IGameModel) => {
+      .then(async (game: GameModel) => {
         if (!game) {
           return {
             success: false,
@@ -648,7 +651,7 @@ export default class GameFacade {
         if (!(turnCheck = this.validateUserTurn(game, data)).success) {
           return turnCheck;
         }
-        let currentUser: IUserModel | null = turnCheck.currentUser;
+        let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
 
@@ -683,7 +686,7 @@ export default class GameFacade {
 
         await game.updatePoints();
 
-        return DAOManager.dao.gameDAO.save(game).then((savedGame: IGameModel) => {
+        return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
           return {
             success: true,
             data: {},
