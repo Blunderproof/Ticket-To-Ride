@@ -35,11 +35,11 @@ export class UserModel {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
 
     this.points = data.points || {};
-    this.claimedRouteList = (data.claimedRouteList || []).map(e => new RouteModel(e));
-    this.trainCardHand = (data.trainCardHand || []).map(e => new TrainCardModel(e));
-    this.destinationCardHand = (data.destinationCardHand || []).map(e => new DestinationCardModel(e));
-    this.metDestinationCards = (data.metDestinationCards || []).map(e => new DestinationCardModel(e));
-    this.unmetDestinationCards = (data.unmetDestinationCards || []).map(e => new DestinationCardModel(e));
+    this.claimedRouteList = (data.claimedRouteList || []).map((e: any) => new RouteModel(e));
+    this.trainCardHand = (data.trainCardHand || []).map((e: any) => new TrainCardModel(e));
+    this.destinationCardHand = (data.destinationCardHand || []).map((e: any) => new DestinationCardModel(e));
+    this.metDestinationCards = (data.metDestinationCards || []).map((e: any) => new DestinationCardModel(e));
+    this.unmetDestinationCards = (data.unmetDestinationCards || []).map((e: any) => new DestinationCardModel(e));
   }
 
   get trainCardCount() {
