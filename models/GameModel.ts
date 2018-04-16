@@ -1,5 +1,5 @@
 import { IGameModel } from './Game';
-import { GameState, PLAYER_COLOR_MAP, INITIAL_TOKEN_COUNT, TurnState, TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, TrainColor } from '../constants';
+import { GameState, PLAYER_COLOR_MAP, INITIAL_TOKEN_COUNT, TurnState, TRAIN_CARD_HAND_SIZE, DESTINATION_CARD_HAND_SIZE, TrainColor, PlayerColor } from '../constants';
 import { DAOManager } from '../daos/DAOManager';
 import { UserModel } from './UserModel';
 import { RouteModel } from './RouteModel';
@@ -25,13 +25,13 @@ export class GameModel {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
 
     this.host = new UserModel(data.host || {});
-    this.userList = (data.userList || []).map(e => new UserModel(e));
-    this.playersReady = (data.playersReady || []).map(e => new UserModel(e));
-    this.unclaimedRoutes = (data.unclaimedRoutes || []).map(e => new RouteModel(e));
-    this.trainCardDeck = (data.trainCardDeck || []).map(e => new TrainCardModel(e));
-    this.trainCardDiscardPile = (data.trainCardDiscardPile || []).map(e => new TrainCardModel(e));
-    this.destinationCardDeck = (data.destinationCardDeck || []).map(e => new DestinationCardModel(e));
-    this.destinationCardDiscardPile = (data.destinationCardDiscardPile || []).map(e => new DestinationCardModel(e));
+    this.userList = (data.userList || []).map((e: any) => new UserModel(e));
+    this.playersReady = (data.playersReady || []).map((e: any) => new UserModel(e));
+    this.unclaimedRoutes = (data.unclaimedRoutes || []).map((e: any) => new RouteModel(e));
+    this.trainCardDeck = (data.trainCardDeck || []).map((e: any) => new TrainCardModel(e));
+    this.trainCardDiscardPile = (data.trainCardDiscardPile || []).map((e: any) => new TrainCardModel(e));
+    this.destinationCardDeck = (data.destinationCardDeck || []).map((e: any) => new DestinationCardModel(e));
+    this.destinationCardDiscardPile = (data.destinationCardDiscardPile || []).map((e: any) => new DestinationCardModel(e));
   }
 
   getObject(): any {
@@ -111,7 +111,7 @@ export class GameModel {
     let that = this;
 
     for (let index = 0; index < this.userList.length; index++) {
-      let userID = this.userList[index].toString();
+      let userID: any = this.userList[index].toString();
       // just in case we have real User objects, we just need the id
       if (typeof userID != 'string') {
         userID = userID._id;
