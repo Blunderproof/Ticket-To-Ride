@@ -4,6 +4,8 @@ import { Game, IGameModel } from '../../models/Game';
 import CommandResults from '../../modules/commands/CommandResults';
 import { HASHING_SECRET, GameState, MessageType } from '../../constants';
 import { DAOManager } from '../../daos/DAOManager';
+import { GameModel } from '../../models/GameModel';
+import { UserModel } from '../../models/UserModel';
 const crypto = require('crypto');
 
 export default class UserFacade {
@@ -41,7 +43,7 @@ export default class UserFacade {
 
     return DAOManager.dao.userDAO
       .findOne({ username, hashedPassword }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList'])
-      .then(async (user: IUserModel) => {
+      .then(async (user: UserModel) => {
         if (user) {
           let game = await DAOManager.dao.gameDAO
             .findOne(
@@ -90,7 +92,7 @@ export default class UserFacade {
                 },
               ]
             )
-            .then(async (game: IGameModel) => {
+            .then(async (game: GameModel) => {
               return game;
             });
 
@@ -163,7 +165,7 @@ export default class UserFacade {
       .update(data.password)
       .digest('hex');
 
-    return DAOManager.dao.userDAO.findOne({ username }, []).then(async (user: IUserModel) => {
+    return DAOManager.dao.userDAO.findOne({ username }, []).then(async (user: UserModel) => {
       if (user) {
         // doc may be null if no document matched
         return {
@@ -239,7 +241,7 @@ export default class UserFacade {
           'destinationCardDeck',
         ]
       )
-      .then((game: IGameModel) => {
+      .then((game: GameModel) => {
         return {
           success: true,
           data: game,
@@ -249,7 +251,7 @@ export default class UserFacade {
 
   getUser(data: any): Promise<any> {
     console.log('getUser called');
-    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then((user: IUserModel) => {
+    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then((user: UserModel) => {
       return {
         success: true,
         data: user,

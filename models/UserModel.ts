@@ -33,6 +33,7 @@ export class UserModel {
 
   constructor(data?: any) {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
+    this._id = data._id;
 
     this.points = data.points || {};
     this.claimedRouteList = (data.claimedRouteList || []).map((e: any) => new RouteModel(e));

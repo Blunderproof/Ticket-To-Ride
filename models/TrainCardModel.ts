@@ -5,5 +5,6 @@ export class TrainCardModel {
   color?: TrainColor;
   constructor(data?: any) {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
+    this._id = data._id;
   }
 }

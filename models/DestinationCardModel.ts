@@ -5,6 +5,7 @@ export class DestinationCardModel {
   pointValue?: number;
 
   constructor(data?: any) {
+    this._id = data._id;
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
   }
 

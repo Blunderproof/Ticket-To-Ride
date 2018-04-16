@@ -32,6 +32,7 @@ export class GameModel {
 
   constructor(data?: any) {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
+    this._id = data._id;
 
     this.host = new UserModel(data.host || {});
     this.userList = (data.userList || []).map((e: any) => new UserModel(e));
