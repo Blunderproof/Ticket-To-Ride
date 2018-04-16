@@ -1,3 +1,57 @@
+//LARGE SCREEN
+@media screen and (min-width: 1200px){
+  .final-display-window{
+    position: fixed;
+    top: 50%;
+    left: 25%;
+    padding: 20px;
+    transform: translateY(-50%);
+    background-color: #FFF;
+    border-radius: 5px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    display: grid;
+    width: 800px;
+    margin: 0 auto;
+    z-index: 5000;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+        "title"
+        "table"
+        "chat"
+        "button";
+    }
+}
+//MEDIUM SIZE SCREEN
+@media screen and (max-width: 1200px){
+  .final-display-window{
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    transform: translateY(-50%);
+    background-color: #FFF;
+    border-radius: 5px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 60px;
+    z-index: 5000;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+        "title"
+        "table"
+        "chat"
+        "button";
+    }
+}
+
+
 .backdrop{
   background-color:rgba(0,0,0,0.6);
   position:fixed;
@@ -8,30 +62,6 @@
   z-index: 1000;
 }
 
-.final-display-window{
-  position: fixed;
-  top: 50%;
-  left: 25%;
-  padding: 20px;
-  transform: translateY(-50%);
-  z-index: 1050;
-  background-color: #FFF;
-  border-radius: 5px;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  display: grid;
-  width: 800px;
-  margin: 0 auto;
-  z-index: 5000;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-areas:
-      "title"
-      "table"
-      "chat"
-      "button";
-}
 
 .title{
   grid-area: title;
