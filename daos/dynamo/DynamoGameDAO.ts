@@ -3,6 +3,7 @@ import IGameDAO from '../IGameDAO';
 import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { GAME_TABLE_NAME } from '../../constants';
+import { GameModel } from '../../models/GameModel';
 
 export class DynamoGameDAO implements IGameDAO {
   dbClient: DocumentClient;
@@ -11,7 +12,7 @@ export class DynamoGameDAO implements IGameDAO {
     this.dbClient = new AWS.DynamoDB.DocumentClient();
   }
 
-  findOne(data: any): Promise<IGameModel | null> {
+  findOne(data: any): Promise<GameModel | null> {
     var params = {
       TableName: GAME_TABLE_NAME,
       Key: data,
@@ -23,12 +24,12 @@ export class DynamoGameDAO implements IGameDAO {
         if (err) {
           no(err);
         } else {
-          yes(data);
+          yes(new GameModel(data));
         }
       });
     });
   }
-  find(data: any): Promise<IGameModel[]> {
+  find(data: any): Promise<GameModel[]> {
     var params = {
       TableName: GAME_TABLE_NAME,
       Key: data,
@@ -39,7 +40,11 @@ export class DynamoGameDAO implements IGameDAO {
         if (err) {
           no(err);
         } else {
-          yes(data);
+          let games: GameModel[] = [];
+          for (let i = 0; i < data.length; i++) {
+            games.push(new GameModel(data));
+          }
+          yes(games);
         }
       });
     });
@@ -55,12 +60,12 @@ export class DynamoGameDAO implements IGameDAO {
         if (err) {
           no(err);
         } else {
-          yes(data);
+          yes();
         }
       });
     });
   }
-  save(game: IGameModel): Promise<IGameModel> {
+  save(game: GameModel): Promise<GameModel> {
     return new Promise((yes, no) => {
       this.dbClient.put(
         {
@@ -71,16 +76,16 @@ export class DynamoGameDAO implements IGameDAO {
           if (err) {
             no(err);
           } else {
-            yes(data);
+            yes(new GameModel(data));
           }
         }
       );
     });
   }
-  create(data: any): Promise<IGameModel> {
+  create(data: any): Promise<GameModel> {
     //load cards from csv
     //create game
 
-    return this.save;
+    return this.save(data);
   }
 }
