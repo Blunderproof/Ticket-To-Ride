@@ -97,7 +97,7 @@ export class UserModel {
     if (!this.claimedRouteList) return 0;
 
     let points = 0;
-    await this.populate('claimedRouteList').execPopulate();
+
     for (let i = 0; i < this.claimedRouteList.length; i++) {
       points += this.claimedRouteList[i].pointValue;
     }
@@ -124,7 +124,6 @@ export class UserModel {
       return traverse(city);
     };
 
-    await this.populate('claimedRouteList').execPopulate();
     let lengths: number[] = [];
 
     for (let i = 0; i < this.claimedRouteList.length; i++) {
@@ -184,8 +183,6 @@ export class UserModel {
     }
 
     let remove: any[] = [];
-    await this.populate('unmetDestinationCards').execPopulate();
-    await this.populate('claimedRouteList').execPopulate();
     for (let i = 0; i < this.unmetDestinationCards.length; i++) {
       if (DestinationCardFulfilled(this.claimedRouteList, this.unmetDestinationCards[i])) {
         this.metDestinationCards.push(this.unmetDestinationCards[i]);
@@ -195,18 +192,13 @@ export class UserModel {
       }
     }
 
-    await this.populate('metDestinationCards').execPopulate();
-
     for (let i = 0; i < this.metDestinationCards.length; i++) {
       points.positive += this.metDestinationCards[i].pointValue!;
     }
 
     //depopulate met & unmet destination cards
-    this.unmetDestinationCards = depopulate(this.unmetDestinationCards);
-    this.metDestinationCards = depopulate(this.metDestinationCards);
-    this.claimedRouteList = depopulate(this.claimedRouteList);
     this.unmetDestinationCards = this.unmetDestinationCards.filter((e: any) => {
-      return remove.indexOf(e) === -1;
+      return remove.indexOf(e._id) === -1;
     });
 
     this.points.detailed.positiveDestinationCards = points.positive;
