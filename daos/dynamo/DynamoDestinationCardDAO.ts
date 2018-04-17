@@ -1,14 +1,17 @@
 import IDestinationCardDAO from '../IDestinationCardDAO';
-import { IDestinationCardModel, DestinationCard } from '../../models/DestinationCard';
 import { DAOManager } from '../DAOManager';
 import { getDestinationCards } from '../../helpers';
+import { DestinationCardModel } from '../../models/DestinationCardModel';
 
 export class DynamoDestinationCardDAO implements IDestinationCardDAO {
   find(data: any, populates: any[]): Promise<DestinationCardModel[]> {
-    let destCards = getDestinationCards();
-    for (let i = 0; i < destCards.length; i++) {
-      destCards[i] = new DestinationCard(destCards[i]);
-    }
+    return new Promise((yes, no) => {
+      let destCards = getDestinationCards();
+      let destCarModels: DestinationCardModel[] = [];
+      for (let i = 0; i < destCards.length; i++) {
+        destCarModels.push(new DestinationCardModel(destCards[i]));
+      }
+      yes(destCarModels);
+    });
   }
-  constructor() {}
 }

@@ -1,8 +1,13 @@
 import IMessageDAO from '../IMessageDAO';
 import { IMessageModel } from '../../models/Message';
 import { MessageModel } from '../../models/MessageModel';
+import { DynamoHelpers } from './DynamoDAOHelpers';
 
-export class DynamoMessageDAO implements IMessageDAO {
+export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
+  constructor() {
+    super();
+  }
+
   find(data: any, populates: any[], sort: string): Promise<MessageModel[]> {
     throw new Error('Method not implemented.');
   }
@@ -15,5 +20,4 @@ export class DynamoMessageDAO implements IMessageDAO {
   save(message: MessageModel): Promise<MessageModel> {
     throw new Error('Method not implemented.');
   }
-  constructor() {}
 }

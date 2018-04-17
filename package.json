@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@types/express-session": "^1.15.7",
 		"@types/papaparse": "^4.1.33",
-		"aws-sdk": "^2.221.1",
+		"aws-sdk": "^2.224.1",
 		"body-parser": "^1.18.2",
 		"express": "^4.16.2",
 		"express-session": "^1.15.6",
