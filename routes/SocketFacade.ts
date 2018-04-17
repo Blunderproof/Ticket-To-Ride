@@ -4,6 +4,7 @@ import { GameState, MessageType } from '../constants';
 import { SocketCommand } from '../constants';
 import { emit } from 'cluster';
 import { DAOManager } from '../daos/DAOManager';
+import { GameModel } from '../models/GameModel';
 
 export default class SocketFacade {
   socketCommandMap: Map<string, SocketCommand>;
@@ -50,7 +51,7 @@ export default class SocketFacade {
   }
 
   private getOpenGameList = (data: any): Promise<any> => {
-    return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then((games: IGameModel[]) => {
+    return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then((games: GameModel[]) => {
       return games;
     });
   };
@@ -93,7 +94,7 @@ export default class SocketFacade {
         'destinationCardDeck',
         'destinationCardDiscardPile',
       ])
-      .then((game: IGameModel) => {
+      .then((game: GameModel) => {
         return game;
       });
   };

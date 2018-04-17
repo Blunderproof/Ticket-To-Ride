@@ -123,7 +123,37 @@ export default class GameFacade {
       return promise;
     }
 
-    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, ['userList']);
+    let game = await DAOManager.dao.gameDAO.findOne({ _id: data.reqGameID }, [
+      'userList',
+      {
+        path: 'userList',
+        populate: {
+          path: 'trainCardHand',
+          model: 'TrainCard',
+        },
+      },
+      {
+        path: 'userList',
+        populate: {
+          path: 'claimedRouteList',
+          model: 'Route',
+        },
+      },
+      {
+        path: 'userList',
+        populate: {
+          path: 'unmetDestinationCards',
+          model: 'DestinationCard',
+        },
+      },
+      {
+        path: 'userList',
+        populate: {
+          path: 'metDestinationCards',
+          model: 'DestinationCard',
+        },
+      },
+    ]);
 
     if (!game) {
       return {
@@ -271,10 +301,10 @@ export default class GameFacade {
           },
         },
         {
-          path: 'claimedRouteList',
+          path: 'userList',
           populate: {
-            path: 'trainCardHand',
-            model: 'TrainCard',
+            path: 'claimedRouteList',
+            model: 'Route',
           },
         },
       ])

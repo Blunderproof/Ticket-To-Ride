@@ -133,6 +133,8 @@ export default class ServerCommunicator {
 
     // since we've already checked if facadeCommand is not null,
     // we can force unwrap the optional type using varName!
+    console.log('body', body);
+    console.log('facadeCommand', facadeCommand);
     let command: Command = new Command(body, facadeCommand!);
 
     this.commandHandler
@@ -143,7 +145,10 @@ export default class ServerCommunicator {
 
         if (commandResults.wasSuccessful()) {
           // set and update cookie stuff
+          console.log('command success');
+          console.log('commandResults.shouldSetSession()', commandResults.shouldSetSession());
           const userCookie = commandResults.shouldSetSession() || {};
+          console.log('userCookie', userCookie);
           let lgid = userCookie.lgid;
           let gmid = userCookie.gmid;
 

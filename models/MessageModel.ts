@@ -3,8 +3,8 @@ import { GameModel } from './GameModel';
 import { UserModel } from './UserModel';
 
 export class MessageModel {
-    _id?: string;
-    game: GameModel;
+  _id?: string;
+  game: GameModel;
   user: UserModel;
   message?: string;
   timestamp?: Date;
@@ -12,6 +12,7 @@ export class MessageModel {
 
   constructor(data?: any) {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
+    this._id = data._id;
 
     this.game = new GameModel(data.game || {});
     this.user = new UserModel(data.user || {});
