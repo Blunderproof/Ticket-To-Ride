@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
   finalTurnModalToOpen = true;
   leftCollapsed = true;
 
-
+  showInitialMessage = false;
   intentoryOverlayApplied = true;
 
   gameOver = true;
@@ -28,11 +28,7 @@ export class GameComponent implements OnInit {
   simState = 0;
   turnStateEnum = TurnState;
 
-  constructor(
-    private _serverProxy: ServerProxy,
-    public _gameHistory: GameHistory,
-    public _userInfo: UserInfo
-  ) {}
+  constructor(private _serverProxy: ServerProxy, public _gameHistory: GameHistory, public _userInfo: UserInfo) {}
 
   ngOnInit() {
     this._userInfo.getUser();
@@ -40,11 +36,11 @@ export class GameComponent implements OnInit {
     this.printUserInfo();
   }
 
-  toggleFinalTurnModal(){
+  toggleFinalTurnModal() {
     this.finalTurnModalToOpen = !this.finalTurnModalToOpen;
   }
 
-  leftCollapsedToggle(){
+  leftCollapsedToggle() {
     this.leftCollapsed = !this.leftCollapsed;
   }
 

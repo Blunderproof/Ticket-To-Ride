@@ -7,6 +7,7 @@ import { RouteModel } from '../RouteModel';
 export default class BeginningTurnStateObject implements TurnStateObject {
   user: UserModel;
   error: string = '';
+  type: string = TurnState.BeginningOfTurn;
 
   constructor(user: UserModel) {
     this.user = user;
@@ -65,7 +66,6 @@ export default class BeginningTurnStateObject implements TurnStateObject {
 
   claimRoute(route: RouteModel, cardColor: TrainColor, game: GameModel) {
     let userCardsOfColor = this.user.trainCardHand.filter((card, index) => {
-      console.log('card', card);
       return card.color == cardColor;
     });
 
@@ -104,27 +104,20 @@ export default class BeginningTurnStateObject implements TurnStateObject {
 
     // take only the number of cards required
     let cardsToDiscard = userCardsOfColor.slice(0, route.length);
-    console.log('cardsToDiscard');
-    console.log(cardsToDiscard);
 
     if (usingRainbows) {
       // if we need to use rainbows, add also the number of rainbow cards
       cardsToDiscard = cardsToDiscard.concat(userRainbowCards.slice(0, difference));
-      console.log('using rainbows, updated cardsToDiscard');
-      console.log(cardsToDiscard);
     }
     // map them to ids
     let cardIDsToDiscard = cardsToDiscard.map(card => {
-      return card.toString();
+      return card._id;
     });
-
-    console.log('cardIDsToDiscard');
-    console.log(cardIDsToDiscard);
 
     // filter the trainCardHand by cards not in the discard list
     this.user.trainCardHand = this.user.trainCardHand.filter((card, index) => {
       // < 0 means not in the discard list
-      return cardIDsToDiscard.indexOf(card.toString()) < 0;
+      return cardIDsToDiscard.indexOf(card._id) < 0;
     });
 
     game.trainCardDiscardPile = game.trainCardDiscardPile.concat(cardsToDiscard);
@@ -132,10 +125,6 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     // remove the route from the unclaimed routes
     let routeIndex = game.unclaimedRoutes.indexOf(route);
     game.unclaimedRoutes.splice(routeIndex, 1);
-    if (game.userList.length <= 3) {
-      // TODO check db for a second route with the same city1 and city2 but opposite routeNumber
-      // if it exists, remove it from game.unclaimedRoutes to prevent them from claiming it
-    }
 
     if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {
       game.reshuffleTrainCards();

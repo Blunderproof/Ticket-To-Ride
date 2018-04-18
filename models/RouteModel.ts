@@ -9,8 +9,17 @@ export class RouteModel {
   city2?: string;
 
   constructor(data?: any) {
-    this._id = data._id;
-    Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
+    if (data._id == null) {
+      // if we're just an ObjectID
+      this._id = data.toString();
+    } else {
+      this._id = data._id.toString();
+    }
+    this.city1 = data.city1;
+    this.city2 = data.city2;
+    this.routeNumber = data.routeNumber;
+    this.length = data.length;
+    this.color = data.color;
   }
 
   get pointValue() {
@@ -23,5 +32,17 @@ export class RouteModel {
       6: 15,
     };
     return this.length && points[this.length] ? points[this.length] : 0;
+  }
+
+  getObject() {
+    let data = {
+      _id: this._id,
+      color: this.color,
+      length: this.length,
+      routeNumber: this.routeNumber,
+      city1: this.city1,
+      city2: this.city2,
+    };
+    return data;
   }
 }

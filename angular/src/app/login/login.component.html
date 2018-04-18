@@ -17,7 +17,8 @@
         </div>
         <app-validation-messages [control]="form.controls.username" class="m-b-20"></app-validation-messages>
         <div class="wrap-input rs3-wrap-input validate-input" data-validate="Type password">
-          <input id="password" class="input" type="password" name="password" placeholder="Password" [formControl]="form.controls.password" (change)="revalidate()">
+          <input id="password" class="input" type="password" name="password" placeholder="Password" [formControl]="form.controls.password"
+            (change)="revalidate()">
           <span class="focus-input"></span>
         </div>
         <app-validation-messages [control]="form.controls.password" class="m-b-20"></app-validation-messages>

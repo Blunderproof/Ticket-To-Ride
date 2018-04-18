@@ -1,8 +1,6 @@
 <div class="card-slot" (click)="trainCardClicked()">
-  <div
-    class="card" (click)="trainCardClicked()" [class.clicked] = "isClicked()"
-    [ngClass]="{'valid-card': trainCardValid(trainCard.color), 'invalid-card': !trainCardValid(trainCard.color)}">
-    <img class="side" src="../../assets/images/traincards/vertical/{{trainCard.color}}.png"/>
-    <img class="side back" src="../../assets/images/traincards/vertical/cardback.png"/>
+  <div class="card" (click)="trainCardClicked()" [class.clicked]="isClicked()" [ngClass]="{'valid-card': trainCardValid(trainCard.color), 'invalid-card': !trainCardValid(trainCard.color)}">
+    <img class="side" src="../../assets/images/traincards/vertical/{{trainCard.color}}.png" />
+    <!-- <img class="side back" src="../../assets/images/traincards/vertical/cardback.png" /> -->
   </div>
 </div>

@@ -21,7 +21,7 @@ export class PlayerTrainCardComponent implements OnInit {
 
   count() {
     if (this._userInfo.game) {
-      return this._userInfo.game.userList.find(x => x._id == this._userInfo.user._id).trainCardCount[this.color];
+      return this._userInfo.user.trainCardCount[this.color];
     }
   }
 }

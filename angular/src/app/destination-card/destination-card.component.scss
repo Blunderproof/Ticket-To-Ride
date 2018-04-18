@@ -1,22 +1,23 @@
 .destcard {
   margin: 5px;
-  width: 300px;
+  width: 250px;
   height: auto;
-  opacity: 0.6;
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: transform 0.25s, opacity 0.25s;
 }
 
 .cursor {
   cursor: pointer;
 }
 
-.card-viewed{
+.card-viewed {
   opacity: 1 !important;
   cursor: default;
 }
 
 .card-selected {
-  transition: transform 1s;
-  transform: translate(10px, -10px);
+  transform: scale(1.05);
   opacity: 1 !important;
 }
 
@@ -26,4 +27,8 @@
 
 .card-done {
   border: 3px solid green;
+}
+
+.col {
+  padding: 0 !important;
 }

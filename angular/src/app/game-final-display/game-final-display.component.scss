@@ -1,16 +1,15 @@
 //LARGE SCREEN
-@media screen and (min-width: 1200px){
-  .final-display-window{
+@media screen and (min-width: 1200px) {
+  .final-display-window {
     position: fixed;
     top: 50%;
-    left: 25%;
+    left: 50%;
     padding: 20px;
-    transform: translateY(-50%);
-    background-color: #FFF;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: #fff;
     border-radius: 5px;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
     display: grid;
     width: 800px;
     margin: 0 auto;
@@ -18,20 +17,20 @@
     display: grid;
     grid-gap: 10px;
     grid-template-areas:
-        "title"
-        "table"
-        "chat"
-        "button";
-    }
+      'title'
+      'table'
+      'chat'
+      'button';
+  }
 }
 //MEDIUM SIZE SCREEN
-@media screen and (max-width: 1200px){
-  .final-display-window{
+@media screen and (max-width: 1200px) {
+  .final-display-window {
     position: absolute;
     top: 50%;
     padding: 10px;
     transform: translateY(-50%);
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 5px;
     overflow-x: hidden;
     transition: 0.5s;
@@ -44,54 +43,52 @@
     display: grid;
     grid-gap: 10px;
     grid-template-areas:
-        "title"
-        "table"
-        "chat"
-        "button";
-    }
+      'title'
+      'table'
+      'chat'
+      'button';
+  }
 }
 
-
-.backdrop{
-  background-color:rgba(0,0,0,0.6);
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1000;
 }
 
-
-.title{
+.title {
   grid-area: title;
 }
 
-.table{
+.table {
   grid-area: table;
 }
 
 .box {
-    background-color: #444;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 150%;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 150%;
 }
 
 .box .box {
-    background-color: #FFF;
-    color: #444;
+  background-color: #fff;
+  color: #444;
 }
 
-.btn-success{
-  float:right;
+.btn-success {
+  float: right;
 }
 
-.chat{
+.chat {
   grid-area: chat;
 }
 
-.button{
+.button {
   grid-area: button;
 }

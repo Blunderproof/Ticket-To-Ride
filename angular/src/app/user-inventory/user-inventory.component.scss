@@ -1,19 +1,20 @@
-.user-inventory{
+.user-inventory {
   grid-area: user-inventory;
 
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 8fr;
   grid-template-areas:
-        "dest-card-list"
-        "train-card-list";
+    'dest-card-list'
+    'train-card-list';
 }
 
-.dest-card-button{
+.dest-card-button {
   width: 100%;
+  margin-bottom: 8px;
 }
 
-.inventory-header{
+.inventory-header {
   grid-area: inventory-header;
 }
 
@@ -28,15 +29,14 @@
 //   max-height: 60px;
 // }
 
-.train-card-list{
+.train-card-list {
   grid-area: train-card-list;
-
 }
 
-.dest-card-list{
+.dest-card-list {
   grid-area: dest-card-list;
 }
 
-.train-token-pile{
+.train-token-pile {
   grid-area: train-token-pile;
 }

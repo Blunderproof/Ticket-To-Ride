@@ -1,30 +1,30 @@
-.user-list{
-  max-height: 500px;
-  min-height: 500px;
+.user-list {
+  height: 100%;
   background-color: #fff;
   color: #333;
 }
 
-.user-card{
+.user-card {
   background-color: #bbb;
   overflow: hidden;
   padding: 10px;
   font-size: 20px;
-  margin: 5px;
+  margin: 5px 0px;
+  border-radius: 5px;
 }
 
-.kick-user-button{
-  float:right;
+.kick-user-button {
+  float: right;
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
   .box {
     border-radius: 5px;
     padding: 20px;
     font-size: 100%;
   }
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .box {
     border-radius: 3px;
     padding: 3px;

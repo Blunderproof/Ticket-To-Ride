@@ -1,4 +1,4 @@
-.navbar{
+.navbar {
   z-index: 2000;
   overflow: hidden;
   width: 100%;
@@ -28,9 +28,9 @@ span {
 .initial-setup-modal {
   position: fixed;
   top: 50%;
-  left: 25%;
+  left: 50%;
   padding: 20px;
-  transform: translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
   z-index: 1049;
   background-color: #fff;
   border-radius: 5px;

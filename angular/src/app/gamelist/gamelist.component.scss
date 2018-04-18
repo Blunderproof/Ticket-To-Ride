@@ -7,14 +7,14 @@
 .game-tile-list {
   min-height: 50vh;
   border-radius: 5px;
-  height: 100%;
+  height: calc(100% - 38px);
   grid-column: 1/2;
   overflow-y: auto;
   color: #333;
   background-color: #dae4f2;
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
   .box {
     background-color: #444;
     color: #fff;
@@ -23,7 +23,7 @@
     font-size: 100%;
   }
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .box {
     background-color: #444;
     color: #fff;

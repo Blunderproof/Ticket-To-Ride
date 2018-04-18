@@ -36,11 +36,22 @@ export class GameModel {
   trainCards?: TrainCardModel[];
 
   constructor(data?: any) {
-    Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
-    this._id = data._id;
+    if (data._id == null) {
+      // if we're just an ObjectID
+      this._id = data.toString();
+    } else {
+      this._id = data._id.toString();
+    }
+    this.lastRound = data.lastRound;
+    this.turnNumber = data.turnNumber;
+    this.gameState = data.gameState;
 
     this.host = new UserModel(data.host || {});
-    this.userList = (data.userList || []).map((e: any) => new UserModel(e));
+
+    this.userList = (data.userList || []).map((e: any) => {
+      if (e != null) return new UserModel(e);
+    });
+
     this.playersReady = (data.playersReady || []).map((e: any) => new UserModel(e));
     this.unclaimedRoutes = (data.unclaimedRoutes || []).map((e: any) => new RouteModel(e));
     this.trainCardDeck = (data.trainCardDeck || []).map((e: any) => new TrainCardModel(e));
@@ -51,17 +62,32 @@ export class GameModel {
 
   getObject(): any {
     let data = {
-      host: this.host,
-      userList: this.userList,
+      _id: this._id,
+      host: typeof this.host == 'string' ? this.host : this.host.getObject(),
+      userList: this.userList.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
       gameState: this.gameState,
-      unclaimedRoutes: this.unclaimedRoutes,
-      trainCardDeck: this.trainCardDeck,
-      trainCardDiscardPile: this.trainCardDiscardPile,
-      destinationCardDeck: this.destinationCardDeck,
-      destinationCardDiscardPile: this.destinationCardDiscardPile,
+      unclaimedRoutes: this.unclaimedRoutes.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      trainCardDeck: this.trainCardDeck.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      trainCardDiscardPile: this.trainCardDiscardPile.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      destinationCardDeck: this.destinationCardDeck.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      destinationCardDiscardPile: this.destinationCardDiscardPile.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
       turnNumber: this.turnNumber,
       lastRound: this.lastRound,
-      playersReady: this.playersReady,
+      playersReady: this.playersReady.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
     };
     return data;
   }
@@ -84,7 +110,7 @@ export class GameModel {
         ],
       };
     }
-    await DAOManager.dao.routeDAO.find(filter, []).then((routes: RouteModel[]) => {
+    await DAOManager.dao.routeDAO.find(filter, [], this._id).then((routes: RouteModel[]) => {
       if (routes) {
         for (let index = 0; index < routes.length; index++) {
           unclaimedRoutes.push(routes[index]);
@@ -95,7 +121,7 @@ export class GameModel {
     });
 
     let trainCardDeck: TrainCardModel[] = [];
-    await DAOManager.dao.trainCardDAO.find({}, []).then((trainCards: TrainCardModel[]) => {
+    await DAOManager.dao.trainCardDAO.find({}, [], this._id).then((trainCards: TrainCardModel[]) => {
       if (trainCards) {
         for (let index = 0; index < trainCards.length; index++) {
           trainCardDeck.push(trainCards[index]);
@@ -106,7 +132,7 @@ export class GameModel {
     });
 
     let destinationCardDeck: DestinationCardModel[] = [];
-    await DAOManager.dao.destinationCardDAO.find({}, []).then((destinationCards: DestinationCardModel[]) => {
+    await DAOManager.dao.destinationCardDAO.find({}, [], this._id).then((destinationCards: DestinationCardModel[]) => {
       if (destinationCards) {
         for (let index = 0; index < destinationCards.length; index++) {
           destinationCardDeck.push(destinationCards[index]);
@@ -126,11 +152,7 @@ export class GameModel {
     let that = this;
 
     for (let index = 0; index < this.userList.length; index++) {
-      let userID: any = this.userList[index].toString();
-      // just in case we have real User objects, we just need the id
-      if (typeof userID != 'string') {
-        userID = userID._id;
-      }
+      let userID: any = this.userList[index]._id;
 
       let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
@@ -170,7 +192,6 @@ export class GameModel {
           player.destinationCardHand.push(shuffledDestinationCardDeck[0]);
           shuffledDestinationCardDeck.splice(0, 1);
         }
-
         return DAOManager.dao.userDAO.save(player);
       });
     }

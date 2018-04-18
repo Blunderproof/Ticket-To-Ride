@@ -3,7 +3,7 @@
 <div class="sidenav" tabindex="-1" role="dialog">
   <div class="title">
     <h4 class="title"> User Destination Cards</h4>
-    <div style="float:right">Uncompleted Routes: -{{_userInfo.user.points.detailed.negativeDestinationCards}}
+    <div style="text-align: left;">Uncompleted Routes: -{{_userInfo.user.points.detailed.negativeDestinationCards}}
       <br> Completed Routes: +{{_userInfo.user.points.detailed.positiveDestinationCards}}</div>
   </div>
   <div class="card-col centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0">

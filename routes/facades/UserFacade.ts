@@ -250,8 +250,8 @@ export default class UserFacade {
   }
 
   getUser(data: any): Promise<any> {
-    console.log('getUser called');
     return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, ['trainCardHand', 'destinationCardHand', 'claimedRouteList']).then((user: UserModel) => {
+      if (user) user.attachCardCounts();
       return {
         success: true,
         data: user,

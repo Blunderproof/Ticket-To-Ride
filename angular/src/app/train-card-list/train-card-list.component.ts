@@ -4,7 +4,7 @@ import { UserInfo } from '../services/user_info.service';
 @Component({
   selector: 'app-train-card-list',
   templateUrl: './train-card-list.component.html',
-  styleUrls: ['./train-card-list.component.scss']
+  styleUrls: ['./train-card-list.component.scss'],
 })
 export class TrainCardListComponent implements OnInit {
   cardOrder: string[];
@@ -15,13 +15,11 @@ export class TrainCardListComponent implements OnInit {
 
   constructor(public _userInfo: UserInfo) {
     this.cardOrder = ['pink', 'black', 'white', 'green', 'blue', 'red', 'yellow', 'orange', 'rainbow'];
-   }
-
-  ngOnInit() {
   }
+
+  ngOnInit() {}
 
   count() {
-    return this._userInfo.game.userList.find(x => x._id == this._userInfo.user._id).tokenCount;
+    return this._userInfo.user.tokenCount;
   }
-
 }
