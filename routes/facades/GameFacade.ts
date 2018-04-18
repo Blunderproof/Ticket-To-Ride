@@ -75,12 +75,15 @@ export default class GameFacade {
     }
 
     return DAOManager.dao.messageDAO
-      .create({
-        message: data.message,
-        user: data.reqUserID,
-        game: data.reqGameID,
-        type: MessageType.Chat,
-      })
+      .create(
+        {
+          message: data.message,
+          user: data.reqUserID,
+          game: data.reqGameID,
+          type: MessageType.Chat,
+        },
+        data.reqGameID
+      )
       .then((message: IMessageModel) => {
         return {
           success: true,
