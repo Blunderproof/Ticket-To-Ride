@@ -33,6 +33,8 @@ export default class SocketFacade {
   }
 
   execute(emitRequest: any, socketConnection: any) {
+    console.log('about to execute a emitRequest');
+    // console.log('emitRequest', emitRequest);
     const socketCommand: SocketCommand | undefined = this.socketCommandMap.get(emitRequest.command);
 
     if (!socketCommand) {
@@ -42,6 +44,9 @@ export default class SocketFacade {
 
     let sureSocketCommand: SocketCommand = socketCommand!;
     sureSocketCommand(emitRequest.data).then(emitData => {
+      // console.log('emitData', emitData);
+      console.log('emitRequest.command', emitRequest.command);
+      console.log('emitData', emitData);
       if (emitRequest.to) {
         socketConnection.to(emitRequest.to).emit(emitRequest.command, emitData);
       } else {
@@ -52,7 +57,9 @@ export default class SocketFacade {
 
   private getOpenGameList = (data: any): Promise<any> => {
     return DAOManager.dao.gameDAO.find({ gameState: GameState.Open }, ['host', 'userList']).then((games: GameModel[]) => {
-      return games;
+      return games.map(game => {
+        return game.getObject();
+      });
     });
   };
 
@@ -95,13 +102,15 @@ export default class SocketFacade {
         'destinationCardDiscardPile',
       ])
       .then((game: GameModel) => {
-        return game;
+        return game.getObject();
       });
   };
 
   private updateChatHistory = (data: any): Promise<any> => {
     return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp').then((chatMessages: IMessageModel[]) => {
-      return chatMessages;
+      return chatMessages.map(msg => {
+        return msg.getObject();
+      });
     });
   };
 
@@ -109,7 +118,9 @@ export default class SocketFacade {
     return DAOManager.dao.messageDAO
       .find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp')
       .then((gameHistoryMessages: IMessageModel[]) => {
-        return gameHistoryMessages;
+        return gameHistoryMessages.map(msg => {
+          return msg.getObject();
+        });
       });
   };
 }

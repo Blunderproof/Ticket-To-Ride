@@ -109,7 +109,6 @@ export default class GameLobbyFacade {
     }
 
     const { reqUserID } = data;
-
     return DAOManager.dao.gameDAO
       .findOne(
         {
@@ -230,6 +229,7 @@ export default class GameLobbyFacade {
               errorInfo: 'The specified game already has 5 users.',
             };
           } else {
+            console.log('about to append to game.userList', game.userList);
             game.userList.push(reqUserID);
             return await DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
               console.log('savedGame', savedGame);

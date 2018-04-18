@@ -1,11 +1,16 @@
 import IGameDAO from '../IGameDAO';
 import { GameModel } from '../../models/GameModel';
 import { Game, IGameModel } from '../../models/Game';
+import { IUserModel } from '../../models/User';
+import { UserModel } from '../../models/UserModel';
+import { RouteModel } from '../../models/RouteModel';
+import { TrainCardModel } from '../../models/TrainCardModel';
+import { DestinationCardModel } from '../../models/DestinationCardModel';
 
 export class MongoGameDAO implements IGameDAO {
   constructor() {}
 
-  findOne(data: any, populates: any[]): Promise<GameModel | null> {
+  async findOne(data: any, populates: any[]): Promise<GameModel | null> {
     let query = Game.findOne(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
@@ -16,7 +21,8 @@ export class MongoGameDAO implements IGameDAO {
       return new GameModel(game);
     });
   }
-  find(data: any, populates: any[]): Promise<GameModel[]> {
+
+  async find(data: any, populates: any[]): Promise<GameModel[]> {
     let query = Game.find(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
@@ -30,18 +36,58 @@ export class MongoGameDAO implements IGameDAO {
       return gameModels;
     });
   }
-  remove(data: any): Promise<void> {
-    return Game.remove(data).exec();
+
+  remove(game: GameModel): Promise<void> {
+    let cleanedData = { _id: game._id };
+
+    return Game.remove(cleanedData).exec();
   }
+
   create(data: any): Promise<GameModel> {
+    console.log('about to create a game in create');
+    console.log('data', data);
     return Game.create(data).then((game: IGameModel | null) => {
+      console.log('game from mongoose', game);
       return new GameModel(game);
     });
   }
 
   async save(game: GameModel): Promise<GameModel> {
-    await Game.update({ _id: game._id }, game.getObject());
+    let data = this.depopulate(game);
+
+    await Game.update({ _id: game._id }, data);
 
     return game;
+  }
+
+  depopulate(game: GameModel): any {
+    let data: any = game.getObject();
+    console.log('game after getObject', data);
+
+    data.host = data.host._id || data.host;
+    data.userList = data.userList.map((model: any) => {
+      return model._id || model;
+    });
+    data.playersReady = data.playersReady.map((model: any) => {
+      return model._id || model;
+    });
+    data.unclaimedRoutes = data.unclaimedRoutes.map((model: any) => {
+      return model._id || model;
+    });
+    data.trainCardDeck = data.trainCardDeck.map((model: any) => {
+      return model._id || model;
+    });
+    data.trainCardDiscardPile = data.trainCardDiscardPile.map((model: any) => {
+      return model._id || model;
+    });
+    data.destinationCardDeck = data.destinationCardDeck.map((model: any) => {
+      return model._id || model;
+    });
+    data.destinationCardDiscardPile = data.destinationCardDiscardPile.map((model: any) => {
+      return model._id || model;
+    });
+
+    console.log('depopulated game', data);
+    return data;
   }
 }

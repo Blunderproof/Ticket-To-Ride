@@ -193,7 +193,7 @@ export default class GameFacade {
       } else {
         // unpopulated so we're just comparing ids
         user.destinationCardHand = user.destinationCardHand.filter(function(i) {
-          return data.discardCards.indexOf(i.toString()) < 0;
+          return data.discardCards.indexOf(i._id) < 0;
         });
 
         // the only amount that we could subtract is by 1! so length should be 2.
@@ -214,16 +214,22 @@ export default class GameFacade {
       }
 
       unwrappedGame.playersReady.push(user._id);
+
       if (unwrappedGame.playersReady.length == unwrappedGame.userList.length) {
         unwrappedGame.turnNumber = 0;
       }
 
       await DAOManager.dao.gameDAO.save(unwrappedGame);
+
       user.turnState = TurnState.BeginningOfTurn;
 
+      console.log('about to update points');
       await user.updatePoints();
+      console.log('done updated points');
 
+      console.log('about to save user');
       return DAOManager.dao.userDAO.save(user).then((savedUser: UserModel) => {
+        console.log('just saved user');
         return {
           success: true,
           data: {},

@@ -31,9 +31,22 @@ export class UserModel {
   };
   longestRoute?: number;
 
-  constructor(data?: any) {
-    Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
-    this._id = data._id;
+  constructor(data: any) {
+    // console.log('In UserModel constructor, here is data:', data);
+
+    if (data._id == null) {
+      // if we're just an ObjectID
+      this._id = data.toString();
+    } else {
+      this._id = data._id.toString();
+    }
+    this.username = data.username;
+    this.hashedPassword = data.hashedPassword;
+    this.score = data.score;
+    this.tokenCount = data.tokenCount;
+    this.turnState = data.turnState;
+    this.color = data.color;
+    this.longestRoute = data.longestRoute;
 
     this.points = data.points || {};
     this.claimedRouteList = (data.claimedRouteList || []).map((e: any) => new RouteModel(e));
@@ -63,13 +76,24 @@ export class UserModel {
 
   getObject(): any {
     let data = {
+      _id: this._id,
       username: this.username,
       hashedPassword: this.hashedPassword,
-      claimedRouteList: this.claimedRouteList,
-      trainCardHand: this.trainCardHand,
-      destinationCardHand: this.destinationCardHand,
-      metDestinationCards: this.metDestinationCards,
-      unmetDestinationCards: this.unmetDestinationCards,
+      claimedRouteList: this.claimedRouteList.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      trainCardHand: this.trainCardHand.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      destinationCardHand: this.destinationCardHand.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      metDestinationCards: this.metDestinationCards.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      unmetDestinationCards: this.unmetDestinationCards.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
       score: this.score,
       tokenCount: this.tokenCount,
       turnState: this.turnState,

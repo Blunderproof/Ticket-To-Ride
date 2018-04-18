@@ -1,6 +1,6 @@
 <div class="backdrop" [hidden]="!display"></div>
 
-<div *ngIf="_userInfo.game != null && _userInfo.game.turnNumber < 0" class="initial-setup-modal">
+<div *ngIf="_userInfo.game != null && _userInfo.game.gameState == 2 && _userInfo.game.turnNumber < 0" class="initial-setup-modal">
   <h3>Initial Set Up – Waiting for all players to choose initial destination cards</h3>
 </div>
 
@@ -13,11 +13,14 @@
     <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [card]="card" [clickable]=true (click)="updateSelectedCards()"></app-destination-card>
   </div>
   <div class="card-rows centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0">
-    <app-destination-card *ngFor="let card of _userInfo.game.destinationCardDeck | slice:0:3" [card]="card" [clickable]=true (click)="updateSelectedCards()"></app-destination-card>
+    <app-destination-card *ngFor="let card of _userInfo.game.destinationCardDeck | slice:0:3" [card]="card" [clickable]=true
+      (click)="updateSelectedCards()"></app-destination-card>
   </div>
   <app-errors [messages]="errorMessages"></app-errors>
   <div>
-    <button type="button" class="btn btn-success" *ngIf="_userInfo.game && _userInfo.game.turnNumber < 0" (click)="chooseInitialDestinationCard()" [disabled]="notSelected.length > 1">Choose</button>
-    <button type="button" class="btn btn-success" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0" (click)="chooseDestinationCard()" [disabled]="selected.length < 1">Choose</button>
+    <button type="button" class="btn btn-success" *ngIf="_userInfo.game && _userInfo.game.turnNumber < 0" (click)="chooseInitialDestinationCard()"
+      [disabled]="notSelected.length > 1">Choose</button>
+    <button type="button" class="btn btn-success" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0" (click)="chooseDestinationCard()"
+      [disabled]="selected.length < 1">Choose</button>
   </div>
 </div>

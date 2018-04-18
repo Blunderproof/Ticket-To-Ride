@@ -11,8 +11,15 @@ export class MessageModel {
   type?: MessageType;
 
   constructor(data?: any) {
-    Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
-    this._id = data._id;
+    if (data._id == null) {
+      // if we're just an ObjectID
+      this._id = data.toString();
+    } else {
+      this._id = data._id.toString();
+    }
+    this.message = data.message;
+    this.timestamp = data.timestamp;
+    this.type = data.type;
 
     this.game = new GameModel(data.game || {});
     this.user = new UserModel(data.user || {});
@@ -20,8 +27,8 @@ export class MessageModel {
 
   getObject(): any {
     let data = {
-      game: this.game,
-      user: this.user,
+      game: typeof this.game == 'string' ? this.game : this.game.getObject(),
+      user: typeof this.user == 'string' ? this.user : this.user.getObject(),
       message: this.message,
       timestamp: this.timestamp,
       type: this.type,

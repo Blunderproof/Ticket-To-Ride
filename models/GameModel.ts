@@ -31,11 +31,22 @@ export class GameModel {
   playersReady: UserModel[];
 
   constructor(data?: any) {
-    Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));
-    this._id = data._id;
+    if (data._id == null) {
+      // if we're just an ObjectID
+      this._id = data.toString();
+    } else {
+      this._id = data._id.toString();
+    }
+    this.lastRound = data.lastRound;
+    this.turnNumber = data.turnNumber;
+    this.gameState = data.gameState;
 
     this.host = new UserModel(data.host || {});
-    this.userList = (data.userList || []).map((e: any) => new UserModel(e));
+
+    this.userList = (data.userList || []).map((e: any) => {
+      if (e != null) return new UserModel(e);
+    });
+
     this.playersReady = (data.playersReady || []).map((e: any) => new UserModel(e));
     this.unclaimedRoutes = (data.unclaimedRoutes || []).map((e: any) => new RouteModel(e));
     this.trainCardDeck = (data.trainCardDeck || []).map((e: any) => new TrainCardModel(e));
@@ -46,22 +57,38 @@ export class GameModel {
 
   getObject(): any {
     let data = {
-      host: this.host,
-      userList: this.userList,
+      _id: this._id,
+      host: typeof this.host == 'string' ? this.host : this.host.getObject(),
+      userList: this.userList.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
       gameState: this.gameState,
-      unclaimedRoutes: this.unclaimedRoutes,
-      trainCardDeck: this.trainCardDeck,
-      trainCardDiscardPile: this.trainCardDiscardPile,
-      destinationCardDeck: this.destinationCardDeck,
-      destinationCardDiscardPile: this.destinationCardDiscardPile,
+      unclaimedRoutes: this.unclaimedRoutes.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      trainCardDeck: this.trainCardDeck.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      trainCardDiscardPile: this.trainCardDiscardPile.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      destinationCardDeck: this.destinationCardDeck.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
+      destinationCardDiscardPile: this.destinationCardDiscardPile.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
       turnNumber: this.turnNumber,
       lastRound: this.lastRound,
-      playersReady: this.playersReady,
+      playersReady: this.playersReady.map(model => {
+        return typeof model == 'string' ? model : model.getObject();
+      }),
     };
     return data;
   }
 
   async initGame(): Promise<any> {
+    console.log('beginning of initGame');
     let unclaimedRoutes: RouteModel[] = [];
     let filter = {};
 
@@ -111,25 +138,25 @@ export class GameModel {
       }
     });
 
+    console.log('end of initGame');
     return this.shuffleDealCards(unclaimedRoutes, trainCardDeck, destinationCardDeck);
   }
 
   async shuffleDealCards(unclaimedRoutes: RouteModel[], trainCardDeck: TrainCardModel[], destinationCardDeck: DestinationCardModel[]): Promise<any> {
+    console.log('beginning of shuffleDealCards');
     let shuffledTrainCardDeck = shuffle(trainCardDeck);
     let shuffledDestinationCardDeck = shuffle(destinationCardDeck);
 
     let that = this;
 
     for (let index = 0; index < this.userList.length; index++) {
-      let userID: any = this.userList[index].toString();
-      // just in case we have real User objects, we just need the id
-      if (typeof userID != 'string') {
-        userID = userID._id;
-      }
+      let userID: any = this.userList[index]._id;
 
       let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
+      console.log('about to findOne user');
       await DAOManager.dao.userDAO.findOne({ _id: userID }, []).then(async (player: UserModel) => {
+        console.log('after findOne user');
         if (!player) {
           return null;
         }
@@ -165,7 +192,7 @@ export class GameModel {
           player.destinationCardHand.push(shuffledDestinationCardDeck[0]);
           shuffledDestinationCardDeck.splice(0, 1);
         }
-
+        console.log('about to save user', player);
         return DAOManager.dao.userDAO.save(player);
       });
     }
@@ -185,6 +212,7 @@ export class GameModel {
     that.playersReady = [];
     that.gameState = GameState.InProgress;
 
+    console.log('end of shuffleDealCards');
     return DAOManager.dao.gameDAO.save(that);
   }
 
