@@ -64,7 +64,7 @@ export default class GameLobbyFacade {
         },
         []
       ),
-      DAOManager.dao.userDAO.findOne({ _id: reqUserID }),
+      DAOManager.dao.userDAO.findOne({ _id: reqUserID }, []),
     ]).then(async data => {
       let game: GameModel = data[0];
       let user: UserModel = data[1];
