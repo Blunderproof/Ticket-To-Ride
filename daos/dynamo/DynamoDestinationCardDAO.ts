@@ -2,6 +2,7 @@ import IDestinationCardDAO from '../IDestinationCardDAO';
 import { DAOManager } from '../DAOManager';
 import { getDestinationCards } from '../../helpers';
 import { DestinationCardModel } from '../../models/DestinationCardModel';
+import { DynamoHelpers } from './DynamoDAOHelpers';
 
 export class DynamoDestinationCardDAO implements IDestinationCardDAO {
   find(data: any, populates: any[]): Promise<DestinationCardModel[]> {

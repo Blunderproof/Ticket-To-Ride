@@ -44,9 +44,11 @@ export class DynamoDAO implements IDAO {
     this.db = new AWS.DynamoDB(serviceConfigOptions);
     this.db.createTable({
       TableName: GAME_TABLE_NAME,
+      KeySchema: [{ AttributeName: '_id', KeyType: 'HASH' }],
     });
     this.db.createTable({
       TableName: USER_TABLE_NAME,
+      KeySchema: [{ AttributeName: '_id', KeyType: 'HASH' }],
     });
   }
 }
