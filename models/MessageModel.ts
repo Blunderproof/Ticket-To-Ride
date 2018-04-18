@@ -7,7 +7,7 @@ export class MessageModel {
   game: GameModel;
   user: UserModel;
   message?: string;
-  timestamp?: Date;
+  timestamp?: number;
   type?: MessageType;
 
   constructor(data?: any) {

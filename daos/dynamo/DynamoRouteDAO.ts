@@ -21,7 +21,9 @@ export class DynamoRouteDAO extends DynamoHelpers implements IRouteDAO {
       let routes = getRoutes();
       let filtered: RouteModel[] = [];
       for (let i = 0; i < routes.length; i++) {
-        filtered.push(new RouteModel(routes[i]));
+        let route = new RouteModel(routes[i]);
+        route._id = this.new_id();
+        filtered.push(route);
       }
       return filtered;
     });

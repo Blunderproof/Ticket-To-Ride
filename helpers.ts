@@ -22,7 +22,7 @@ export function shuffle(array: any[]) {
 }
 
 export function getTrainCards() {
-  let contents = fs.readFileSync(__dirname + './scripts/train_cards.csv', 'utf8');
+  let contents = fs.readFileSync(__dirname + '/../scripts/train_cards.csv', 'utf8');
 
   return Papa.parse(contents, {
     header: true,
@@ -31,7 +31,7 @@ export function getTrainCards() {
 }
 
 export function getDestinationCards() {
-  let contents = fs.readFileSync(__dirname + './scripts/destination_cards.csv', 'utf8');
+  let contents = fs.readFileSync(__dirname + '/../scripts/destination_cards.csv', 'utf8');
 
   return Papa.parse(contents, {
     header: true,
@@ -40,7 +40,7 @@ export function getDestinationCards() {
 }
 
 export function getRoutes() {
-  let contents = fs.readFileSync(__dirname + './scripts/routes.csv', 'utf8');
+  let contents = fs.readFileSync(__dirname + '/../scripts/routes.csv', 'utf8');
 
   return Papa.parse(contents, {
     header: true,

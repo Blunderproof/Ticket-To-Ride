@@ -15,7 +15,9 @@ export class DynamoTrainCardDAO extends DynamoHelpers implements ITrainCardDAO {
       let trainCards = getTrainCards();
       let filtered: TrainCardModel[] = [];
       for (let i = 0; i < trainCards.length; i++) {
-        filtered.push(new TrainCardModel(trainCards[i]));
+        let card = new TrainCardModel(trainCards[i]);
+        card._id = this.new_id();
+        filtered.push(card);
       }
       return filtered;
     });
