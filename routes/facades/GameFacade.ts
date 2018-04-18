@@ -401,14 +401,22 @@ export default class GameFacade {
             errorInfo: "The route specified doesn't exist.",
           };
         }
+
+        console.log('data to find route', {
+          color: data.color,
+          routeNumber: data.routeNumber,
+          city1: data.city1,
+          city2: data.city2,
+        });
+        console.log('route found', route);
         // force unwrap route
         route = route!;
         console.log('force unwrapped route', route);
 
-        let unclaimedRoute = game.unclaimedRoutes.filter(gameRoute => {
+        let unclaimedRoutes = game.unclaimedRoutes.filter(gameRoute => {
           return gameRoute._id == route._id;
         });
-        if (unclaimedRoute.length == 0) {
+        if (unclaimedRoutes.length == 0) {
           return {
             success: false,
             errorInfo: 'That route has already been claimed.',
@@ -625,7 +633,21 @@ export default class GameFacade {
     return DAOManager.dao.gameDAO
       .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, [
         'userList',
-        'destinationCardDeck',
+        'unclaimedRoutes',
+        {
+          path: 'userList',
+          populate: {
+            path: 'trainCardHand',
+            model: 'TrainCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'claimedRouteList',
+            model: 'Route',
+          },
+        },
         {
           path: 'userList',
           populate: {
