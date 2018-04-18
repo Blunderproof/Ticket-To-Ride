@@ -1,6 +1,5 @@
 import { Game, IGameModel, GameSchema } from '../../models/Game';
 import IGameDAO from '../IGameDAO';
-import * as AWS from 'aws-sdk';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { GAME_TABLE_NAME } from '../../constants';
 import { GameModel } from '../../models/GameModel';
@@ -8,28 +7,13 @@ import { DynamoHelpers } from './DynamoDAOHelpers';
 import { getTrainCards, getDestinationCards, getRoutes } from '../../helpers';
 
 export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
-  dbClient: DocumentClient;
-
   constructor() {
     super();
-    this.dbClient = new AWS.DynamoDB.DocumentClient();
   }
 
   findOne(query: any): Promise<GameModel | null> {
-    var params = {
-      TableName: GAME_TABLE_NAME,
-      Key: query,
-      Limit: 1,
-    };
-
-    return new Promise((yes, no) => {
-      this.dbClient.get(params, function(err, data) {
-        if (err) {
-          no(err);
-        } else {
-          yes(new GameModel(data));
-        }
-      });
+    return this.find(query).then(data => {
+      return data[0];
     });
   }
 
@@ -76,9 +60,6 @@ export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
   }
 
   create(game: any): Promise<GameModel> {
-    game.destinationCards = getDestinationCards();
-    game.trainCards = getTrainCards();
-    game.routes = getRoutes();
     game._id = this.new_id();
     return this.save_game(game);
   }

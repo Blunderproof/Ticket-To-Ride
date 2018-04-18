@@ -15,6 +15,10 @@ import { DynamoMessageDAO } from './DynamoMessageDAO';
 import { DynamoRouteDAO } from './DynamoRouteDAO';
 import { DynamoTrainCardDAO } from './DynamoTrainCardDAO';
 import { DynamoUserDAO } from './DynamoUserDAO';
+import { DynamoDB } from 'aws-sdk';
+import { CreateTableInput } from 'aws-sdk/clients/dynamodb';
+
+// java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 
 export class DynamoDAO implements IDAO {
   destinationCardDAO: IDestinationCardDAO;
@@ -24,7 +28,7 @@ export class DynamoDAO implements IDAO {
   trainCardDAO: ITrainCardDAO;
   userDAO: IUserDAO;
 
-  db: any;
+  db?: DynamoDB;
 
   constructor() {
     this.destinationCardDAO = new DynamoDestinationCardDAO();
@@ -38,17 +42,33 @@ export class DynamoDAO implements IDAO {
 
   initialize(): void {
     let serviceConfigOptions: ServiceConfigurationOptions = {
-      region: 'us-west-2',
+      region: 'us-east-1',
       endpoint: 'http://localhost:8000',
     };
     this.db = new AWS.DynamoDB(serviceConfigOptions);
-    this.db.createTable({
+    let game_table: CreateTableInput = {
       TableName: GAME_TABLE_NAME,
       KeySchema: [{ AttributeName: '_id', KeyType: 'HASH' }],
-    });
-    this.db.createTable({
+      AttributeDefinitions: [{ AttributeName: '_id', AttributeType: 'S' }],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1,
+      },
+    };
+    let user_table: CreateTableInput = {
       TableName: USER_TABLE_NAME,
       KeySchema: [{ AttributeName: '_id', KeyType: 'HASH' }],
-    });
+      AttributeDefinitions: [{ AttributeName: '_id', AttributeType: 'S' }],
+      ProvisionedThroughput: {
+        ReadCapacityUnits: 1,
+        WriteCapacityUnits: 1,
+      },
+    };
+
+    this.db.createTable(game_table);
+    this.db.createTable(user_table);
   }
 }
+
+let DAO = new DynamoDAO();
+export { DAO };

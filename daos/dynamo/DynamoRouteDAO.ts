@@ -3,6 +3,7 @@ import { IRouteModel } from '../../models/Route';
 import { RouteModel } from '../../models/RouteModel';
 import { DynamoHelpers } from './DynamoDAOHelpers';
 import { GameModel } from '../../models/GameModel';
+import { getRoutes } from '../../helpers';
 
 export class DynamoRouteDAO extends DynamoHelpers implements IRouteDAO {
   constructor() {
@@ -16,12 +17,11 @@ export class DynamoRouteDAO extends DynamoHelpers implements IRouteDAO {
   }
 
   find(query: any, populates: any[], gameID: string): Promise<RouteModel[]> {
-    return this.get_game(gameID).then((game: GameModel) => {
-      let routes = game.routes;
-      let found = this.query(routes!, query);
+    return new Promise((yes, no) => {
+      let routes = getRoutes();
       let filtered: RouteModel[] = [];
-      for (let i = 0; i < found.length; i++) {
-        filtered.push(new RouteModel(found[i]));
+      for (let i = 0; i < routes.length; i++) {
+        filtered.push(new RouteModel(routes[i]));
       }
       return filtered;
     });

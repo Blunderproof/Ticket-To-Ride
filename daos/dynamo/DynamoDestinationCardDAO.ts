@@ -7,12 +7,11 @@ import { GameModel } from '../../models/GameModel';
 
 export class DynamoDestinationCardDAO extends DynamoHelpers implements IDestinationCardDAO {
   find(query: any, populates: any[], gameID: string): Promise<DestinationCardModel[]> {
-    return this.get_game(gameID).then((game: GameModel) => {
-      let routes = game.routes;
-      let found = this.query(routes!, query);
+    return new Promise((yes, no) => {
+      let destinationCards = getDestinationCards();
       let filtered: DestinationCardModel[] = [];
-      for (let i = 0; i < found.length; i++) {
-        filtered.push(new DestinationCardModel(found[i]));
+      for (let i = 0; i < destinationCards.length; i++) {
+        filtered.push(new DestinationCardModel(destinationCards[i]));
       }
       return filtered;
     });

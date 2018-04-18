@@ -1,17 +1,12 @@
-import * as AWS from 'aws-sdk';
 import { MessageModel } from '../../models/MessageModel';
 import { DynamoHelpers } from './DynamoDAOHelpers';
 import { GAME_TABLE_NAME } from '../../constants';
-import { DocumentClient } from 'aws-sdk/clients/dynamodb';
-import { stringList } from 'aws-sdk/clients/datapipeline';
 import IMessageDAO from '../IMessageDAO';
 import { GameModel } from '../../models/GameModel';
 
 export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
-  dbClient: DocumentClient;
   constructor() {
     super();
-    this.dbClient = new AWS.DynamoDB.DocumentClient();
   }
 
   find(query: any, populates: any[], sort: string, gameID: string): Promise<MessageModel[]> {

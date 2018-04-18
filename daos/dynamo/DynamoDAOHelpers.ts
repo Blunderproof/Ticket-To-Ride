@@ -2,11 +2,20 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import * as AWS from 'aws-sdk';
 import { GAME_TABLE_NAME } from '../../constants';
 import { GameModel } from '../../models/GameModel';
+import { ConfigurationOptions } from 'aws-sdk/lib/config';
 
 export class DynamoHelpers {
   dbClient: DocumentClient;
   constructor() {
-    this.dbClient = new AWS.DynamoDB.DocumentClient();
+    let config: ConfigurationOptions = {
+      region: 'us-east-1',
+    };
+
+    AWS.config.update(config);
+
+    this.dbClient = new AWS.DynamoDB.DocumentClient({
+      endpoint: 'http://localhost:8000',
+    });
   }
 
   public get_game(gameID: string): Promise<GameModel> {
@@ -40,7 +49,7 @@ export class DynamoHelpers {
         if (err) {
           no(err);
         } else {
-          yes(new GameModel(data.Attributes));
+          yes(new GameModel(game));
         }
       });
     });
@@ -71,7 +80,7 @@ export class DynamoHelpers {
   }
 
   public compare(instance: any, query: any) {
-    if (typeof instance === 'object') {
+    if (typeof instance === 'object' && typeof query === 'object') {
       let keys = Object.keys(query);
 
       for (let i = 0; i < keys.length; i++) {
@@ -85,6 +94,8 @@ export class DynamoHelpers {
         }
       }
       return true;
+    } else if (Array.isArray(instance)) {
+      return instance.indexOf(query) >= 0;
     } else {
       return instance === query;
     }

@@ -11,12 +11,11 @@ export class DynamoTrainCardDAO extends DynamoHelpers implements ITrainCardDAO {
   }
 
   find(query: any, populates: any[], gameID: string): Promise<TrainCardModel[]> {
-    return this.get_game(gameID).then((game: GameModel) => {
-      let routes = game.routes;
-      let found = this.query(routes!, query);
+    return new Promise((yes, no) => {
+      let trainCards = getTrainCards();
       let filtered: TrainCardModel[] = [];
-      for (let i = 0; i < found.length; i++) {
-        filtered.push(new TrainCardModel(found[i]));
+      for (let i = 0; i < trainCards.length; i++) {
+        filtered.push(new TrainCardModel(trainCards[i]));
       }
       return filtered;
     });
