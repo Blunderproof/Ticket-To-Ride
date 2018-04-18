@@ -166,7 +166,7 @@ export default class ServerCommunicator {
                 user: reqUserID,
                 type: MessageType.History,
               },
-              gmid
+              reqGameID || req.session.gmid
             );
           }
 

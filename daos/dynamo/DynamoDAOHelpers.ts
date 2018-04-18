@@ -97,7 +97,12 @@ export class DynamoHelpers {
       }
       return true;
     } else if (Array.isArray(instance)) {
-      return instance.indexOf(query) >= 0;
+      if (typeof query === 'string') {
+        let ids = instance.map(model => model._id);
+        return ids.indexOf(query) >= 0;
+      } else {
+        return instance.indexOf(query) >= 0;
+      }
     } else if (typeof instance === 'object' && typeof query === 'string') {
       return instance._id == query;
     } else {
