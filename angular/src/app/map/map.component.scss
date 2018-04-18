@@ -13,6 +13,7 @@
   grid-column: g-col2-start / g-col3-start;
   overflow-y: hidden;
   margin: 0 10px;
+  padding-bottom: 0 !important;
 }
 
 .box {
@@ -21,6 +22,7 @@
   border-radius: 5px;
   padding: 10px;
   font-size: 150%;
+  height: 100%;
 }
 
 .map-overlay {
@@ -46,7 +48,6 @@ Like the routes one, there are many paths with an included 1 or 2 with 1 being t
 EX: tp-1-Denver-KansasCity
 */
 .route {
-  transition: all 0.5s ease-in-out;
   // z-index: 5000;
   padding: 100px;
   cursor: pointer;
@@ -54,6 +55,7 @@ EX: tp-1-Denver-KansasCity
 
 .route > g > path {
   fill-opacity: 1 !important;
+  transition: fill-opacity 0.25s;
 }
 
 .route:hover > g > path {
@@ -70,7 +72,7 @@ EX: tp-1-Denver-KansasCity
                                   supported by Chrome and Opera */
 }
 
-.dest-city{
+.dest-city {
   animation-timing-function: ease-in-out;
   animation: dest-city-pulse 5s infinite;
 }

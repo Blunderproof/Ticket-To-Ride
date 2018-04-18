@@ -1,32 +1,37 @@
-.game-tile{
+.game-tile {
   border-radius: 5px;
   margin: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   color: #444;
   display: grid;
   grid-gap: 5px;
-  grid-template-rows: [tile-row1-start] .5fr [tile-row2-start] 1fr [tile-row2-end];
+  grid-template-rows: [tile-row1-start] 0.5fr [tile-row2-start] 1fr [tile-row2-end];
   grid-template-columns: [tile-col1-start] 3fr [tile-col2-start] 1fr [tile-col2-end];
+  min-height: 63px;
 }
 
-.game-tile-header{
+.game-tile-header {
   grid-column: tile-col1-start / tile-col2-end;
   grid-row: tile-row1-start / tile-row2-start;
-  font-size: .75em;
+  font-size: 0.75em;
   padding-left: 20px;
   background-color: #bbb;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
-.game-tile-name{
+.game-tile-name {
   grid-column: tile-col1-start / tile-col2-start;
   grid-row: tile-row2-start / tile-row3-start;
   padding-left: 10px;
 }
 
-.join-game-btn{
-  float:right;
+.join-game-btn {
+  float: right;
   grid-row: tile-row2-start / tile-row3-start;
   grid-column: tile-col2-start / tile-col2-end;
-  height: 3em;
+  height: 100%;
   margin-right: 10px;
+  padding: 3px 6px;
+  font-size: 13px;
 }

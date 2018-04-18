@@ -10,11 +10,11 @@
   </div>
   <form [formGroup]="form">
     <div class="chat-input">
-      <div class="input-group mb-3 input-user-msg">
-        <input type="text" class="form-control" placeholder="User Message" [formControl]="controls.messageToSend" aria-label="User Message"
+      <div class="input-group input-user-msg">
+        <input type="text" class="form-control" placeholder="Type a message..." [formControl]="controls.messageToSend" aria-label="User Message"
           aria-describedby="basic-addon2" />
         <div class="input-group-append">
-          <button (click)="sendMessage()" class="btn btn-outline-secondary chat-send" type="submit" [disabled]="!form.valid">Send</button>
+          <button (click)="sendMessage()" class="btn btn-info chat-send" type="submit" [disabled]="!form.valid">Send</button>
         </div>
       </div>
     </div>

@@ -6,11 +6,11 @@
   display: block;
   position: absolute;
   transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
+  transition: transform 0.25s;
 }
 
-.card-slot{
-  background-color: #888;
+.card-slot {
+  // background-color: #888;
   width: 100px;
   height: inherit;
   border-radius: 3px;
@@ -31,9 +31,9 @@
   transform: rotateY(180deg);
 }
 
-.invalid-card{
+.invalid-card {
   opacity: 0.5;
-  transition: transform 1s;
+  transition: transform 0.25s;
   //-webkit-animation: slide-down 1s; /* Safari 4.0 - 8.0 */
   ////animation: slide-down 1s;
   //animation-fill-mode: forwards;
@@ -41,39 +41,41 @@
   pointer-events: none !important;
 }
 @keyframes slide-down {
-    0%   {pading-top:0px;}
-    100% {padding-top:30px;}
+  0% {
+    pading-top: 0px;
+  }
+  100% {
+    padding-top: 30px;
+  }
 }
 
-.valid-card:hover{
+.valid-card:hover {
   pointer-events: auto;
   outline: none;
   border-color: #9ecaed;
-  box-shadow: 0 0 80px #FFF;
+  box-shadow: 0 0 80px #fff;
   border-radius: 3px;
-  transition: transform .5s;
-  transform: translate(0px, -40px);
-  cursor:pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.clicked{
-  transition: transform 1s;
-  -webkit-animation: card-spin 1s;
-  animation: card-spin 1s;
+.clicked {
+  transition: transform 0.25s;
+  -webkit-animation: card-spin 0.25s;
+  animation: card-spin 0.25s;
   animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes card-spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform: translate(0px, -80px) rotateY( 270deg );
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: translate(0px, -80px) rotateY(270deg);
+  }
 }
 
-
-.valid-card:active{
+.valid-card:active {
   // pointer-events: auto;
   // transform: translate(20px, -80px) rotateY(180deg );
 }

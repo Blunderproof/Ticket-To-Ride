@@ -14,7 +14,7 @@
 
   <div *ngIf="_userInfo.game != null && _userInfo.game.lastRound >= 0 && finalTurnModalToOpen" class="final-turn-modal">
     <h3>You have one turn left.</h3>
-    <button (click)="toggleFinalTurnModal()" class="btn btn-outline-secondary" type="submit">Okay</button>
+    <button (click)="toggleFinalTurnModal()" class="btn btn-outline-secondary" type="submit">Got it!</button>
   </div>
 
   <div [ngClass]="{'game-container-left-visible': !leftCollapsed, 'game-container-right-visible': leftCollapsed}">
@@ -27,7 +27,7 @@
       <div class="box opponent-sidebar">
         <div *ngIf="_userInfo.game">
           <div *ngFor="let user of _userInfo.game.userList; let i = index" [attr.data-index]="i" class="opponent-card">
-            <div style="margin-top: 20px;">
+            <div [class]="i != 0 ? 'marginTop10' : ''">
               <app-opponent-card [index]="i"></app-opponent-card>
             </div>
           </div>
@@ -44,7 +44,7 @@
     <div class="right-sidebar">
       <div class="box player-sidebar">
         <!-- <div class="box player-inventory" [class.inventory-overlay]="!_userInfo.isCurrentTurn()"> -->
-          <app-user-inventory></app-user-inventory>
+        <app-user-inventory></app-user-inventory>
         <!-- </div> -->
         <div class="chat">
           <app-chat [inLobby]=false class="chat-window"></app-chat>

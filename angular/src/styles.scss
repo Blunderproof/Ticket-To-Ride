@@ -10,6 +10,7 @@
   left: 50%;
   width: 40px;
   height: 40px;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .cube1, .cube2 {
@@ -56,6 +57,13 @@
 }
 
 /*END LOADING SPINNER */
+
+
+#toasty.toasty-position-bottom-left {
+  left: 20px !important;
+  bottom: 20px !important;
+}
+
 
 /* You can add global styles to this file, and also import other style files */
 /*//////////////////////////////////////////////////////////////////
@@ -314,6 +322,7 @@
 
   :disabled, :disabled:hover {
     background-color: rgb(100,100,100)!important;
+    border-color: rgb(75, 75, 75) !important;
     cursor: default!important;
   }
 

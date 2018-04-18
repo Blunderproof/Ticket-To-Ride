@@ -56,6 +56,7 @@ export class UserInfo {
     this._serverProxy.getUser().then((x: any) => {
       if (x.success) {
         this.user = new User(x.result) || new User();
+        console.log(this.user);
       } else {
         if (x.message) {
           this.errorMessages.push(x.message);

@@ -1,6 +1,6 @@
 @media screen and (min-width: 1200px) {
-
-  .bank-navbar-left-visible{ //Used to allow the cards to float upward
+  .bank-navbar-left-visible {
+    //Used to allow the cards to float upward
     z-index: 500;
     width: 100%;
     display: block;
@@ -11,7 +11,8 @@
     pointer-events: none;
   }
 
-  .bank-navbar-right-visible{ //Used to allow the cards to float upward
+  .bank-navbar-right-visible {
+    //Used to allow the cards to float upward
     z-index: 500;
     width: 100%;
     display: block;
@@ -22,20 +23,20 @@
     pointer-events: none;
   }
 
-  .bank-items{
+  .bank-items {
     top: 75px;
     position: relative;
     width: 50%;
     margin: 0px 0px 0px calc(20vw + 50px);
     display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
-      justify-items: center;
-      height: inherit;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas: 'traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck';
+    justify-items: center;
+    height: inherit;
   }
-  .card-slot{
-    background-color: #888;
-    margin-left: calc((100vw / 12 ) - 110px );
+  .card-slot {
+    // background-color: #888;
+    margin-left: calc((100vw / 12) - 110px);
     width: 100px;
     height: inherit;
     border-radius: 3px;
@@ -43,9 +44,9 @@
 }
 
 // SMALLER screen
-@media screen and (max-width: 1200px){
-
-  .bank-navbar-left-visible{ //Used to allow the cards to float upward
+@media screen and (max-width: 1200px) {
+  .bank-navbar-left-visible {
+    //Used to allow the cards to float upward
     z-index: 500;
     width: 100%;
     display: block;
@@ -55,7 +56,8 @@
     bottom: 0;
     pointer-events: none;
   }
-  .bank-navbar-right-visible{ //Used to allow the cards to float upward
+  .bank-navbar-right-visible {
+    //Used to allow the cards to float upward
     z-index: 500;
     width: calc(100%-300px);
     display: block;
@@ -65,74 +67,69 @@
     bottom: 0;
     pointer-events: none;
   }
-  .bank-items{
+  .bank-items {
     top: 75px;
     left: 45px;
     position: relative;
     margin: 0 auto;
     display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-areas: "traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck";
-      justify-items: center;
-      height: inherit;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-areas: 'traincard-0 traincard-1 traincard-2 traincard-3 traincard-4 traincard-deck destcard-deck';
+    justify-items: center;
+    height: inherit;
   }
-  .card-slot{
-    background-color: #888;
-    margin-left: calc((100vw / 10 ) - 110px );
+  .card-slot {
+    // background-color: #888;
+    margin-left: calc((100vw / 10) - 110px);
     width: 100px;
     height: inherit;
     border-radius: 3px;
   }
 }
 
-
-
-
 // SCREEN SIZE INDEPENDENT CLASSES
-.traincard-0{
+.traincard-0 {
   grid-area: traincard-0;
 }
 
-.traincard-1{
+.traincard-1 {
   grid-area: traincard-1;
 }
 
-.traincard-2{
+.traincard-2 {
   grid-area: traincard-2;
 }
 
-.traincard-3{
+.traincard-3 {
   grid-area: traincard-3;
 }
 
-.traincard-4{
+.traincard-4 {
   grid-area: traincard-4;
 }
 
-.traincard-deck{
+.traincard-deck {
   grid-area: traincard-deck;
   width: 100px;
   height: auto;
 }
 
-.destcard-deck{
+.destcard-deck {
   grid-area: destcard-deck;
 }
-#destCardCount{
-  font-weight: bold!important;
+#destCardCount {
+  font-weight: bold !important;
   padding-top: 104px;
   text-align: center;
 }
 
-#trainCardCount{
-  font-weight: bold!important;
+#trainCardCount {
+  font-weight: bold !important;
   padding-top: 104px;
   text-align: center;
 }
 
-
-
-.card{
+.card {
   pointer-events: auto;
   width: 100px;
   height: 150px;
@@ -141,12 +138,11 @@
   position: absolute;
   position: absolute;
   transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
+  transition: transform 0.25s;
 }
 
-.invalid-card{
+.invalid-card {
   opacity: 0.5;
-  transition: transform 1s;
   // -webkit-animation: slide-down 1s; /* Safari 4.0 - 8.0 */
   // animation: slide-down 1s;
   // animation-fill-mode: forwards;
@@ -154,22 +150,25 @@
   pointer-events: none !important;
 }
 @keyframes slide-down {
-    0%   {pading-top:0px;}
-    100% {padding-top:30px;}
+  0% {
+    pading-top: 0px;
+  }
+  100% {
+    padding-top: 30px;
+  }
 }
 
-.valid-card:hover{
+.valid-card:hover {
   pointer-events: auto;
   outline: none;
   border-color: #9ecaed;
-  box-shadow: 0 0 80px #FFF;
+  box-shadow: 0 0 80px #fff;
   border-radius: 3px;
-  transition: transform 1s;
-  transform: translate(0px, -40px);
-  cursor:pointer;
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
-.valid-card:active{
+.valid-card:active {
 }
 
 .side {
@@ -189,16 +188,16 @@
   transform: rotateY(180deg);
 }
 
-.card-back{
+.card-back {
   background: blue;
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
 }
 
-.bottom-bar{
+.bottom-bar {
   overflow: hidden;
   height: 80px;
   bottom: 0px;
   background-color: rgba(80, 80, 80, 1);
   text-align: center;
-  position:fixed;
+  position: fixed;
 }

@@ -1,13 +1,4 @@
-@media screen and (min-width: 800px){
-  @media screen and (min-width: 1200px){
-    .borders{
-      margin-top: 60px !important;
-      margin-left: 60px !important;
-      margin-right: 60px !important;
-      font-size: 14pt;
-      overflow: visible;
-    }
-  }
+@media screen and (min-width: 800px) {
   .box {
     background-color: #444;
     color: #fff;
@@ -16,28 +7,40 @@
     font-size: 100%;
   }
 
-  .borders{
+  .borders {
     margin-top: 60px;
     margin-left: 10px;
     margin-right: 10px;
     font-size: 14pt;
     overflow: visible;
+    height: calc(100vh - 70px);
   }
 
-  .lobby-container{
+  @media screen and (min-width: 1200px) {
+    .borders {
+      margin-top: 75px;
+      margin-left: 60px;
+      margin-right: 60px;
+      font-size: 14pt;
+      overflow: visible;
+      height: calc(100vh - 100px);
+    }
+  }
+
+  .lobby-container {
     overflow-x: hidden;
     display: grid;
-     grid-gap: 10px;
-     grid-template-columns: 60% 40%;
-     grid-template-areas:
-            "joined-game lobby-sidebar";
-     background-color: #fff;
-     color: #444;
+    grid-gap: 10px;
+    grid-template-columns: 60% calc(40% - 10px);
+    grid-template-areas: 'joined-game lobby-sidebar';
+    background-color: #fff;
+    color: #444;
+    height: 100%;
   }
 }
 
-@media screen and (max-width: 800px) and (min-width: 0px){
-  .borders{
+@media screen and (max-width: 800px) and (min-width: 0px) {
+  .borders {
     margin-top: 60px;
     margin-left: 0px;
     margin-right: 0px;
@@ -45,16 +48,16 @@
     overflow: visible;
   }
 
-  .lobby-container{
+  .lobby-container {
     overflow-x: hidden;
     display: grid;
-     grid-gap: 10px;
-     grid-template-rows: 50% 50% !important;
-     grid-template-areas:
-            "joined-game"
-            "lobby-sidebar";
-     background-color: #fff;
-     color: #444;
+    grid-gap: 10px;
+    grid-template-rows: 50% 50% !important;
+    grid-template-areas:
+      'joined-game'
+      'lobby-sidebar';
+    background-color: #fff;
+    color: #444;
   }
 
   .box {
@@ -66,49 +69,41 @@
   }
 }
 
-
-
-
-
 .box .box {
   background-color: #fff;
   color: #444;
 }
 
-
-
-.joined-game{
-    grid-area: joined-game;
-    display: grid;
-      grid-gap: 10px;
-      grid-template-columns: 40% 60%;
-      grid-template-rows: 20% 60% 20%;
-      grid-template-areas:
-            "game-header game-header"
-            "user-list chat"
-            "start-leave-button start-leave-button";
+.joined-game {
+  grid-area: joined-game;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 45% 55%;
+  grid-template-rows: 5% 85% 5%;
+  grid-template-areas:
+    'game-header game-header'
+    'user-list chat'
+    'start-leave-button start-leave-button';
 }
 
-app-userlist{
+app-userlist {
   grid-area: user-list;
 }
 
-app-chat{
+app-chat {
   padding-right: 10px;
   grid-area: chat;
 }
 
-.game-header{
+.game-header {
   grid-column: 1/2;
   grid-area: game-header;
 }
 
-
-.start-leave-button{
+.start-leave-button {
   grid-column: 1/2;
   grid-area: start-leave-button;
 }
-
 
 .chat-window {
   max-height: none;
