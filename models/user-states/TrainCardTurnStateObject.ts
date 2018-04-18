@@ -7,6 +7,7 @@ import { RouteModel } from '../RouteModel';
 export default class TrainCardTurnStateObject implements TurnStateObject {
   user: UserModel;
   error: string = '';
+  type: string = TurnState.OneTrainCardChosen;
 
   constructor(user: UserModel) {
     this.user = user;

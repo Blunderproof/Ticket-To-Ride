@@ -142,6 +142,13 @@ export default class GameFacade {
       {
         path: 'userList',
         populate: {
+          path: 'destinationCardHand',
+          model: 'DestinationCard',
+        },
+      },
+      {
+        path: 'userList',
+        populate: {
           path: 'unmetDestinationCards',
           model: 'DestinationCard',
         },
@@ -179,76 +186,100 @@ export default class GameFacade {
       };
     }
 
-    return DAOManager.dao.userDAO.findOne({ _id: data.reqUserID }, []).then(async (user: UserModel) => {
-      if (!user) {
-        return {
-          success: false,
-          data: {},
-          errorInfo: "That user doesn't exist.",
-        };
-      }
-
-      if (data.discardCards.length == 0) {
-        // pass
-      } else {
-        // unpopulated so we're just comparing ids
-        user.destinationCardHand = user.destinationCardHand.filter(function(i) {
-          return data.discardCards.indexOf(i._id) < 0;
-        });
-
-        // the only amount that we could subtract is by 1! so length should be 2.
-        // if it's not 2, then the discardCard submitted wasn't in the users hand.
-        // this is sorta strange way to do it, but whatever. it's as good as checking it before.
-        if (user.destinationCardHand.length != 2) {
+    return DAOManager.dao.userDAO
+      .findOne({ _id: data.reqUserID }, [
+        {
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'unmetDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'metDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+      ])
+      .then(async (user: UserModel) => {
+        if (!user) {
           return {
             success: false,
             data: {},
-            errorInfo: "The card you submitted to discard isn't in your hand.",
+            errorInfo: "That user doesn't exist.",
           };
         }
 
-        for (let index = 0; index < data.discardCards.length; index++) {
-          const element = data.discardCards[index];
-          unwrappedGame.destinationCardDiscardPile.push(element);
+        if (data.discardCards.length == 0) {
+          // pass
+        } else {
+          // unpopulated so we're just comparing ids
+          user.destinationCardHand = user.destinationCardHand.filter(function(i) {
+            return data.discardCards.indexOf(i._id) < 0;
+          });
+
+          // the only amount that we could subtract is by 1! so length should be 2.
+          // if it's not 2, then the discardCard submitted wasn't in the users hand.
+          // this is sorta strange way to do it, but whatever. it's as good as checking it before.
+          if (user.destinationCardHand.length != 2) {
+            return {
+              success: false,
+              data: {},
+              errorInfo: "The card you submitted to discard isn't in your hand.",
+            };
+          }
+
+          for (let index = 0; index < data.discardCards.length; index++) {
+            const element = data.discardCards[index];
+            unwrappedGame.destinationCardDiscardPile.push(element);
+          }
         }
-      }
 
-      unwrappedGame.playersReady.push(user._id);
+        unwrappedGame.playersReady.push(user._id);
 
-      if (unwrappedGame.playersReady.length == unwrappedGame.userList.length) {
-        unwrappedGame.turnNumber = 0;
-      }
+        if (unwrappedGame.playersReady.length == unwrappedGame.userList.length) {
+          unwrappedGame.turnNumber = 0;
+        }
 
-      await DAOManager.dao.gameDAO.save(unwrappedGame);
+        await DAOManager.dao.gameDAO.save(unwrappedGame);
 
-      user.turnState = TurnState.BeginningOfTurn;
+        user.turnState = TurnState.BeginningOfTurn;
 
-      console.log('about to update points');
-      await user.updatePoints();
-      console.log('done updated points');
+        console.log('about to update points');
+        await user.updatePoints();
+        console.log('done updated points');
 
-      console.log('about to save user');
-      return DAOManager.dao.userDAO.save(user).then((savedUser: UserModel) => {
-        console.log('just saved user');
-        return {
-          success: true,
-          data: {},
-          gameHistory: `selected ${savedUser.destinationCardHand.length} destination cards.`,
-          emit: [
-            {
-              command: 'updateGameState',
-              data: { id: data.reqGameID },
-              to: data.reqGameID,
-            },
-            {
-              command: 'updateGameHistory',
-              to: data.reqGameID,
-              data: { id: data.reqGameID },
-            },
-          ],
-        };
+        console.log('about to save user');
+        return DAOManager.dao.userDAO.save(user).then((savedUser: UserModel) => {
+          console.log('just saved user');
+          return {
+            success: true,
+            data: {},
+            gameHistory: `selected ${savedUser.destinationCardHand.length} destination cards.`,
+            emit: [
+              {
+                command: 'updateGameState',
+                data: { id: data.reqGameID },
+                to: data.reqGameID,
+              },
+              {
+                command: 'updateGameHistory',
+                to: data.reqGameID,
+                data: { id: data.reqGameID },
+              },
+            ],
+          };
+        });
       });
-    });
   }
 
   claimRoute(data: any): Promise<any> {
@@ -313,6 +344,27 @@ export default class GameFacade {
             model: 'Route',
           },
         },
+        {
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'unmetDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'metDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
       ])
       .then(async (game: GameModel) => {
         if (!game) {
@@ -332,7 +384,6 @@ export default class GameFacade {
         let currentUser: UserModel | null = turnCheck.currentUser;
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
-
         let route = await DAOManager.dao.routeDAO.findOne(
           {
             color: data.color,
@@ -352,10 +403,12 @@ export default class GameFacade {
         }
         // force unwrap route
         route = route!;
-        const id = route._id;
+        console.log('force unwrapped route', route);
 
-        let unclaimedRoute = game.unclaimedRoutes.indexOf(id);
-        if (unclaimedRoute < 0) {
+        let unclaimedRoute = game.unclaimedRoutes.filter(gameRoute => {
+          return gameRoute._id == route._id;
+        });
+        if (unclaimedRoute.length == 0) {
           return {
             success: false,
             errorInfo: 'That route has already been claimed.',
@@ -570,7 +623,31 @@ export default class GameFacade {
     }
 
     return DAOManager.dao.gameDAO
-      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['userList', 'destinationCardDeck'])
+      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, [
+        'userList',
+        'destinationCardDeck',
+        {
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'unmetDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'metDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+      ])
       .then(async (game: GameModel) => {
         if (!game) {
           return {
@@ -592,7 +669,7 @@ export default class GameFacade {
 
         // check if the keep cards specified are in the game destination card deck
         let keep = game.destinationCardDeck.filter(function(card) {
-          return data.keepCards.indexOf(card.toString()) >= 0;
+          return data.keepCards.indexOf(card._id) >= 0;
         });
 
         if (keep.length != data.keepCards.length) {
@@ -675,7 +752,31 @@ export default class GameFacade {
     }
 
     return DAOManager.dao.gameDAO
-      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, ['trainCardDeck', 'userList'])
+      .findOne({ _id: data.reqGameID, gameState: GameState.InProgress }, [
+        'trainCardDeck',
+        'userList',
+        {
+          path: 'userList',
+          populate: {
+            path: 'destinationCardHand',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'unmetDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+        {
+          path: 'userList',
+          populate: {
+            path: 'metDestinationCards',
+            model: 'DestinationCard',
+          },
+        },
+      ])
       .then(async (game: GameModel) => {
         if (!game) {
           return {
@@ -704,6 +805,8 @@ export default class GameFacade {
 
         let currentUserState = currentUser.getTurnStateObject();
 
+        const initialDraw = currentUserState.type == TurnState.BeginningOfTurn;
+
         if ((currentUser = currentUserState.drawTrainCard(data.cardIndex, game)) == null) {
           return {
             success: false,
@@ -715,16 +818,15 @@ export default class GameFacade {
         // it won't be null at this point, we just checked
         currentUser = currentUser!;
         await DAOManager.dao.userDAO.save(currentUser);
+        await game.updatePoints();
 
-        if (game.lastRound! > 0) {
+        if (game.lastRound! > 0 && !initialDraw) {
           game.lastRound! -= 1;
           if (game.lastRound == 0) {
             // end the game
             game.gameState = GameState.Ended;
           }
         }
-
-        await game.updatePoints();
 
         return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
           return {

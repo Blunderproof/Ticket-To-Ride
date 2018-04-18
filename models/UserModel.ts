@@ -56,7 +56,25 @@ export class UserModel {
     this.unmetDestinationCards = (data.unmetDestinationCards || []).map((e: any) => new DestinationCardModel(e));
   }
 
-  get trainCardCount() {
+  // get trainCardCount() {
+  //   let counts = {
+  //     pink: 0,
+  //     black: 0,
+  //     green: 0,
+  //     blue: 0,
+  //     white: 0,
+  //     yellow: 0,
+  //     orange: 0,
+  //     red: 0,
+  //     rainbow: 0,
+  //   };
+  //   for (let i = 0; i < this.trainCardHand.length; i++) {
+  //     (counts as any)[this.trainCardHand[i].color!]++;
+  //   }
+  //   return counts;
+  // }
+
+  attachCardCounts(): void {
     let counts = {
       pink: 0,
       black: 0,
@@ -71,7 +89,7 @@ export class UserModel {
     for (let i = 0; i < this.trainCardHand.length; i++) {
       (counts as any)[this.trainCardHand[i].color!]++;
     }
-    return counts;
+    (this as any).trainCardCount = counts;
   }
 
   getObject(): any {
@@ -112,6 +130,7 @@ export class UserModel {
   }
 
   getPrivatePoints(): Promise<any> {
+    console.log('in user getPrivatePoints');
     return this.destinationCardPoints().then((resolved: any) => {
       this.points.private = resolved.positive;
       return this.points.private;
@@ -134,19 +153,19 @@ export class UserModel {
     let LongestRoute = (routes: RouteModel[], city: string | undefined) => {
       let visited: RouteModel[] = [];
 
-      var traverse = (curCity: string | undefined): any => {
+      var traverse = (curCity: string): any => {
         let lengths: number[] = [];
         for (var i = 0; i < routes.length; i++) {
           if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]) === -1) {
             visited.push(routes[i]);
             let newCity = routes[i].city1 == curCity ? routes[i].city2 : routes[i].city1;
-            lengths.push(traverse(newCity) + routes[i].length);
+            lengths.push(traverse(newCity!) + routes[i].length);
           }
         }
         return lengths.reduce((a, b) => Math.max(a, b), 0);
       };
 
-      return traverse(city);
+      return traverse(city!);
     };
 
     let lengths: number[] = [];
@@ -166,6 +185,7 @@ export class UserModel {
   }
 
   async destinationCardPoints(): Promise<any> {
+    console.log('in user destinationCardPoints');
     let depopulate = (arr: any[]) => {
       for (let i = 0; i < arr.length; i++) {
         arr[i] = arr[i]._id;
@@ -176,19 +196,19 @@ export class UserModel {
     let DestinationCardFulfilled = (routes: RouteModel[], destinationCard: DestinationCardModel) => {
       let visited: RouteModel[] = [];
 
-      var traverse = (curCity: string | undefined, findCity: string | undefined): any => {
+      var traverse = (curCity: string, findCity: string): any => {
         for (var i = 0; i < routes.length; i++) {
           if ((routes[i].city1 == curCity || routes[i].city2 == curCity) && visited.indexOf(routes[i]) === -1) {
             visited.push(routes[i]);
             let newCity = routes[i].city1 == curCity ? routes[i].city2 : routes[i].city1;
 
-            if (newCity === findCity || traverse(newCity, findCity)) return true;
+            if (newCity === findCity || traverse(newCity!, findCity)) return true;
           }
         }
         return false;
       };
 
-      return traverse(destinationCard.city1, destinationCard.city2);
+      return traverse(destinationCard.city1!, destinationCard.city2!);
     };
 
     let points = {
@@ -197,13 +217,18 @@ export class UserModel {
     };
 
     if (!this.destinationCardHand) return points;
+    console.log('destinationCardHand', this.destinationCardHand);
 
     if (!this.unmetDestinationCards) this.unmetDestinationCards = [];
     if (!this.metDestinationCards) this.metDestinationCards = [];
 
+    let unmetIDs = this.unmetDestinationCards.map(card => card._id);
+    let metIDs = this.metDestinationCards.map(card => card._id);
+
     for (let i = 0; i < this.destinationCardHand.length; i++) {
-      if (this.unmetDestinationCards.indexOf(this.destinationCardHand[i]) == -1 && this.metDestinationCards.indexOf(this.destinationCardHand[i]) == -1) {
+      if (unmetIDs.indexOf(this.destinationCardHand[i]._id) == -1 && metIDs.indexOf(this.destinationCardHand[i]._id) == -1) {
         this.unmetDestinationCards.push(this.destinationCardHand[i]);
+        unmetIDs.push(this.destinationCardHand[i]._id);
       }
     }
 
@@ -233,7 +258,9 @@ export class UserModel {
   }
 
   updatePoints(): Promise<any> {
+    console.log('in user updatePoints');
     return Promise.all([this.getPublicPoints(), this.getPrivatePoints()]).then(resolved => {
+      console.log(resolved);
       this.points.total = resolved[0] + resolved[1] - this.points.detailed.negativeDestinationCards;
       return this.points.total;
     });

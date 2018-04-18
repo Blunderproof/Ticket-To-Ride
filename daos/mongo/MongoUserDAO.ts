@@ -31,7 +31,6 @@ export class MongoUserDAO implements IUserDAO {
 
   depopulate(game: UserModel): any {
     let data: any = game.getObject();
-    console.log('game after getObject', data);
 
     data.claimedRouteList = data.claimedRouteList.map((model: any) => {
       return model._id || model;
@@ -49,7 +48,6 @@ export class MongoUserDAO implements IUserDAO {
       return model._id || model;
     });
 
-    console.log('depopulated user', data);
     return data;
   }
 }

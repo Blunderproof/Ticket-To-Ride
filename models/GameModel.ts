@@ -93,7 +93,6 @@ export class GameModel {
   }
 
   async initGame(): Promise<any> {
-    console.log('beginning of initGame');
     let unclaimedRoutes: RouteModel[] = [];
     let filter = {};
 
@@ -111,7 +110,7 @@ export class GameModel {
         ],
       };
     }
-    await DAOManager.dao.routeDAO.find(filter, []).then((routes: RouteModel[]) => {
+    await DAOManager.dao.routeDAO.find(filter, [], this._id).then((routes: RouteModel[]) => {
       if (routes) {
         for (let index = 0; index < routes.length; index++) {
           unclaimedRoutes.push(routes[index]);
@@ -122,7 +121,7 @@ export class GameModel {
     });
 
     let trainCardDeck: TrainCardModel[] = [];
-    await DAOManager.dao.trainCardDAO.find({}, []).then((trainCards: TrainCardModel[]) => {
+    await DAOManager.dao.trainCardDAO.find({}, [], this._id).then((trainCards: TrainCardModel[]) => {
       if (trainCards) {
         for (let index = 0; index < trainCards.length; index++) {
           trainCardDeck.push(trainCards[index]);
@@ -133,7 +132,7 @@ export class GameModel {
     });
 
     let destinationCardDeck: DestinationCardModel[] = [];
-    await DAOManager.dao.destinationCardDAO.find({}, []).then((destinationCards: DestinationCardModel[]) => {
+    await DAOManager.dao.destinationCardDAO.find({}, [], this._id).then((destinationCards: DestinationCardModel[]) => {
       if (destinationCards) {
         for (let index = 0; index < destinationCards.length; index++) {
           destinationCardDeck.push(destinationCards[index]);
@@ -143,12 +142,10 @@ export class GameModel {
       }
     });
 
-    console.log('end of initGame');
     return this.shuffleDealCards(unclaimedRoutes, trainCardDeck, destinationCardDeck);
   }
 
   async shuffleDealCards(unclaimedRoutes: RouteModel[], trainCardDeck: TrainCardModel[], destinationCardDeck: DestinationCardModel[]): Promise<any> {
-    console.log('beginning of shuffleDealCards');
     let shuffledTrainCardDeck = shuffle(trainCardDeck);
     let shuffledDestinationCardDeck = shuffle(destinationCardDeck);
 
@@ -159,9 +156,7 @@ export class GameModel {
 
       let color: PlayerColor = PLAYER_COLOR_MAP[index];
 
-      console.log('about to findOne user');
       await DAOManager.dao.userDAO.findOne({ _id: userID }, []).then(async (player: UserModel) => {
-        console.log('after findOne user');
         if (!player) {
           return null;
         }
@@ -197,7 +192,6 @@ export class GameModel {
           player.destinationCardHand.push(shuffledDestinationCardDeck[0]);
           shuffledDestinationCardDeck.splice(0, 1);
         }
-        console.log('about to save user', player);
         return DAOManager.dao.userDAO.save(player);
       });
     }
@@ -217,7 +211,6 @@ export class GameModel {
     that.playersReady = [];
     that.gameState = GameState.InProgress;
 
-    console.log('end of shuffleDealCards');
     return DAOManager.dao.gameDAO.save(that);
   }
 

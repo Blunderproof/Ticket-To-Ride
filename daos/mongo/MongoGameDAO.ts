@@ -44,10 +44,7 @@ export class MongoGameDAO implements IGameDAO {
   }
 
   create(data: any): Promise<GameModel> {
-    console.log('about to create a game in create');
-    console.log('data', data);
     return Game.create(data).then((game: IGameModel | null) => {
-      console.log('game from mongoose', game);
       return new GameModel(game);
     });
   }
@@ -62,7 +59,6 @@ export class MongoGameDAO implements IGameDAO {
 
   depopulate(game: GameModel): any {
     let data: any = game.getObject();
-    console.log('game after getObject', data);
 
     data.host = data.host._id || data.host;
     data.userList = data.userList.map((model: any) => {
@@ -87,7 +83,6 @@ export class MongoGameDAO implements IGameDAO {
       return model._id || model;
     });
 
-    console.log('depopulated game', data);
     return data;
   }
 }
