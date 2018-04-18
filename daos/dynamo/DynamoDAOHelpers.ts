@@ -21,18 +21,20 @@ export class DynamoHelpers {
   public get_game(gameID: string): Promise<GameModel> {
     var params = {
       TableName: GAME_TABLE_NAME,
-      Key: {
-        _id: gameID,
-      },
-      Limit: 1,
     };
 
     return new Promise((yes, no) => {
-      this.dbClient.get(params, function(err, data) {
+      this.dbClient.scan(params, (err, data) => {
+        console.log(gameID, data);
         if (err) {
           no(err);
         } else {
-          yes(new GameModel(data.Item));
+          let gamesRaw = this.query(data.Items!, { _id: gameID });
+          let games: GameModel[] = [];
+          for (let i = 0; i < gamesRaw.length; i++) {
+            games.push(new GameModel(gamesRaw[i]));
+          }
+          yes(games[0]);
         }
       });
     });
@@ -80,7 +82,7 @@ export class DynamoHelpers {
   }
 
   public compare(instance: any, query: any) {
-    if (typeof instance === 'object' && typeof query === 'object') {
+    if (instance && typeof instance === 'object' && (query && typeof query === 'object')) {
       let keys = Object.keys(query);
 
       for (let i = 0; i < keys.length; i++) {

@@ -158,13 +158,16 @@ export default class ServerCommunicator {
 
           //add gamehistory
           if (commandResults.shouldAddHistory()) {
-            await DAOManager.dao.messageDAO.create({
-              message: commandResults.shouldAddHistory(),
-              // when you join, the reqGameID is null so use the session one we just set
-              game: reqGameID || req.session.gmid,
-              user: reqUserID,
-              type: MessageType.History,
-            });
+            await DAOManager.dao.messageDAO.create(
+              {
+                message: commandResults.shouldAddHistory(),
+                // when you join, the reqGameID is null so use the session one we just set
+                game: reqGameID || req.session.gmid,
+                user: reqUserID,
+                type: MessageType.History,
+              },
+              gmid
+            );
           }
 
           // emit stuff

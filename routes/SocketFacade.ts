@@ -105,16 +105,18 @@ export default class SocketFacade {
   };
 
   private updateChatHistory = (data: any): Promise<any> => {
-    return DAOManager.dao.messageDAO.find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp').then((chatMessages: IMessageModel[]) => {
-      return chatMessages.map(msg => {
-        return msg.getObject();
+    return DAOManager.dao.messageDAO
+      .find({ game: data.id, type: MessageType.Chat }, ['user', 'game'], 'timestamp', data.id)
+      .then((chatMessages: IMessageModel[]) => {
+        return chatMessages.map(msg => {
+          return msg.getObject();
+        });
       });
-    });
   };
 
   private updateGameHistory = (data: any): Promise<any> => {
     return DAOManager.dao.messageDAO
-      .find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp')
+      .find({ game: data.id, type: MessageType.History }, ['user', 'game'], '-timestamp', data.id)
       .then((gameHistoryMessages: IMessageModel[]) => {
         return gameHistoryMessages.map(msg => {
           return msg.getObject();

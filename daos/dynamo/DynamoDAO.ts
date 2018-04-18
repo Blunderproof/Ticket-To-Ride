@@ -65,8 +65,12 @@ export class DynamoDAO implements IDAO {
       },
     };
 
-    this.db.createTable(game_table);
-    this.db.createTable(user_table);
+    this.db.createTable(game_table, (err, data) => {
+      if (!err) console.log('game table created');
+    });
+    this.db.createTable(user_table, (err, data) => {
+      if (!err) console.log('user table created');
+    });
   }
 }
 

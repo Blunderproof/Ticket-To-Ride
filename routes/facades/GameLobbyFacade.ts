@@ -4,6 +4,7 @@ import { GameState, UserState } from '../../constants';
 import CommandResults from '../../modules/commands/CommandResults';
 import { DAOManager } from '../../daos/DAOManager';
 import { GameModel } from '../../models/GameModel';
+import { UserModel } from '../../models/UserModel';
 
 export default class GameLobbyFacade {
   private constructor() {}
@@ -39,8 +40,8 @@ export default class GameLobbyFacade {
     }
 
     const { reqUserID } = data;
-    return DAOManager.dao.gameDAO
-      .findOne(
+    return Promise.all([
+      DAOManager.dao.gameDAO.findOne(
         {
           $or: [
             {
@@ -62,44 +63,47 @@ export default class GameLobbyFacade {
           ],
         },
         []
-      )
-      .then(async (game: GameModel) => {
-        if (game) {
-          // doc may be null if no document matched
+      ),
+      DAOManager.dao.userDAO.findOne({ _id: reqUserID }),
+    ]).then(async data => {
+      let game: GameModel = data[0];
+      let user: UserModel = data[1];
+      if (game) {
+        // doc may be null if no document matched
+        return {
+          success: false,
+          data: {},
+          errorInfo: 'User already has an open game or a game in progress.',
+        };
+      } else {
+        var newGameData = {
+          host: user, //TODO: need this be actual object
+          gameState: GameState.Open,
+          userList: [user], //and this
+        };
+
+        // Save the new model instance, passing a callback
+
+        return DAOManager.dao.gameDAO.create(newGameData).then((game: GameModel) => {
           return {
-            success: false,
-            data: {},
-            errorInfo: 'User already has an open game or a game in progress.',
-          };
-        } else {
-          var newGameData = {
-            host: reqUserID,
-            gameState: GameState.Open,
-            userList: [reqUserID],
-          };
-
-          // Save the new model instance, passing a callback
-
-          return DAOManager.dao.gameDAO.create(newGameData).then((game: GameModel) => {
-            return {
-              success: true,
-              data: {
-                gameID: game._id,
+            success: true,
+            data: {
+              gameID: game._id,
+            },
+            emit: [
+              { command: 'gameList' },
+              {
+                command: 'updateGameHistory',
+                to: game._id,
+                data: { id: game._id },
               },
-              emit: [
-                { command: 'gameList' },
-                {
-                  command: 'updateGameHistory',
-                  to: game._id,
-                  data: { id: game._id },
-                },
-              ],
-              userCookie: { gmid: game._id },
-              gameHistory: 'created the game.',
-            };
-          });
-        }
-      });
+            ],
+            userCookie: { gmid: game._id },
+            gameHistory: 'created the game.',
+          };
+        });
+      }
+    });
   }
 
   deleteGame(data: any): Promise<any> {
