@@ -31,6 +31,9 @@ export class GameModel {
   lastRound?: number;
   playersReady: UserModel[];
   messages?: MessageModel[];
+  routes?: RouteModel[];
+  destinationCards?: DestinationCardModel[];
+  trainCards?: TrainCardModel[];
 
   constructor(data?: any) {
     Object.keys(data || {}).forEach(k => ((this as any)[k] = data[k]));

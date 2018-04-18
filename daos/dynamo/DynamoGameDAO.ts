@@ -5,7 +5,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { GAME_TABLE_NAME } from '../../constants';
 import { GameModel } from '../../models/GameModel';
 import { DynamoHelpers } from './DynamoDAOHelpers';
-import { getTrainCards, getDestinationCards } from '../../helpers';
+import { getTrainCards, getDestinationCards, getRoutes } from '../../helpers';
 
 export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
   dbClient: DocumentClient;
@@ -76,8 +76,9 @@ export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
   }
 
   create(game: any): Promise<GameModel> {
-    game.destinationCardDeck = getDestinationCards();
-    game.trainCardDeck = getTrainCards();
+    game.destinationCards = getDestinationCards();
+    game.trainCards = getTrainCards();
+    game.routes = getRoutes();
     game._id = this.new_id();
     return this.save_game(game);
   }

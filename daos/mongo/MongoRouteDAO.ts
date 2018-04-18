@@ -3,7 +3,7 @@ import IRouteDAO from '../IRouteDAO';
 import { RouteModel } from '../../models/RouteModel';
 
 export class MongoRouteDAO implements IRouteDAO {
-  findOne(data: any, populates: any[]): Promise<RouteModel | null> {
+  findOne(data: any, populates: any[], gameID: string): Promise<RouteModel | null> {
     let query = Route.findOne(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
@@ -14,7 +14,7 @@ export class MongoRouteDAO implements IRouteDAO {
       return new RouteModel(route);
     });
   }
-  find(data: any, populates: any[]): Promise<RouteModel[]> {
+  find(data: any, populates: any[], gameID: string): Promise<RouteModel[]> {
     let query = Route.find(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
