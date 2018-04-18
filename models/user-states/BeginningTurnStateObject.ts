@@ -123,7 +123,8 @@ export default class BeginningTurnStateObject implements TurnStateObject {
     game.trainCardDiscardPile = game.trainCardDiscardPile.concat(cardsToDiscard);
 
     // remove the route from the unclaimed routes
-    let routeIndex = game.unclaimedRoutes.indexOf(route);
+    let gameRouteIds = game.unclaimedRoutes.map(route => route._id);
+    let routeIndex = gameRouteIds.indexOf(route._id);
     game.unclaimedRoutes.splice(routeIndex, 1);
 
     if (game.trainCardDeck.length <= 5 && game.trainCardDiscardPile.length > 0) {

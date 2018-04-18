@@ -418,7 +418,8 @@ export default class GameFacade {
         console.log('force unwrapped route', route);
 
         let unclaimedRoutes = game.unclaimedRoutes.filter(gameRoute => {
-          return gameRoute._id == route._id;
+          // console.log('gameRoute._id', gameRoute._id);
+          return gameRoute._id!.toString() == route._id.toString();
         });
 
         if (unclaimedRoutes.length == 0) {
@@ -493,6 +494,7 @@ export default class GameFacade {
 
         return DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
           route = route!;
+          console.log('game.unclaimedRoutes.length', game.unclaimedRoutes.length);
           return {
             success: true,
             data: {},
