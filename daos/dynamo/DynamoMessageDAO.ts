@@ -40,7 +40,7 @@ export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
     return this.get_game(gameID).then((game: GameModel) => {
       let message = new MessageModel(data);
       message._id = this.new_id();
-      message.timestamp = new Date();
+      message.timestamp = +new Date();
       delete message.game;
       let messages = game.messages || [];
       messages.push(message);
