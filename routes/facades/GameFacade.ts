@@ -416,6 +416,7 @@ export default class GameFacade {
         let unclaimedRoutes = game.unclaimedRoutes.filter(gameRoute => {
           return gameRoute._id == route._id;
         });
+
         if (unclaimedRoutes.length == 0) {
           return {
             success: false,
@@ -423,6 +424,21 @@ export default class GameFacade {
           };
         }
 
+        if (game.userList.length <= 3) {
+          for (let index = 0; index < game.userList.length; index++) {
+            const theUser = game.userList[index];
+
+            for (let i = 0; i < theUser.claimedRouteList.length; i++) {
+              if (route.city1 == theUser.claimedRouteList[i].city1 && route.city2 == theUser.claimedRouteList[i].city2) {
+                return {
+                  success: false,
+                  data: {},
+                  errorInfo: "You can't claim both routes on a double route in a game with only 2 or 3 players.",
+                };
+              }
+            }
+          }
+        }
         for (let i = 0; i < currentUser.claimedRouteList.length; i++) {
           if (route.city1 == currentUser.claimedRouteList[i].city1 && route.city2 == currentUser.claimedRouteList[i].city2) {
             return {
@@ -450,13 +466,6 @@ export default class GameFacade {
             data: {},
             errorInfo: currentUserState.error,
           };
-        }
-
-        if (game.userList.length <= 3) {
-          let unclaimedRoutes = game.unclaimedRoutes.filter((e: RouteModel) => {
-            route = route!;
-            return e.city1 != route.city1 || e.city2 != route.city2;
-          });
         }
 
         // it won't be null at this point, we just checked
