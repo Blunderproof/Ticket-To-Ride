@@ -19,7 +19,7 @@ export class DynamoTrainCardDAO extends DynamoHelpers implements ITrainCardDAO {
         card._id = this.new_id();
         filtered.push(card);
       }
-      return filtered;
+      yes(filtered);
     });
   }
 }

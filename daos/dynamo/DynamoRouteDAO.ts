@@ -25,7 +25,7 @@ export class DynamoRouteDAO extends DynamoHelpers implements IRouteDAO {
         route._id = this.new_id();
         filtered.push(route);
       }
-      return filtered;
+      yes(filtered);
     });
   }
 }

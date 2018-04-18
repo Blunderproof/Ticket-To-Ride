@@ -31,9 +31,6 @@ export class GameModel {
   lastRound?: number;
   playersReady: UserModel[];
   messages?: MessageModel[];
-  routes?: RouteModel[];
-  destinationCards?: DestinationCardModel[];
-  trainCards?: TrainCardModel[];
 
   constructor(data?: any) {
     if (data._id == null) {
@@ -47,9 +44,6 @@ export class GameModel {
     this.gameState = data.gameState;
 
     this.messages = data.messages;
-    this.routes = data.routes;
-    this.destinationCards = data.destinationCards;
-    this.trainCards = data.trainCards;
 
     this.host = new UserModel(data.host || {});
 
@@ -115,15 +109,14 @@ export class GameModel {
         ],
       };
     }
-    await DAOManager.dao.routeDAO.find(filter, [], this._id).then((routes: RouteModel[]) => {
-      if (routes) {
-        for (let index = 0; index < routes.length; index++) {
-          unclaimedRoutes.push(routes[index]);
-        }
-      } else {
-        console.log('Unexpected error – there should be routes in the database.');
+    let routes = await DAOManager.dao.routeDAO.find(filter, [], this._id);
+    if (routes) {
+      for (let index = 0; index < routes.length; index++) {
+        unclaimedRoutes.push(routes[index]);
       }
-    });
+    } else {
+      console.log('Unexpected error – there should be routes in the database.');
+    }
 
     let trainCardDeck: TrainCardModel[] = [];
     await DAOManager.dao.trainCardDAO.find({}, [], this._id).then((trainCards: TrainCardModel[]) => {

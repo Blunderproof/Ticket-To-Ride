@@ -15,7 +15,7 @@ export class DynamoDestinationCardDAO extends DynamoHelpers implements IDestinat
         card._id = this.new_id();
         filtered.push(card);
       }
-      return filtered;
+      yes(filtered);
     });
   }
 }

@@ -47,6 +47,7 @@ export class DynamoHelpers {
 
     return new Promise((yes, no) => {
       this.dbClient.put(params, (err, data) => {
+        console.log(params, err);
         if (err) {
           no(err);
         } else {
