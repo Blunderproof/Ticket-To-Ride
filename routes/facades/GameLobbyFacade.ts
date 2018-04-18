@@ -234,7 +234,8 @@ export default class GameLobbyFacade {
             };
           } else {
             console.log('about to append to game.userList', game.userList);
-            game.userList.push(reqUserID);
+            let yourUser = await DAOManager.dao.userDAO.findOne({ _id: reqUserID }, []);
+            game.userList.push(yourUser);
             return await DAOManager.dao.gameDAO.save(game).then((savedGame: GameModel) => {
               console.log('savedGame', savedGame);
               return {
