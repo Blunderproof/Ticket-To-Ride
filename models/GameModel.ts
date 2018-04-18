@@ -15,6 +15,7 @@ import { RouteModel } from './RouteModel';
 import { TrainCardModel } from './TrainCardModel';
 import { DestinationCardModel } from './DestinationCardModel';
 import { shuffle } from '../helpers';
+import { MessageModel } from './MessageModel';
 
 export class GameModel {
   _id?: string;
@@ -29,6 +30,10 @@ export class GameModel {
   turnNumber?: number;
   lastRound?: number;
   playersReady: UserModel[];
+  messages?: MessageModel[];
+  routes?: RouteModel[];
+  destinationCards?: DestinationCardModel[];
+  trainCards?: TrainCardModel[];
 
   constructor(data?: any) {
     if (data._id == null) {

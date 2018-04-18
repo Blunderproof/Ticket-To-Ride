@@ -3,7 +3,7 @@ import IMessageDAO from '../IMessageDAO';
 import { MessageModel } from '../../models/MessageModel';
 
 export class MongoMessageDAO implements IMessageDAO {
-  async find(data: any, populates: any[], sort: string): Promise<MessageModel[]> {
+  async find(data: any, populates: any[], sort: string, gameID: string): Promise<MessageModel[]> {
     let query = Message.find(data);
     for (let index = 0; index < populates.length; index++) {
       const fieldName = populates[index];
@@ -19,15 +19,15 @@ export class MongoMessageDAO implements IMessageDAO {
     });
   }
 
-  remove(data: any): Promise<void> {
+  remove(data: any, gameID: string): Promise<void> {
     return Message.remove(data).exec();
   }
-  create(data: any): Promise<MessageModel> {
+  create(data: any, gameID: string): Promise<MessageModel> {
     return Message.create(data).then((message: IMessageModel | null) => {
       return new MessageModel(message);
     });
   }
-  async save(message: MessageModel): Promise<MessageModel> {
+  async save(message: MessageModel, gameID: string): Promise<MessageModel> {
     await Message.update({ _id: message._id }, message.getObject());
 
     return message;
