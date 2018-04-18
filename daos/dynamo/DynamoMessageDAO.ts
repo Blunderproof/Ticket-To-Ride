@@ -10,12 +10,15 @@ export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
   }
 
   find(query: any, populates: any[], sort: string, gameID: string): Promise<MessageModel[]> {
+    delete query.game;
     return this.get_game(gameID).then((game: GameModel) => {
       let messages = game.messages;
       let found = this.query(messages!, query);
       let filteredMessages: MessageModel[] = [];
       for (let i = 0; i < found.length; i++) {
-        filteredMessages.push(new MessageModel(found[i]));
+        let message = new MessageModel(found[i]);
+        message.game = game;
+        filteredMessages.push(message);
       }
       return filteredMessages;
     });
@@ -37,14 +40,18 @@ export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
     return this.get_game(gameID).then((game: GameModel) => {
       let message = new MessageModel(data);
       message._id = this.new_id();
-      if (!game.messages) game.messages = [];
-      game.messages.push(message);
+      message.timestamp = new Date();
+      delete message.game;
+      let messages = game.messages || [];
+      messages.push(message);
+      game.messages = messages;
       this.save_game(game);
       return message;
     });
   }
   save(message: MessageModel, gameID: string): Promise<MessageModel> {
     return this.get_game(gameID).then((game: GameModel) => {
+      delete message.game;
       let messages = game.messages!;
       for (let i = 0; i < messages!.length; i++) {
         if (this.compare(messages[i], { _id: message._id })) messages[i] = message;

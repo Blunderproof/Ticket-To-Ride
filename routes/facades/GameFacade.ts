@@ -8,6 +8,7 @@ import { Message, IMessageModel } from '../../models/Message';
 import { Route } from '../../models/Route';
 import { RouteModel } from '../../models/RouteModel';
 import { DAOManager } from '../../daos/DAOManager';
+import { MessageModel } from '../../models/MessageModel';
 
 export default class GameFacade {
   private constructor() {}
@@ -84,7 +85,7 @@ export default class GameFacade {
         },
         data.reqGameID
       )
-      .then((message: IMessageModel) => {
+      .then((message: MessageModel) => {
         return {
           success: true,
           data: {},

@@ -25,7 +25,6 @@ export class DynamoHelpers {
 
     return new Promise((yes, no) => {
       this.dbClient.scan(params, (err, data) => {
-        console.log(gameID, data);
         if (err) {
           no(err);
         } else {
@@ -98,6 +97,8 @@ export class DynamoHelpers {
       return true;
     } else if (Array.isArray(instance)) {
       return instance.indexOf(query) >= 0;
+    } else if (typeof instance === 'object' && typeof query === 'string') {
+      return instance._id == query;
     } else {
       return instance === query;
     }

@@ -46,6 +46,11 @@ export class GameModel {
     this.turnNumber = data.turnNumber;
     this.gameState = data.gameState;
 
+    this.messages = data.messages;
+    this.routes = data.routes;
+    this.destinationCards = data.destinationCards;
+    this.trainCards = data.trainCards;
+
     this.host = new UserModel(data.host || {});
 
     this.userList = (data.userList || []).map((e: any) => {
