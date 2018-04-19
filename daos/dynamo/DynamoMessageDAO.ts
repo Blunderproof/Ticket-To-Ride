@@ -45,8 +45,9 @@ export class DynamoMessageDAO extends DynamoHelpers implements IMessageDAO {
       let messages = game.messages || [];
       messages.push(message);
       game.messages = messages;
-      this.save_game(game);
-      return message;
+      return this.save_game(game).then(done => {
+        return message;
+      });
     });
   }
   save(message: MessageModel, gameID: string): Promise<MessageModel> {
