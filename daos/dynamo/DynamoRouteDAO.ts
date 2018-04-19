@@ -11,8 +11,9 @@ export class DynamoRouteDAO extends DynamoHelpers implements IRouteDAO {
   }
 
   findOne(query: any, populates: any[], gameID: string): Promise<RouteModel | null> {
-    return this.find(query, populates, gameID).then(data => {
-      return data[0];
+    return this.get_game(gameID).then((game: GameModel) => {
+      console.log(game, gameID);
+      return this.query(game.unclaimedRoutes, query)[0];
     });
   }
 

@@ -395,7 +395,8 @@ export default class GameFacade {
             city1: data.city1,
             city2: data.city2,
           },
-          []
+          [],
+          game._id
         );
 
         if (!route) {
@@ -417,6 +418,7 @@ export default class GameFacade {
         route = route!;
         console.log('force unwrapped route', route);
 
+        console.log(game.unclaimedRoutes, route, 'NOW GAME LOG');
         let unclaimedRoutes = game.unclaimedRoutes.filter(gameRoute => {
           // console.log('gameRoute._id', gameRoute._id);
           return gameRoute._id!.toString() == route._id.toString();

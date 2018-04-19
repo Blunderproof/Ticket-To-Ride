@@ -13,7 +13,7 @@ export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
 
   findOne(query: any): Promise<GameModel | null> {
     return this.find(query).then(data => {
-      return data[0];
+      return this.populateUsers(data[0]);
     });
   }
 
@@ -56,11 +56,34 @@ export class DynamoGameDAO extends DynamoHelpers implements IGameDAO {
   }
 
   save(game: GameModel): Promise<GameModel> {
-    return this.save_game(game);
+    return this.populateUsers(game).then(game => {
+      return this.save_game(game);
+    });
   }
 
   create(game: any): Promise<GameModel> {
     game._id = this.new_id();
     return this.save_game(game);
+  }
+
+  private populateUsers(game: GameModel): Promise<GameModel> {
+    let requests = [];
+    if (game && game.host) {
+      requests.push(this.get_user(game.host._id!));
+    }
+
+    if (game && game.userList) {
+      for (let i = 0; i < game.userList.length; i++) {
+        requests.push(this.get_user(game.userList[i]._id!));
+      }
+    }
+    return Promise.all(requests).then(users => {
+      if (game && game.host) {
+        game.host = users[0];
+        users.shift();
+      }
+      if (game) game.userList = users;
+      return game;
+    });
   }
 }

@@ -12,6 +12,7 @@ export class DynamoDestinationCardDAO extends DynamoHelpers implements IDestinat
       let filtered: DestinationCardModel[] = [];
       for (let i = 0; i < destinationCards.length; i++) {
         let card = new DestinationCardModel(destinationCards[i]);
+        card.pointValue = parseInt(card.pointValue!.toString());
         card._id = this.new_id();
         filtered.push(card);
       }

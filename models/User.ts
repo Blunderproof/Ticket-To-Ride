@@ -16,7 +16,6 @@ export interface IUser {
   destinationCardHand: IDestinationCardModel[];
   metDestinationCards: IDestinationCardModel[];
   unmetDestinationCards: IDestinationCardModel[];
-  score: number;
   tokenCount: number;
   turnState: TurnState;
   color: PlayerColor;
@@ -55,7 +54,6 @@ export var UserSchema: mongoose.Schema = new mongoose.Schema(
     unmetDestinationCards: [{ type: Schema.Types.ObjectId, ref: 'DestinationCard' }],
     metDestinationCards: [{ type: Schema.Types.ObjectId, ref: 'DestinationCard' }],
 
-    score: Number,
     tokenCount: Number,
     color: String,
     points: {
@@ -87,7 +85,6 @@ UserSchema.methods.getObject = function() {
     destinationCardHand: this.destinationCardHand,
     metDestinationCards: this.metDestinationCards,
     unmetDestinationCards: this.unmetDestinationCards,
-    score: this.score,
     tokenCount: this.tokenCount,
     turnState: this.turnState,
     color: this.color,

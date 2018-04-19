@@ -14,7 +14,6 @@ export class UserModel {
   destinationCardHand: DestinationCardModel[];
   metDestinationCards: DestinationCardModel[];
   unmetDestinationCards: DestinationCardModel[];
-  score?: number;
   tokenCount?: number;
   turnState?: TurnState;
   color?: PlayerColor;
@@ -42,7 +41,6 @@ export class UserModel {
     }
     this.username = data.username;
     this.hashedPassword = data.hashedPassword;
-    this.score = data.score;
     this.tokenCount = data.tokenCount;
     this.turnState = data.turnState;
     this.color = data.color;
@@ -112,7 +110,6 @@ export class UserModel {
       unmetDestinationCards: this.unmetDestinationCards.map(model => {
         return typeof model == 'string' ? model : model.getObject();
       }),
-      score: this.score,
       tokenCount: this.tokenCount,
       turnState: this.turnState,
       color: this.color,
@@ -217,7 +214,6 @@ export class UserModel {
     };
 
     if (!this.destinationCardHand) return points;
-    console.log('destinationCardHand', this.destinationCardHand);
 
     if (!this.unmetDestinationCards) this.unmetDestinationCards = [];
     if (!this.metDestinationCards) this.metDestinationCards = [];

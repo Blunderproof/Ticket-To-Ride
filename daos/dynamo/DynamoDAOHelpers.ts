@@ -1,8 +1,9 @@
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import * as AWS from 'aws-sdk';
-import { GAME_TABLE_NAME } from '../../constants';
+import { GAME_TABLE_NAME, USER_TABLE_NAME } from '../../constants';
 import { GameModel } from '../../models/GameModel';
 import { ConfigurationOptions } from 'aws-sdk/lib/config';
+import { UserModel } from '../../models/UserModel';
 
 export class DynamoHelpers {
   dbClient: DocumentClient;
@@ -39,6 +40,27 @@ export class DynamoHelpers {
     });
   }
 
+  public get_user(userID: string): Promise<UserModel> {
+    var params = {
+      TableName: USER_TABLE_NAME,
+    };
+
+    return new Promise((yes, no) => {
+      this.dbClient.scan(params, (err, data) => {
+        if (err) {
+          no(err);
+        } else {
+          let usersRaw = this.query(data.Items!, { _id: userID });
+          let users: UserModel[] = [];
+          for (let i = 0; i < usersRaw.length; i++) {
+            users.push(new UserModel(usersRaw[i]));
+          }
+          yes(users[0]);
+        }
+      });
+    });
+  }
+
   public save_game(game: any): Promise<GameModel> {
     let params = {
       Item: game,
@@ -47,7 +69,7 @@ export class DynamoHelpers {
 
     return new Promise((yes, no) => {
       this.dbClient.put(params, (err, data) => {
-        console.log(params, err);
+        console.log(JSON.stringify(params), err);
         if (err) {
           no(err);
         } else {

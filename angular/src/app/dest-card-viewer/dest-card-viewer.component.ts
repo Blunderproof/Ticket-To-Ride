@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../services/user_info.service';
+import { DestinationCard } from '../classes/destination-card';
 
 @Component({
   selector: 'app-dest-card-viewer',
@@ -9,5 +10,17 @@ import { UserInfo } from '../services/user_info.service';
 export class DestCardViewerComponent implements OnInit {
   constructor(public _userInfo: UserInfo) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this._userInfo, 'USERINFO');
+  }
+
+  is_complete(card: DestinationCard) {
+    const metCards = this._userInfo.user.metDestinationCards;
+    for (let i = 0; i < metCards.length; i++) {
+      if ((metCards[i] as any)._id == card._id) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

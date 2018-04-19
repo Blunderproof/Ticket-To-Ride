@@ -7,8 +7,8 @@
       <br> Completed Routes: +{{_userInfo.user.points.detailed.positiveDestinationCards}}</div>
   </div>
   <div class="card-col centered" *ngIf="_userInfo.game && _userInfo.game.turnNumber >= 0">
-    <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [complete]="_userInfo.user.metDestinationCards.indexOf(card._id) >= 0"
-      [card]="card" [clickable]=false></app-destination-card>
+    <app-destination-card *ngFor="let card of _userInfo.user.destinationCardHand" [complete]="is_complete(card)" [card]="card"
+      [clickable]=false></app-destination-card>
   </div>
   <div>
     <button type="button" class="row centered btn btn-success" (click)="_userInfo.viewDestinationCards = false">Close</button>
