@@ -7,6 +7,7 @@ export class Game {
   host: User;
   userList: User[];
   gameState: number;
+  lastRound: number;
   unclaimedRoutes: Route[];
   trainCardDeck: TrainCard[];
   destinationCardDeck: DestinationCard[];
